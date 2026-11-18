@@ -6,7 +6,7 @@ This catalog lists declarations importable from each package library after apply
 
 Source-first reuse note: outside the retained parent `pocket_host/`, this work checked `README.md`, `docs/02_ARCHITECTURE_AND_MEMORY_DESIGN.md`, `docs/03_DUAL_HOST_UI_COMPONENTS_SPEC.md`, `docs/04_DEVELOPER_GUIDE_AND_VERIFICATION.md`, and `docs/04_BIDIRECTIONAL_FFI_WASM_AND_YOOASSET_HOTUPDATE.md` in `/Volumes/ORICO/Development/Github/pocketjs_flutter_demo`. These preserve the earlier Flutter/WeChat host split, component-to-host projections, and run/regression scenarios. The necessary adaptation is to use only current SDK library exports and apply every Dart `show`/`hide`, keeping app UI policy and composition in JS and Dart at the rendering/input/lifecycle/native boundary. Validation checks the biometrics and root SDK facade filters, default parameter signatures, and current source SHA markers.
 
-Coverage: 605 public declarations and 3024 declared members across 22 library entrances; 107 inventoried source digests.
+Coverage: 609 public declarations and 3041 declared members across 22 library entrances; 108 inventoried source digests.
 
 ## Packages and imports
 
@@ -14,7 +14,7 @@ Coverage: 605 public declarations and 3024 declared members across 22 library en
 
 ### Import `package:pocket_archive/pocket_archive.dart`
 
-Entry: [packages/pocket_archive/lib/pocket_archive.dart](https://github.com/PocketFlutter/Pocket/blob/235b5b5589faf492f4a9fc3b7c0827bcd1d9de2c/sdk/packages/pocket_archive/lib/pocket_archive.dart)
+Entry: [packages/pocket_archive/lib/pocket_archive.dart](https://github.com/PocketFlutter/Pocket/blob/b06cb43cac4d553cea232ae1cd1f9ed4ee0c4ff4/sdk/packages/pocket_archive/lib/pocket_archive.dart)
 
 ### `PocketNativeArchive`
 
@@ -23,24 +23,24 @@ Entry: [packages/pocket_archive/lib/pocket_archive.dart](https://github.com/Pock
 Members:
 - `static Future<void> extract({ required String archivePath, required String destinationPath, required int maxOutputBytes, String? password, })`
 
-Source: [packages/pocket_archive/lib/pocket_archive.dart](https://github.com/PocketFlutter/Pocket/blob/235b5b5589faf492f4a9fc3b7c0827bcd1d9de2c/sdk/packages/pocket_archive/lib/pocket_archive.dart#L10)
+Source: [packages/pocket_archive/lib/pocket_archive.dart](https://github.com/PocketFlutter/Pocket/blob/b06cb43cac4d553cea232ae1cd1f9ed4ee0c4ff4/sdk/packages/pocket_archive/lib/pocket_archive.dart#L10)
 ## `pocket_audio`
 
 ### Import `package:pocket_audio/pocket_audio.dart`
 
-Entry: [packages/pocket_audio/lib/pocket_audio.dart](https://github.com/PocketFlutter/Pocket/blob/235b5b5589faf492f4a9fc3b7c0827bcd1d9de2c/sdk/packages/pocket_audio/lib/pocket_audio.dart)
+Entry: [packages/pocket_audio/lib/pocket_audio.dart](https://github.com/PocketFlutter/Pocket/blob/b06cb43cac4d553cea232ae1cd1f9ed4ee0c4ff4/sdk/packages/pocket_audio/lib/pocket_audio.dart)
 
 ### `PocketAudioActiveChanged`
 
 **Typedef** `typedef PocketAudioActiveChanged = void Function(bool active);`
 
-Source: [packages/pocket_audio/lib/src/pocket_audio_plugin.dart](https://github.com/PocketFlutter/Pocket/blob/235b5b5589faf492f4a9fc3b7c0827bcd1d9de2c/sdk/packages/pocket_audio/lib/src/pocket_audio_plugin.dart#L84)
+Source: [packages/pocket_audio/lib/src/pocket_audio_plugin.dart](https://github.com/PocketFlutter/Pocket/blob/b06cb43cac4d553cea232ae1cd1f9ed4ee0c4ff4/sdk/packages/pocket_audio/lib/src/pocket_audio_plugin.dart#L84)
 
 ### `PocketAudioPlaybackChanged`
 
 **Typedef** `typedef PocketAudioPlaybackChanged = void Function(Map<String, Object?> fact);`
 
-Source: [packages/pocket_audio/lib/src/pocket_audio_plugin.dart](https://github.com/PocketFlutter/Pocket/blob/235b5b5589faf492f4a9fc3b7c0827bcd1d9de2c/sdk/packages/pocket_audio/lib/src/pocket_audio_plugin.dart#L85)
+Source: [packages/pocket_audio/lib/src/pocket_audio_plugin.dart](https://github.com/PocketFlutter/Pocket/blob/b06cb43cac4d553cea232ae1cd1f9ed4ee0c4ff4/sdk/packages/pocket_audio/lib/src/pocket_audio_plugin.dart#L85)
 
 ### `PocketAudioPlayer`
 
@@ -63,13 +63,13 @@ Members:
 - `Future<void> stop()`
 - `Future<void> dispose()`
 
-Source: [packages/pocket_audio/lib/src/pocket_audio_plugin.dart](https://github.com/PocketFlutter/Pocket/blob/235b5b5589faf492f4a9fc3b7c0827bcd1d9de2c/sdk/packages/pocket_audio/lib/src/pocket_audio_plugin.dart#L104)
+Source: [packages/pocket_audio/lib/src/pocket_audio_plugin.dart](https://github.com/PocketFlutter/Pocket/blob/b06cb43cac4d553cea232ae1cd1f9ed4ee0c4ff4/sdk/packages/pocket_audio/lib/src/pocket_audio_plugin.dart#L104)
 
 ### `PocketAudioPlayerFactory`
 
 **Typedef** `typedef PocketAudioPlayerFactory = PocketAudioPlayer Function();`
 
-Source: [packages/pocket_audio/lib/src/pocket_audio_plugin.dart](https://github.com/PocketFlutter/Pocket/blob/235b5b5589faf492f4a9fc3b7c0827bcd1d9de2c/sdk/packages/pocket_audio/lib/src/pocket_audio_plugin.dart#L82)
+Source: [packages/pocket_audio/lib/src/pocket_audio_plugin.dart](https://github.com/PocketFlutter/Pocket/blob/b06cb43cac4d553cea232ae1cd1f9ed4ee0c4ff4/sdk/packages/pocket_audio/lib/src/pocket_audio_plugin.dart#L82)
 
 ### `PocketAudioPlayerState`
 
@@ -82,7 +82,7 @@ Members:
 - `final Duration? duration`
 - `final String? error`
 
-Source: [packages/pocket_audio/lib/src/pocket_audio_plugin.dart](https://github.com/PocketFlutter/Pocket/blob/235b5b5589faf492f4a9fc3b7c0827bcd1d9de2c/sdk/packages/pocket_audio/lib/src/pocket_audio_plugin.dart#L88)
+Source: [packages/pocket_audio/lib/src/pocket_audio_plugin.dart](https://github.com/PocketFlutter/Pocket/blob/b06cb43cac4d553cea232ae1cd1f9ed4ee0c4ff4/sdk/packages/pocket_audio/lib/src/pocket_audio_plugin.dart#L88)
 
 ### `PocketAudioPlugin`
 
@@ -107,60 +107,60 @@ Members:
 - `Future<void> activate(PocketPluginContext context)`
 - `Future<void> dispose()`
 
-Source: [packages/pocket_audio/lib/src/pocket_audio_plugin.dart](https://github.com/PocketFlutter/Pocket/blob/235b5b5589faf492f4a9fc3b7c0827bcd1d9de2c/sdk/packages/pocket_audio/lib/src/pocket_audio_plugin.dart#L126)
+Source: [packages/pocket_audio/lib/src/pocket_audio_plugin.dart](https://github.com/PocketFlutter/Pocket/blob/b06cb43cac4d553cea232ae1cd1f9ed4ee0c4ff4/sdk/packages/pocket_audio/lib/src/pocket_audio_plugin.dart#L126)
 
 ### `pocketAudioMaxChannels`
 
 **Top-level variable** `const int pocketAudioMaxChannels = 8`
 
-Source: [packages/pocket_audio/lib/src/pocket_audio_plugin.dart](https://github.com/PocketFlutter/Pocket/blob/235b5b5589faf492f4a9fc3b7c0827bcd1d9de2c/sdk/packages/pocket_audio/lib/src/pocket_audio_plugin.dart#L14)
+Source: [packages/pocket_audio/lib/src/pocket_audio_plugin.dart](https://github.com/PocketFlutter/Pocket/blob/b06cb43cac4d553cea232ae1cd1f9ed4ee0c4ff4/sdk/packages/pocket_audio/lib/src/pocket_audio_plugin.dart#L14)
 
 ### `pocketAudioPauseCapability`
 
 **Top-level variable** `const String pocketAudioPauseCapability = 'media.audio.pause'`
 
-Source: [packages/pocket_audio/lib/src/pocket_audio_plugin.dart](https://github.com/PocketFlutter/Pocket/blob/235b5b5589faf492f4a9fc3b7c0827bcd1d9de2c/sdk/packages/pocket_audio/lib/src/pocket_audio_plugin.dart#L10)
+Source: [packages/pocket_audio/lib/src/pocket_audio_plugin.dart](https://github.com/PocketFlutter/Pocket/blob/b06cb43cac4d553cea232ae1cd1f9ed4ee0c4ff4/sdk/packages/pocket_audio/lib/src/pocket_audio_plugin.dart#L10)
 
 ### `pocketAudioPlayCapability`
 
 **Top-level variable** `const String pocketAudioPlayCapability = 'media.audio.play'`
 
-Source: [packages/pocket_audio/lib/src/pocket_audio_plugin.dart](https://github.com/PocketFlutter/Pocket/blob/235b5b5589faf492f4a9fc3b7c0827bcd1d9de2c/sdk/packages/pocket_audio/lib/src/pocket_audio_plugin.dart#L8)
+Source: [packages/pocket_audio/lib/src/pocket_audio_plugin.dart](https://github.com/PocketFlutter/Pocket/blob/b06cb43cac4d553cea232ae1cd1f9ed4ee0c4ff4/sdk/packages/pocket_audio/lib/src/pocket_audio_plugin.dart#L8)
 
 ### `pocketAudioPlaybackEvent`
 
 **Top-level variable** `const String pocketAudioPlaybackEvent = 'media.audio.playback'`
 
-Source: [packages/pocket_audio/lib/src/pocket_audio_plugin.dart](https://github.com/PocketFlutter/Pocket/blob/235b5b5589faf492f4a9fc3b7c0827bcd1d9de2c/sdk/packages/pocket_audio/lib/src/pocket_audio_plugin.dart#L13)
+Source: [packages/pocket_audio/lib/src/pocket_audio_plugin.dart](https://github.com/PocketFlutter/Pocket/blob/b06cb43cac4d553cea232ae1cd1f9ed4ee0c4ff4/sdk/packages/pocket_audio/lib/src/pocket_audio_plugin.dart#L13)
 
 ### `pocketAudioPluginId`
 
 **Top-level variable** `const String pocketAudioPluginId = 'dart.audio'`
 
-Source: [packages/pocket_audio/lib/src/pocket_audio_plugin.dart](https://github.com/PocketFlutter/Pocket/blob/235b5b5589faf492f4a9fc3b7c0827bcd1d9de2c/sdk/packages/pocket_audio/lib/src/pocket_audio_plugin.dart#L7)
+Source: [packages/pocket_audio/lib/src/pocket_audio_plugin.dart](https://github.com/PocketFlutter/Pocket/blob/b06cb43cac4d553cea232ae1cd1f9ed4ee0c4ff4/sdk/packages/pocket_audio/lib/src/pocket_audio_plugin.dart#L7)
 
 ### `pocketAudioResumeCapability`
 
 **Top-level variable** `const String pocketAudioResumeCapability = 'media.audio.resume'`
 
-Source: [packages/pocket_audio/lib/src/pocket_audio_plugin.dart](https://github.com/PocketFlutter/Pocket/blob/235b5b5589faf492f4a9fc3b7c0827bcd1d9de2c/sdk/packages/pocket_audio/lib/src/pocket_audio_plugin.dart#L11)
+Source: [packages/pocket_audio/lib/src/pocket_audio_plugin.dart](https://github.com/PocketFlutter/Pocket/blob/b06cb43cac4d553cea232ae1cd1f9ed4ee0c4ff4/sdk/packages/pocket_audio/lib/src/pocket_audio_plugin.dart#L11)
 
 ### `pocketAudioStopCapability`
 
 **Top-level variable** `const String pocketAudioStopCapability = 'media.audio.stop'`
 
-Source: [packages/pocket_audio/lib/src/pocket_audio_plugin.dart](https://github.com/PocketFlutter/Pocket/blob/235b5b5589faf492f4a9fc3b7c0827bcd1d9de2c/sdk/packages/pocket_audio/lib/src/pocket_audio_plugin.dart#L9)
+Source: [packages/pocket_audio/lib/src/pocket_audio_plugin.dart](https://github.com/PocketFlutter/Pocket/blob/b06cb43cac4d553cea232ae1cd1f9ed4ee0c4ff4/sdk/packages/pocket_audio/lib/src/pocket_audio_plugin.dart#L9)
 
 ### `pocketAudioVolumeCapability`
 
 **Top-level variable** `const String pocketAudioVolumeCapability = 'media.audio.volume'`
 
-Source: [packages/pocket_audio/lib/src/pocket_audio_plugin.dart](https://github.com/PocketFlutter/Pocket/blob/235b5b5589faf492f4a9fc3b7c0827bcd1d9de2c/sdk/packages/pocket_audio/lib/src/pocket_audio_plugin.dart#L12)
+Source: [packages/pocket_audio/lib/src/pocket_audio_plugin.dart](https://github.com/PocketFlutter/Pocket/blob/b06cb43cac4d553cea232ae1cd1f9ed4ee0c4ff4/sdk/packages/pocket_audio/lib/src/pocket_audio_plugin.dart#L12)
 ## `pocket_biometrics`
 
 ### Import `package:pocket_biometrics/pocket_biometrics.dart`
 
-Entry: [packages/pocket_biometrics/lib/pocket_biometrics.dart](https://github.com/PocketFlutter/Pocket/blob/235b5b5589faf492f4a9fc3b7c0827bcd1d9de2c/sdk/packages/pocket_biometrics/lib/pocket_biometrics.dart)
+Entry: [packages/pocket_biometrics/lib/pocket_biometrics.dart](https://github.com/PocketFlutter/Pocket/blob/b06cb43cac4d553cea232ae1cd1f9ed4ee0c4ff4/sdk/packages/pocket_biometrics/lib/pocket_biometrics.dart)
 
 ### `HardwareCapabilities`
 
@@ -189,7 +189,7 @@ Members:
 - `static const String weatherCurrent = 'hardware.weather.current'`
 - `static const Set<String> all = <String>{permissions, requestPermission, cameraPreviewStart, cameraPreviewStop, cameraLensSwitch, cameraFlashToggle, cameraCapture, photosList, photosDelete, bluetoothScan, bluetoothConnect, bluetoothDisconnect, bluetoothRead, bluetoothWrite, bluetoothNotifications, sensorsRead, sensorsWatch, biometricAuthenticate, locationCurrent, weatherCurrent}`
 
-Source: [packages/pocket_hardware_core/lib/src/hardware_plugin.dart](https://github.com/PocketFlutter/Pocket/blob/235b5b5589faf492f4a9fc3b7c0827bcd1d9de2c/sdk/packages/pocket_hardware_core/lib/src/hardware_plugin.dart#L201)
+Source: [packages/pocket_hardware_core/lib/src/hardware_plugin.dart](https://github.com/PocketFlutter/Pocket/blob/b06cb43cac4d553cea232ae1cd1f9ed4ee0c4ff4/sdk/packages/pocket_hardware_core/lib/src/hardware_plugin.dart#L201)
 
 ### `HardwarePermissions`
 
@@ -206,7 +206,7 @@ Members:
 - `static const String network = 'hardware.network'`
 - `static const Set<String> all = <String>{camera, photos, bluetooth, sensors, biometrics, location, microphone, network}`
 
-Source: [packages/pocket_hardware_core/lib/src/hardware_plugin.dart](https://github.com/PocketFlutter/Pocket/blob/235b5b5589faf492f4a9fc3b7c0827bcd1d9de2c/sdk/packages/pocket_hardware_core/lib/src/hardware_plugin.dart#L179)
+Source: [packages/pocket_hardware_core/lib/src/hardware_plugin.dart](https://github.com/PocketFlutter/Pocket/blob/b06cb43cac4d553cea232ae1cd1f9ed4ee0c4ff4/sdk/packages/pocket_hardware_core/lib/src/hardware_plugin.dart#L179)
 
 ### `HardwarePlatform`
 
@@ -215,7 +215,7 @@ Source: [packages/pocket_hardware_core/lib/src/hardware_plugin.dart](https://git
 Members:
 - `Future<Map<String, dynamic>> invoke( String method, [ Map<String, dynamic> arguments = const <String, dynamic>{}, ])`
 
-Source: [packages/pocket_hardware_core/lib/src/hardware_plugin.dart](https://github.com/PocketFlutter/Pocket/blob/235b5b5589faf492f4a9fc3b7c0827bcd1d9de2c/sdk/packages/pocket_hardware_core/lib/src/hardware_plugin.dart#L254)
+Source: [packages/pocket_hardware_core/lib/src/hardware_plugin.dart](https://github.com/PocketFlutter/Pocket/blob/b06cb43cac4d553cea232ae1cd1f9ed4ee0c4ff4/sdk/packages/pocket_hardware_core/lib/src/hardware_plugin.dart#L254)
 
 ### `HardwarePlatformException`
 
@@ -227,7 +227,7 @@ Members:
 - `final String message`
 - `String toString()`
 
-Source: [packages/pocket_hardware_core/lib/src/hardware_plugin.dart](https://github.com/PocketFlutter/Pocket/blob/235b5b5589faf492f4a9fc3b7c0827bcd1d9de2c/sdk/packages/pocket_hardware_core/lib/src/hardware_plugin.dart#L281)
+Source: [packages/pocket_hardware_core/lib/src/hardware_plugin.dart](https://github.com/PocketFlutter/Pocket/blob/b06cb43cac4d553cea232ae1cd1f9ed4ee0c4ff4/sdk/packages/pocket_hardware_core/lib/src/hardware_plugin.dart#L281)
 
 ### `HardwareStreamingPlatform`
 
@@ -238,19 +238,19 @@ Members:
 - `Future<Map<String, dynamic>> startHardwareStream( Map<String, dynamic> arguments, )`
 - `Future<Map<String, dynamic>> stopHardwareStream( Map<String, dynamic> arguments, )`
 
-Source: [packages/pocket_hardware_core/lib/src/hardware_plugin.dart](https://github.com/PocketFlutter/Pocket/blob/235b5b5589faf492f4a9fc3b7c0827bcd1d9de2c/sdk/packages/pocket_hardware_core/lib/src/hardware_plugin.dart#L265)
+Source: [packages/pocket_hardware_core/lib/src/hardware_plugin.dart](https://github.com/PocketFlutter/Pocket/blob/b06cb43cac4d553cea232ae1cd1f9ed4ee0c4ff4/sdk/packages/pocket_hardware_core/lib/src/hardware_plugin.dart#L265)
 
 ### `HardwareTextureCallback`
 
 **Typedef** `typedef HardwareTextureCallback = void Function(int textureId);`
 
-Source: [packages/pocket_hardware_core/lib/src/hardware_plugin.dart](https://github.com/PocketFlutter/Pocket/blob/235b5b5589faf492f4a9fc3b7c0827bcd1d9de2c/sdk/packages/pocket_hardware_core/lib/src/hardware_plugin.dart#L249)
+Source: [packages/pocket_hardware_core/lib/src/hardware_plugin.dart](https://github.com/PocketFlutter/Pocket/blob/b06cb43cac4d553cea232ae1cd1f9ed4ee0c4ff4/sdk/packages/pocket_hardware_core/lib/src/hardware_plugin.dart#L249)
 
 ### `HardwareWeatherFetcher`
 
 **Typedef** `typedef HardwareWeatherFetcher = Future<Map<String, dynamic>> Function(Uri uri);`
 
-Source: [packages/pocket_hardware_core/lib/src/hardware_plugin.dart](https://github.com/PocketFlutter/Pocket/blob/235b5b5589faf492f4a9fc3b7c0827bcd1d9de2c/sdk/packages/pocket_hardware_core/lib/src/hardware_plugin.dart#L364)
+Source: [packages/pocket_hardware_core/lib/src/hardware_plugin.dart](https://github.com/PocketFlutter/Pocket/blob/b06cb43cac4d553cea232ae1cd1f9ed4ee0c4ff4/sdk/packages/pocket_hardware_core/lib/src/hardware_plugin.dart#L364)
 
 ### `PocketBiometricsPlugin`
 
@@ -259,12 +259,12 @@ Source: [packages/pocket_hardware_core/lib/src/hardware_plugin.dart](https://git
 Members:
 - `PocketBiometricsPlugin({ HardwarePlatform? platform, Duration requestTimeout = const Duration(seconds: 16), })`
 
-Source: [packages/pocket_biometrics/lib/pocket_biometrics.dart](https://github.com/PocketFlutter/Pocket/blob/235b5b5589faf492f4a9fc3b7c0827bcd1d9de2c/sdk/packages/pocket_biometrics/lib/pocket_biometrics.dart#L15)
+Source: [packages/pocket_biometrics/lib/pocket_biometrics.dart](https://github.com/PocketFlutter/Pocket/blob/b06cb43cac4d553cea232ae1cd1f9ed4ee0c4ff4/sdk/packages/pocket_biometrics/lib/pocket_biometrics.dart#L15)
 ## `pocket_bluetooth`
 
 ### Import `package:pocket_bluetooth/pocket_bluetooth.dart`
 
-Entry: [packages/pocket_bluetooth/lib/pocket_bluetooth.dart](https://github.com/PocketFlutter/Pocket/blob/235b5b5589faf492f4a9fc3b7c0827bcd1d9de2c/sdk/packages/pocket_bluetooth/lib/pocket_bluetooth.dart)
+Entry: [packages/pocket_bluetooth/lib/pocket_bluetooth.dart](https://github.com/PocketFlutter/Pocket/blob/b06cb43cac4d553cea232ae1cd1f9ed4ee0c4ff4/sdk/packages/pocket_bluetooth/lib/pocket_bluetooth.dart)
 
 ### `HardwareCapabilities`
 
@@ -293,7 +293,7 @@ Members:
 - `static const String weatherCurrent = 'hardware.weather.current'`
 - `static const Set<String> all = <String>{permissions, requestPermission, cameraPreviewStart, cameraPreviewStop, cameraLensSwitch, cameraFlashToggle, cameraCapture, photosList, photosDelete, bluetoothScan, bluetoothConnect, bluetoothDisconnect, bluetoothRead, bluetoothWrite, bluetoothNotifications, sensorsRead, sensorsWatch, biometricAuthenticate, locationCurrent, weatherCurrent}`
 
-Source: [packages/pocket_hardware_core/lib/src/hardware_plugin.dart](https://github.com/PocketFlutter/Pocket/blob/235b5b5589faf492f4a9fc3b7c0827bcd1d9de2c/sdk/packages/pocket_hardware_core/lib/src/hardware_plugin.dart#L201)
+Source: [packages/pocket_hardware_core/lib/src/hardware_plugin.dart](https://github.com/PocketFlutter/Pocket/blob/b06cb43cac4d553cea232ae1cd1f9ed4ee0c4ff4/sdk/packages/pocket_hardware_core/lib/src/hardware_plugin.dart#L201)
 
 ### `HardwarePermissions`
 
@@ -310,7 +310,7 @@ Members:
 - `static const String network = 'hardware.network'`
 - `static const Set<String> all = <String>{camera, photos, bluetooth, sensors, biometrics, location, microphone, network}`
 
-Source: [packages/pocket_hardware_core/lib/src/hardware_plugin.dart](https://github.com/PocketFlutter/Pocket/blob/235b5b5589faf492f4a9fc3b7c0827bcd1d9de2c/sdk/packages/pocket_hardware_core/lib/src/hardware_plugin.dart#L179)
+Source: [packages/pocket_hardware_core/lib/src/hardware_plugin.dart](https://github.com/PocketFlutter/Pocket/blob/b06cb43cac4d553cea232ae1cd1f9ed4ee0c4ff4/sdk/packages/pocket_hardware_core/lib/src/hardware_plugin.dart#L179)
 
 ### `HardwarePlatform`
 
@@ -319,7 +319,7 @@ Source: [packages/pocket_hardware_core/lib/src/hardware_plugin.dart](https://git
 Members:
 - `Future<Map<String, dynamic>> invoke( String method, [ Map<String, dynamic> arguments = const <String, dynamic>{}, ])`
 
-Source: [packages/pocket_hardware_core/lib/src/hardware_plugin.dart](https://github.com/PocketFlutter/Pocket/blob/235b5b5589faf492f4a9fc3b7c0827bcd1d9de2c/sdk/packages/pocket_hardware_core/lib/src/hardware_plugin.dart#L254)
+Source: [packages/pocket_hardware_core/lib/src/hardware_plugin.dart](https://github.com/PocketFlutter/Pocket/blob/b06cb43cac4d553cea232ae1cd1f9ed4ee0c4ff4/sdk/packages/pocket_hardware_core/lib/src/hardware_plugin.dart#L254)
 
 ### `HardwarePlatformException`
 
@@ -331,7 +331,7 @@ Members:
 - `final String message`
 - `String toString()`
 
-Source: [packages/pocket_hardware_core/lib/src/hardware_plugin.dart](https://github.com/PocketFlutter/Pocket/blob/235b5b5589faf492f4a9fc3b7c0827bcd1d9de2c/sdk/packages/pocket_hardware_core/lib/src/hardware_plugin.dart#L281)
+Source: [packages/pocket_hardware_core/lib/src/hardware_plugin.dart](https://github.com/PocketFlutter/Pocket/blob/b06cb43cac4d553cea232ae1cd1f9ed4ee0c4ff4/sdk/packages/pocket_hardware_core/lib/src/hardware_plugin.dart#L281)
 
 ### `HardwareStreamingPlatform`
 
@@ -342,19 +342,19 @@ Members:
 - `Future<Map<String, dynamic>> startHardwareStream( Map<String, dynamic> arguments, )`
 - `Future<Map<String, dynamic>> stopHardwareStream( Map<String, dynamic> arguments, )`
 
-Source: [packages/pocket_hardware_core/lib/src/hardware_plugin.dart](https://github.com/PocketFlutter/Pocket/blob/235b5b5589faf492f4a9fc3b7c0827bcd1d9de2c/sdk/packages/pocket_hardware_core/lib/src/hardware_plugin.dart#L265)
+Source: [packages/pocket_hardware_core/lib/src/hardware_plugin.dart](https://github.com/PocketFlutter/Pocket/blob/b06cb43cac4d553cea232ae1cd1f9ed4ee0c4ff4/sdk/packages/pocket_hardware_core/lib/src/hardware_plugin.dart#L265)
 
 ### `HardwareTextureCallback`
 
 **Typedef** `typedef HardwareTextureCallback = void Function(int textureId);`
 
-Source: [packages/pocket_hardware_core/lib/src/hardware_plugin.dart](https://github.com/PocketFlutter/Pocket/blob/235b5b5589faf492f4a9fc3b7c0827bcd1d9de2c/sdk/packages/pocket_hardware_core/lib/src/hardware_plugin.dart#L249)
+Source: [packages/pocket_hardware_core/lib/src/hardware_plugin.dart](https://github.com/PocketFlutter/Pocket/blob/b06cb43cac4d553cea232ae1cd1f9ed4ee0c4ff4/sdk/packages/pocket_hardware_core/lib/src/hardware_plugin.dart#L249)
 
 ### `HardwareWeatherFetcher`
 
 **Typedef** `typedef HardwareWeatherFetcher = Future<Map<String, dynamic>> Function(Uri uri);`
 
-Source: [packages/pocket_hardware_core/lib/src/hardware_plugin.dart](https://github.com/PocketFlutter/Pocket/blob/235b5b5589faf492f4a9fc3b7c0827bcd1d9de2c/sdk/packages/pocket_hardware_core/lib/src/hardware_plugin.dart#L364)
+Source: [packages/pocket_hardware_core/lib/src/hardware_plugin.dart](https://github.com/PocketFlutter/Pocket/blob/b06cb43cac4d553cea232ae1cd1f9ed4ee0c4ff4/sdk/packages/pocket_hardware_core/lib/src/hardware_plugin.dart#L364)
 
 ### `PocketBluetoothPlugin`
 
@@ -363,12 +363,12 @@ Source: [packages/pocket_hardware_core/lib/src/hardware_plugin.dart](https://git
 Members:
 - `PocketBluetoothPlugin({ HardwarePlatform? platform, Duration requestTimeout = const Duration(seconds: 16), })`
 
-Source: [packages/pocket_bluetooth/lib/pocket_bluetooth.dart](https://github.com/PocketFlutter/Pocket/blob/235b5b5589faf492f4a9fc3b7c0827bcd1d9de2c/sdk/packages/pocket_bluetooth/lib/pocket_bluetooth.dart#L15)
+Source: [packages/pocket_bluetooth/lib/pocket_bluetooth.dart](https://github.com/PocketFlutter/Pocket/blob/b06cb43cac4d553cea232ae1cd1f9ed4ee0c4ff4/sdk/packages/pocket_bluetooth/lib/pocket_bluetooth.dart#L15)
 ## `pocket_camera`
 
 ### Import `package:pocket_camera/pocket_camera.dart`
 
-Entry: [packages/pocket_camera/lib/pocket_camera.dart](https://github.com/PocketFlutter/Pocket/blob/235b5b5589faf492f4a9fc3b7c0827bcd1d9de2c/sdk/packages/pocket_camera/lib/pocket_camera.dart)
+Entry: [packages/pocket_camera/lib/pocket_camera.dart](https://github.com/PocketFlutter/Pocket/blob/b06cb43cac4d553cea232ae1cd1f9ed4ee0c4ff4/sdk/packages/pocket_camera/lib/pocket_camera.dart)
 
 ### `HardwareCapabilities`
 
@@ -397,7 +397,7 @@ Members:
 - `static const String weatherCurrent = 'hardware.weather.current'`
 - `static const Set<String> all = <String>{permissions, requestPermission, cameraPreviewStart, cameraPreviewStop, cameraLensSwitch, cameraFlashToggle, cameraCapture, photosList, photosDelete, bluetoothScan, bluetoothConnect, bluetoothDisconnect, bluetoothRead, bluetoothWrite, bluetoothNotifications, sensorsRead, sensorsWatch, biometricAuthenticate, locationCurrent, weatherCurrent}`
 
-Source: [packages/pocket_hardware_core/lib/src/hardware_plugin.dart](https://github.com/PocketFlutter/Pocket/blob/235b5b5589faf492f4a9fc3b7c0827bcd1d9de2c/sdk/packages/pocket_hardware_core/lib/src/hardware_plugin.dart#L201)
+Source: [packages/pocket_hardware_core/lib/src/hardware_plugin.dart](https://github.com/PocketFlutter/Pocket/blob/b06cb43cac4d553cea232ae1cd1f9ed4ee0c4ff4/sdk/packages/pocket_hardware_core/lib/src/hardware_plugin.dart#L201)
 
 ### `HardwarePermissions`
 
@@ -414,7 +414,7 @@ Members:
 - `static const String network = 'hardware.network'`
 - `static const Set<String> all = <String>{camera, photos, bluetooth, sensors, biometrics, location, microphone, network}`
 
-Source: [packages/pocket_hardware_core/lib/src/hardware_plugin.dart](https://github.com/PocketFlutter/Pocket/blob/235b5b5589faf492f4a9fc3b7c0827bcd1d9de2c/sdk/packages/pocket_hardware_core/lib/src/hardware_plugin.dart#L179)
+Source: [packages/pocket_hardware_core/lib/src/hardware_plugin.dart](https://github.com/PocketFlutter/Pocket/blob/b06cb43cac4d553cea232ae1cd1f9ed4ee0c4ff4/sdk/packages/pocket_hardware_core/lib/src/hardware_plugin.dart#L179)
 
 ### `HardwarePlatform`
 
@@ -423,7 +423,7 @@ Source: [packages/pocket_hardware_core/lib/src/hardware_plugin.dart](https://git
 Members:
 - `Future<Map<String, dynamic>> invoke( String method, [ Map<String, dynamic> arguments = const <String, dynamic>{}, ])`
 
-Source: [packages/pocket_hardware_core/lib/src/hardware_plugin.dart](https://github.com/PocketFlutter/Pocket/blob/235b5b5589faf492f4a9fc3b7c0827bcd1d9de2c/sdk/packages/pocket_hardware_core/lib/src/hardware_plugin.dart#L254)
+Source: [packages/pocket_hardware_core/lib/src/hardware_plugin.dart](https://github.com/PocketFlutter/Pocket/blob/b06cb43cac4d553cea232ae1cd1f9ed4ee0c4ff4/sdk/packages/pocket_hardware_core/lib/src/hardware_plugin.dart#L254)
 
 ### `HardwarePlatformException`
 
@@ -435,7 +435,7 @@ Members:
 - `final String message`
 - `String toString()`
 
-Source: [packages/pocket_hardware_core/lib/src/hardware_plugin.dart](https://github.com/PocketFlutter/Pocket/blob/235b5b5589faf492f4a9fc3b7c0827bcd1d9de2c/sdk/packages/pocket_hardware_core/lib/src/hardware_plugin.dart#L281)
+Source: [packages/pocket_hardware_core/lib/src/hardware_plugin.dart](https://github.com/PocketFlutter/Pocket/blob/b06cb43cac4d553cea232ae1cd1f9ed4ee0c4ff4/sdk/packages/pocket_hardware_core/lib/src/hardware_plugin.dart#L281)
 
 ### `HardwareStreamingPlatform`
 
@@ -446,19 +446,19 @@ Members:
 - `Future<Map<String, dynamic>> startHardwareStream( Map<String, dynamic> arguments, )`
 - `Future<Map<String, dynamic>> stopHardwareStream( Map<String, dynamic> arguments, )`
 
-Source: [packages/pocket_hardware_core/lib/src/hardware_plugin.dart](https://github.com/PocketFlutter/Pocket/blob/235b5b5589faf492f4a9fc3b7c0827bcd1d9de2c/sdk/packages/pocket_hardware_core/lib/src/hardware_plugin.dart#L265)
+Source: [packages/pocket_hardware_core/lib/src/hardware_plugin.dart](https://github.com/PocketFlutter/Pocket/blob/b06cb43cac4d553cea232ae1cd1f9ed4ee0c4ff4/sdk/packages/pocket_hardware_core/lib/src/hardware_plugin.dart#L265)
 
 ### `HardwareTextureCallback`
 
 **Typedef** `typedef HardwareTextureCallback = void Function(int textureId);`
 
-Source: [packages/pocket_hardware_core/lib/src/hardware_plugin.dart](https://github.com/PocketFlutter/Pocket/blob/235b5b5589faf492f4a9fc3b7c0827bcd1d9de2c/sdk/packages/pocket_hardware_core/lib/src/hardware_plugin.dart#L249)
+Source: [packages/pocket_hardware_core/lib/src/hardware_plugin.dart](https://github.com/PocketFlutter/Pocket/blob/b06cb43cac4d553cea232ae1cd1f9ed4ee0c4ff4/sdk/packages/pocket_hardware_core/lib/src/hardware_plugin.dart#L249)
 
 ### `HardwareWeatherFetcher`
 
 **Typedef** `typedef HardwareWeatherFetcher = Future<Map<String, dynamic>> Function(Uri uri);`
 
-Source: [packages/pocket_hardware_core/lib/src/hardware_plugin.dart](https://github.com/PocketFlutter/Pocket/blob/235b5b5589faf492f4a9fc3b7c0827bcd1d9de2c/sdk/packages/pocket_hardware_core/lib/src/hardware_plugin.dart#L364)
+Source: [packages/pocket_hardware_core/lib/src/hardware_plugin.dart](https://github.com/PocketFlutter/Pocket/blob/b06cb43cac4d553cea232ae1cd1f9ed4ee0c4ff4/sdk/packages/pocket_hardware_core/lib/src/hardware_plugin.dart#L364)
 
 ### `PocketCameraPlugin`
 
@@ -467,12 +467,12 @@ Source: [packages/pocket_hardware_core/lib/src/hardware_plugin.dart](https://git
 Members:
 - `PocketCameraPlugin({ HardwarePlatform? platform, HardwareTextureCallback? onTextureRegistered, HardwareTextureCallback? onTextureReleased, Duration requestTimeout = const Duration(seconds: 16), })`
 
-Source: [packages/pocket_camera/lib/pocket_camera.dart](https://github.com/PocketFlutter/Pocket/blob/235b5b5589faf492f4a9fc3b7c0827bcd1d9de2c/sdk/packages/pocket_camera/lib/pocket_camera.dart#L15)
+Source: [packages/pocket_camera/lib/pocket_camera.dart](https://github.com/PocketFlutter/Pocket/blob/b06cb43cac4d553cea232ae1cd1f9ed4ee0c4ff4/sdk/packages/pocket_camera/lib/pocket_camera.dart#L15)
 ## `pocket_clipboard`
 
 ### Import `package:pocket_clipboard/pocket_clipboard.dart`
 
-Entry: [packages/pocket_clipboard/lib/pocket_clipboard.dart](https://github.com/PocketFlutter/Pocket/blob/235b5b5589faf492f4a9fc3b7c0827bcd1d9de2c/sdk/packages/pocket_clipboard/lib/pocket_clipboard.dart)
+Entry: [packages/pocket_clipboard/lib/pocket_clipboard.dart](https://github.com/PocketFlutter/Pocket/blob/b06cb43cac4d553cea232ae1cd1f9ed4ee0c4ff4/sdk/packages/pocket_clipboard/lib/pocket_clipboard.dart)
 
 ### `PocketClipboardCapabilities`
 
@@ -484,7 +484,7 @@ Members:
 - `static const String hasText = 'clipboard.hasText'`
 - `static const Set<String> all = <String>{readText, writeText, hasText}`
 
-Source: [packages/pocket_clipboard/lib/src/clipboard_plugin.dart](https://github.com/PocketFlutter/Pocket/blob/235b5b5589faf492f4a9fc3b7c0827bcd1d9de2c/sdk/packages/pocket_clipboard/lib/src/clipboard_plugin.dart#L15)
+Source: [packages/pocket_clipboard/lib/src/clipboard_plugin.dart](https://github.com/PocketFlutter/Pocket/blob/b06cb43cac4d553cea232ae1cd1f9ed4ee0c4ff4/sdk/packages/pocket_clipboard/lib/src/clipboard_plugin.dart#L15)
 
 ### `PocketClipboardPermissions`
 
@@ -494,7 +494,7 @@ Members:
 - `static const String read = 'clipboard.read'`
 - `static const String write = 'clipboard.write'`
 
-Source: [packages/pocket_clipboard/lib/src/clipboard_plugin.dart](https://github.com/PocketFlutter/Pocket/blob/235b5b5589faf492f4a9fc3b7c0827bcd1d9de2c/sdk/packages/pocket_clipboard/lib/src/clipboard_plugin.dart#L10)
+Source: [packages/pocket_clipboard/lib/src/clipboard_plugin.dart](https://github.com/PocketFlutter/Pocket/blob/b06cb43cac4d553cea232ae1cd1f9ed4ee0c4ff4/sdk/packages/pocket_clipboard/lib/src/clipboard_plugin.dart#L10)
 
 ### `PocketClipboardPlugin`
 
@@ -509,24 +509,24 @@ Members:
 - `Future<Object?> writeText(Map<String, dynamic> params)`
 - `Future<Object?> hasText(Map<String, dynamic> params)`
 
-Source: [packages/pocket_clipboard/lib/src/clipboard_plugin.dart](https://github.com/PocketFlutter/Pocket/blob/235b5b5589faf492f4a9fc3b7c0827bcd1d9de2c/sdk/packages/pocket_clipboard/lib/src/clipboard_plugin.dart#L99)
+Source: [packages/pocket_clipboard/lib/src/clipboard_plugin.dart](https://github.com/PocketFlutter/Pocket/blob/b06cb43cac4d553cea232ae1cd1f9ed4ee0c4ff4/sdk/packages/pocket_clipboard/lib/src/clipboard_plugin.dart#L99)
 
 ### `pocketClipboardMaxTextBytes`
 
 **Top-level variable** `const int pocketClipboardMaxTextBytes = 192 * 1024`
 
-Source: [packages/pocket_clipboard/lib/src/clipboard_plugin.dart](https://github.com/PocketFlutter/Pocket/blob/235b5b5589faf492f4a9fc3b7c0827bcd1d9de2c/sdk/packages/pocket_clipboard/lib/src/clipboard_plugin.dart#L25)
+Source: [packages/pocket_clipboard/lib/src/clipboard_plugin.dart](https://github.com/PocketFlutter/Pocket/blob/b06cb43cac4d553cea232ae1cd1f9ed4ee0c4ff4/sdk/packages/pocket_clipboard/lib/src/clipboard_plugin.dart#L25)
 
 ### `pocketClipboardPluginId`
 
 **Top-level variable** `const String pocketClipboardPluginId = 'flutter.clipboard'`
 
-Source: [packages/pocket_clipboard/lib/src/clipboard_plugin.dart](https://github.com/PocketFlutter/Pocket/blob/235b5b5589faf492f4a9fc3b7c0827bcd1d9de2c/sdk/packages/pocket_clipboard/lib/src/clipboard_plugin.dart#L6)
+Source: [packages/pocket_clipboard/lib/src/clipboard_plugin.dart](https://github.com/PocketFlutter/Pocket/blob/b06cb43cac4d553cea232ae1cd1f9ed4ee0c4ff4/sdk/packages/pocket_clipboard/lib/src/clipboard_plugin.dart#L6)
 ## `pocket_diagnostics`
 
 ### Import `package:pocket_diagnostics/pocket_diagnostics.dart`
 
-Entry: [packages/pocket_diagnostics/lib/pocket_diagnostics.dart](https://github.com/PocketFlutter/Pocket/blob/235b5b5589faf492f4a9fc3b7c0827bcd1d9de2c/sdk/packages/pocket_diagnostics/lib/pocket_diagnostics.dart)
+Entry: [packages/pocket_diagnostics/lib/pocket_diagnostics.dart](https://github.com/PocketFlutter/Pocket/blob/b06cb43cac4d553cea232ae1cd1f9ed4ee0c4ff4/sdk/packages/pocket_diagnostics/lib/pocket_diagnostics.dart)
 
 ### `DiagnosticClearFilter`
 
@@ -541,7 +541,7 @@ Members:
 - `final String? runtimeId`
 - `final Object? before`
 
-Source: [packages/pocket_diagnostics/lib/src/types.dart](https://github.com/PocketFlutter/Pocket/blob/235b5b5589faf492f4a9fc3b7c0827bcd1d9de2c/sdk/packages/pocket_diagnostics/lib/src/types.dart#L713)
+Source: [packages/pocket_diagnostics/lib/src/types.dart](https://github.com/PocketFlutter/Pocket/blob/b06cb43cac4d553cea232ae1cd1f9ed4ee0c4ff4/sdk/packages/pocket_diagnostics/lib/src/types.dart#L713)
 
 ### `DiagnosticContext`
 
@@ -563,7 +563,7 @@ Members:
 - `bool operator ==(Object other)`
 - `int get hashCode`
 
-Source: [packages/pocket_diagnostics/lib/src/types.dart](https://github.com/PocketFlutter/Pocket/blob/235b5b5589faf492f4a9fc3b7c0827bcd1d9de2c/sdk/packages/pocket_diagnostics/lib/src/types.dart#L68)
+Source: [packages/pocket_diagnostics/lib/src/types.dart](https://github.com/PocketFlutter/Pocket/blob/b06cb43cac4d553cea232ae1cd1f9ed4ee0c4ff4/sdk/packages/pocket_diagnostics/lib/src/types.dart#L68)
 
 ### `DiagnosticCrashInput`
 
@@ -588,7 +588,7 @@ Members:
 - `final Object? data`
 - `final int? recentLogLimit`
 
-Source: [packages/pocket_diagnostics/lib/src/types.dart](https://github.com/PocketFlutter/Pocket/blob/235b5b5589faf492f4a9fc3b7c0827bcd1d9de2c/sdk/packages/pocket_diagnostics/lib/src/types.dart#L599)
+Source: [packages/pocket_diagnostics/lib/src/types.dart](https://github.com/PocketFlutter/Pocket/blob/b06cb43cac4d553cea232ae1cd1f9ed4ee0c4ff4/sdk/packages/pocket_diagnostics/lib/src/types.dart#L599)
 
 ### `DiagnosticCrashRecord`
 
@@ -602,7 +602,7 @@ Members:
 - `final List<DiagnosticRecentLogSummary>? recentLogs`
 - `Map<String, Object?> toJson()`
 
-Source: [packages/pocket_diagnostics/lib/src/types.dart](https://github.com/PocketFlutter/Pocket/blob/235b5b5589faf492f4a9fc3b7c0827bcd1d9de2c/sdk/packages/pocket_diagnostics/lib/src/types.dart#L511)
+Source: [packages/pocket_diagnostics/lib/src/types.dart](https://github.com/PocketFlutter/Pocket/blob/b06cb43cac4d553cea232ae1cd1f9ed4ee0c4ff4/sdk/packages/pocket_diagnostics/lib/src/types.dart#L511)
 
 ### `DiagnosticExportBundle`
 
@@ -620,7 +620,7 @@ Members:
 - `int get schemaVersion`
 - `Map<String, Object?> toJson()`
 
-Source: [packages/pocket_diagnostics/lib/src/types.dart](https://github.com/PocketFlutter/Pocket/blob/235b5b5589faf492f4a9fc3b7c0827bcd1d9de2c/sdk/packages/pocket_diagnostics/lib/src/types.dart#L755)
+Source: [packages/pocket_diagnostics/lib/src/types.dart](https://github.com/PocketFlutter/Pocket/blob/b06cb43cac4d553cea232ae1cd1f9ed4ee0c4ff4/sdk/packages/pocket_diagnostics/lib/src/types.dart#L755)
 
 ### `DiagnosticLogInput`
 
@@ -642,7 +642,7 @@ Members:
 - `final DiagnosticContext? context`
 - `final Object? data`
 
-Source: [packages/pocket_diagnostics/lib/src/types.dart](https://github.com/PocketFlutter/Pocket/blob/235b5b5589faf492f4a9fc3b7c0827bcd1d9de2c/sdk/packages/pocket_diagnostics/lib/src/types.dart#L566)
+Source: [packages/pocket_diagnostics/lib/src/types.dart](https://github.com/PocketFlutter/Pocket/blob/b06cb43cac4d553cea232ae1cd1f9ed4ee0c4ff4/sdk/packages/pocket_diagnostics/lib/src/types.dart#L566)
 
 ### `DiagnosticLogRecord`
 
@@ -653,7 +653,7 @@ Members:
 - `final double? durationMs`
 - `Map<String, Object?> toJson()`
 
-Source: [packages/pocket_diagnostics/lib/src/types.dart](https://github.com/PocketFlutter/Pocket/blob/235b5b5589faf492f4a9fc3b7c0827bcd1d9de2c/sdk/packages/pocket_diagnostics/lib/src/types.dart#L470)
+Source: [packages/pocket_diagnostics/lib/src/types.dart](https://github.com/PocketFlutter/Pocket/blob/b06cb43cac4d553cea232ae1cd1f9ed4ee0c4ff4/sdk/packages/pocket_diagnostics/lib/src/types.dart#L470)
 
 ### `DiagnosticNormalizationLimits`
 
@@ -670,7 +670,7 @@ Members:
 - `final int maxCauseDepth`
 - `final int maxDataBytes`
 
-Source: [packages/pocket_diagnostics/lib/src/types.dart](https://github.com/PocketFlutter/Pocket/blob/235b5b5589faf492f4a9fc3b7c0827bcd1d9de2c/sdk/packages/pocket_diagnostics/lib/src/types.dart#L732)
+Source: [packages/pocket_diagnostics/lib/src/types.dart](https://github.com/PocketFlutter/Pocket/blob/b06cb43cac4d553cea232ae1cd1f9ed4ee0c4ff4/sdk/packages/pocket_diagnostics/lib/src/types.dart#L732)
 
 ### `DiagnosticQuery`
 
@@ -696,7 +696,7 @@ Members:
 - `final bool descending`
 - `DiagnosticQuery copyWith({ DiagnosticRecordKind? kind, List<DiagnosticRecordKind>? kinds, DiagnosticSeverity? severity, List<DiagnosticSeverity>? severities, DiagnosticSeverity? minSeverity, String? source, String? projectId, String? sessionId, String? runtimeId, Object? revision, String? tag, Object? since, Object? until, String? search, int? limit, bool? descending, })`
 
-Source: [packages/pocket_diagnostics/lib/src/types.dart](https://github.com/PocketFlutter/Pocket/blob/235b5b5589faf492f4a9fc3b7c0827bcd1d9de2c/sdk/packages/pocket_diagnostics/lib/src/types.dart#L638)
+Source: [packages/pocket_diagnostics/lib/src/types.dart](https://github.com/PocketFlutter/Pocket/blob/b06cb43cac4d553cea232ae1cd1f9ed4ee0c4ff4/sdk/packages/pocket_diagnostics/lib/src/types.dart#L638)
 
 ### `DiagnosticRecentLogSummary`
 
@@ -718,7 +718,7 @@ Members:
 - `String get level`
 - `Map<String, Object?> toJson()`
 
-Source: [packages/pocket_diagnostics/lib/src/types.dart](https://github.com/PocketFlutter/Pocket/blob/235b5b5589faf492f4a9fc3b7c0827bcd1d9de2c/sdk/packages/pocket_diagnostics/lib/src/types.dart#L243)
+Source: [packages/pocket_diagnostics/lib/src/types.dart](https://github.com/PocketFlutter/Pocket/blob/b06cb43cac4d553cea232ae1cd1f9ed4ee0c4ff4/sdk/packages/pocket_diagnostics/lib/src/types.dart#L243)
 
 ### `DiagnosticRecord`
 
@@ -745,7 +745,7 @@ Members:
 - `Map<String, Object?> toJson()`
 - `static DiagnosticRecord? tryFromJson(Object? raw)`
 
-Source: [packages/pocket_diagnostics/lib/src/types.dart](https://github.com/PocketFlutter/Pocket/blob/235b5b5589faf492f4a9fc3b7c0827bcd1d9de2c/sdk/packages/pocket_diagnostics/lib/src/types.dart#L301)
+Source: [packages/pocket_diagnostics/lib/src/types.dart](https://github.com/PocketFlutter/Pocket/blob/b06cb43cac4d553cea232ae1cd1f9ed4ee0c4ff4/sdk/packages/pocket_diagnostics/lib/src/types.dart#L301)
 
 ### `DiagnosticRecordKind`
 
@@ -760,7 +760,7 @@ Members:
 - `final String value`
 - `static DiagnosticRecordKind? tryParse(Object? raw)`
 
-Source: [packages/pocket_diagnostics/lib/src/types.dart](https://github.com/PocketFlutter/Pocket/blob/235b5b5589faf492f4a9fc3b7c0827bcd1d9de2c/sdk/packages/pocket_diagnostics/lib/src/types.dart#L20)
+Source: [packages/pocket_diagnostics/lib/src/types.dart](https://github.com/PocketFlutter/Pocket/blob/b06cb43cac4d553cea232ae1cd1f9ed4ee0c4ff4/sdk/packages/pocket_diagnostics/lib/src/types.dart#L20)
 
 ### `DiagnosticSeverity`
 
@@ -779,7 +779,7 @@ Members:
 - `final int rank`
 - `static DiagnosticSeverity? tryParse(Object? raw)`
 
-Source: [packages/pocket_diagnostics/lib/src/types.dart](https://github.com/PocketFlutter/Pocket/blob/235b5b5589faf492f4a9fc3b7c0827bcd1d9de2c/sdk/packages/pocket_diagnostics/lib/src/types.dart#L35)
+Source: [packages/pocket_diagnostics/lib/src/types.dart](https://github.com/PocketFlutter/Pocket/blob/b06cb43cac4d553cea232ae1cd1f9ed4ee0c4ff4/sdk/packages/pocket_diagnostics/lib/src/types.dart#L35)
 
 ### `DiagnosticsCollector`
 
@@ -812,7 +812,7 @@ Members:
 - `Future<void> flush()`
 - `Future<void> close()`
 
-Source: [packages/pocket_diagnostics/lib/src/collector.dart](https://github.com/PocketFlutter/Pocket/blob/235b5b5589faf492f4a9fc3b7c0827bcd1d9de2c/sdk/packages/pocket_diagnostics/lib/src/collector.dart#L219)
+Source: [packages/pocket_diagnostics/lib/src/collector.dart](https://github.com/PocketFlutter/Pocket/blob/b06cb43cac4d553cea232ae1cd1f9ed4ee0c4ff4/sdk/packages/pocket_diagnostics/lib/src/collector.dart#L219)
 
 ### `DiagnosticsStorage`
 
@@ -826,7 +826,7 @@ Members:
 - `Future<void> flush()`
 - `Future<void> close()`
 
-Source: [packages/pocket_diagnostics/lib/src/types.dart](https://github.com/PocketFlutter/Pocket/blob/235b5b5589faf492f4a9fc3b7c0827bcd1d9de2c/sdk/packages/pocket_diagnostics/lib/src/types.dart#L796)
+Source: [packages/pocket_diagnostics/lib/src/types.dart](https://github.com/PocketFlutter/Pocket/blob/b06cb43cac4d553cea232ae1cd1f9ed4ee0c4ff4/sdk/packages/pocket_diagnostics/lib/src/types.dart#L796)
 
 ### `DiagnosticsStorageAppendOptions`
 
@@ -836,7 +836,7 @@ Members:
 - `const DiagnosticsStorageAppendOptions({this.sync = false})`
 - `final bool sync`
 
-Source: [packages/pocket_diagnostics/lib/src/types.dart](https://github.com/PocketFlutter/Pocket/blob/235b5b5589faf492f4a9fc3b7c0827bcd1d9de2c/sdk/packages/pocket_diagnostics/lib/src/types.dart#L790)
+Source: [packages/pocket_diagnostics/lib/src/types.dart](https://github.com/PocketFlutter/Pocket/blob/b06cb43cac4d553cea232ae1cd1f9ed4ee0c4ff4/sdk/packages/pocket_diagnostics/lib/src/types.dart#L790)
 
 ### `FileDiagnosticsCollector`
 
@@ -850,7 +850,7 @@ Members:
 - `String get directory`
 - `String get journalPath`
 
-Source: [packages/pocket_diagnostics/lib/src/file_storage.dart](https://github.com/PocketFlutter/Pocket/blob/235b5b5589faf492f4a9fc3b7c0827bcd1d9de2c/sdk/packages/pocket_diagnostics/lib/src/file_storage.dart#L485)
+Source: [packages/pocket_diagnostics/lib/src/file_storage.dart](https://github.com/PocketFlutter/Pocket/blob/b06cb43cac4d553cea232ae1cd1f9ed4ee0c4ff4/sdk/packages/pocket_diagnostics/lib/src/file_storage.dart#L485)
 
 ### `FileDiagnosticsStorage`
 
@@ -875,7 +875,7 @@ Members:
 - `Future<void> flush()`
 - `Future<void> close()`
 
-Source: [packages/pocket_diagnostics/lib/src/file_storage.dart](https://github.com/PocketFlutter/Pocket/blob/235b5b5589faf492f4a9fc3b7c0827bcd1d9de2c/sdk/packages/pocket_diagnostics/lib/src/file_storage.dart#L97)
+Source: [packages/pocket_diagnostics/lib/src/file_storage.dart](https://github.com/PocketFlutter/Pocket/blob/b06cb43cac4d553cea232ae1cd1f9ed4ee0c4ff4/sdk/packages/pocket_diagnostics/lib/src/file_storage.dart#L97)
 
 ### `FlutterErrorCollector`
 
@@ -884,7 +884,7 @@ Source: [packages/pocket_diagnostics/lib/src/file_storage.dart](https://github.c
 Members:
 - `static FlutterErrorCollectorHandle attach({ required DiagnosticsCollector collector, DiagnosticContext? context, DiagnosticContext Function()? contextProvider, bool captureFlutterErrors = true, bool capturePlatformDispatcherErrors = true, void Function(DiagnosticCrashRecord record)? onCrashRecorded, PlatformDispatcher? platformDispatcher, })`
 
-Source: [packages/pocket_diagnostics/lib/src/flutter_adapter.dart](https://github.com/PocketFlutter/Pocket/blob/235b5b5589faf492f4a9fc3b7c0827bcd1d9de2c/sdk/packages/pocket_diagnostics/lib/src/flutter_adapter.dart#L19)
+Source: [packages/pocket_diagnostics/lib/src/flutter_adapter.dart](https://github.com/PocketFlutter/Pocket/blob/b06cb43cac4d553cea232ae1cd1f9ed4ee0c4ff4/sdk/packages/pocket_diagnostics/lib/src/flutter_adapter.dart#L19)
 
 ### `FlutterErrorCollectorHandle`
 
@@ -894,7 +894,7 @@ Members:
 - `bool get active`
 - `void detach()`
 
-Source: [packages/pocket_diagnostics/lib/src/flutter_adapter.dart](https://github.com/PocketFlutter/Pocket/blob/235b5b5589faf492f4a9fc3b7c0827bcd1d9de2c/sdk/packages/pocket_diagnostics/lib/src/flutter_adapter.dart#L14)
+Source: [packages/pocket_diagnostics/lib/src/flutter_adapter.dart](https://github.com/PocketFlutter/Pocket/blob/b06cb43cac4d553cea232ae1cd1f9ed4ee0c4ff4/sdk/packages/pocket_diagnostics/lib/src/flutter_adapter.dart#L14)
 
 ### `MemoryDiagnosticsStorage`
 
@@ -911,7 +911,7 @@ Members:
 - `Future<void> flush()`
 - `Future<void> close()`
 
-Source: [packages/pocket_diagnostics/lib/src/collector.dart](https://github.com/PocketFlutter/Pocket/blob/235b5b5589faf492f4a9fc3b7c0827bcd1d9de2c/sdk/packages/pocket_diagnostics/lib/src/collector.dart#L146)
+Source: [packages/pocket_diagnostics/lib/src/collector.dart](https://github.com/PocketFlutter/Pocket/blob/b06cb43cac4d553cea232ae1cd1f9ed4ee0c4ff4/sdk/packages/pocket_diagnostics/lib/src/collector.dart#L146)
 
 ### `NormalizedDiagnosticError`
 
@@ -929,7 +929,7 @@ Members:
 - `final bool? truncated`
 - `Map<String, Object?> toJson()`
 
-Source: [packages/pocket_diagnostics/lib/src/types.dart](https://github.com/PocketFlutter/Pocket/blob/235b5b5589faf492f4a9fc3b7c0827bcd1d9de2c/sdk/packages/pocket_diagnostics/lib/src/types.dart#L193)
+Source: [packages/pocket_diagnostics/lib/src/types.dart](https://github.com/PocketFlutter/Pocket/blob/b06cb43cac4d553cea232ae1cd1f9ed4ee0c4ff4/sdk/packages/pocket_diagnostics/lib/src/types.dart#L193)
 
 ### `RecentLogCaptureMode`
 
@@ -945,7 +945,7 @@ Members:
 - `const RecentLogCaptureMode(this.value)`
 - `final String value`
 
-Source: [packages/pocket_diagnostics/lib/src/types.dart](https://github.com/PocketFlutter/Pocket/blob/235b5b5589faf492f4a9fc3b7c0827bcd1d9de2c/sdk/packages/pocket_diagnostics/lib/src/types.dart#L57)
+Source: [packages/pocket_diagnostics/lib/src/types.dart](https://github.com/PocketFlutter/Pocket/blob/b06cb43cac4d553cea232ae1cd1f9ed4ee0c4ff4/sdk/packages/pocket_diagnostics/lib/src/types.dart#L57)
 
 ### `ResolvedNormalizationLimits`
 
@@ -962,7 +962,7 @@ Members:
 - `final int maxCauseDepth`
 - `final int maxDataBytes`
 
-Source: [packages/pocket_diagnostics/lib/src/normalize.dart](https://github.com/PocketFlutter/Pocket/blob/235b5b5589faf492f4a9fc3b7c0827bcd1d9de2c/sdk/packages/pocket_diagnostics/lib/src/normalize.dart#L10)
+Source: [packages/pocket_diagnostics/lib/src/normalize.dart](https://github.com/PocketFlutter/Pocket/blob/b06cb43cac4d553cea232ae1cd1f9ed4ee0c4ff4/sdk/packages/pocket_diagnostics/lib/src/normalize.dart#L10)
 
 ### `SynchronousDiagnosticsStorage`
 
@@ -971,7 +971,7 @@ Source: [packages/pocket_diagnostics/lib/src/normalize.dart](https://github.com/
 Members:
 - `void appendSync( DiagnosticRecord record, { DiagnosticsStorageAppendOptions options = const DiagnosticsStorageAppendOptions(), })`
 
-Source: [packages/pocket_diagnostics/lib/src/types.dart](https://github.com/PocketFlutter/Pocket/blob/235b5b5589faf492f4a9fc3b7c0827bcd1d9de2c/sdk/packages/pocket_diagnostics/lib/src/types.dart#L815)
+Source: [packages/pocket_diagnostics/lib/src/types.dart](https://github.com/PocketFlutter/Pocket/blob/b06cb43cac4d553cea232ae1cd1f9ed4ee0c4ff4/sdk/packages/pocket_diagnostics/lib/src/types.dart#L815)
 
 ### `TruncationTracker`
 
@@ -981,198 +981,198 @@ Members:
 - `bool truncated = false`
 - `TruncationTracker()` _(implicit)_
 
-Source: [packages/pocket_diagnostics/lib/src/normalize.dart](https://github.com/PocketFlutter/Pocket/blob/235b5b5589faf492f4a9fc3b7c0827bcd1d9de2c/sdk/packages/pocket_diagnostics/lib/src/normalize.dart#L98)
+Source: [packages/pocket_diagnostics/lib/src/normalize.dart](https://github.com/PocketFlutter/Pocket/blob/b06cb43cac4d553cea232ae1cd1f9ed4ee0c4ff4/sdk/packages/pocket_diagnostics/lib/src/normalize.dart#L98)
 
 ### `attachFlutterErrorCollector`
 
 **function** `FlutterErrorCollectorHandle attachFlutterErrorCollector({ required DiagnosticsCollector collector, DiagnosticContext? context, DiagnosticContext Function()? contextProvider, bool captureFlutterErrors = true, bool capturePlatformDispatcherErrors = true, void Function(DiagnosticCrashRecord record)? onCrashRecorded, PlatformDispatcher? platformDispatcher, })`
 
-Source: [packages/pocket_diagnostics/lib/src/flutter_adapter.dart](https://github.com/PocketFlutter/Pocket/blob/235b5b5589faf492f4a9fc3b7c0827bcd1d9de2c/sdk/packages/pocket_diagnostics/lib/src/flutter_adapter.dart#L174)
+Source: [packages/pocket_diagnostics/lib/src/flutter_adapter.dart](https://github.com/PocketFlutter/Pocket/blob/b06cb43cac4d553cea232ae1cd1f9ed4ee0c4ff4/sdk/packages/pocket_diagnostics/lib/src/flutter_adapter.dart#L174)
 
 ### `createDiagnosticsCollector`
 
 **function** `DiagnosticsCollector createDiagnosticsCollector({ DiagnosticsStorage? storage, DiagnosticContext? context, int maxRecords = defaultMaxRecords, int recentLogLimit = defaultRecentLogLimit, RecentLogCaptureMode recentLogMode = RecentLogCaptureMode.auto, DiagnosticNormalizationLimits? normalization, DateTime Function()? now, String Function()? idGenerator, })`
 
-Source: [packages/pocket_diagnostics/lib/src/collector.dart](https://github.com/PocketFlutter/Pocket/blob/235b5b5589faf492f4a9fc3b7c0827bcd1d9de2c/sdk/packages/pocket_diagnostics/lib/src/collector.dart#L764)
+Source: [packages/pocket_diagnostics/lib/src/collector.dart](https://github.com/PocketFlutter/Pocket/blob/b06cb43cac4d553cea232ae1cd1f9ed4ee0c4ff4/sdk/packages/pocket_diagnostics/lib/src/collector.dart#L764)
 
 ### `createFileDiagnostics`
 
 **function** `FileDiagnosticsCollector createFileDiagnostics({ required Directory directory, String filename = defaultJournalFilename, int maxFileBytes = defaultMaxFileBytes, int maxRotatedFiles = defaultMaxRotatedFiles, int maxRecords = defaultMaxRecords, bool syncOnLog = false, DiagnosticContext? context, int recentLogLimit = defaultRecentLogLimit, RecentLogCaptureMode recentLogMode = RecentLogCaptureMode.auto, DiagnosticNormalizationLimits? normalization, DateTime Function()? now, String Function()? idGenerator, })`
 
-Source: [packages/pocket_diagnostics/lib/src/file_storage.dart](https://github.com/PocketFlutter/Pocket/blob/235b5b5589faf492f4a9fc3b7c0827bcd1d9de2c/sdk/packages/pocket_diagnostics/lib/src/file_storage.dart#L554)
+Source: [packages/pocket_diagnostics/lib/src/file_storage.dart](https://github.com/PocketFlutter/Pocket/blob/b06cb43cac4d553cea232ae1cd1f9ed4ee0c4ff4/sdk/packages/pocket_diagnostics/lib/src/file_storage.dart#L554)
 
 ### `createFileDiagnosticsStorage`
 
 **function** `FileDiagnosticsStorage createFileDiagnosticsStorage({ required Directory directory, String filename = defaultJournalFilename, int maxFileBytes = defaultMaxFileBytes, int maxRotatedFiles = defaultMaxRotatedFiles, int maxRecords = defaultMaxRecords, bool syncOnLog = false, })`
 
-Source: [packages/pocket_diagnostics/lib/src/file_storage.dart](https://github.com/PocketFlutter/Pocket/blob/235b5b5589faf492f4a9fc3b7c0827bcd1d9de2c/sdk/packages/pocket_diagnostics/lib/src/file_storage.dart#L538)
+Source: [packages/pocket_diagnostics/lib/src/file_storage.dart](https://github.com/PocketFlutter/Pocket/blob/b06cb43cac4d553cea232ae1cd1f9ed4ee0c4ff4/sdk/packages/pocket_diagnostics/lib/src/file_storage.dart#L538)
 
 ### `defaultDiagnosticIdGenerator`
 
 **function** `String defaultDiagnosticIdGenerator([math.Random? random])`
 
-Source: [packages/pocket_diagnostics/lib/src/collector.dart](https://github.com/PocketFlutter/Pocket/blob/235b5b5589faf492f4a9fc3b7c0827bcd1d9de2c/sdk/packages/pocket_diagnostics/lib/src/collector.dart#L8)
+Source: [packages/pocket_diagnostics/lib/src/collector.dart](https://github.com/PocketFlutter/Pocket/blob/b06cb43cac4d553cea232ae1cd1f9ed4ee0c4ff4/sdk/packages/pocket_diagnostics/lib/src/collector.dart#L8)
 
 ### `defaultJournalFilename`
 
 **Top-level variable** `const String defaultJournalFilename = 'diagnostics.jsonl'`
 
-Source: [packages/pocket_diagnostics/lib/src/types.dart](https://github.com/PocketFlutter/Pocket/blob/235b5b5589faf492f4a9fc3b7c0827bcd1d9de2c/sdk/packages/pocket_diagnostics/lib/src/types.dart#L16)
+Source: [packages/pocket_diagnostics/lib/src/types.dart](https://github.com/PocketFlutter/Pocket/blob/b06cb43cac4d553cea232ae1cd1f9ed4ee0c4ff4/sdk/packages/pocket_diagnostics/lib/src/types.dart#L16)
 
 ### `defaultMaxArrayLength`
 
 **Top-level variable** `const int defaultMaxArrayLength = 64`
 
-Source: [packages/pocket_diagnostics/lib/src/types.dart](https://github.com/PocketFlutter/Pocket/blob/235b5b5589faf492f4a9fc3b7c0827bcd1d9de2c/sdk/packages/pocket_diagnostics/lib/src/types.dart#L10)
+Source: [packages/pocket_diagnostics/lib/src/types.dart](https://github.com/PocketFlutter/Pocket/blob/b06cb43cac4d553cea232ae1cd1f9ed4ee0c4ff4/sdk/packages/pocket_diagnostics/lib/src/types.dart#L10)
 
 ### `defaultMaxCauseDepth`
 
 **Top-level variable** `const int defaultMaxCauseDepth = 6`
 
-Source: [packages/pocket_diagnostics/lib/src/types.dart](https://github.com/PocketFlutter/Pocket/blob/235b5b5589faf492f4a9fc3b7c0827bcd1d9de2c/sdk/packages/pocket_diagnostics/lib/src/types.dart#L14)
+Source: [packages/pocket_diagnostics/lib/src/types.dart](https://github.com/PocketFlutter/Pocket/blob/b06cb43cac4d553cea232ae1cd1f9ed4ee0c4ff4/sdk/packages/pocket_diagnostics/lib/src/types.dart#L14)
 
 ### `defaultMaxDataBytes`
 
 **Top-level variable** `const int defaultMaxDataBytes = 32 * 1024`
 
-Source: [packages/pocket_diagnostics/lib/src/types.dart](https://github.com/PocketFlutter/Pocket/blob/235b5b5589faf492f4a9fc3b7c0827bcd1d9de2c/sdk/packages/pocket_diagnostics/lib/src/types.dart#L15)
+Source: [packages/pocket_diagnostics/lib/src/types.dart](https://github.com/PocketFlutter/Pocket/blob/b06cb43cac4d553cea232ae1cd1f9ed4ee0c4ff4/sdk/packages/pocket_diagnostics/lib/src/types.dart#L15)
 
 ### `defaultMaxDepth`
 
 **Top-level variable** `const int defaultMaxDepth = 8`
 
-Source: [packages/pocket_diagnostics/lib/src/types.dart](https://github.com/PocketFlutter/Pocket/blob/235b5b5589faf492f4a9fc3b7c0827bcd1d9de2c/sdk/packages/pocket_diagnostics/lib/src/types.dart#L8)
+Source: [packages/pocket_diagnostics/lib/src/types.dart](https://github.com/PocketFlutter/Pocket/blob/b06cb43cac4d553cea232ae1cd1f9ed4ee0c4ff4/sdk/packages/pocket_diagnostics/lib/src/types.dart#L8)
 
 ### `defaultMaxFileBytes`
 
 **Top-level variable** `const int defaultMaxFileBytes = 512 * 1024`
 
-Source: [packages/pocket_diagnostics/lib/src/types.dart](https://github.com/PocketFlutter/Pocket/blob/235b5b5589faf492f4a9fc3b7c0827bcd1d9de2c/sdk/packages/pocket_diagnostics/lib/src/types.dart#L17)
+Source: [packages/pocket_diagnostics/lib/src/types.dart](https://github.com/PocketFlutter/Pocket/blob/b06cb43cac4d553cea232ae1cd1f9ed4ee0c4ff4/sdk/packages/pocket_diagnostics/lib/src/types.dart#L17)
 
 ### `defaultMaxNodes`
 
 **Top-level variable** `const int defaultMaxNodes = 512`
 
-Source: [packages/pocket_diagnostics/lib/src/types.dart](https://github.com/PocketFlutter/Pocket/blob/235b5b5589faf492f4a9fc3b7c0827bcd1d9de2c/sdk/packages/pocket_diagnostics/lib/src/types.dart#L9)
+Source: [packages/pocket_diagnostics/lib/src/types.dart](https://github.com/PocketFlutter/Pocket/blob/b06cb43cac4d553cea232ae1cd1f9ed4ee0c4ff4/sdk/packages/pocket_diagnostics/lib/src/types.dart#L9)
 
 ### `defaultMaxObjectKeys`
 
 **Top-level variable** `const int defaultMaxObjectKeys = 64`
 
-Source: [packages/pocket_diagnostics/lib/src/types.dart](https://github.com/PocketFlutter/Pocket/blob/235b5b5589faf492f4a9fc3b7c0827bcd1d9de2c/sdk/packages/pocket_diagnostics/lib/src/types.dart#L11)
+Source: [packages/pocket_diagnostics/lib/src/types.dart](https://github.com/PocketFlutter/Pocket/blob/b06cb43cac4d553cea232ae1cd1f9ed4ee0c4ff4/sdk/packages/pocket_diagnostics/lib/src/types.dart#L11)
 
 ### `defaultMaxRecords`
 
 **Top-level variable** `const int defaultMaxRecords = 500`
 
-Source: [packages/pocket_diagnostics/lib/src/types.dart](https://github.com/PocketFlutter/Pocket/blob/235b5b5589faf492f4a9fc3b7c0827bcd1d9de2c/sdk/packages/pocket_diagnostics/lib/src/types.dart#L6)
+Source: [packages/pocket_diagnostics/lib/src/types.dart](https://github.com/PocketFlutter/Pocket/blob/b06cb43cac4d553cea232ae1cd1f9ed4ee0c4ff4/sdk/packages/pocket_diagnostics/lib/src/types.dart#L6)
 
 ### `defaultMaxRotatedFiles`
 
 **Top-level variable** `const int defaultMaxRotatedFiles = 3`
 
-Source: [packages/pocket_diagnostics/lib/src/types.dart](https://github.com/PocketFlutter/Pocket/blob/235b5b5589faf492f4a9fc3b7c0827bcd1d9de2c/sdk/packages/pocket_diagnostics/lib/src/types.dart#L18)
+Source: [packages/pocket_diagnostics/lib/src/types.dart](https://github.com/PocketFlutter/Pocket/blob/b06cb43cac4d553cea232ae1cd1f9ed4ee0c4ff4/sdk/packages/pocket_diagnostics/lib/src/types.dart#L18)
 
 ### `defaultMaxStackLength`
 
 **Top-level variable** `const int defaultMaxStackLength = 16 * 1024`
 
-Source: [packages/pocket_diagnostics/lib/src/types.dart](https://github.com/PocketFlutter/Pocket/blob/235b5b5589faf492f4a9fc3b7c0827bcd1d9de2c/sdk/packages/pocket_diagnostics/lib/src/types.dart#L13)
+Source: [packages/pocket_diagnostics/lib/src/types.dart](https://github.com/PocketFlutter/Pocket/blob/b06cb43cac4d553cea232ae1cd1f9ed4ee0c4ff4/sdk/packages/pocket_diagnostics/lib/src/types.dart#L13)
 
 ### `defaultMaxStringLength`
 
 **Top-level variable** `const int defaultMaxStringLength = 4096`
 
-Source: [packages/pocket_diagnostics/lib/src/types.dart](https://github.com/PocketFlutter/Pocket/blob/235b5b5589faf492f4a9fc3b7c0827bcd1d9de2c/sdk/packages/pocket_diagnostics/lib/src/types.dart#L12)
+Source: [packages/pocket_diagnostics/lib/src/types.dart](https://github.com/PocketFlutter/Pocket/blob/b06cb43cac4d553cea232ae1cd1f9ed4ee0c4ff4/sdk/packages/pocket_diagnostics/lib/src/types.dart#L12)
 
 ### `defaultRecentLogLimit`
 
 **Top-level variable** `const int defaultRecentLogLimit = 20`
 
-Source: [packages/pocket_diagnostics/lib/src/types.dart](https://github.com/PocketFlutter/Pocket/blob/235b5b5589faf492f4a9fc3b7c0827bcd1d9de2c/sdk/packages/pocket_diagnostics/lib/src/types.dart#L7)
+Source: [packages/pocket_diagnostics/lib/src/types.dart](https://github.com/PocketFlutter/Pocket/blob/b06cb43cac4d553cea232ae1cd1f9ed4ee0c4ff4/sdk/packages/pocket_diagnostics/lib/src/types.dart#L7)
 
 ### `diagnosticsSchemaVersion`
 
 **Top-level variable** `const int diagnosticsSchemaVersion = 1`
 
-Source: [packages/pocket_diagnostics/lib/src/types.dart](https://github.com/PocketFlutter/Pocket/blob/235b5b5589faf492f4a9fc3b7c0827bcd1d9de2c/sdk/packages/pocket_diagnostics/lib/src/types.dart#L5)
+Source: [packages/pocket_diagnostics/lib/src/types.dart](https://github.com/PocketFlutter/Pocket/blob/b06cb43cac4d553cea232ae1cd1f9ed4ee0c4ff4/sdk/packages/pocket_diagnostics/lib/src/types.dart#L5)
 
 ### `estimateUtf8Bytes`
 
 **function** `int estimateUtf8Bytes(String text)`
 
-Source: [packages/pocket_diagnostics/lib/src/normalize.dart](https://github.com/PocketFlutter/Pocket/blob/235b5b5589faf492f4a9fc3b7c0827bcd1d9de2c/sdk/packages/pocket_diagnostics/lib/src/normalize.dart#L80)
+Source: [packages/pocket_diagnostics/lib/src/normalize.dart](https://github.com/PocketFlutter/Pocket/blob/b06cb43cac4d553cea232ae1cd1f9ed4ee0c4ff4/sdk/packages/pocket_diagnostics/lib/src/normalize.dart#L80)
 
 ### `filterAndSortRecords`
 
 **function** `List<DiagnosticRecord> filterAndSortRecords( List<DiagnosticRecord> records, [ DiagnosticQuery? query, ])`
 
-Source: [packages/pocket_diagnostics/lib/src/collector.dart](https://github.com/PocketFlutter/Pocket/blob/235b5b5589faf492f4a9fc3b7c0827bcd1d9de2c/sdk/packages/pocket_diagnostics/lib/src/collector.dart#L46)
+Source: [packages/pocket_diagnostics/lib/src/collector.dart](https://github.com/PocketFlutter/Pocket/blob/b06cb43cac4d553cea232ae1cd1f9ed4ee0c4ff4/sdk/packages/pocket_diagnostics/lib/src/collector.dart#L46)
 
 ### `matchesClearFilter`
 
 **function** `bool matchesClearFilter( DiagnosticRecord record, [ DiagnosticClearFilter? filter, ])`
 
-Source: [packages/pocket_diagnostics/lib/src/collector.dart](https://github.com/PocketFlutter/Pocket/blob/235b5b5589faf492f4a9fc3b7c0827bcd1d9de2c/sdk/packages/pocket_diagnostics/lib/src/collector.dart#L15)
+Source: [packages/pocket_diagnostics/lib/src/collector.dart](https://github.com/PocketFlutter/Pocket/blob/b06cb43cac4d553cea232ae1cd1f9ed4ee0c4ff4/sdk/packages/pocket_diagnostics/lib/src/collector.dart#L15)
 
 ### `normalizeContextString`
 
 **function** `String? normalizeContextString(Object? value, [int maxLength = 256])`
 
-Source: [packages/pocket_diagnostics/lib/src/normalize.dart](https://github.com/PocketFlutter/Pocket/blob/235b5b5589faf492f4a9fc3b7c0827bcd1d9de2c/sdk/packages/pocket_diagnostics/lib/src/normalize.dart#L601)
+Source: [packages/pocket_diagnostics/lib/src/normalize.dart](https://github.com/PocketFlutter/Pocket/blob/b06cb43cac4d553cea232ae1cd1f9ed4ee0c4ff4/sdk/packages/pocket_diagnostics/lib/src/normalize.dart#L601)
 
 ### `normalizeDiagnosticContext`
 
 **function** `DiagnosticContext normalizeDiagnosticContext(DiagnosticContext? context)`
 
-Source: [packages/pocket_diagnostics/lib/src/normalize.dart](https://github.com/PocketFlutter/Pocket/blob/235b5b5589faf492f4a9fc3b7c0827bcd1d9de2c/sdk/packages/pocket_diagnostics/lib/src/normalize.dart#L624)
+Source: [packages/pocket_diagnostics/lib/src/normalize.dart](https://github.com/PocketFlutter/Pocket/blob/b06cb43cac4d553cea232ae1cd1f9ed4ee0c4ff4/sdk/packages/pocket_diagnostics/lib/src/normalize.dart#L624)
 
 ### `normalizeDiagnosticData`
 
 **function** `Object? normalizeDiagnosticData( Object? value, [ DiagnosticNormalizationLimits? limits, ])`
 
-Source: [packages/pocket_diagnostics/lib/src/normalize.dart](https://github.com/PocketFlutter/Pocket/blob/235b5b5589faf492f4a9fc3b7c0827bcd1d9de2c/sdk/packages/pocket_diagnostics/lib/src/normalize.dart#L270)
+Source: [packages/pocket_diagnostics/lib/src/normalize.dart](https://github.com/PocketFlutter/Pocket/blob/b06cb43cac4d553cea232ae1cd1f9ed4ee0c4ff4/sdk/packages/pocket_diagnostics/lib/src/normalize.dart#L270)
 
 ### `normalizeDiagnosticError`
 
 **function** `NormalizedDiagnosticError normalizeDiagnosticError( Object? error, { StackTrace? stackTrace, DiagnosticNormalizationLimits? limits, })`
 
-Source: [packages/pocket_diagnostics/lib/src/normalize.dart](https://github.com/PocketFlutter/Pocket/blob/235b5b5589faf492f4a9fc3b7c0827bcd1d9de2c/sdk/packages/pocket_diagnostics/lib/src/normalize.dart#L280)
+Source: [packages/pocket_diagnostics/lib/src/normalize.dart](https://github.com/PocketFlutter/Pocket/blob/b06cb43cac4d553cea232ae1cd1f9ed4ee0c4ff4/sdk/packages/pocket_diagnostics/lib/src/normalize.dart#L280)
 
 ### `normalizeRevision`
 
 **function** `Object? normalizeRevision(Object? value)`
 
-Source: [packages/pocket_diagnostics/lib/src/normalize.dart](https://github.com/PocketFlutter/Pocket/blob/235b5b5589faf492f4a9fc3b7c0827bcd1d9de2c/sdk/packages/pocket_diagnostics/lib/src/normalize.dart#L610)
+Source: [packages/pocket_diagnostics/lib/src/normalize.dart](https://github.com/PocketFlutter/Pocket/blob/b06cb43cac4d553cea232ae1cd1f9ed4ee0c4ff4/sdk/packages/pocket_diagnostics/lib/src/normalize.dart#L610)
 
 ### `normalizeTimestamp`
 
 **function** `String normalizeTimestamp(Object? value, DateTime Function() fallbackNow)`
 
-Source: [packages/pocket_diagnostics/lib/src/normalize.dart](https://github.com/PocketFlutter/Pocket/blob/235b5b5589faf492f4a9fc3b7c0827bcd1d9de2c/sdk/packages/pocket_diagnostics/lib/src/normalize.dart#L636)
+Source: [packages/pocket_diagnostics/lib/src/normalize.dart](https://github.com/PocketFlutter/Pocket/blob/b06cb43cac4d553cea232ae1cd1f9ed4ee0c4ff4/sdk/packages/pocket_diagnostics/lib/src/normalize.dart#L636)
 
 ### `resolveNormalizationLimits`
 
 **function** `ResolvedNormalizationLimits resolveNormalizationLimits([ DiagnosticNormalizationLimits? limits, ])`
 
-Source: [packages/pocket_diagnostics/lib/src/normalize.dart](https://github.com/PocketFlutter/Pocket/blob/235b5b5589faf492f4a9fc3b7c0827bcd1d9de2c/sdk/packages/pocket_diagnostics/lib/src/normalize.dart#L37)
+Source: [packages/pocket_diagnostics/lib/src/normalize.dart](https://github.com/PocketFlutter/Pocket/blob/b06cb43cac4d553cea232ae1cd1f9ed4ee0c4ff4/sdk/packages/pocket_diagnostics/lib/src/normalize.dart#L37)
 
 ### `summarizeDiagnosticLog`
 
 **function** `DiagnosticRecentLogSummary summarizeDiagnosticLog(DiagnosticLogRecord log)`
 
-Source: [packages/pocket_diagnostics/lib/src/collector.dart](https://github.com/PocketFlutter/Pocket/blob/235b5b5589faf492f4a9fc3b7c0827bcd1d9de2c/sdk/packages/pocket_diagnostics/lib/src/collector.dart#L132)
+Source: [packages/pocket_diagnostics/lib/src/collector.dart](https://github.com/PocketFlutter/Pocket/blob/b06cb43cac4d553cea232ae1cd1f9ed4ee0c4ff4/sdk/packages/pocket_diagnostics/lib/src/collector.dart#L132)
 
 ### `truncateString`
 
 **function** `String truncateString( String value, int maxLength, [ TruncationTracker? tracker, ])`
 
-Source: [packages/pocket_diagnostics/lib/src/normalize.dart](https://github.com/PocketFlutter/Pocket/blob/235b5b5589faf492f4a9fc3b7c0827bcd1d9de2c/sdk/packages/pocket_diagnostics/lib/src/normalize.dart#L102)
+Source: [packages/pocket_diagnostics/lib/src/normalize.dart](https://github.com/PocketFlutter/Pocket/blob/b06cb43cac4d553cea232ae1cd1f9ed4ee0c4ff4/sdk/packages/pocket_diagnostics/lib/src/normalize.dart#L102)
 ## `pocket_dio`
 
 ### Import `package:pocket_dio/pocket_dio.dart`
 
-Entry: [packages/pocket_dio/lib/pocket_dio.dart](https://github.com/PocketFlutter/Pocket/blob/235b5b5589faf492f4a9fc3b7c0827bcd1d9de2c/sdk/packages/pocket_dio/lib/pocket_dio.dart)
+Entry: [packages/pocket_dio/lib/pocket_dio.dart](https://github.com/PocketFlutter/Pocket/blob/b06cb43cac4d553cea232ae1cd1f9ed4ee0c4ff4/sdk/packages/pocket_dio/lib/pocket_dio.dart)
 
 ### `PocketDioPlugin`
 
@@ -1190,30 +1190,30 @@ Members:
 - `Future<void> deactivate(PocketPluginContext context)`
 - `Future<void> dispose()`
 
-Source: [packages/pocket_dio/lib/src/dio_plugin.dart](https://github.com/PocketFlutter/Pocket/blob/235b5b5589faf492f4a9fc3b7c0827bcd1d9de2c/sdk/packages/pocket_dio/lib/src/dio_plugin.dart#L65)
+Source: [packages/pocket_dio/lib/src/dio_plugin.dart](https://github.com/PocketFlutter/Pocket/blob/b06cb43cac4d553cea232ae1cd1f9ed4ee0c4ff4/sdk/packages/pocket_dio/lib/src/dio_plugin.dart#L65)
 
 ### `pocketDioNetworkPermission`
 
 **Top-level variable** `const String pocketDioNetworkPermission = 'network'`
 
-Source: [packages/pocket_dio/lib/src/dio_plugin.dart](https://github.com/PocketFlutter/Pocket/blob/235b5b5589faf492f4a9fc3b7c0827bcd1d9de2c/sdk/packages/pocket_dio/lib/src/dio_plugin.dart#L23)
+Source: [packages/pocket_dio/lib/src/dio_plugin.dart](https://github.com/PocketFlutter/Pocket/blob/b06cb43cac4d553cea232ae1cd1f9ed4ee0c4ff4/sdk/packages/pocket_dio/lib/src/dio_plugin.dart#L23)
 
 ### `pocketDioPluginId`
 
 **Top-level variable** `const String pocketDioPluginId = 'dart.dio'`
 
-Source: [packages/pocket_dio/lib/src/dio_plugin.dart](https://github.com/PocketFlutter/Pocket/blob/235b5b5589faf492f4a9fc3b7c0827bcd1d9de2c/sdk/packages/pocket_dio/lib/src/dio_plugin.dart#L21)
+Source: [packages/pocket_dio/lib/src/dio_plugin.dart](https://github.com/PocketFlutter/Pocket/blob/b06cb43cac4d553cea232ae1cd1f9ed4ee0c4ff4/sdk/packages/pocket_dio/lib/src/dio_plugin.dart#L21)
 
 ### `pocketDioRequestCapability`
 
 **Top-level variable** `const String pocketDioRequestCapability = 'dio.request'`
 
-Source: [packages/pocket_dio/lib/src/dio_plugin.dart](https://github.com/PocketFlutter/Pocket/blob/235b5b5589faf492f4a9fc3b7c0827bcd1d9de2c/sdk/packages/pocket_dio/lib/src/dio_plugin.dart#L22)
+Source: [packages/pocket_dio/lib/src/dio_plugin.dart](https://github.com/PocketFlutter/Pocket/blob/b06cb43cac4d553cea232ae1cd1f9ed4ee0c4ff4/sdk/packages/pocket_dio/lib/src/dio_plugin.dart#L22)
 ## `pocket_file_picker`
 
 ### Import `package:pocket_file_picker/pocket_file_picker.dart`
 
-Entry: [packages/pocket_file_picker/lib/pocket_file_picker.dart](https://github.com/PocketFlutter/Pocket/blob/235b5b5589faf492f4a9fc3b7c0827bcd1d9de2c/sdk/packages/pocket_file_picker/lib/pocket_file_picker.dart)
+Entry: [packages/pocket_file_picker/lib/pocket_file_picker.dart](https://github.com/PocketFlutter/Pocket/blob/b06cb43cac4d553cea232ae1cd1f9ed4ee0c4ff4/sdk/packages/pocket_file_picker/lib/pocket_file_picker.dart)
 
 ### `PocketFilePickerCapabilities`
 
@@ -1225,7 +1225,7 @@ Members:
 - `static const String release = 'files.release'`
 - `static const Set<String> all = <String>{pickOpen, readChunk, release}`
 
-Source: [packages/pocket_file_picker/lib/src/file_picker_plugin.dart](https://github.com/PocketFlutter/Pocket/blob/235b5b5589faf492f4a9fc3b7c0827bcd1d9de2c/sdk/packages/pocket_file_picker/lib/src/file_picker_plugin.dart#L17)
+Source: [packages/pocket_file_picker/lib/src/file_picker_plugin.dart](https://github.com/PocketFlutter/Pocket/blob/b06cb43cac4d553cea232ae1cd1f9ed4ee0c4ff4/sdk/packages/pocket_file_picker/lib/src/file_picker_plugin.dart#L17)
 
 ### `PocketFilePickerPermissions`
 
@@ -1234,7 +1234,7 @@ Source: [packages/pocket_file_picker/lib/src/file_picker_plugin.dart](https://gi
 Members:
 - `static const String open = 'files.open'`
 
-Source: [packages/pocket_file_picker/lib/src/file_picker_plugin.dart](https://github.com/PocketFlutter/Pocket/blob/235b5b5589faf492f4a9fc3b7c0827bcd1d9de2c/sdk/packages/pocket_file_picker/lib/src/file_picker_plugin.dart#L13)
+Source: [packages/pocket_file_picker/lib/src/file_picker_plugin.dart](https://github.com/PocketFlutter/Pocket/blob/b06cb43cac4d553cea232ae1cd1f9ed4ee0c4ff4/sdk/packages/pocket_file_picker/lib/src/file_picker_plugin.dart#L13)
 
 ### `PocketFilePickerPlugin`
 
@@ -1250,42 +1250,42 @@ Members:
 - `Future<Object?> readChunk(Map<String, dynamic> params)`
 - `Future<Object?> release(Map<String, dynamic> params)`
 
-Source: [packages/pocket_file_picker/lib/src/file_picker_plugin.dart](https://github.com/PocketFlutter/Pocket/blob/235b5b5589faf492f4a9fc3b7c0827bcd1d9de2c/sdk/packages/pocket_file_picker/lib/src/file_picker_plugin.dart#L162)
+Source: [packages/pocket_file_picker/lib/src/file_picker_plugin.dart](https://github.com/PocketFlutter/Pocket/blob/b06cb43cac4d553cea232ae1cd1f9ed4ee0c4ff4/sdk/packages/pocket_file_picker/lib/src/file_picker_plugin.dart#L162)
 
 ### `pocketFilePickerChunkBytes`
 
 **Top-level variable** `const int pocketFilePickerChunkBytes = 128 * 1024`
 
-Source: [packages/pocket_file_picker/lib/src/file_picker_plugin.dart](https://github.com/PocketFlutter/Pocket/blob/235b5b5589faf492f4a9fc3b7c0827bcd1d9de2c/sdk/packages/pocket_file_picker/lib/src/file_picker_plugin.dart#L27)
+Source: [packages/pocket_file_picker/lib/src/file_picker_plugin.dart](https://github.com/PocketFlutter/Pocket/blob/b06cb43cac4d553cea232ae1cd1f9ed4ee0c4ff4/sdk/packages/pocket_file_picker/lib/src/file_picker_plugin.dart#L27)
 
 ### `pocketFilePickerDefaultMaxFileBytes`
 
 **Top-level variable** `const int pocketFilePickerDefaultMaxFileBytes = 256 * 1024 * 1024`
 
-Source: [packages/pocket_file_picker/lib/src/file_picker_plugin.dart](https://github.com/PocketFlutter/Pocket/blob/235b5b5589faf492f4a9fc3b7c0827bcd1d9de2c/sdk/packages/pocket_file_picker/lib/src/file_picker_plugin.dart#L30)
+Source: [packages/pocket_file_picker/lib/src/file_picker_plugin.dart](https://github.com/PocketFlutter/Pocket/blob/b06cb43cac4d553cea232ae1cd1f9ed4ee0c4ff4/sdk/packages/pocket_file_picker/lib/src/file_picker_plugin.dart#L30)
 
 ### `pocketFilePickerMaxFileBytesCeiling`
 
 **Top-level variable** `const int pocketFilePickerMaxFileBytesCeiling = 1024 * 1024 * 1024`
 
-Source: [packages/pocket_file_picker/lib/src/file_picker_plugin.dart](https://github.com/PocketFlutter/Pocket/blob/235b5b5589faf492f4a9fc3b7c0827bcd1d9de2c/sdk/packages/pocket_file_picker/lib/src/file_picker_plugin.dart#L31)
+Source: [packages/pocket_file_picker/lib/src/file_picker_plugin.dart](https://github.com/PocketFlutter/Pocket/blob/b06cb43cac4d553cea232ae1cd1f9ed4ee0c4ff4/sdk/packages/pocket_file_picker/lib/src/file_picker_plugin.dart#L31)
 
 ### `pocketFilePickerMaxHandles`
 
 **Top-level variable** `const int pocketFilePickerMaxHandles = 64`
 
-Source: [packages/pocket_file_picker/lib/src/file_picker_plugin.dart](https://github.com/PocketFlutter/Pocket/blob/235b5b5589faf492f4a9fc3b7c0827bcd1d9de2c/sdk/packages/pocket_file_picker/lib/src/file_picker_plugin.dart#L34)
+Source: [packages/pocket_file_picker/lib/src/file_picker_plugin.dart](https://github.com/PocketFlutter/Pocket/blob/b06cb43cac4d553cea232ae1cd1f9ed4ee0c4ff4/sdk/packages/pocket_file_picker/lib/src/file_picker_plugin.dart#L34)
 
 ### `pocketFilePickerPluginId`
 
 **Top-level variable** `const String pocketFilePickerPluginId = 'flutter.files'`
 
-Source: [packages/pocket_file_picker/lib/src/file_picker_plugin.dart](https://github.com/PocketFlutter/Pocket/blob/235b5b5589faf492f4a9fc3b7c0827bcd1d9de2c/sdk/packages/pocket_file_picker/lib/src/file_picker_plugin.dart#L9)
+Source: [packages/pocket_file_picker/lib/src/file_picker_plugin.dart](https://github.com/PocketFlutter/Pocket/blob/b06cb43cac4d553cea232ae1cd1f9ed4ee0c4ff4/sdk/packages/pocket_file_picker/lib/src/file_picker_plugin.dart#L9)
 ## `pocket_flutter`
 
 ### Import `package:pocket_flutter/pocket_flutter.dart`
 
-Entry: [packages/pocket_flutter/lib/pocket_flutter.dart](https://github.com/PocketFlutter/Pocket/blob/235b5b5589faf492f4a9fc3b7c0827bcd1d9de2c/sdk/packages/pocket_flutter/lib/pocket_flutter.dart)
+Entry: [packages/pocket_flutter/lib/pocket_flutter.dart](https://github.com/PocketFlutter/Pocket/blob/b06cb43cac4d553cea232ae1cd1f9ed4ee0c4ff4/sdk/packages/pocket_flutter/lib/pocket_flutter.dart)
 
 ### `FfiPocketRuntime`
 
@@ -1327,7 +1327,7 @@ Members:
 - `String? get lastError`
 - `void dispose()`
 
-Source: [packages/pocket_flutter/lib/src/pocket_runtime.dart](https://github.com/PocketFlutter/Pocket/blob/235b5b5589faf492f4a9fc3b7c0827bcd1d9de2c/sdk/packages/pocket_flutter/lib/src/pocket_runtime.dart#L613)
+Source: [packages/pocket_flutter/lib/src/pocket_runtime.dart](https://github.com/PocketFlutter/Pocket/blob/b06cb43cac4d553cea232ae1cd1f9ed4ee0c4ff4/sdk/packages/pocket_flutter/lib/src/pocket_runtime.dart#L613)
 
 ### `FlutterFrameMonitor`
 
@@ -1341,7 +1341,7 @@ Members:
 - `State<FlutterFrameMonitor> createState()`
 - `static int get debugSubscriberCount`
 
-Source: [packages/pocket_flutter/lib/src/flutter_frame_monitor.dart](https://github.com/PocketFlutter/Pocket/blob/235b5b5589faf492f4a9fc3b7c0827bcd1d9de2c/sdk/packages/pocket_flutter/lib/src/flutter_frame_monitor.dart#L354)
+Source: [packages/pocket_flutter/lib/src/flutter_frame_monitor.dart](https://github.com/PocketFlutter/Pocket/blob/b06cb43cac4d553cea232ae1cd1f9ed4ee0c4ff4/sdk/packages/pocket_flutter/lib/src/flutter_frame_monitor.dart#L354)
 
 ### `FlutterFrameMonitorController`
 
@@ -1365,7 +1365,7 @@ Members:
 - `void setDisplayRefreshRateHz(double? refreshRateHz)`
 - `void debugReportTimings(Iterable<FrameTiming> timings)`
 
-Source: [packages/pocket_flutter/lib/src/flutter_frame_monitor.dart](https://github.com/PocketFlutter/Pocket/blob/235b5b5589faf492f4a9fc3b7c0827bcd1d9de2c/sdk/packages/pocket_flutter/lib/src/flutter_frame_monitor.dart#L142)
+Source: [packages/pocket_flutter/lib/src/flutter_frame_monitor.dart](https://github.com/PocketFlutter/Pocket/blob/b06cb43cac4d553cea232ae1cd1f9ed4ee0c4ff4/sdk/packages/pocket_flutter/lib/src/flutter_frame_monitor.dart#L142)
 
 ### `FlutterFrameTimingSample`
 
@@ -1377,7 +1377,7 @@ Members:
 - `final double uiMs`
 - `final double rasterMs`
 
-Source: [packages/pocket_flutter/lib/src/flutter_frame_monitor.dart](https://github.com/PocketFlutter/Pocket/blob/235b5b5589faf492f4a9fc3b7c0827bcd1d9de2c/sdk/packages/pocket_flutter/lib/src/flutter_frame_monitor.dart#L19)
+Source: [packages/pocket_flutter/lib/src/flutter_frame_monitor.dart](https://github.com/PocketFlutter/Pocket/blob/b06cb43cac4d553cea232ae1cd1f9ed4ee0c4ff4/sdk/packages/pocket_flutter/lib/src/flutter_frame_monitor.dart#L19)
 
 ### `FlutterFrameWindow`
 
@@ -1402,7 +1402,7 @@ Members:
 - `bool get hasCadence`
 - `bool get isEmpty`
 
-Source: [packages/pocket_flutter/lib/src/flutter_frame_monitor.dart](https://github.com/PocketFlutter/Pocket/blob/235b5b5589faf492f4a9fc3b7c0827bcd1d9de2c/sdk/packages/pocket_flutter/lib/src/flutter_frame_monitor.dart#L37)
+Source: [packages/pocket_flutter/lib/src/flutter_frame_monitor.dart](https://github.com/PocketFlutter/Pocket/blob/b06cb43cac4d553cea232ae1cd1f9ed4ee0c4ff4/sdk/packages/pocket_flutter/lib/src/flutter_frame_monitor.dart#L37)
 
 ### `PocketArcOp`
 
@@ -1416,7 +1416,7 @@ Members:
 - `final double startAngle`
 - `final double sweepAngle`
 
-Source: [packages/pocket_flutter/lib/src/pocket_model.dart](https://github.com/PocketFlutter/Pocket/blob/235b5b5589faf492f4a9fc3b7c0827bcd1d9de2c/sdk/packages/pocket_flutter/lib/src/pocket_model.dart#L367)
+Source: [packages/pocket_flutter/lib/src/pocket_model.dart](https://github.com/PocketFlutter/Pocket/blob/b06cb43cac4d553cea232ae1cd1f9ed4ee0c4ff4/sdk/packages/pocket_flutter/lib/src/pocket_model.dart#L367)
 
 ### `PocketBinaryCodec`
 
@@ -1429,7 +1429,7 @@ Members:
 - `static PocketBinaryOffloadRecord decodeOffloadRecord( Uint8List bytes, { bool isCancel = false, })`
 - `static Uint8List encodeOffloadCompletion(PocketOffloadCompletion completion)`
 
-Source: [packages/pocket_flutter/lib/src/pocket_binary_codec.dart](https://github.com/PocketFlutter/Pocket/blob/235b5b5589faf492f4a9fc3b7c0827bcd1d9de2c/sdk/packages/pocket_flutter/lib/src/pocket_binary_codec.dart#L46)
+Source: [packages/pocket_flutter/lib/src/pocket_binary_codec.dart](https://github.com/PocketFlutter/Pocket/blob/b06cb43cac4d553cea232ae1cd1f9ed4ee0c4ff4/sdk/packages/pocket_flutter/lib/src/pocket_binary_codec.dart#L46)
 
 ### `PocketBinaryDuplexRuntime`
 
@@ -1440,7 +1440,7 @@ Members:
 - `int duplexStep()`
 - `bool get duplexRuntimeAlive`
 
-Source: [packages/pocket_flutter/lib/src/pocket_duplex.dart](https://github.com/PocketFlutter/Pocket/blob/235b5b5589faf492f4a9fc3b7c0827bcd1d9de2c/sdk/packages/pocket_flutter/lib/src/pocket_duplex.dart#L45)
+Source: [packages/pocket_flutter/lib/src/pocket_duplex.dart](https://github.com/PocketFlutter/Pocket/blob/b06cb43cac4d553cea232ae1cd1f9ed4ee0c4ff4/sdk/packages/pocket_flutter/lib/src/pocket_duplex.dart#L45)
 
 ### `PocketBinaryOffloadRecord`
 
@@ -1451,7 +1451,7 @@ Members:
 - `final PocketOffloadRequest? request`
 - `final String? validationError`
 
-Source: [packages/pocket_flutter/lib/src/pocket_binary_codec.dart](https://github.com/PocketFlutter/Pocket/blob/235b5b5589faf492f4a9fc3b7c0827bcd1d9de2c/sdk/packages/pocket_flutter/lib/src/pocket_binary_codec.dart#L30)
+Source: [packages/pocket_flutter/lib/src/pocket_binary_codec.dart](https://github.com/PocketFlutter/Pocket/blob/b06cb43cac4d553cea232ae1cd1f9ed4ee0c4ff4/sdk/packages/pocket_flutter/lib/src/pocket_binary_codec.dart#L30)
 
 ### `PocketBoundedOffloadProvider`
 
@@ -1471,7 +1471,7 @@ Members:
 - `void cancel(PocketOffloadRequest request)`
 - `Future<void> close()`
 
-Source: [packages/pocket_flutter/lib/src/pocket_offload_runtime.dart](https://github.com/PocketFlutter/Pocket/blob/235b5b5589faf492f4a9fc3b7c0827bcd1d9de2c/sdk/packages/pocket_flutter/lib/src/pocket_offload_runtime.dart#L177)
+Source: [packages/pocket_flutter/lib/src/pocket_offload_runtime.dart](https://github.com/PocketFlutter/Pocket/blob/b06cb43cac4d553cea232ae1cd1f9ed4ee0c4ff4/sdk/packages/pocket_flutter/lib/src/pocket_offload_runtime.dart#L177)
 
 ### `PocketBytecodeMetadata`
 
@@ -1492,7 +1492,7 @@ Members:
 - `final String? payloadSha256`
 - `final String? fonts`
 
-Source: [packages/pocket_flutter/lib/src/pocket_runtime.dart](https://github.com/PocketFlutter/Pocket/blob/235b5b5589faf492f4a9fc3b7c0827bcd1d9de2c/sdk/packages/pocket_flutter/lib/src/pocket_runtime.dart#L135)
+Source: [packages/pocket_flutter/lib/src/pocket_runtime.dart](https://github.com/PocketFlutter/Pocket/blob/b06cb43cac4d553cea232ae1cd1f9ed4ee0c4ff4/sdk/packages/pocket_flutter/lib/src/pocket_runtime.dart#L135)
 
 ### `PocketBytecodeRuntime`
 
@@ -1502,7 +1502,7 @@ Members:
 - `PocketFrame loadBytecode( Uint8List bytecode, Uint8List pak, { String? expectedRuntimeAbi, })`
 - `String? get actualAbi`
 
-Source: [packages/pocket_flutter/lib/src/pocket_runtime.dart](https://github.com/PocketFlutter/Pocket/blob/235b5b5589faf492f4a9fc3b7c0827bcd1d9de2c/sdk/packages/pocket_flutter/lib/src/pocket_runtime.dart#L90)
+Source: [packages/pocket_flutter/lib/src/pocket_runtime.dart](https://github.com/PocketFlutter/Pocket/blob/b06cb43cac4d553cea232ae1cd1f9ed4ee0c4ff4/sdk/packages/pocket_flutter/lib/src/pocket_runtime.dart#L90)
 
 ### `PocketCanvasPainter`
 
@@ -1528,7 +1528,7 @@ Members:
 - `bool hitTest(Offset position)`
 - `bool shouldRepaint(PocketCanvasPainter oldDelegate)`
 
-Source: [packages/pocket_flutter/lib/src/pocket_view_painter.dart](https://github.com/PocketFlutter/Pocket/blob/235b5b5589faf492f4a9fc3b7c0827bcd1d9de2c/sdk/packages/pocket_flutter/lib/src/pocket_view_painter.dart#L269)
+Source: [packages/pocket_flutter/lib/src/pocket_view_painter.dart](https://github.com/PocketFlutter/Pocket/blob/b06cb43cac4d553cea232ae1cd1f9ed4ee0c4ff4/sdk/packages/pocket_flutter/lib/src/pocket_view_painter.dart#L269)
 
 ### `PocketClip`
 
@@ -1542,7 +1542,7 @@ Members:
 - `final double width`
 - `final double height`
 
-Source: [packages/pocket_flutter/lib/src/pocket_model.dart](https://github.com/PocketFlutter/Pocket/blob/235b5b5589faf492f4a9fc3b7c0827bcd1d9de2c/sdk/packages/pocket_flutter/lib/src/pocket_model.dart#L7)
+Source: [packages/pocket_flutter/lib/src/pocket_model.dart](https://github.com/PocketFlutter/Pocket/blob/b06cb43cac4d553cea232ae1cd1f9ed4ee0c4ff4/sdk/packages/pocket_flutter/lib/src/pocket_model.dart#L7)
 
 ### `PocketCompositorRuntime`
 
@@ -1551,7 +1551,7 @@ Source: [packages/pocket_flutter/lib/src/pocket_model.dart](https://github.com/P
 Members:
 - `void configureCompositor(Map<String, int> applications)`
 
-Source: [packages/pocket_flutter/lib/src/pocket_runtime.dart](https://github.com/PocketFlutter/Pocket/blob/235b5b5589faf492f4a9fc3b7c0827bcd1d9de2c/sdk/packages/pocket_flutter/lib/src/pocket_runtime.dart#L64)
+Source: [packages/pocket_flutter/lib/src/pocket_runtime.dart](https://github.com/PocketFlutter/Pocket/blob/b06cb43cac4d553cea232ae1cd1f9ed4ee0c4ff4/sdk/packages/pocket_flutter/lib/src/pocket_runtime.dart#L64)
 
 ### `PocketCompositorSlot`
 
@@ -1568,7 +1568,7 @@ Members:
 - `final int drawIndex`
 - `final bool preserveDisplayGeometry`
 
-Source: [packages/pocket_flutter/lib/src/pocket_compositor.dart](https://github.com/PocketFlutter/Pocket/blob/235b5b5589faf492f4a9fc3b7c0827bcd1d9de2c/sdk/packages/pocket_flutter/lib/src/pocket_compositor.dart#L13)
+Source: [packages/pocket_flutter/lib/src/pocket_compositor.dart](https://github.com/PocketFlutter/Pocket/blob/b06cb43cac4d553cea232ae1cd1f9ed4ee0c4ff4/sdk/packages/pocket_flutter/lib/src/pocket_compositor.dart#L13)
 
 ### `PocketDisplayGeometryChannel`
 
@@ -1580,7 +1580,7 @@ Members:
 - `Future<PocketDisplayGeometrySnapshot> start({ PocketDisplayGeometryUpdate? onUpdate, })`
 - `Future<void> stop({PocketDisplayGeometryUpdate? onUpdate})`
 
-Source: [packages/pocket_flutter/lib/src/pocket_display_geometry.dart](https://github.com/PocketFlutter/Pocket/blob/235b5b5589faf492f4a9fc3b7c0827bcd1d9de2c/sdk/packages/pocket_flutter/lib/src/pocket_display_geometry.dart#L156)
+Source: [packages/pocket_flutter/lib/src/pocket_display_geometry.dart](https://github.com/PocketFlutter/Pocket/blob/b06cb43cac4d553cea232ae1cd1f9ed4ee0c4ff4/sdk/packages/pocket_flutter/lib/src/pocket_display_geometry.dart#L156)
 
 ### `PocketDisplayGeometrySnapshot`
 
@@ -1595,7 +1595,7 @@ Members:
 - `final bool? reduceTransparency`
 - `static PocketDisplayGeometrySnapshot fromDynamic(Object? value)`
 
-Source: [packages/pocket_flutter/lib/src/pocket_display_geometry.dart](https://github.com/PocketFlutter/Pocket/blob/235b5b5589faf492f4a9fc3b7c0827bcd1d9de2c/sdk/packages/pocket_flutter/lib/src/pocket_display_geometry.dart#L88)
+Source: [packages/pocket_flutter/lib/src/pocket_display_geometry.dart](https://github.com/PocketFlutter/Pocket/blob/b06cb43cac4d553cea232ae1cd1f9ed4ee0c4ff4/sdk/packages/pocket_flutter/lib/src/pocket_display_geometry.dart#L88)
 
 ### `PocketDisplayGeometrySource`
 
@@ -1605,13 +1605,13 @@ Members:
 - `Future<PocketDisplayGeometrySnapshot> start({ PocketDisplayGeometryUpdate? onUpdate, })`
 - `Future<void> stop({PocketDisplayGeometryUpdate? onUpdate})`
 
-Source: [packages/pocket_flutter/lib/src/pocket_display_geometry.dart](https://github.com/PocketFlutter/Pocket/blob/235b5b5589faf492f4a9fc3b7c0827bcd1d9de2c/sdk/packages/pocket_flutter/lib/src/pocket_display_geometry.dart#L148)
+Source: [packages/pocket_flutter/lib/src/pocket_display_geometry.dart](https://github.com/PocketFlutter/Pocket/blob/b06cb43cac4d553cea232ae1cd1f9ed4ee0c4ff4/sdk/packages/pocket_flutter/lib/src/pocket_display_geometry.dart#L148)
 
 ### `PocketDisplayGeometryUpdate`
 
 **Typedef** `typedef PocketDisplayGeometryUpdate = void Function(PocketDisplayGeometrySnapshot snapshot);`
 
-Source: [packages/pocket_flutter/lib/src/pocket_display_geometry.dart](https://github.com/PocketFlutter/Pocket/blob/235b5b5589faf492f4a9fc3b7c0827bcd1d9de2c/sdk/packages/pocket_flutter/lib/src/pocket_display_geometry.dart#L4)
+Source: [packages/pocket_flutter/lib/src/pocket_display_geometry.dart](https://github.com/PocketFlutter/Pocket/blob/b06cb43cac4d553cea232ae1cd1f9ed4ee0c4ff4/sdk/packages/pocket_flutter/lib/src/pocket_display_geometry.dart#L4)
 
 ### `PocketDisplayRegion`
 
@@ -1629,7 +1629,7 @@ Members:
 - `bool operator ==(Object other)`
 - `int get hashCode`
 
-Source: [packages/pocket_flutter/lib/src/pocket_display_geometry.dart](https://github.com/PocketFlutter/Pocket/blob/235b5b5589faf492f4a9fc3b7c0827bcd1d9de2c/sdk/packages/pocket_flutter/lib/src/pocket_display_geometry.dart#L13)
+Source: [packages/pocket_flutter/lib/src/pocket_display_geometry.dart](https://github.com/PocketFlutter/Pocket/blob/b06cb43cac4d553cea232ae1cd1f9ed4ee0c4ff4/sdk/packages/pocket_flutter/lib/src/pocket_display_geometry.dart#L13)
 
 ### `PocketDuplexChannel`
 
@@ -1654,7 +1654,7 @@ Members:
 - `List<PocketDuplexEvent> drainFromPocketJs({int maxBatch = 64})`
 - `void close()`
 
-Source: [packages/pocket_flutter/lib/src/pocket_duplex.dart](https://github.com/PocketFlutter/Pocket/blob/235b5b5589faf492f4a9fc3b7c0827bcd1d9de2c/sdk/packages/pocket_flutter/lib/src/pocket_duplex.dart#L63)
+Source: [packages/pocket_flutter/lib/src/pocket_duplex.dart](https://github.com/PocketFlutter/Pocket/blob/b06cb43cac4d553cea232ae1cd1f9ed4ee0c4ff4/sdk/packages/pocket_flutter/lib/src/pocket_duplex.dart#L63)
 
 ### `PocketDuplexEndpoint`
 
@@ -1669,7 +1669,7 @@ Members:
 - `void consumeEgress(int messageCount)`
 - `void close()`
 
-Source: [packages/pocket_flutter/lib/src/pocket_duplex.dart](https://github.com/PocketFlutter/Pocket/blob/235b5b5589faf492f4a9fc3b7c0827bcd1d9de2c/sdk/packages/pocket_flutter/lib/src/pocket_duplex.dart#L16)
+Source: [packages/pocket_flutter/lib/src/pocket_duplex.dart](https://github.com/PocketFlutter/Pocket/blob/b06cb43cac4d553cea232ae1cd1f9ed4ee0c4ff4/sdk/packages/pocket_flutter/lib/src/pocket_duplex.dart#L16)
 
 ### `PocketDuplexEvent`
 
@@ -1678,13 +1678,13 @@ Source: [packages/pocket_flutter/lib/src/pocket_duplex.dart](https://github.com/
 Members:
 - `const PocketDuplexEvent({ required super.msgType, super.flags, required super.targetId, super.arg0, super.arg1, })`
 
-Source: [packages/pocket_flutter/lib/src/pocket_duplex.dart](https://github.com/PocketFlutter/Pocket/blob/235b5b5589faf492f4a9fc3b7c0827bcd1d9de2c/sdk/packages/pocket_flutter/lib/src/pocket_duplex.dart#L405)
+Source: [packages/pocket_flutter/lib/src/pocket_duplex.dart](https://github.com/PocketFlutter/Pocket/blob/b06cb43cac4d553cea232ae1cd1f9ed4ee0c4ff4/sdk/packages/pocket_flutter/lib/src/pocket_duplex.dart#L405)
 
 ### `PocketDuplexEventCallback`
 
 **Typedef** `typedef PocketDuplexEventCallback = void Function(PocketDuplexEvent event);`
 
-Source: [packages/pocket_flutter/lib/src/pocket_view.dart](https://github.com/PocketFlutter/Pocket/blob/235b5b5589faf492f4a9fc3b7c0827bcd1d9de2c/sdk/packages/pocket_flutter/lib/src/pocket_view.dart#L41)
+Source: [packages/pocket_flutter/lib/src/pocket_view.dart](https://github.com/PocketFlutter/Pocket/blob/b06cb43cac4d553cea232ae1cd1f9ed4ee0c4ff4/sdk/packages/pocket_flutter/lib/src/pocket_view.dart#L41)
 
 ### `PocketDuplexMessage`
 
@@ -1698,7 +1698,7 @@ Members:
 - `final double arg0`
 - `final double arg1`
 
-Source: [packages/pocket_flutter/lib/src/pocket_duplex.dart](https://github.com/PocketFlutter/Pocket/blob/235b5b5589faf492f4a9fc3b7c0827bcd1d9de2c/sdk/packages/pocket_flutter/lib/src/pocket_duplex.dart#L389)
+Source: [packages/pocket_flutter/lib/src/pocket_duplex.dart](https://github.com/PocketFlutter/Pocket/blob/b06cb43cac4d553cea232ae1cd1f9ed4ee0c4ff4/sdk/packages/pocket_flutter/lib/src/pocket_duplex.dart#L389)
 
 ### `PocketEvent`
 
@@ -1712,13 +1712,13 @@ Members:
 - `final int? wireByteLength`
 - `factory PocketEvent.fromJson( Map<String, dynamic> json, { int? wireByteLength, })`
 
-Source: [packages/pocket_flutter/lib/src/pocket_model.dart](https://github.com/PocketFlutter/Pocket/blob/235b5b5589faf492f4a9fc3b7c0827bcd1d9de2c/sdk/packages/pocket_flutter/lib/src/pocket_model.dart#L690)
+Source: [packages/pocket_flutter/lib/src/pocket_model.dart](https://github.com/PocketFlutter/Pocket/blob/b06cb43cac4d553cea232ae1cd1f9ed4ee0c4ff4/sdk/packages/pocket_flutter/lib/src/pocket_model.dart#L690)
 
 ### `PocketEventCallback`
 
 **Typedef** `typedef PocketEventCallback = void Function(PocketEvent event);`
 
-Source: [packages/pocket_flutter/lib/src/pocket_view.dart](https://github.com/PocketFlutter/Pocket/blob/235b5b5589faf492f4a9fc3b7c0827bcd1d9de2c/sdk/packages/pocket_flutter/lib/src/pocket_view.dart#L40)
+Source: [packages/pocket_flutter/lib/src/pocket_view.dart](https://github.com/PocketFlutter/Pocket/blob/b06cb43cac4d553cea232ae1cd1f9ed4ee0c4ff4/sdk/packages/pocket_flutter/lib/src/pocket_view.dart#L40)
 
 ### `PocketFrame`
 
@@ -1738,7 +1738,7 @@ Members:
 - `final PocketSurfaceFrame? auxiliary`
 - `final int? sequence`
 
-Source: [packages/pocket_flutter/lib/src/pocket_model.dart](https://github.com/PocketFlutter/Pocket/blob/235b5b5589faf492f4a9fc3b7c0827bcd1d9de2c/sdk/packages/pocket_flutter/lib/src/pocket_model.dart#L789)
+Source: [packages/pocket_flutter/lib/src/pocket_model.dart](https://github.com/PocketFlutter/Pocket/blob/b06cb43cac4d553cea232ae1cd1f9ed4ee0c4ff4/sdk/packages/pocket_flutter/lib/src/pocket_model.dart#L789)
 
 ### `PocketGradientOp`
 
@@ -1750,7 +1750,7 @@ Members:
 - `final int toColor`
 - `final int direction`
 
-Source: [packages/pocket_flutter/lib/src/pocket_model.dart](https://github.com/PocketFlutter/Pocket/blob/235b5b5589faf492f4a9fc3b7c0827bcd1d9de2c/sdk/packages/pocket_flutter/lib/src/pocket_model.dart#L391)
+Source: [packages/pocket_flutter/lib/src/pocket_model.dart](https://github.com/PocketFlutter/Pocket/blob/b06cb43cac4d553cea232ae1cd1f9ed4ee0c4ff4/sdk/packages/pocket_flutter/lib/src/pocket_model.dart#L391)
 
 ### `PocketGuestSecurityPolicy`
 
@@ -1769,7 +1769,7 @@ Members:
 - `bool operator ==(Object other)`
 - `int get hashCode`
 
-Source: [packages/pocket_flutter/lib/src/pocket_guest_security.dart](https://github.com/PocketFlutter/Pocket/blob/235b5b5589faf492f4a9fc3b7c0827bcd1d9de2c/sdk/packages/pocket_flutter/lib/src/pocket_guest_security.dart#L8)
+Source: [packages/pocket_flutter/lib/src/pocket_guest_security.dart](https://github.com/PocketFlutter/Pocket/blob/b06cb43cac4d553cea232ae1cd1f9ed4ee0c4ff4/sdk/packages/pocket_flutter/lib/src/pocket_guest_security.dart#L8)
 
 ### `PocketHostFontMetrics`
 
@@ -1783,7 +1783,7 @@ Members:
 - `static PocketHostFontMetrics forFallback([ List<String> fontFamilyFallback = const <String>[], ])`
 - `static void clearCache()`
 
-Source: [packages/pocket_flutter/lib/src/pocket_host_fonts.dart](https://github.com/PocketFlutter/Pocket/blob/235b5b5589faf492f4a9fc3b7c0827bcd1d9de2c/sdk/packages/pocket_flutter/lib/src/pocket_host_fonts.dart#L202)
+Source: [packages/pocket_flutter/lib/src/pocket_host_fonts.dart](https://github.com/PocketFlutter/Pocket/blob/b06cb43cac4d553cea232ae1cd1f9ed4ee0c4ff4/sdk/packages/pocket_flutter/lib/src/pocket_host_fonts.dart#L202)
 
 ### `PocketHostFontMetricsSnapshot`
 
@@ -1797,13 +1797,13 @@ Members:
 - `final List<double> asciiAdvances`
 - `Map<String, dynamic> toJson()`
 
-Source: [packages/pocket_flutter/lib/src/pocket_recording.dart](https://github.com/PocketFlutter/Pocket/blob/235b5b5589faf492f4a9fc3b7c0827bcd1d9de2c/sdk/packages/pocket_flutter/lib/src/pocket_recording.dart#L22)
+Source: [packages/pocket_flutter/lib/src/pocket_recording.dart](https://github.com/PocketFlutter/Pocket/blob/b06cb43cac4d553cea232ae1cd1f9ed4ee0c4ff4/sdk/packages/pocket_flutter/lib/src/pocket_recording.dart#L22)
 
 ### `PocketHostSurfaceBuilder`
 
 **Typedef** `typedef PocketHostSurfaceBuilder = Widget? Function(PocketCompositorSlot slot);`
 
-Source: [packages/pocket_flutter/lib/src/pocket_compositor.dart](https://github.com/PocketFlutter/Pocket/blob/235b5b5589faf492f4a9fc3b7c0827bcd1d9de2c/sdk/packages/pocket_flutter/lib/src/pocket_compositor.dart#L62)
+Source: [packages/pocket_flutter/lib/src/pocket_compositor.dart](https://github.com/PocketFlutter/Pocket/blob/b06cb43cac4d553cea232ae1cd1f9ed4ee0c4ff4/sdk/packages/pocket_flutter/lib/src/pocket_compositor.dart#L62)
 
 ### `PocketHostSurfaceOp`
 
@@ -1817,7 +1817,7 @@ Members:
 - `final String kind`
 - `final Map<String, dynamic> parameters`
 
-Source: [packages/pocket_flutter/lib/src/pocket_model.dart](https://github.com/PocketFlutter/Pocket/blob/235b5b5589faf492f4a9fc3b7c0827bcd1d9de2c/sdk/packages/pocket_flutter/lib/src/pocket_model.dart#L1633)
+Source: [packages/pocket_flutter/lib/src/pocket_model.dart](https://github.com/PocketFlutter/Pocket/blob/b06cb43cac4d553cea232ae1cd1f9ed4ee0c4ff4/sdk/packages/pocket_flutter/lib/src/pocket_model.dart#L1633)
 
 ### `PocketImageOp`
 
@@ -1829,7 +1829,7 @@ Members:
 - `final List<double>? uv`
 - `final int? tint`
 
-Source: [packages/pocket_flutter/lib/src/pocket_model.dart](https://github.com/PocketFlutter/Pocket/blob/235b5b5589faf492f4a9fc3b7c0827bcd1d9de2c/sdk/packages/pocket_flutter/lib/src/pocket_model.dart#L648)
+Source: [packages/pocket_flutter/lib/src/pocket_model.dart](https://github.com/PocketFlutter/Pocket/blob/b06cb43cac4d553cea232ae1cd1f9ed4ee0c4ff4/sdk/packages/pocket_flutter/lib/src/pocket_model.dart#L648)
 
 ### `PocketImageResource`
 
@@ -1847,19 +1847,19 @@ Members:
 - `final Uint8List pixels`
 - `final Uint8List? palette`
 
-Source: [packages/pocket_flutter/lib/src/pocket_model.dart](https://github.com/PocketFlutter/Pocket/blob/235b5b5589faf492f4a9fc3b7c0827bcd1d9de2c/sdk/packages/pocket_flutter/lib/src/pocket_model.dart#L724)
+Source: [packages/pocket_flutter/lib/src/pocket_model.dart](https://github.com/PocketFlutter/Pocket/blob/b06cb43cac4d553cea232ae1cd1f9ed4ee0c4ff4/sdk/packages/pocket_flutter/lib/src/pocket_model.dart#L724)
 
 ### `PocketImageResourceDecoder`
 
 **Typedef** `typedef PocketImageResourceDecoder = Future<ui.Image> Function(PocketImageResource resource);`
 
-Source: [packages/pocket_flutter/lib/src/pocket_view.dart](https://github.com/PocketFlutter/Pocket/blob/235b5b5589faf492f4a9fc3b7c0827bcd1d9de2c/sdk/packages/pocket_flutter/lib/src/pocket_view.dart#L80)
+Source: [packages/pocket_flutter/lib/src/pocket_view.dart](https://github.com/PocketFlutter/Pocket/blob/b06cb43cac4d553cea232ae1cd1f9ed4ee0c4ff4/sdk/packages/pocket_flutter/lib/src/pocket_view.dart#L80)
 
 ### `PocketLoadingBuilder`
 
 **Typedef** `typedef PocketLoadingBuilder = Widget Function(BuildContext context, PocketStartupProgress progress);`
 
-Source: [packages/pocket_flutter/lib/src/pocket_startup_progress.dart](https://github.com/PocketFlutter/Pocket/blob/235b5b5589faf492f4a9fc3b7c0827bcd1d9de2c/sdk/packages/pocket_flutter/lib/src/pocket_startup_progress.dart#L101)
+Source: [packages/pocket_flutter/lib/src/pocket_startup_progress.dart](https://github.com/PocketFlutter/Pocket/blob/b06cb43cac4d553cea232ae1cd1f9ed4ee0c4ff4/sdk/packages/pocket_flutter/lib/src/pocket_startup_progress.dart#L101)
 
 ### `PocketLongFrameEvent`
 
@@ -1880,7 +1880,7 @@ Members:
 - `Map<String, dynamic> toJson()`
 - `PocketLongFrameEvent copyWith({ double? buildMs, double? rasterMs, double? nativeMs, double? activeGapMs, String? context, })`
 
-Source: [packages/pocket_flutter/lib/src/pocket_performance.dart](https://github.com/PocketFlutter/Pocket/blob/235b5b5589faf492f4a9fc3b7c0827bcd1d9de2c/sdk/packages/pocket_flutter/lib/src/pocket_performance.dart#L10)
+Source: [packages/pocket_flutter/lib/src/pocket_performance.dart](https://github.com/PocketFlutter/Pocket/blob/b06cb43cac4d553cea232ae1cd1f9ed4ee0c4ff4/sdk/packages/pocket_flutter/lib/src/pocket_performance.dart#L10)
 
 ### `PocketMemoryLimits`
 
@@ -1901,7 +1901,7 @@ Members:
 - `bool operator ==(Object other)`
 - `int get hashCode`
 
-Source: [packages/pocket_flutter/lib/src/pocket_memory_limits.dart](https://github.com/PocketFlutter/Pocket/blob/235b5b5589faf492f4a9fc3b7c0827bcd1d9de2c/sdk/packages/pocket_flutter/lib/src/pocket_memory_limits.dart#L3)
+Source: [packages/pocket_flutter/lib/src/pocket_memory_limits.dart](https://github.com/PocketFlutter/Pocket/blob/b06cb43cac4d553cea232ae1cd1f9ed4ee0c4ff4/sdk/packages/pocket_flutter/lib/src/pocket_memory_limits.dart#L3)
 
 ### `PocketMeshLayerBeginOp`
 
@@ -1913,7 +1913,7 @@ Members:
 - `final List<double> multiplyRgb`
 - `final List<double> screenRgb`
 
-Source: [packages/pocket_flutter/lib/src/pocket_model.dart](https://github.com/PocketFlutter/Pocket/blob/235b5b5589faf492f4a9fc3b7c0827bcd1d9de2c/sdk/packages/pocket_flutter/lib/src/pocket_model.dart#L575)
+Source: [packages/pocket_flutter/lib/src/pocket_model.dart](https://github.com/PocketFlutter/Pocket/blob/b06cb43cac4d553cea232ae1cd1f9ed4ee0c4ff4/sdk/packages/pocket_flutter/lib/src/pocket_model.dart#L575)
 
 ### `PocketMeshLayerRestoreOp`
 
@@ -1922,7 +1922,7 @@ Source: [packages/pocket_flutter/lib/src/pocket_model.dart](https://github.com/P
 Members:
 - `const PocketMeshLayerRestoreOp({ required super.x, required super.y, required super.width, required super.height, super.clip, })`
 
-Source: [packages/pocket_flutter/lib/src/pocket_model.dart](https://github.com/PocketFlutter/Pocket/blob/235b5b5589faf492f4a9fc3b7c0827bcd1d9de2c/sdk/packages/pocket_flutter/lib/src/pocket_model.dart#L607)
+Source: [packages/pocket_flutter/lib/src/pocket_model.dart](https://github.com/PocketFlutter/Pocket/blob/b06cb43cac4d553cea232ae1cd1f9ed4ee0c4ff4/sdk/packages/pocket_flutter/lib/src/pocket_model.dart#L607)
 
 ### `PocketMeshMaskBeginOp`
 
@@ -1932,7 +1932,7 @@ Members:
 - `const PocketMeshMaskBeginOp({ required super.x, required super.y, required super.width, required super.height, required this.inverted, super.clip, })`
 - `final bool inverted`
 
-Source: [packages/pocket_flutter/lib/src/pocket_model.dart](https://github.com/PocketFlutter/Pocket/blob/235b5b5589faf492f4a9fc3b7c0827bcd1d9de2c/sdk/packages/pocket_flutter/lib/src/pocket_model.dart#L593)
+Source: [packages/pocket_flutter/lib/src/pocket_model.dart](https://github.com/PocketFlutter/Pocket/blob/b06cb43cac4d553cea232ae1cd1f9ed4ee0c4ff4/sdk/packages/pocket_flutter/lib/src/pocket_model.dart#L593)
 
 ### `PocketMeshSpanPainter`
 
@@ -1954,7 +1954,7 @@ Members:
 - `bool? hitTest(Offset position)`
 - `bool shouldRepaint(PocketMeshSpanPainter oldDelegate)`
 
-Source: [packages/pocket_flutter/lib/src/pocket_view_painter.dart](https://github.com/PocketFlutter/Pocket/blob/235b5b5589faf492f4a9fc3b7c0827bcd1d9de2c/sdk/packages/pocket_flutter/lib/src/pocket_view_painter.dart#L893)
+Source: [packages/pocket_flutter/lib/src/pocket_view_painter.dart](https://github.com/PocketFlutter/Pocket/blob/b06cb43cac4d553cea232ae1cd1f9ed4ee0c4ff4/sdk/packages/pocket_flutter/lib/src/pocket_view_painter.dart#L893)
 
 ### `PocketNativeStageTimings`
 
@@ -1980,7 +1980,7 @@ Members:
 - `double get encodeMs`
 - `double get otherMs`
 
-Source: [packages/pocket_flutter/lib/src/pocket_runtime.dart](https://github.com/PocketFlutter/Pocket/blob/235b5b5589faf492f4a9fc3b7c0827bcd1d9de2c/sdk/packages/pocket_flutter/lib/src/pocket_runtime.dart#L577)
+Source: [packages/pocket_flutter/lib/src/pocket_runtime.dart](https://github.com/PocketFlutter/Pocket/blob/b06cb43cac4d553cea232ae1cd1f9ed4ee0c4ff4/sdk/packages/pocket_flutter/lib/src/pocket_runtime.dart#L577)
 
 ### `PocketOffloadCancellationToken`
 
@@ -1993,7 +1993,7 @@ Members:
 - `void throwIfCancelled()`
 - `PocketOffloadCancellationToken()` _(implicit)_
 
-Source: [packages/pocket_flutter/lib/src/pocket_offload_runtime.dart](https://github.com/PocketFlutter/Pocket/blob/235b5b5589faf492f4a9fc3b7c0827bcd1d9de2c/sdk/packages/pocket_flutter/lib/src/pocket_offload_runtime.dart#L125)
+Source: [packages/pocket_flutter/lib/src/pocket_offload_runtime.dart](https://github.com/PocketFlutter/Pocket/blob/b06cb43cac4d553cea232ae1cd1f9ed4ee0c4ff4/sdk/packages/pocket_flutter/lib/src/pocket_offload_runtime.dart#L125)
 
 ### `PocketOffloadCancelled`
 
@@ -2003,7 +2003,7 @@ Members:
 - `const PocketOffloadCancelled()`
 - `String toString()`
 
-Source: [packages/pocket_flutter/lib/src/pocket_offload_runtime.dart](https://github.com/PocketFlutter/Pocket/blob/235b5b5589faf492f4a9fc3b7c0827bcd1d9de2c/sdk/packages/pocket_flutter/lib/src/pocket_offload_runtime.dart#L140)
+Source: [packages/pocket_flutter/lib/src/pocket_offload_runtime.dart](https://github.com/PocketFlutter/Pocket/blob/b06cb43cac4d553cea232ae1cd1f9ed4ee0c4ff4/sdk/packages/pocket_flutter/lib/src/pocket_offload_runtime.dart#L140)
 
 ### `PocketOffloadCompletion`
 
@@ -2018,7 +2018,7 @@ Members:
 - `Map<String, Object> toJson()`
 - `String toNativeRecord()`
 
-Source: [packages/pocket_flutter/lib/src/pocket_offload_runtime.dart](https://github.com/PocketFlutter/Pocket/blob/235b5b5589faf492f4a9fc3b7c0827bcd1d9de2c/sdk/packages/pocket_flutter/lib/src/pocket_offload_runtime.dart#L98)
+Source: [packages/pocket_flutter/lib/src/pocket_offload_runtime.dart](https://github.com/PocketFlutter/Pocket/blob/b06cb43cac4d553cea232ae1cd1f9ed4ee0c4ff4/sdk/packages/pocket_flutter/lib/src/pocket_offload_runtime.dart#L98)
 
 ### `PocketOffloadKey`
 
@@ -2032,7 +2032,7 @@ Members:
 - `bool operator ==(Object other)`
 - `int get hashCode`
 
-Source: [packages/pocket_flutter/lib/src/pocket_offload_runtime.dart](https://github.com/PocketFlutter/Pocket/blob/235b5b5589faf492f4a9fc3b7c0827bcd1d9de2c/sdk/packages/pocket_flutter/lib/src/pocket_offload_runtime.dart#L8)
+Source: [packages/pocket_flutter/lib/src/pocket_offload_runtime.dart](https://github.com/PocketFlutter/Pocket/blob/b06cb43cac4d553cea232ae1cd1f9ed4ee0c4ff4/sdk/packages/pocket_flutter/lib/src/pocket_offload_runtime.dart#L8)
 
 ### `PocketOffloadProvider`
 
@@ -2045,7 +2045,7 @@ Members:
 - `void cancel(PocketOffloadRequest request)`
 - `Future<void> close()`
 
-Source: [packages/pocket_flutter/lib/src/pocket_offload_runtime.dart](https://github.com/PocketFlutter/Pocket/blob/235b5b5589faf492f4a9fc3b7c0827bcd1d9de2c/sdk/packages/pocket_flutter/lib/src/pocket_offload_runtime.dart#L150)
+Source: [packages/pocket_flutter/lib/src/pocket_offload_runtime.dart](https://github.com/PocketFlutter/Pocket/blob/b06cb43cac4d553cea232ae1cd1f9ed4ee0c4ff4/sdk/packages/pocket_flutter/lib/src/pocket_offload_runtime.dart#L150)
 
 ### `PocketOffloadRequest`
 
@@ -2063,7 +2063,7 @@ Members:
 - `Map<String, Object> toJson()`
 - `static PocketOffloadRequest fromJson(Map<String, Object?> value)`
 
-Source: [packages/pocket_flutter/lib/src/pocket_offload_runtime.dart](https://github.com/PocketFlutter/Pocket/blob/235b5b5589faf492f4a9fc3b7c0827bcd1d9de2c/sdk/packages/pocket_flutter/lib/src/pocket_offload_runtime.dart#L31)
+Source: [packages/pocket_flutter/lib/src/pocket_offload_runtime.dart](https://github.com/PocketFlutter/Pocket/blob/b06cb43cac4d553cea232ae1cd1f9ed4ee0c4ff4/sdk/packages/pocket_flutter/lib/src/pocket_offload_runtime.dart#L31)
 
 ### `PocketOffloadRuntime`
 
@@ -2072,7 +2072,7 @@ Source: [packages/pocket_flutter/lib/src/pocket_offload_runtime.dart](https://gi
 Members:
 - `void configureOffload( PocketOffloadProvider? provider, { required void Function() onWake, })`
 
-Source: [packages/pocket_flutter/lib/src/pocket_offload_runtime.dart](https://github.com/PocketFlutter/Pocket/blob/235b5b5589faf492f4a9fc3b7c0827bcd1d9de2c/sdk/packages/pocket_flutter/lib/src/pocket_offload_runtime.dart#L166)
+Source: [packages/pocket_flutter/lib/src/pocket_offload_runtime.dart](https://github.com/PocketFlutter/Pocket/blob/b06cb43cac4d553cea232ae1cd1f9ed4ee0c4ff4/sdk/packages/pocket_flutter/lib/src/pocket_offload_runtime.dart#L166)
 
 ### `PocketOp`
 
@@ -2087,13 +2087,13 @@ Members:
 - `final PocketClip? clip`
 - `factory PocketOp.fromJson(Map<String, dynamic> json)`
 
-Source: [packages/pocket_flutter/lib/src/pocket_model.dart](https://github.com/PocketFlutter/Pocket/blob/235b5b5589faf492f4a9fc3b7c0827bcd1d9de2c/sdk/packages/pocket_flutter/lib/src/pocket_model.dart#L35)
+Source: [packages/pocket_flutter/lib/src/pocket_model.dart](https://github.com/PocketFlutter/Pocket/blob/b06cb43cac4d553cea232ae1cd1f9ed4ee0c4ff4/sdk/packages/pocket_flutter/lib/src/pocket_model.dart#L35)
 
 ### `PocketPackageManifest`
 
 **Typedef** `typedef PocketPackageManifest = PocketPackageSource;`
 
-Source: [packages/pocket_flutter/lib/src/pocket_package.dart](https://github.com/PocketFlutter/Pocket/blob/235b5b5589faf492f4a9fc3b7c0827bcd1d9de2c/sdk/packages/pocket_flutter/lib/src/pocket_package.dart#L44)
+Source: [packages/pocket_flutter/lib/src/pocket_package.dart](https://github.com/PocketFlutter/Pocket/blob/b06cb43cac4d553cea232ae1cd1f9ed4ee0c4ff4/sdk/packages/pocket_flutter/lib/src/pocket_package.dart#L44)
 
 ### `PocketPackageSource`
 
@@ -2109,7 +2109,7 @@ Members:
 - `final Map<String, String> assetPaths`
 - `String? pathForAsset(String asset)`
 
-Source: [packages/pocket_flutter/lib/src/pocket_package.dart](https://github.com/PocketFlutter/Pocket/blob/235b5b5589faf492f4a9fc3b7c0827bcd1d9de2c/sdk/packages/pocket_flutter/lib/src/pocket_package.dart#L6)
+Source: [packages/pocket_flutter/lib/src/pocket_package.dart](https://github.com/PocketFlutter/Pocket/blob/b06cb43cac4d553cea232ae1cd1f9ed4ee0c4ff4/sdk/packages/pocket_flutter/lib/src/pocket_package.dart#L6)
 
 ### `PocketPakImage`
 
@@ -2122,7 +2122,7 @@ Members:
 - `final Uint8List rgba`
 - `Future<ui.Image> decode()`
 
-Source: [packages/pocket_flutter/lib/src/pocket_assets.dart](https://github.com/PocketFlutter/Pocket/blob/235b5b5589faf492f4a9fc3b7c0827bcd1d9de2c/sdk/packages/pocket_flutter/lib/src/pocket_assets.dart#L9)
+Source: [packages/pocket_flutter/lib/src/pocket_assets.dart](https://github.com/PocketFlutter/Pocket/blob/b06cb43cac4d553cea232ae1cd1f9ed4ee0c4ff4/sdk/packages/pocket_flutter/lib/src/pocket_assets.dart#L9)
 
 ### `PocketPakImages`
 
@@ -2133,7 +2133,7 @@ Members:
 - `static PocketPakImage? fromResource(PocketImageResource resource)`
 - `static Map<String, PocketPakImage> extract(Uint8List pak)`
 
-Source: [packages/pocket_flutter/lib/src/pocket_assets.dart](https://github.com/PocketFlutter/Pocket/blob/235b5b5589faf492f4a9fc3b7c0827bcd1d9de2c/sdk/packages/pocket_flutter/lib/src/pocket_assets.dart#L75)
+Source: [packages/pocket_flutter/lib/src/pocket_assets.dart](https://github.com/PocketFlutter/Pocket/blob/b06cb43cac4d553cea232ae1cd1f9ed4ee0c4ff4/sdk/packages/pocket_flutter/lib/src/pocket_assets.dart#L75)
 
 ### `PocketPerformanceSample`
 
@@ -2164,13 +2164,13 @@ Members:
 - `final List<PocketLongFrameEvent> longFrameEvents`
 - `Map<String, dynamic> toJson()`
 
-Source: [packages/pocket_flutter/lib/src/pocket_performance.dart](https://github.com/PocketFlutter/Pocket/blob/235b5b5589faf492f4a9fc3b7c0827bcd1d9de2c/sdk/packages/pocket_flutter/lib/src/pocket_performance.dart#L96)
+Source: [packages/pocket_flutter/lib/src/pocket_performance.dart](https://github.com/PocketFlutter/Pocket/blob/b06cb43cac4d553cea232ae1cd1f9ed4ee0c4ff4/sdk/packages/pocket_flutter/lib/src/pocket_performance.dart#L96)
 
 ### `PocketPerformanceSampleCallback`
 
 **Typedef** `typedef PocketPerformanceSampleCallback = void Function(PocketPerformanceSample sample);`
 
-Source: [packages/pocket_flutter/lib/src/pocket_performance.dart](https://github.com/PocketFlutter/Pocket/blob/235b5b5589faf492f4a9fc3b7c0827bcd1d9de2c/sdk/packages/pocket_flutter/lib/src/pocket_performance.dart#L245)
+Source: [packages/pocket_flutter/lib/src/pocket_performance.dart](https://github.com/PocketFlutter/Pocket/blob/b06cb43cac4d553cea232ae1cd1f9ed4ee0c4ff4/sdk/packages/pocket_flutter/lib/src/pocket_performance.dart#L245)
 
 ### `PocketPoint`
 
@@ -2182,7 +2182,7 @@ Members:
 - `final double x`
 - `final double y`
 
-Source: [packages/pocket_flutter/lib/src/pocket_model.dart](https://github.com/PocketFlutter/Pocket/blob/235b5b5589faf492f4a9fc3b7c0827bcd1d9de2c/sdk/packages/pocket_flutter/lib/src/pocket_model.dart#L431)
+Source: [packages/pocket_flutter/lib/src/pocket_model.dart](https://github.com/PocketFlutter/Pocket/blob/b06cb43cac4d553cea232ae1cd1f9ed4ee0c4ff4/sdk/packages/pocket_flutter/lib/src/pocket_model.dart#L431)
 
 ### `PocketRawTextClient`
 
@@ -2218,7 +2218,7 @@ Members:
 - `void removeTextPlaceholder()`
 - `bool onFocusReceived()`
 
-Source: [packages/pocket_flutter/lib/src/pocket_raw_text_input.dart](https://github.com/PocketFlutter/Pocket/blob/235b5b5589faf492f4a9fc3b7c0827bcd1d9de2c/sdk/packages/pocket_flutter/lib/src/pocket_raw_text_input.dart#L129)
+Source: [packages/pocket_flutter/lib/src/pocket_raw_text_input.dart](https://github.com/PocketFlutter/Pocket/blob/b06cb43cac4d553cea232ae1cd1f9ed4ee0c4ff4/sdk/packages/pocket_flutter/lib/src/pocket_raw_text_input.dart#L129)
 
 ### `PocketRawTextOutput`
 
@@ -2234,7 +2234,7 @@ Members:
 - `final int selectionEnd`
 - `String toString()`
 
-Source: [packages/pocket_flutter/lib/src/pocket_raw_text_input.dart](https://github.com/PocketFlutter/Pocket/blob/235b5b5589faf492f4a9fc3b7c0827bcd1d9de2c/sdk/packages/pocket_flutter/lib/src/pocket_raw_text_input.dart#L88)
+Source: [packages/pocket_flutter/lib/src/pocket_raw_text_input.dart](https://github.com/PocketFlutter/Pocket/blob/b06cb43cac4d553cea232ae1cd1f9ed4ee0c4ff4/sdk/packages/pocket_flutter/lib/src/pocket_raw_text_input.dart#L88)
 
 ### `PocketRecording`
 
@@ -2256,7 +2256,7 @@ Members:
 - `Map<String, dynamic> toJson()`
 - `String toJsonString()`
 
-Source: [packages/pocket_flutter/lib/src/pocket_recording.dart](https://github.com/PocketFlutter/Pocket/blob/235b5b5589faf492f4a9fc3b7c0827bcd1d9de2c/sdk/packages/pocket_flutter/lib/src/pocket_recording.dart#L318)
+Source: [packages/pocket_flutter/lib/src/pocket_recording.dart](https://github.com/PocketFlutter/Pocket/blob/b06cb43cac4d553cea232ae1cd1f9ed4ee0c4ff4/sdk/packages/pocket_flutter/lib/src/pocket_recording.dart#L318)
 
 ### `PocketRecordingController`
 
@@ -2293,7 +2293,7 @@ Members:
 - `PocketRecording finish()`
 - `PocketRecording stop()`
 
-Source: [packages/pocket_flutter/lib/src/pocket_recording.dart](https://github.com/PocketFlutter/Pocket/blob/235b5b5589faf492f4a9fc3b7c0827bcd1d9de2c/sdk/packages/pocket_flutter/lib/src/pocket_recording.dart#L501)
+Source: [packages/pocket_flutter/lib/src/pocket_recording.dart](https://github.com/PocketFlutter/Pocket/blob/b06cb43cac4d553cea232ae1cd1f9ed4ee0c4ff4/sdk/packages/pocket_flutter/lib/src/pocket_recording.dart#L501)
 
 ### `PocketRecordingEntry`
 
@@ -2310,7 +2310,7 @@ Members:
 - `Map<String, dynamic> toJson()`
 - `PocketRecordingEntry withIndex(int nextIndex)`
 
-Source: [packages/pocket_flutter/lib/src/pocket_recording.dart](https://github.com/PocketFlutter/Pocket/blob/235b5b5589faf492f4a9fc3b7c0827bcd1d9de2c/sdk/packages/pocket_flutter/lib/src/pocket_recording.dart#L213)
+Source: [packages/pocket_flutter/lib/src/pocket_recording.dart](https://github.com/PocketFlutter/Pocket/blob/b06cb43cac4d553cea232ae1cd1f9ed4ee0c4ff4/sdk/packages/pocket_flutter/lib/src/pocket_recording.dart#L213)
 
 ### `PocketRecordingFormatException`
 
@@ -2319,7 +2319,7 @@ Source: [packages/pocket_flutter/lib/src/pocket_recording.dart](https://github.c
 Members:
 - `const PocketRecordingFormatException( super.message, [ super.source, super.offset, ])`
 
-Source: [packages/pocket_flutter/lib/src/pocket_recording.dart](https://github.com/PocketFlutter/Pocket/blob/235b5b5589faf492f4a9fc3b7c0827bcd1d9de2c/sdk/packages/pocket_flutter/lib/src/pocket_recording.dart#L12)
+Source: [packages/pocket_flutter/lib/src/pocket_recording.dart](https://github.com/PocketFlutter/Pocket/blob/b06cb43cac4d553cea232ae1cd1f9ed4ee0c4ff4/sdk/packages/pocket_flutter/lib/src/pocket_recording.dart#L12)
 
 ### `PocketRecordingMetadata`
 
@@ -2338,7 +2338,7 @@ Members:
 - `final Map<String, String> contentHashes`
 - `Map<String, dynamic> toJson()`
 
-Source: [packages/pocket_flutter/lib/src/pocket_recording.dart](https://github.com/PocketFlutter/Pocket/blob/235b5b5589faf492f4a9fc3b7c0827bcd1d9de2c/sdk/packages/pocket_flutter/lib/src/pocket_recording.dart#L103)
+Source: [packages/pocket_flutter/lib/src/pocket_recording.dart](https://github.com/PocketFlutter/Pocket/blob/b06cb43cac4d553cea232ae1cd1f9ed4ee0c4ff4/sdk/packages/pocket_flutter/lib/src/pocket_recording.dart#L103)
 
 ### `PocketRecordingReplay`
 
@@ -2347,7 +2347,7 @@ Source: [packages/pocket_flutter/lib/src/pocket_recording.dart](https://github.c
 Members:
 - `Future<PocketReplayResult> replay({ required PocketReplayAssets assets, PocketReplayRuntimeFactory? runtimeFactory, })`
 
-Source: [packages/pocket_flutter/lib/src/pocket_runtime.dart](https://github.com/PocketFlutter/Pocket/blob/235b5b5589faf492f4a9fc3b7c0827bcd1d9de2c/sdk/packages/pocket_flutter/lib/src/pocket_runtime.dart#L4144)
+Source: [packages/pocket_flutter/lib/src/pocket_runtime.dart](https://github.com/PocketFlutter/Pocket/blob/b06cb43cac4d553cea232ae1cd1f9ed4ee0c4ff4/sdk/packages/pocket_flutter/lib/src/pocket_runtime.dart#L4144)
 
 ### `PocketRectOp`
 
@@ -2357,7 +2357,7 @@ Members:
 - `const PocketRectOp({ required super.x, required super.y, required super.width, required super.height, required this.color, super.clip, })`
 - `final int color`
 
-Source: [packages/pocket_flutter/lib/src/pocket_model.dart](https://github.com/PocketFlutter/Pocket/blob/235b5b5589faf492f4a9fc3b7c0827bcd1d9de2c/sdk/packages/pocket_flutter/lib/src/pocket_model.dart#L332)
+Source: [packages/pocket_flutter/lib/src/pocket_model.dart](https://github.com/PocketFlutter/Pocket/blob/b06cb43cac4d553cea232ae1cd1f9ed4ee0c4ff4/sdk/packages/pocket_flutter/lib/src/pocket_model.dart#L332)
 
 ### `PocketReplayAssets`
 
@@ -2373,7 +2373,7 @@ Members:
 - `final Uint8List? Function(String key, String? expectedSha256)? resolver`
 - `Uint8List? resolve({String? key, String? sha256})`
 
-Source: [packages/pocket_flutter/lib/src/pocket_recording.dart](https://github.com/PocketFlutter/Pocket/blob/235b5b5589faf492f4a9fc3b7c0827bcd1d9de2c/sdk/packages/pocket_flutter/lib/src/pocket_recording.dart#L751)
+Source: [packages/pocket_flutter/lib/src/pocket_recording.dart](https://github.com/PocketFlutter/Pocket/blob/b06cb43cac4d553cea232ae1cd1f9ed4ee0c4ff4/sdk/packages/pocket_flutter/lib/src/pocket_recording.dart#L751)
 
 ### `PocketReplayMismatch`
 
@@ -2390,7 +2390,7 @@ Members:
 - `Map<String, dynamic> toJson()`
 - `String toString()`
 
-Source: [packages/pocket_flutter/lib/src/pocket_recording.dart](https://github.com/PocketFlutter/Pocket/blob/235b5b5589faf492f4a9fc3b7c0827bcd1d9de2c/sdk/packages/pocket_flutter/lib/src/pocket_recording.dart#L786)
+Source: [packages/pocket_flutter/lib/src/pocket_recording.dart](https://github.com/PocketFlutter/Pocket/blob/b06cb43cac4d553cea232ae1cd1f9ed4ee0c4ff4/sdk/packages/pocket_flutter/lib/src/pocket_recording.dart#L786)
 
 ### `PocketReplayResult`
 
@@ -2407,7 +2407,7 @@ Members:
 - `bool get rejected`
 - `Map<String, dynamic> toJson()`
 
-Source: [packages/pocket_flutter/lib/src/pocket_recording.dart](https://github.com/PocketFlutter/Pocket/blob/235b5b5589faf492f4a9fc3b7c0827bcd1d9de2c/sdk/packages/pocket_flutter/lib/src/pocket_recording.dart#L817)
+Source: [packages/pocket_flutter/lib/src/pocket_recording.dart](https://github.com/PocketFlutter/Pocket/blob/b06cb43cac4d553cea232ae1cd1f9ed4ee0c4ff4/sdk/packages/pocket_flutter/lib/src/pocket_recording.dart#L817)
 
 ### `PocketReplayRunner`
 
@@ -2418,13 +2418,13 @@ Members:
 - `final PocketReplayRuntimeFactory? runtimeFactory`
 - `Future<PocketReplayResult> run( PocketRecording recording, { required PocketReplayAssets assets, })`
 
-Source: [packages/pocket_flutter/lib/src/pocket_runtime.dart](https://github.com/PocketFlutter/Pocket/blob/235b5b5589faf492f4a9fc3b7c0827bcd1d9de2c/sdk/packages/pocket_flutter/lib/src/pocket_runtime.dart#L3223)
+Source: [packages/pocket_flutter/lib/src/pocket_runtime.dart](https://github.com/PocketFlutter/Pocket/blob/b06cb43cac4d553cea232ae1cd1f9ed4ee0c4ff4/sdk/packages/pocket_flutter/lib/src/pocket_runtime.dart#L3223)
 
 ### `PocketReplayRuntimeFactory`
 
 **Typedef** `typedef PocketReplayRuntimeFactory = FfiPocketRuntime Function(PocketRecordingMetadata metadata);`
 
-Source: [packages/pocket_flutter/lib/src/pocket_runtime.dart](https://github.com/PocketFlutter/Pocket/blob/235b5b5589faf492f4a9fc3b7c0827bcd1d9de2c/sdk/packages/pocket_flutter/lib/src/pocket_runtime.dart#L3217)
+Source: [packages/pocket_flutter/lib/src/pocket_runtime.dart](https://github.com/PocketFlutter/Pocket/blob/b06cb43cac4d553cea232ae1cd1f9ed4ee0c4ff4/sdk/packages/pocket_flutter/lib/src/pocket_runtime.dart#L3217)
 
 ### `PocketRoundedGradientOp`
 
@@ -2439,7 +2439,7 @@ Members:
 - `final int? viaColor`
 - `final double? viaPosition`
 
-Source: [packages/pocket_flutter/lib/src/pocket_model.dart](https://github.com/PocketFlutter/Pocket/blob/235b5b5589faf492f4a9fc3b7c0827bcd1d9de2c/sdk/packages/pocket_flutter/lib/src/pocket_model.dart#L408)
+Source: [packages/pocket_flutter/lib/src/pocket_model.dart](https://github.com/PocketFlutter/Pocket/blob/b06cb43cac4d553cea232ae1cd1f9ed4ee0c4ff4/sdk/packages/pocket_flutter/lib/src/pocket_model.dart#L408)
 
 ### `PocketRoundedOp`
 
@@ -2451,7 +2451,7 @@ Members:
 - `final double radius`
 - `final double borderWidth`
 
-Source: [packages/pocket_flutter/lib/src/pocket_model.dart](https://github.com/PocketFlutter/Pocket/blob/235b5b5589faf492f4a9fc3b7c0827bcd1d9de2c/sdk/packages/pocket_flutter/lib/src/pocket_model.dart#L345)
+Source: [packages/pocket_flutter/lib/src/pocket_model.dart](https://github.com/PocketFlutter/Pocket/blob/b06cb43cac4d553cea232ae1cd1f9ed4ee0c4ff4/sdk/packages/pocket_flutter/lib/src/pocket_model.dart#L345)
 
 ### `PocketRuntime`
 
@@ -2467,7 +2467,7 @@ Members:
 - `String? get lastError`
 - `void dispose()`
 
-Source: [packages/pocket_flutter/lib/src/pocket_runtime.dart](https://github.com/PocketFlutter/Pocket/blob/235b5b5589faf492f4a9fc3b7c0827bcd1d9de2c/sdk/packages/pocket_flutter/lib/src/pocket_runtime.dart#L31)
+Source: [packages/pocket_flutter/lib/src/pocket_runtime.dart](https://github.com/PocketFlutter/Pocket/blob/b06cb43cac4d553cea232ae1cd1f9ed4ee0c4ff4/sdk/packages/pocket_flutter/lib/src/pocket_runtime.dart#L31)
 
 ### `PocketRuntimeBytecode`
 
@@ -2477,7 +2477,7 @@ Members:
 - `PocketFrame loadBytecode( Uint8List bytecode, Uint8List pak, { String? expectedRuntimeAbi, })`
 - `String? get actualAbi`
 
-Source: [packages/pocket_flutter/lib/src/pocket_runtime.dart](https://github.com/PocketFlutter/Pocket/blob/235b5b5589faf492f4a9fc3b7c0827bcd1d9de2c/sdk/packages/pocket_flutter/lib/src/pocket_runtime.dart#L100)
+Source: [packages/pocket_flutter/lib/src/pocket_runtime.dart](https://github.com/PocketFlutter/Pocket/blob/b06cb43cac4d553cea232ae1cd1f9ed4ee0c4ff4/sdk/packages/pocket_flutter/lib/src/pocket_runtime.dart#L100)
 
 ### `PocketRuntimeException`
 
@@ -2488,7 +2488,7 @@ Members:
 - `final String message`
 - `String toString()`
 
-Source: [packages/pocket_flutter/lib/src/pocket_runtime.dart](https://github.com/PocketFlutter/Pocket/blob/235b5b5589faf492f4a9fc3b7c0827bcd1d9de2c/sdk/packages/pocket_flutter/lib/src/pocket_runtime.dart#L122)
+Source: [packages/pocket_flutter/lib/src/pocket_runtime.dart](https://github.com/PocketFlutter/Pocket/blob/b06cb43cac4d553cea232ae1cd1f9ed4ee0c4ff4/sdk/packages/pocket_flutter/lib/src/pocket_runtime.dart#L122)
 
 ### `PocketRuntimeScheduling`
 
@@ -2497,7 +2497,7 @@ Source: [packages/pocket_flutter/lib/src/pocket_runtime.dart](https://github.com
 Members:
 - `double get nextWakeDelayMilliseconds`
 
-Source: [packages/pocket_flutter/lib/src/pocket_runtime.dart](https://github.com/PocketFlutter/Pocket/blob/235b5b5589faf492f4a9fc3b7c0827bcd1d9de2c/sdk/packages/pocket_flutter/lib/src/pocket_runtime.dart#L75)
+Source: [packages/pocket_flutter/lib/src/pocket_runtime.dart](https://github.com/PocketFlutter/Pocket/blob/b06cb43cac4d553cea232ae1cd1f9ed4ee0c4ff4/sdk/packages/pocket_flutter/lib/src/pocket_runtime.dart#L75)
 
 ### `PocketStartupProgress`
 
@@ -2519,7 +2519,7 @@ Members:
 - `bool operator ==(Object other)`
 - `int get hashCode`
 
-Source: [packages/pocket_flutter/lib/src/pocket_startup_progress.dart](https://github.com/PocketFlutter/Pocket/blob/235b5b5589faf492f4a9fc3b7c0827bcd1d9de2c/sdk/packages/pocket_flutter/lib/src/pocket_startup_progress.dart#L25)
+Source: [packages/pocket_flutter/lib/src/pocket_startup_progress.dart](https://github.com/PocketFlutter/Pocket/blob/b06cb43cac4d553cea232ae1cd1f9ed4ee0c4ff4/sdk/packages/pocket_flutter/lib/src/pocket_startup_progress.dart#L25)
 
 ### `PocketStartupStage`
 
@@ -2531,7 +2531,7 @@ Values:
 - `decodingInitialResources`
 - `applyingDisplayGeometry`
 
-Source: [packages/pocket_flutter/lib/src/pocket_startup_progress.dart](https://github.com/PocketFlutter/Pocket/blob/235b5b5589faf492f4a9fc3b7c0827bcd1d9de2c/sdk/packages/pocket_flutter/lib/src/pocket_startup_progress.dart#L9)
+Source: [packages/pocket_flutter/lib/src/pocket_startup_progress.dart](https://github.com/PocketFlutter/Pocket/blob/b06cb43cac4d553cea232ae1cd1f9ed4ee0c4ff4/sdk/packages/pocket_flutter/lib/src/pocket_startup_progress.dart#L9)
 
 ### `PocketSurfaceFrame`
 
@@ -2544,7 +2544,7 @@ Members:
 - `final double height`
 - `final List<PocketOp> ops`
 
-Source: [packages/pocket_flutter/lib/src/pocket_model.dart](https://github.com/PocketFlutter/Pocket/blob/235b5b5589faf492f4a9fc3b7c0827bcd1d9de2c/sdk/packages/pocket_flutter/lib/src/pocket_model.dart#L769)
+Source: [packages/pocket_flutter/lib/src/pocket_model.dart](https://github.com/PocketFlutter/Pocket/blob/b06cb43cac4d553cea232ae1cd1f9ed4ee0c4ff4/sdk/packages/pocket_flutter/lib/src/pocket_model.dart#L769)
 
 ### `PocketTextLayoutCache`
 
@@ -2563,7 +2563,7 @@ Members:
 - `void resetStats()`
 - `void dispose()`
 
-Source: [packages/pocket_flutter/lib/src/pocket_text_cache.dart](https://github.com/PocketFlutter/Pocket/blob/235b5b5589faf492f4a9fc3b7c0827bcd1d9de2c/sdk/packages/pocket_flutter/lib/src/pocket_text_cache.dart#L34)
+Source: [packages/pocket_flutter/lib/src/pocket_text_cache.dart](https://github.com/PocketFlutter/Pocket/blob/b06cb43cac4d553cea232ae1cd1f9ed4ee0c4ff4/sdk/packages/pocket_flutter/lib/src/pocket_text_cache.dart#L34)
 
 ### `PocketTextLayoutCacheStats`
 
@@ -2578,7 +2578,7 @@ Members:
 - `final int evictionCount`
 - `String toString()`
 
-Source: [packages/pocket_flutter/lib/src/pocket_text_cache.dart](https://github.com/PocketFlutter/Pocket/blob/235b5b5589faf492f4a9fc3b7c0827bcd1d9de2c/sdk/packages/pocket_flutter/lib/src/pocket_text_cache.dart#L7)
+Source: [packages/pocket_flutter/lib/src/pocket_text_cache.dart](https://github.com/PocketFlutter/Pocket/blob/b06cb43cac4d553cea232ae1cd1f9ed4ee0c4ff4/sdk/packages/pocket_flutter/lib/src/pocket_text_cache.dart#L7)
 
 ### `PocketTextOp`
 
@@ -2594,7 +2594,7 @@ Members:
 - `final double tracking`
 - `final List<double>? affine`
 
-Source: [packages/pocket_flutter/lib/src/pocket_model.dart](https://github.com/PocketFlutter/Pocket/blob/235b5b5589faf492f4a9fc3b7c0827bcd1d9de2c/sdk/packages/pocket_flutter/lib/src/pocket_model.dart#L617)
+Source: [packages/pocket_flutter/lib/src/pocket_model.dart](https://github.com/PocketFlutter/Pocket/blob/b06cb43cac4d553cea232ae1cd1f9ed4ee0c4ff4/sdk/packages/pocket_flutter/lib/src/pocket_model.dart#L617)
 
 ### `PocketTextureTriangleOp`
 
@@ -2610,7 +2610,7 @@ Members:
 - `List<PocketPoint> get points`
 - `List<double> get uvs`
 
-Source: [packages/pocket_flutter/lib/src/pocket_model.dart](https://github.com/PocketFlutter/Pocket/blob/235b5b5589faf492f4a9fc3b7c0827bcd1d9de2c/sdk/packages/pocket_flutter/lib/src/pocket_model.dart#L503)
+Source: [packages/pocket_flutter/lib/src/pocket_model.dart](https://github.com/PocketFlutter/Pocket/blob/b06cb43cac4d553cea232ae1cd1f9ed4ee0c4ff4/sdk/packages/pocket_flutter/lib/src/pocket_model.dart#L503)
 
 ### `PocketTriangleOp`
 
@@ -2623,7 +2623,7 @@ Members:
 - `List<PocketPoint> get points`
 - `List<int> get colors`
 
-Source: [packages/pocket_flutter/lib/src/pocket_model.dart](https://github.com/PocketFlutter/Pocket/blob/235b5b5589faf492f4a9fc3b7c0827bcd1d9de2c/sdk/packages/pocket_flutter/lib/src/pocket_model.dart#L446)
+Source: [packages/pocket_flutter/lib/src/pocket_model.dart](https://github.com/PocketFlutter/Pocket/blob/b06cb43cac4d553cea232ae1cd1f9ed4ee0c4ff4/sdk/packages/pocket_flutter/lib/src/pocket_model.dart#L446)
 
 ### `PocketVideoOp`
 
@@ -2636,7 +2636,7 @@ Members:
 - `final bool autoplay`
 - `final String fit`
 
-Source: [packages/pocket_flutter/lib/src/pocket_model.dart](https://github.com/PocketFlutter/Pocket/blob/235b5b5589faf492f4a9fc3b7c0827bcd1d9de2c/sdk/packages/pocket_flutter/lib/src/pocket_model.dart#L668)
+Source: [packages/pocket_flutter/lib/src/pocket_model.dart](https://github.com/PocketFlutter/Pocket/blob/b06cb43cac4d553cea232ae1cd1f9ed4ee0c4ff4/sdk/packages/pocket_flutter/lib/src/pocket_model.dart#L668)
 
 ### `PocketView`
 
@@ -2693,7 +2693,7 @@ Members:
 - `final PocketPerformanceSampleCallback? onPerformanceSample`
 - `State<PocketView> createState()`
 
-Source: [packages/pocket_flutter/lib/src/pocket_view.dart](https://github.com/PocketFlutter/Pocket/blob/235b5b5589faf492f4a9fc3b7c0827bcd1d9de2c/sdk/packages/pocket_flutter/lib/src/pocket_view.dart#L569)
+Source: [packages/pocket_flutter/lib/src/pocket_view.dart](https://github.com/PocketFlutter/Pocket/blob/b06cb43cac4d553cea232ae1cd1f9ed4ee0c4ff4/sdk/packages/pocket_flutter/lib/src/pocket_view.dart#L569)
 
 ### `PocketViewCapture`
 
@@ -2704,7 +2704,7 @@ Members:
 - `final int width`
 - `final int height`
 
-Source: [packages/pocket_flutter/lib/src/pocket_view.dart](https://github.com/PocketFlutter/Pocket/blob/235b5b5589faf492f4a9fc3b7c0827bcd1d9de2c/sdk/packages/pocket_flutter/lib/src/pocket_view.dart#L54)
+Source: [packages/pocket_flutter/lib/src/pocket_view.dart](https://github.com/PocketFlutter/Pocket/blob/b06cb43cac4d553cea232ae1cd1f9ed4ee0c4ff4/sdk/packages/pocket_flutter/lib/src/pocket_view.dart#L54)
 
 ### `PocketViewController`
 
@@ -2738,7 +2738,7 @@ Members:
 - `void notifyWork()`
 - `PocketViewController()` _(implicit)_
 
-Source: [packages/pocket_flutter/lib/src/pocket_view.dart](https://github.com/PocketFlutter/Pocket/blob/235b5b5589faf492f4a9fc3b7c0827bcd1d9de2c/sdk/packages/pocket_flutter/lib/src/pocket_view.dart#L88)
+Source: [packages/pocket_flutter/lib/src/pocket_view.dart](https://github.com/PocketFlutter/Pocket/blob/b06cb43cac4d553cea232ae1cd1f9ed4ee0c4ff4/sdk/packages/pocket_flutter/lib/src/pocket_view.dart#L88)
 
 ### `PocketWorkerLimits`
 
@@ -2754,7 +2754,7 @@ Members:
 - `void validate()`
 - `Map<String, Object> toJson()`
 
-Source: [packages/pocket_flutter/lib/src/pocket_worker_runtime.dart](https://github.com/PocketFlutter/Pocket/blob/235b5b5589faf492f4a9fc3b7c0827bcd1d9de2c/sdk/packages/pocket_flutter/lib/src/pocket_worker_runtime.dart#L9)
+Source: [packages/pocket_flutter/lib/src/pocket_worker_runtime.dart](https://github.com/PocketFlutter/Pocket/blob/b06cb43cac4d553cea232ae1cd1f9ed4ee0c4ff4/sdk/packages/pocket_flutter/lib/src/pocket_worker_runtime.dart#L9)
 
 ### `PocketWorkerProgram`
 
@@ -2773,7 +2773,7 @@ Members:
 - `Map<String, Object?> get declaration`
 - `String nativeConfigJson({required int nativeGeneration})`
 
-Source: [packages/pocket_flutter/lib/src/pocket_worker_runtime.dart](https://github.com/PocketFlutter/Pocket/blob/235b5b5589faf492f4a9fc3b7c0827bcd1d9de2c/sdk/packages/pocket_flutter/lib/src/pocket_worker_runtime.dart#L56)
+Source: [packages/pocket_flutter/lib/src/pocket_worker_runtime.dart](https://github.com/PocketFlutter/Pocket/blob/b06cb43cac4d553cea232ae1cd1f9ed4ee0c4ff4/sdk/packages/pocket_flutter/lib/src/pocket_worker_runtime.dart#L56)
 
 ### `PocketWorkerRuntime`
 
@@ -2782,282 +2782,282 @@ Source: [packages/pocket_flutter/lib/src/pocket_worker_runtime.dart](https://git
 Members:
 - `void configureWorker( PocketWorkerProgram program, { required void Function() onWake, })`
 
-Source: [packages/pocket_flutter/lib/src/pocket_worker_runtime.dart](https://github.com/PocketFlutter/Pocket/blob/235b5b5589faf492f4a9fc3b7c0827bcd1d9de2c/sdk/packages/pocket_flutter/lib/src/pocket_worker_runtime.dart#L139)
+Source: [packages/pocket_flutter/lib/src/pocket_worker_runtime.dart](https://github.com/PocketFlutter/Pocket/blob/b06cb43cac4d553cea232ae1cd1f9ed4ee0c4ff4/sdk/packages/pocket_flutter/lib/src/pocket_worker_runtime.dart#L139)
 
 ### `debugOnPocketFrameStageAttribution`
 
 **Top-level variable** `void Function({double? buildMs, double? paintMs})? debugOnPocketFrameStageAttribution`
 
-Source: [packages/pocket_flutter/lib/src/pocket_view.dart](https://github.com/PocketFlutter/Pocket/blob/235b5b5589faf492f4a9fc3b7c0827bcd1d9de2c/sdk/packages/pocket_flutter/lib/src/pocket_view.dart#L871)
+Source: [packages/pocket_flutter/lib/src/pocket_view.dart](https://github.com/PocketFlutter/Pocket/blob/b06cb43cac4d553cea232ae1cd1f9ed4ee0c4ff4/sdk/packages/pocket_flutter/lib/src/pocket_view.dart#L871)
 
 ### `debugOnPocketTickAttribution`
 
 **Top-level variable** `void Function({required double nativeMs, required double decodeMs, required double diffMs, PocketNativeStageTimings nativeStages})? debugOnPocketTickAttribution`
 
-Source: [packages/pocket_flutter/lib/src/pocket_view.dart](https://github.com/PocketFlutter/Pocket/blob/235b5b5589faf492f4a9fc3b7c0827bcd1d9de2c/sdk/packages/pocket_flutter/lib/src/pocket_view.dart#L867)
+Source: [packages/pocket_flutter/lib/src/pocket_view.dart](https://github.com/PocketFlutter/Pocket/blob/b06cb43cac4d553cea232ae1cd1f9ed4ee0c4ff4/sdk/packages/pocket_flutter/lib/src/pocket_view.dart#L867)
 
 ### `debugPocketFirstFrameResourceTimeoutOverride`
 
 **Top-level variable** `Duration? debugPocketFirstFrameResourceTimeoutOverride`
 
-Source: [packages/pocket_flutter/lib/src/pocket_view.dart](https://github.com/PocketFlutter/Pocket/blob/235b5b5589faf492f4a9fc3b7c0827bcd1d9de2c/sdk/packages/pocket_flutter/lib/src/pocket_view.dart#L879)
+Source: [packages/pocket_flutter/lib/src/pocket_view.dart](https://github.com/PocketFlutter/Pocket/blob/b06cb43cac4d553cea232ae1cd1f9ed4ee0c4ff4/sdk/packages/pocket_flutter/lib/src/pocket_view.dart#L879)
 
 ### `debugPocketFrameDeltaAtOverride`
 
 **Top-level variable** `PocketFrame? Function(PocketRuntime runtime, double deltaMilliseconds)? debugPocketFrameDeltaAtOverride`
 
-Source: [packages/pocket_flutter/lib/src/pocket_view.dart](https://github.com/PocketFlutter/Pocket/blob/235b5b5589faf492f4a9fc3b7c0827bcd1d9de2c/sdk/packages/pocket_flutter/lib/src/pocket_view.dart#L852)
+Source: [packages/pocket_flutter/lib/src/pocket_view.dart](https://github.com/PocketFlutter/Pocket/blob/b06cb43cac4d553cea232ae1cd1f9ed4ee0c4ff4/sdk/packages/pocket_flutter/lib/src/pocket_view.dart#L852)
 
 ### `debugPocketNativeFrameDurationOverride`
 
 **Top-level variable** `Duration Function()? debugPocketNativeFrameDurationOverride`
 
-Source: [packages/pocket_flutter/lib/src/pocket_view.dart](https://github.com/PocketFlutter/Pocket/blob/235b5b5589faf492f4a9fc3b7c0827bcd1d9de2c/sdk/packages/pocket_flutter/lib/src/pocket_view.dart#L855)
+Source: [packages/pocket_flutter/lib/src/pocket_view.dart](https://github.com/PocketFlutter/Pocket/blob/b06cb43cac4d553cea232ae1cd1f9ed4ee0c4ff4/sdk/packages/pocket_flutter/lib/src/pocket_view.dart#L855)
 
 ### `debugPocketSelfOwnedRuntimeFactory`
 
 **Top-level variable** `PocketRuntime Function(Size viewport)? debugPocketSelfOwnedRuntimeFactory`
 
-Source: [packages/pocket_flutter/lib/src/pocket_view.dart](https://github.com/PocketFlutter/Pocket/blob/235b5b5589faf492f4a9fc3b7c0827bcd1d9de2c/sdk/packages/pocket_flutter/lib/src/pocket_view.dart#L858)
+Source: [packages/pocket_flutter/lib/src/pocket_view.dart](https://github.com/PocketFlutter/Pocket/blob/b06cb43cac4d553cea232ae1cd1f9ed4ee0c4ff4/sdk/packages/pocket_flutter/lib/src/pocket_view.dart#L858)
 
 ### `measurePocketHostScalarAdvance`
 
 **function** `double measurePocketHostScalarAdvance( int slot, int codepoint, { List<String> fontFamilyFallback = const <String>[], })`
 
-Source: [packages/pocket_flutter/lib/src/pocket_host_fonts.dart](https://github.com/PocketFlutter/Pocket/blob/235b5b5589faf492f4a9fc3b7c0827bcd1d9de2c/sdk/packages/pocket_flutter/lib/src/pocket_host_fonts.dart#L123)
+Source: [packages/pocket_flutter/lib/src/pocket_host_fonts.dart](https://github.com/PocketFlutter/Pocket/blob/b06cb43cac4d553cea232ae1cd1f9ed4ee0c4ff4/sdk/packages/pocket_flutter/lib/src/pocket_host_fonts.dart#L123)
 
 ### `measurePocketHostTextRunString`
 
 **function** `double measurePocketHostTextRunString( int slot, String text, { double tracking = 0.0, List<String> fontFamilyFallback = const <String>[], })`
 
-Source: [packages/pocket_flutter/lib/src/pocket_host_fonts.dart](https://github.com/PocketFlutter/Pocket/blob/235b5b5589faf492f4a9fc3b7c0827bcd1d9de2c/sdk/packages/pocket_flutter/lib/src/pocket_host_fonts.dart#L145)
+Source: [packages/pocket_flutter/lib/src/pocket_host_fonts.dart](https://github.com/PocketFlutter/Pocket/blob/b06cb43cac4d553cea232ae1cd1f9ed4ee0c4ff4/sdk/packages/pocket_flutter/lib/src/pocket_host_fonts.dart#L145)
 
 ### `measurePocketHostTextRunUtf8`
 
 **function** `double measurePocketHostTextRunUtf8( int slot, double tracking, Pointer<Uint8> utf8Ptr, int utf8Len, { List<String> fontFamilyFallback = const <String>[], })`
 
-Source: [packages/pocket_flutter/lib/src/pocket_host_fonts.dart](https://github.com/PocketFlutter/Pocket/blob/235b5b5589faf492f4a9fc3b7c0827bcd1d9de2c/sdk/packages/pocket_flutter/lib/src/pocket_host_fonts.dart#L177)
+Source: [packages/pocket_flutter/lib/src/pocket_host_fonts.dart](https://github.com/PocketFlutter/Pocket/blob/b06cb43cac4d553cea232ae1cd1f9ed4ee0c4ff4/sdk/packages/pocket_flutter/lib/src/pocket_host_fonts.dart#L177)
 
 ### `pocketAdditiveFontFeatures`
 
 **Top-level variable** `const List<ui.FontFeature> pocketAdditiveFontFeatures = <ui.FontFeature>[ui.FontFeature.disable('liga'), ui.FontFeature.disable('clig'), ui.FontFeature.disable('dlig'), ui.FontFeature.disable('kern')]`
 
-Source: [packages/pocket_flutter/lib/src/pocket_host_fonts.dart](https://github.com/PocketFlutter/Pocket/blob/235b5b5589faf492f4a9fc3b7c0827bcd1d9de2c/sdk/packages/pocket_flutter/lib/src/pocket_host_fonts.dart#L50)
+Source: [packages/pocket_flutter/lib/src/pocket_host_fonts.dart](https://github.com/PocketFlutter/Pocket/blob/b06cb43cac4d553cea232ae1cd1f9ed4ee0c4ff4/sdk/packages/pocket_flutter/lib/src/pocket_host_fonts.dart#L50)
 
 ### `pocketBinaryMessageMagic`
 
 **Top-level variable** `const int pocketBinaryMessageMagic = 0xB1`
 
-Source: [packages/pocket_flutter/lib/src/pocket_binary_codec.dart](https://github.com/PocketFlutter/Pocket/blob/235b5b5589faf492f4a9fc3b7c0827bcd1d9de2c/sdk/packages/pocket_flutter/lib/src/pocket_binary_codec.dart#L8)
+Source: [packages/pocket_flutter/lib/src/pocket_binary_codec.dart](https://github.com/PocketFlutter/Pocket/blob/b06cb43cac4d553cea232ae1cd1f9ed4ee0c4ff4/sdk/packages/pocket_flutter/lib/src/pocket_binary_codec.dart#L8)
 
 ### `pocketCanonicalJson`
 
 **function** `String pocketCanonicalJson(Object? value)`
 
-Source: [packages/pocket_flutter/lib/src/pocket_recording.dart](https://github.com/PocketFlutter/Pocket/blob/235b5b5589faf492f4a9fc3b7c0827bcd1d9de2c/sdk/packages/pocket_flutter/lib/src/pocket_recording.dart#L846)
+Source: [packages/pocket_flutter/lib/src/pocket_recording.dart](https://github.com/PocketFlutter/Pocket/blob/b06cb43cac4d553cea232ae1cd1f9ed4ee0c4ff4/sdk/packages/pocket_flutter/lib/src/pocket_recording.dart#L846)
 
 ### `pocketFontSizeForSlot`
 
 **function** `double pocketFontSizeForSlot(int? slot)`
 
-Source: [packages/pocket_flutter/lib/src/pocket_host_fonts.dart](https://github.com/PocketFlutter/Pocket/blob/235b5b5589faf492f4a9fc3b7c0827bcd1d9de2c/sdk/packages/pocket_flutter/lib/src/pocket_host_fonts.dart#L68)
+Source: [packages/pocket_flutter/lib/src/pocket_host_fonts.dart](https://github.com/PocketFlutter/Pocket/blob/b06cb43cac4d553cea232ae1cd1f9ed4ee0c4ff4/sdk/packages/pocket_flutter/lib/src/pocket_host_fonts.dart#L68)
 
 ### `pocketFontSlotSizes`
 
 **Top-level variable** `const List<double> pocketFontSlotSizes = <double>[12, 14, 16, 18, 20, 24, 36, 12, 14, 16, 18, 20, 24, 36, 54, 54, 12, 14, 16, 10, 10]`
 
-Source: [packages/pocket_flutter/lib/src/pocket_host_fonts.dart](https://github.com/PocketFlutter/Pocket/blob/235b5b5589faf492f4a9fc3b7c0827bcd1d9de2c/sdk/packages/pocket_flutter/lib/src/pocket_host_fonts.dart#L23)
+Source: [packages/pocket_flutter/lib/src/pocket_host_fonts.dart](https://github.com/PocketFlutter/Pocket/blob/b06cb43cac4d553cea232ae1cd1f9ed4ee0c4ff4/sdk/packages/pocket_flutter/lib/src/pocket_host_fonts.dart#L23)
 
 ### `pocketFontWeightForSlot`
 
 **function** `FontWeight? pocketFontWeightForSlot(int? slot)`
 
-Source: [packages/pocket_flutter/lib/src/pocket_host_fonts.dart](https://github.com/PocketFlutter/Pocket/blob/235b5b5589faf492f4a9fc3b7c0827bcd1d9de2c/sdk/packages/pocket_flutter/lib/src/pocket_host_fonts.dart#L75)
+Source: [packages/pocket_flutter/lib/src/pocket_host_fonts.dart](https://github.com/PocketFlutter/Pocket/blob/b06cb43cac4d553cea232ae1cd1f9ed4ee0c4ff4/sdk/packages/pocket_flutter/lib/src/pocket_host_fonts.dart#L75)
 
 ### `pocketFrameAt`
 
 **function** `PocketFrame pocketFrameAt(PocketRuntime runtime, double deltaMilliseconds)`
 
-Source: [packages/pocket_flutter/lib/src/pocket_runtime.dart](https://github.com/PocketFlutter/Pocket/blob/235b5b5589faf492f4a9fc3b7c0827bcd1d9de2c/sdk/packages/pocket_flutter/lib/src/pocket_runtime.dart#L220)
+Source: [packages/pocket_flutter/lib/src/pocket_runtime.dart](https://github.com/PocketFlutter/Pocket/blob/b06cb43cac4d553cea232ae1cd1f9ed4ee0c4ff4/sdk/packages/pocket_flutter/lib/src/pocket_runtime.dart#L220)
 
 ### `pocketFrameDeltaAt`
 
 **function** `PocketFrame? pocketFrameDeltaAt( PocketRuntime runtime, double deltaMilliseconds, )`
 
-Source: [packages/pocket_flutter/lib/src/pocket_runtime.dart](https://github.com/PocketFlutter/Pocket/blob/235b5b5589faf492f4a9fc3b7c0827bcd1d9de2c/sdk/packages/pocket_flutter/lib/src/pocket_runtime.dart#L230)
+Source: [packages/pocket_flutter/lib/src/pocket_runtime.dart](https://github.com/PocketFlutter/Pocket/blob/b06cb43cac4d553cea232ae1cd1f9ed4ee0c4ff4/sdk/packages/pocket_flutter/lib/src/pocket_runtime.dart#L230)
 
 ### `pocketHostAsciiCount`
 
 **Top-level variable** `const int pocketHostAsciiCount = 95`
 
-Source: [packages/pocket_flutter/lib/src/pocket_host_fonts.dart](https://github.com/PocketFlutter/Pocket/blob/235b5b5589faf492f4a9fc3b7c0827bcd1d9de2c/sdk/packages/pocket_flutter/lib/src/pocket_host_fonts.dart#L20)
+Source: [packages/pocket_flutter/lib/src/pocket_host_fonts.dart](https://github.com/PocketFlutter/Pocket/blob/b06cb43cac4d553cea232ae1cd1f9ed4ee0c4ff4/sdk/packages/pocket_flutter/lib/src/pocket_host_fonts.dart#L20)
 
 ### `pocketHostAsciiStart`
 
 **Top-level variable** `const int pocketHostAsciiStart = 0x20`
 
-Source: [packages/pocket_flutter/lib/src/pocket_host_fonts.dart](https://github.com/PocketFlutter/Pocket/blob/235b5b5589faf492f4a9fc3b7c0827bcd1d9de2c/sdk/packages/pocket_flutter/lib/src/pocket_host_fonts.dart#L17)
+Source: [packages/pocket_flutter/lib/src/pocket_host_fonts.dart](https://github.com/PocketFlutter/Pocket/blob/b06cb43cac4d553cea232ae1cd1f9ed4ee0c4ff4/sdk/packages/pocket_flutter/lib/src/pocket_host_fonts.dart#L17)
 
 ### `pocketHostFontSlotCount`
 
 **Top-level variable** `const int pocketHostFontSlotCount = 21`
 
-Source: [packages/pocket_flutter/lib/src/pocket_host_fonts.dart](https://github.com/PocketFlutter/Pocket/blob/235b5b5589faf492f4a9fc3b7c0827bcd1d9de2c/sdk/packages/pocket_flutter/lib/src/pocket_host_fonts.dart#L14)
+Source: [packages/pocket_flutter/lib/src/pocket_host_fonts.dart](https://github.com/PocketFlutter/Pocket/blob/b06cb43cac4d553cea232ae1cd1f9ed4ee0c4ff4/sdk/packages/pocket_flutter/lib/src/pocket_host_fonts.dart#L14)
 
 ### `pocketIsMonoSlot`
 
 **function** `bool pocketIsMonoSlot(int? slot)`
 
-Source: [packages/pocket_flutter/lib/src/pocket_host_fonts.dart](https://github.com/PocketFlutter/Pocket/blob/235b5b5589faf492f4a9fc3b7c0827bcd1d9de2c/sdk/packages/pocket_flutter/lib/src/pocket_host_fonts.dart#L66)
+Source: [packages/pocket_flutter/lib/src/pocket_host_fonts.dart](https://github.com/PocketFlutter/Pocket/blob/b06cb43cac4d553cea232ae1cd1f9ed4ee0c4ff4/sdk/packages/pocket_flutter/lib/src/pocket_host_fonts.dart#L66)
 
 ### `pocketNextWakeDelayMilliseconds`
 
 **function** `double pocketNextWakeDelayMilliseconds(PocketRuntime runtime)`
 
-Source: [packages/pocket_flutter/lib/src/pocket_runtime.dart](https://github.com/PocketFlutter/Pocket/blob/235b5b5589faf492f4a9fc3b7c0827bcd1d9de2c/sdk/packages/pocket_flutter/lib/src/pocket_runtime.dart#L82)
+Source: [packages/pocket_flutter/lib/src/pocket_runtime.dart](https://github.com/PocketFlutter/Pocket/blob/b06cb43cac4d553cea232ae1cd1f9ed4ee0c4ff4/sdk/packages/pocket_flutter/lib/src/pocket_runtime.dart#L82)
 
 ### `pocketOffloadBinaryMagic`
 
 **Top-level variable** `const int pocketOffloadBinaryMagic = 0xB2`
 
-Source: [packages/pocket_flutter/lib/src/pocket_binary_codec.dart](https://github.com/PocketFlutter/Pocket/blob/235b5b5589faf492f4a9fc3b7c0827bcd1d9de2c/sdk/packages/pocket_flutter/lib/src/pocket_binary_codec.dart#L11)
+Source: [packages/pocket_flutter/lib/src/pocket_binary_codec.dart](https://github.com/PocketFlutter/Pocket/blob/b06cb43cac4d553cea232ae1cd1f9ed4ee0c4ff4/sdk/packages/pocket_flutter/lib/src/pocket_binary_codec.dart#L11)
 
 ### `pocketRasterDensity`
 
 **function** `int pocketRasterDensity(double devicePixelRatio)`
 
-Source: [packages/pocket_flutter/lib/src/pocket_display.dart](https://github.com/PocketFlutter/Pocket/blob/235b5b5589faf492f4a9fc3b7c0827bcd1d9de2c/sdk/packages/pocket_flutter/lib/src/pocket_display.dart#L3)
+Source: [packages/pocket_flutter/lib/src/pocket_display.dart](https://github.com/PocketFlutter/Pocket/blob/b06cb43cac4d553cea232ae1cd1f9ed4ee0c4ff4/sdk/packages/pocket_flutter/lib/src/pocket_display.dart#L3)
 
 ### `pocketRawKeyName`
 
 **function** `String pocketRawKeyName(LogicalKeyboardKey key, String? character)`
 
-Source: [packages/pocket_flutter/lib/src/pocket_raw_text_input.dart](https://github.com/PocketFlutter/Pocket/blob/235b5b5589faf492f4a9fc3b7c0827bcd1d9de2c/sdk/packages/pocket_flutter/lib/src/pocket_raw_text_input.dart#L28)
+Source: [packages/pocket_flutter/lib/src/pocket_raw_text_input.dart](https://github.com/PocketFlutter/Pocket/blob/b06cb43cac4d553cea232ae1cd1f9ed4ee0c4ff4/sdk/packages/pocket_flutter/lib/src/pocket_raw_text_input.dart#L28)
 
 ### `pocketRawTextMaxEventBytes`
 
 **Top-level variable** `const int pocketRawTextMaxEventBytes = 4096`
 
-Source: [packages/pocket_flutter/lib/src/pocket_raw_text_input.dart](https://github.com/PocketFlutter/Pocket/blob/235b5b5589faf492f4a9fc3b7c0827bcd1d9de2c/sdk/packages/pocket_flutter/lib/src/pocket_raw_text_input.dart#L12)
+Source: [packages/pocket_flutter/lib/src/pocket_raw_text_input.dart](https://github.com/PocketFlutter/Pocket/blob/b06cb43cac4d553cea232ae1cd1f9ed4ee0c4ff4/sdk/packages/pocket_flutter/lib/src/pocket_raw_text_input.dart#L12)
 
 ### `pocketRawTextModifiers`
 
 **function** `int pocketRawTextModifiers()`
 
-Source: [packages/pocket_flutter/lib/src/pocket_raw_text_input.dart](https://github.com/PocketFlutter/Pocket/blob/235b5b5589faf492f4a9fc3b7c0827bcd1d9de2c/sdk/packages/pocket_flutter/lib/src/pocket_raw_text_input.dart#L15)
+Source: [packages/pocket_flutter/lib/src/pocket_raw_text_input.dart](https://github.com/PocketFlutter/Pocket/blob/b06cb43cac4d553cea232ae1cd1f9ed4ee0c4ff4/sdk/packages/pocket_flutter/lib/src/pocket_raw_text_input.dart#L15)
 
 ### `pocketRecordingDefaultMaxBytes`
 
 **Top-level variable** `const int pocketRecordingDefaultMaxBytes = 8 * 1024 * 1024`
 
-Source: [packages/pocket_flutter/lib/src/pocket_recording.dart](https://github.com/PocketFlutter/Pocket/blob/235b5b5589faf492f4a9fc3b7c0827bcd1d9de2c/sdk/packages/pocket_flutter/lib/src/pocket_recording.dart#L8)
+Source: [packages/pocket_flutter/lib/src/pocket_recording.dart](https://github.com/PocketFlutter/Pocket/blob/b06cb43cac4d553cea232ae1cd1f9ed4ee0c4ff4/sdk/packages/pocket_flutter/lib/src/pocket_recording.dart#L8)
 
 ### `pocketRecordingDefaultMaxEntries`
 
 **Top-level variable** `const int pocketRecordingDefaultMaxEntries = 8192`
 
-Source: [packages/pocket_flutter/lib/src/pocket_recording.dart](https://github.com/PocketFlutter/Pocket/blob/235b5b5589faf492f4a9fc3b7c0827bcd1d9de2c/sdk/packages/pocket_flutter/lib/src/pocket_recording.dart#L7)
+Source: [packages/pocket_flutter/lib/src/pocket_recording.dart](https://github.com/PocketFlutter/Pocket/blob/b06cb43cac4d553cea232ae1cd1f9ed4ee0c4ff4/sdk/packages/pocket_flutter/lib/src/pocket_recording.dart#L7)
 
 ### `pocketRecordingMaxTraceLaneBytes`
 
 **Top-level variable** `const int pocketRecordingMaxTraceLaneBytes = 8 * 1024 * 1024`
 
-Source: [packages/pocket_flutter/lib/src/pocket_recording.dart](https://github.com/PocketFlutter/Pocket/blob/235b5b5589faf492f4a9fc3b7c0827bcd1d9de2c/sdk/packages/pocket_flutter/lib/src/pocket_recording.dart#L10)
+Source: [packages/pocket_flutter/lib/src/pocket_recording.dart](https://github.com/PocketFlutter/Pocket/blob/b06cb43cac4d553cea232ae1cd1f9ed4ee0c4ff4/sdk/packages/pocket_flutter/lib/src/pocket_recording.dart#L10)
 
 ### `pocketRecordingMaxTraceLaneEvents`
 
 **Top-level variable** `const int pocketRecordingMaxTraceLaneEvents = 8192`
 
-Source: [packages/pocket_flutter/lib/src/pocket_recording.dart](https://github.com/PocketFlutter/Pocket/blob/235b5b5589faf492f4a9fc3b7c0827bcd1d9de2c/sdk/packages/pocket_flutter/lib/src/pocket_recording.dart#L9)
+Source: [packages/pocket_flutter/lib/src/pocket_recording.dart](https://github.com/PocketFlutter/Pocket/blob/b06cb43cac4d553cea232ae1cd1f9ed4ee0c4ff4/sdk/packages/pocket_flutter/lib/src/pocket_recording.dart#L9)
 
 ### `pocketRecordingSchema`
 
 **Top-level variable** `const String pocketRecordingSchema = 'pocket.runtime.recording'`
 
-Source: [packages/pocket_flutter/lib/src/pocket_recording.dart](https://github.com/PocketFlutter/Pocket/blob/235b5b5589faf492f4a9fc3b7c0827bcd1d9de2c/sdk/packages/pocket_flutter/lib/src/pocket_recording.dart#L6)
+Source: [packages/pocket_flutter/lib/src/pocket_recording.dart](https://github.com/PocketFlutter/Pocket/blob/b06cb43cac4d553cea232ae1cd1f9ed4ee0c4ff4/sdk/packages/pocket_flutter/lib/src/pocket_recording.dart#L6)
 
 ### `pocketRecordingSchemaVersion`
 
 **Top-level variable** `const int pocketRecordingSchemaVersion = 2`
 
-Source: [packages/pocket_flutter/lib/src/pocket_recording.dart](https://github.com/PocketFlutter/Pocket/blob/235b5b5589faf492f4a9fc3b7c0827bcd1d9de2c/sdk/packages/pocket_flutter/lib/src/pocket_recording.dart#L5)
+Source: [packages/pocket_flutter/lib/src/pocket_recording.dart](https://github.com/PocketFlutter/Pocket/blob/b06cb43cac4d553cea232ae1cd1f9ed4ee0c4ff4/sdk/packages/pocket_flutter/lib/src/pocket_recording.dart#L5)
 
 ### `pocketSetSchedulerPaused`
 
 **function** `void pocketSetSchedulerPaused(PocketRuntime runtime, bool paused)`
 
-Source: [packages/pocket_flutter/lib/src/pocket_runtime.dart](https://github.com/PocketFlutter/Pocket/blob/235b5b5589faf492f4a9fc3b7c0827bcd1d9de2c/sdk/packages/pocket_flutter/lib/src/pocket_runtime.dart#L4457)
+Source: [packages/pocket_flutter/lib/src/pocket_runtime.dart](https://github.com/PocketFlutter/Pocket/blob/b06cb43cac4d553cea232ae1cd1f9ed4ee0c4ff4/sdk/packages/pocket_flutter/lib/src/pocket_runtime.dart#L4457)
 
 ### `pocketSha256`
 
 **function** `String pocketSha256(List<int> bytes)`
 
-Source: [packages/pocket_flutter/lib/src/pocket_recording.dart](https://github.com/PocketFlutter/Pocket/blob/235b5b5589faf492f4a9fc3b7c0827bcd1d9de2c/sdk/packages/pocket_flutter/lib/src/pocket_recording.dart#L1101)
+Source: [packages/pocket_flutter/lib/src/pocket_recording.dart](https://github.com/PocketFlutter/Pocket/blob/b06cb43cac4d553cea232ae1cd1f9ed4ee0c4ff4/sdk/packages/pocket_flutter/lib/src/pocket_recording.dart#L1101)
 
 ### `pocketSplitUtf8`
 
 **function** `List<String> pocketSplitUtf8( String text, { int maxBytes = pocketRawTextMaxEventBytes, })`
 
-Source: [packages/pocket_flutter/lib/src/pocket_raw_text_input.dart](https://github.com/PocketFlutter/Pocket/blob/235b5b5589faf492f4a9fc3b7c0827bcd1d9de2c/sdk/packages/pocket_flutter/lib/src/pocket_raw_text_input.dart#L51)
+Source: [packages/pocket_flutter/lib/src/pocket_raw_text_input.dart](https://github.com/PocketFlutter/Pocket/blob/b06cb43cac4d553cea232ae1cd1f9ed4ee0c4ff4/sdk/packages/pocket_flutter/lib/src/pocket_raw_text_input.dart#L51)
 
 ### `pocketTextModifierAlt`
 
 **Top-level variable** `const int pocketTextModifierAlt = 4`
 
-Source: [packages/pocket_flutter/lib/src/pocket_raw_text_input.dart](https://github.com/PocketFlutter/Pocket/blob/235b5b5589faf492f4a9fc3b7c0827bcd1d9de2c/sdk/packages/pocket_flutter/lib/src/pocket_raw_text_input.dart#L7)
+Source: [packages/pocket_flutter/lib/src/pocket_raw_text_input.dart](https://github.com/PocketFlutter/Pocket/blob/b06cb43cac4d553cea232ae1cd1f9ed4ee0c4ff4/sdk/packages/pocket_flutter/lib/src/pocket_raw_text_input.dart#L7)
 
 ### `pocketTextModifierControl`
 
 **Top-level variable** `const int pocketTextModifierControl = 2`
 
-Source: [packages/pocket_flutter/lib/src/pocket_raw_text_input.dart](https://github.com/PocketFlutter/Pocket/blob/235b5b5589faf492f4a9fc3b7c0827bcd1d9de2c/sdk/packages/pocket_flutter/lib/src/pocket_raw_text_input.dart#L6)
+Source: [packages/pocket_flutter/lib/src/pocket_raw_text_input.dart](https://github.com/PocketFlutter/Pocket/blob/b06cb43cac4d553cea232ae1cd1f9ed4ee0c4ff4/sdk/packages/pocket_flutter/lib/src/pocket_raw_text_input.dart#L6)
 
 ### `pocketTextModifierMeta`
 
 **Top-level variable** `const int pocketTextModifierMeta = 8`
 
-Source: [packages/pocket_flutter/lib/src/pocket_raw_text_input.dart](https://github.com/PocketFlutter/Pocket/blob/235b5b5589faf492f4a9fc3b7c0827bcd1d9de2c/sdk/packages/pocket_flutter/lib/src/pocket_raw_text_input.dart#L8)
+Source: [packages/pocket_flutter/lib/src/pocket_raw_text_input.dart](https://github.com/PocketFlutter/Pocket/blob/b06cb43cac4d553cea232ae1cd1f9ed4ee0c4ff4/sdk/packages/pocket_flutter/lib/src/pocket_raw_text_input.dart#L8)
 
 ### `pocketTextModifierShift`
 
 **Top-level variable** `const int pocketTextModifierShift = 1`
 
-Source: [packages/pocket_flutter/lib/src/pocket_raw_text_input.dart](https://github.com/PocketFlutter/Pocket/blob/235b5b5589faf492f4a9fc3b7c0827bcd1d9de2c/sdk/packages/pocket_flutter/lib/src/pocket_raw_text_input.dart#L5)
+Source: [packages/pocket_flutter/lib/src/pocket_raw_text_input.dart](https://github.com/PocketFlutter/Pocket/blob/b06cb43cac4d553cea232ae1cd1f9ed4ee0c4ff4/sdk/packages/pocket_flutter/lib/src/pocket_raw_text_input.dart#L5)
 
 ### `pocketTextStyleForSlot`
 
 **function** `TextStyle pocketTextStyleForSlot({ required int? slot, required double fontSize, Color? color, List<String> fontFamilyFallback = const <String>[], double? height, double letterSpacing = 0.0, })`
 
-Source: [packages/pocket_flutter/lib/src/pocket_host_fonts.dart](https://github.com/PocketFlutter/Pocket/blob/235b5b5589faf492f4a9fc3b7c0827bcd1d9de2c/sdk/packages/pocket_flutter/lib/src/pocket_host_fonts.dart#L92)
+Source: [packages/pocket_flutter/lib/src/pocket_host_fonts.dart](https://github.com/PocketFlutter/Pocket/blob/b06cb43cac4d553cea232ae1cd1f9ed4ee0c4ff4/sdk/packages/pocket_flutter/lib/src/pocket_host_fonts.dart#L92)
 
 ### `pocketTruncateUtf8`
 
 **function** `String pocketTruncateUtf8( String text, { int maxBytes = pocketRawTextMaxEventBytes, })`
 
-Source: [packages/pocket_flutter/lib/src/pocket_raw_text_input.dart](https://github.com/PocketFlutter/Pocket/blob/235b5b5589faf492f4a9fc3b7c0827bcd1d9de2c/sdk/packages/pocket_flutter/lib/src/pocket_raw_text_input.dart#L79)
+Source: [packages/pocket_flutter/lib/src/pocket_raw_text_input.dart](https://github.com/PocketFlutter/Pocket/blob/b06cb43cac4d553cea232ae1cd1f9ed4ee0c4ff4/sdk/packages/pocket_flutter/lib/src/pocket_raw_text_input.dart#L79)
 
 ### `pocketValidateTraceClockEnvelope`
 
 **function** `Map<String, dynamic> pocketValidateTraceClockEnvelope(Object? value)`
 
-Source: [packages/pocket_flutter/lib/src/pocket_recording.dart](https://github.com/PocketFlutter/Pocket/blob/235b5b5589faf492f4a9fc3b7c0827bcd1d9de2c/sdk/packages/pocket_flutter/lib/src/pocket_recording.dart#L855)
+Source: [packages/pocket_flutter/lib/src/pocket_recording.dart](https://github.com/PocketFlutter/Pocket/blob/b06cb43cac4d553cea232ae1cd1f9ed4ee0c4ff4/sdk/packages/pocket_flutter/lib/src/pocket_recording.dart#L855)
 
 ### `replayPocketRecording`
 
 **function** `Future<PocketReplayResult> replayPocketRecording( PocketRecording recording, { required PocketReplayAssets assets, PocketReplayRuntimeFactory? runtimeFactory, })`
 
-Source: [packages/pocket_flutter/lib/src/pocket_runtime.dart](https://github.com/PocketFlutter/Pocket/blob/235b5b5589faf492f4a9fc3b7c0827bcd1d9de2c/sdk/packages/pocket_flutter/lib/src/pocket_runtime.dart#L4156)
+Source: [packages/pocket_flutter/lib/src/pocket_runtime.dart](https://github.com/PocketFlutter/Pocket/blob/b06cb43cac4d553cea232ae1cd1f9ed4ee0c4ff4/sdk/packages/pocket_flutter/lib/src/pocket_runtime.dart#L4156)
 
 ### `syncPocketHostFonts`
 
 **function** `bool syncPocketHostFonts( PocketRuntime runtime, { List<String> fontFamilyFallback = const <String>[], })`
 
-Source: [packages/pocket_flutter/lib/src/pocket_host_fonts.dart](https://github.com/PocketFlutter/Pocket/blob/235b5b5589faf492f4a9fc3b7c0827bcd1d9de2c/sdk/packages/pocket_flutter/lib/src/pocket_host_fonts.dart#L304)
+Source: [packages/pocket_flutter/lib/src/pocket_host_fonts.dart](https://github.com/PocketFlutter/Pocket/blob/b06cb43cac4d553cea232ae1cd1f9ed4ee0c4ff4/sdk/packages/pocket_flutter/lib/src/pocket_host_fonts.dart#L304)
 ## `pocket_hardware`
 
 ### Import `package:pocket_hardware/pocket_hardware.dart`
 
-Entry: [packages/pocket_hardware/lib/pocket_hardware.dart](https://github.com/PocketFlutter/Pocket/blob/235b5b5589faf492f4a9fc3b7c0827bcd1d9de2c/sdk/packages/pocket_hardware/lib/pocket_hardware.dart)
+Entry: [packages/pocket_hardware/lib/pocket_hardware.dart](https://github.com/PocketFlutter/Pocket/blob/b06cb43cac4d553cea232ae1cd1f9ed4ee0c4ff4/sdk/packages/pocket_hardware/lib/pocket_hardware.dart)
 
 ### `HardwareCapabilities`
 
@@ -3086,7 +3086,7 @@ Members:
 - `static const String weatherCurrent = 'hardware.weather.current'`
 - `static const Set<String> all = <String>{permissions, requestPermission, cameraPreviewStart, cameraPreviewStop, cameraLensSwitch, cameraFlashToggle, cameraCapture, photosList, photosDelete, bluetoothScan, bluetoothConnect, bluetoothDisconnect, bluetoothRead, bluetoothWrite, bluetoothNotifications, sensorsRead, sensorsWatch, biometricAuthenticate, locationCurrent, weatherCurrent}`
 
-Source: [packages/pocket_hardware_core/lib/src/hardware_plugin.dart](https://github.com/PocketFlutter/Pocket/blob/235b5b5589faf492f4a9fc3b7c0827bcd1d9de2c/sdk/packages/pocket_hardware_core/lib/src/hardware_plugin.dart#L201)
+Source: [packages/pocket_hardware_core/lib/src/hardware_plugin.dart](https://github.com/PocketFlutter/Pocket/blob/b06cb43cac4d553cea232ae1cd1f9ed4ee0c4ff4/sdk/packages/pocket_hardware_core/lib/src/hardware_plugin.dart#L201)
 
 ### `HardwareCapabilityPlugin`
 
@@ -3106,7 +3106,7 @@ Members:
 - `Future<void> deactivate(PocketPluginContext context)`
 - `Future<void> dispose()`
 
-Source: [packages/pocket_hardware_core/lib/src/hardware_plugin.dart](https://github.com/PocketFlutter/Pocket/blob/235b5b5589faf492f4a9fc3b7c0827bcd1d9de2c/sdk/packages/pocket_hardware_core/lib/src/hardware_plugin.dart#L434)
+Source: [packages/pocket_hardware_core/lib/src/hardware_plugin.dart](https://github.com/PocketFlutter/Pocket/blob/b06cb43cac4d553cea232ae1cd1f9ed4ee0c4ff4/sdk/packages/pocket_hardware_core/lib/src/hardware_plugin.dart#L434)
 
 ### `HardwareFeature`
 
@@ -3120,7 +3120,7 @@ Values:
 - `biometrics`
 - `weather`
 
-Source: [packages/pocket_hardware_core/lib/src/hardware_plugin.dart](https://github.com/PocketFlutter/Pocket/blob/235b5b5589faf492f4a9fc3b7c0827bcd1d9de2c/sdk/packages/pocket_hardware_core/lib/src/hardware_plugin.dart#L16)
+Source: [packages/pocket_hardware_core/lib/src/hardware_plugin.dart](https://github.com/PocketFlutter/Pocket/blob/b06cb43cac4d553cea232ae1cd1f9ed4ee0c4ff4/sdk/packages/pocket_hardware_core/lib/src/hardware_plugin.dart#L16)
 
 ### `HardwareFeatures`
 
@@ -3130,13 +3130,13 @@ Members:
 - `static const all = <HardwareFeature>{HardwareFeature.camera, HardwareFeature.bluetooth, HardwareFeature.sensors, HardwareFeature.location, HardwareFeature.biometrics, HardwareFeature.weather}`
 - `static Set<String> capabilities(HardwareFeature feature)`
 
-Source: [packages/pocket_hardware_core/lib/src/hardware_plugin.dart](https://github.com/PocketFlutter/Pocket/blob/235b5b5589faf492f4a9fc3b7c0827bcd1d9de2c/sdk/packages/pocket_hardware_core/lib/src/hardware_plugin.dart#L25)
+Source: [packages/pocket_hardware_core/lib/src/hardware_plugin.dart](https://github.com/PocketFlutter/Pocket/blob/b06cb43cac4d553cea232ae1cd1f9ed4ee0c4ff4/sdk/packages/pocket_hardware_core/lib/src/hardware_plugin.dart#L25)
 
 ### `HardwarePermissionHandler`
 
 **Typedef** `typedef HardwarePermissionHandler = Future<Map<String, dynamic>> Function( String permission, { required bool request, });`
 
-Source: [packages/pocket_hardware_core/lib/src/hardware_plugin.dart](https://github.com/PocketFlutter/Pocket/blob/235b5b5589faf492f4a9fc3b7c0827bcd1d9de2c/sdk/packages/pocket_hardware_core/lib/src/hardware_plugin.dart#L358)
+Source: [packages/pocket_hardware_core/lib/src/hardware_plugin.dart](https://github.com/PocketFlutter/Pocket/blob/b06cb43cac4d553cea232ae1cd1f9ed4ee0c4ff4/sdk/packages/pocket_hardware_core/lib/src/hardware_plugin.dart#L358)
 
 ### `HardwarePermissions`
 
@@ -3153,7 +3153,7 @@ Members:
 - `static const String network = 'hardware.network'`
 - `static const Set<String> all = <String>{camera, photos, bluetooth, sensors, biometrics, location, microphone, network}`
 
-Source: [packages/pocket_hardware_core/lib/src/hardware_plugin.dart](https://github.com/PocketFlutter/Pocket/blob/235b5b5589faf492f4a9fc3b7c0827bcd1d9de2c/sdk/packages/pocket_hardware_core/lib/src/hardware_plugin.dart#L179)
+Source: [packages/pocket_hardware_core/lib/src/hardware_plugin.dart](https://github.com/PocketFlutter/Pocket/blob/b06cb43cac4d553cea232ae1cd1f9ed4ee0c4ff4/sdk/packages/pocket_hardware_core/lib/src/hardware_plugin.dart#L179)
 
 ### `HardwarePlatform`
 
@@ -3162,7 +3162,7 @@ Source: [packages/pocket_hardware_core/lib/src/hardware_plugin.dart](https://git
 Members:
 - `Future<Map<String, dynamic>> invoke( String method, [ Map<String, dynamic> arguments = const <String, dynamic>{}, ])`
 
-Source: [packages/pocket_hardware_core/lib/src/hardware_plugin.dart](https://github.com/PocketFlutter/Pocket/blob/235b5b5589faf492f4a9fc3b7c0827bcd1d9de2c/sdk/packages/pocket_hardware_core/lib/src/hardware_plugin.dart#L254)
+Source: [packages/pocket_hardware_core/lib/src/hardware_plugin.dart](https://github.com/PocketFlutter/Pocket/blob/b06cb43cac4d553cea232ae1cd1f9ed4ee0c4ff4/sdk/packages/pocket_hardware_core/lib/src/hardware_plugin.dart#L254)
 
 ### `HardwarePlatformException`
 
@@ -3174,7 +3174,7 @@ Members:
 - `final String message`
 - `String toString()`
 
-Source: [packages/pocket_hardware_core/lib/src/hardware_plugin.dart](https://github.com/PocketFlutter/Pocket/blob/235b5b5589faf492f4a9fc3b7c0827bcd1d9de2c/sdk/packages/pocket_hardware_core/lib/src/hardware_plugin.dart#L281)
+Source: [packages/pocket_hardware_core/lib/src/hardware_plugin.dart](https://github.com/PocketFlutter/Pocket/blob/b06cb43cac4d553cea232ae1cd1f9ed4ee0c4ff4/sdk/packages/pocket_hardware_core/lib/src/hardware_plugin.dart#L281)
 
 ### `HardwarePlugin`
 
@@ -3184,7 +3184,7 @@ Members:
 - `factory HardwarePlugin.forPocketViewController( PocketViewController controller, )`
 - `HardwarePlugin({ HardwarePlatform? platform, PocketSystemPermissions? systemPermissions, HardwareWeatherFetcher? weatherFetcher, HardwareTextureCallback? onTextureRegistered, HardwareTextureCallback? onTextureReleased, Duration requestTimeout = const Duration(seconds: 16), Set<String>? grantedPermissions, })`
 
-Source: [packages/pocket_hardware/lib/src/hardware_plugin.dart](https://github.com/PocketFlutter/Pocket/blob/235b5b5589faf492f4a9fc3b7c0827bcd1d9de2c/sdk/packages/pocket_hardware/lib/src/hardware_plugin.dart#L8)
+Source: [packages/pocket_hardware/lib/src/hardware_plugin.dart](https://github.com/PocketFlutter/Pocket/blob/b06cb43cac4d553cea232ae1cd1f9ed4ee0c4ff4/sdk/packages/pocket_hardware/lib/src/hardware_plugin.dart#L8)
 
 ### `HardwareStreamingPlatform`
 
@@ -3195,19 +3195,19 @@ Members:
 - `Future<Map<String, dynamic>> startHardwareStream( Map<String, dynamic> arguments, )`
 - `Future<Map<String, dynamic>> stopHardwareStream( Map<String, dynamic> arguments, )`
 
-Source: [packages/pocket_hardware_core/lib/src/hardware_plugin.dart](https://github.com/PocketFlutter/Pocket/blob/235b5b5589faf492f4a9fc3b7c0827bcd1d9de2c/sdk/packages/pocket_hardware_core/lib/src/hardware_plugin.dart#L265)
+Source: [packages/pocket_hardware_core/lib/src/hardware_plugin.dart](https://github.com/PocketFlutter/Pocket/blob/b06cb43cac4d553cea232ae1cd1f9ed4ee0c4ff4/sdk/packages/pocket_hardware_core/lib/src/hardware_plugin.dart#L265)
 
 ### `HardwareTextureCallback`
 
 **Typedef** `typedef HardwareTextureCallback = void Function(int textureId);`
 
-Source: [packages/pocket_hardware_core/lib/src/hardware_plugin.dart](https://github.com/PocketFlutter/Pocket/blob/235b5b5589faf492f4a9fc3b7c0827bcd1d9de2c/sdk/packages/pocket_hardware_core/lib/src/hardware_plugin.dart#L249)
+Source: [packages/pocket_hardware_core/lib/src/hardware_plugin.dart](https://github.com/PocketFlutter/Pocket/blob/b06cb43cac4d553cea232ae1cd1f9ed4ee0c4ff4/sdk/packages/pocket_hardware_core/lib/src/hardware_plugin.dart#L249)
 
 ### `HardwareWeatherFetcher`
 
 **Typedef** `typedef HardwareWeatherFetcher = Future<Map<String, dynamic>> Function(Uri uri);`
 
-Source: [packages/pocket_hardware_core/lib/src/hardware_plugin.dart](https://github.com/PocketFlutter/Pocket/blob/235b5b5589faf492f4a9fc3b7c0827bcd1d9de2c/sdk/packages/pocket_hardware_core/lib/src/hardware_plugin.dart#L364)
+Source: [packages/pocket_hardware_core/lib/src/hardware_plugin.dart](https://github.com/PocketFlutter/Pocket/blob/b06cb43cac4d553cea232ae1cd1f9ed4ee0c4ff4/sdk/packages/pocket_hardware_core/lib/src/hardware_plugin.dart#L364)
 
 ### `MethodChannelHardwarePlatform`
 
@@ -3222,36 +3222,36 @@ Members:
 - `Future<Map<String, dynamic>> stopHardwareStream( Map<String, dynamic> arguments, )`
 - `Future<Map<String, dynamic>> invoke( String method, [ Map<String, dynamic> arguments = const <String, dynamic>{}, ])`
 
-Source: [packages/pocket_hardware_core/lib/src/hardware_plugin.dart](https://github.com/PocketFlutter/Pocket/blob/235b5b5589faf492f4a9fc3b7c0827bcd1d9de2c/sdk/packages/pocket_hardware_core/lib/src/hardware_plugin.dart#L291)
+Source: [packages/pocket_hardware_core/lib/src/hardware_plugin.dart](https://github.com/PocketFlutter/Pocket/blob/b06cb43cac4d553cea232ae1cd1f9ed4ee0c4ff4/sdk/packages/pocket_hardware_core/lib/src/hardware_plugin.dart#L291)
 
 ### `createHardwarePlatform`
 
 **function** `HardwarePlatform createHardwarePlatform(Set<HardwareFeature> features)`
 
-Source: [packages/pocket_hardware_core/lib/src/hardware_plugin.dart](https://github.com/PocketFlutter/Pocket/blob/235b5b5589faf492f4a9fc3b7c0827bcd1d9de2c/sdk/packages/pocket_hardware_core/lib/src/hardware_plugin.dart#L66)
+Source: [packages/pocket_hardware_core/lib/src/hardware_plugin.dart](https://github.com/PocketFlutter/Pocket/blob/b06cb43cac4d553cea232ae1cd1f9ed4ee0c4ff4/sdk/packages/pocket_hardware_core/lib/src/hardware_plugin.dart#L66)
 
 ### `hardwareEventsChannelName`
 
 **Top-level variable** `const String hardwareEventsChannelName = 'com.pocketnexus.host/hardware/events'`
 
-Source: [packages/pocket_hardware_core/lib/src/hardware_plugin.dart](https://github.com/PocketFlutter/Pocket/blob/235b5b5589faf492f4a9fc3b7c0827bcd1d9de2c/sdk/packages/pocket_hardware_core/lib/src/hardware_plugin.dart#L14)
+Source: [packages/pocket_hardware_core/lib/src/hardware_plugin.dart](https://github.com/PocketFlutter/Pocket/blob/b06cb43cac4d553cea232ae1cd1f9ed4ee0c4ff4/sdk/packages/pocket_hardware_core/lib/src/hardware_plugin.dart#L14)
 
 ### `hardwareMethodChannelName`
 
 **Top-level variable** `const String hardwareMethodChannelName = 'com.pocketnexus.host/hardware'`
 
-Source: [packages/pocket_hardware_core/lib/src/hardware_plugin.dart](https://github.com/PocketFlutter/Pocket/blob/235b5b5589faf492f4a9fc3b7c0827bcd1d9de2c/sdk/packages/pocket_hardware_core/lib/src/hardware_plugin.dart#L13)
+Source: [packages/pocket_hardware_core/lib/src/hardware_plugin.dart](https://github.com/PocketFlutter/Pocket/blob/b06cb43cac4d553cea232ae1cd1f9ed4ee0c4ff4/sdk/packages/pocket_hardware_core/lib/src/hardware_plugin.dart#L13)
 
 ### `hardwarePluginId`
 
 **Top-level variable** `const String hardwarePluginId = 'flutter.hardware'`
 
-Source: [packages/pocket_hardware_core/lib/src/hardware_plugin.dart](https://github.com/PocketFlutter/Pocket/blob/235b5b5589faf492f4a9fc3b7c0827bcd1d9de2c/sdk/packages/pocket_hardware_core/lib/src/hardware_plugin.dart#L12)
+Source: [packages/pocket_hardware_core/lib/src/hardware_plugin.dart](https://github.com/PocketFlutter/Pocket/blob/b06cb43cac4d553cea232ae1cd1f9ed4ee0c4ff4/sdk/packages/pocket_hardware_core/lib/src/hardware_plugin.dart#L12)
 ## `pocket_hardware_core`
 
 ### Import `package:pocket_hardware_core/pocket_hardware_core.dart`
 
-Entry: [packages/pocket_hardware_core/lib/pocket_hardware_core.dart](https://github.com/PocketFlutter/Pocket/blob/235b5b5589faf492f4a9fc3b7c0827bcd1d9de2c/sdk/packages/pocket_hardware_core/lib/pocket_hardware_core.dart)
+Entry: [packages/pocket_hardware_core/lib/pocket_hardware_core.dart](https://github.com/PocketFlutter/Pocket/blob/b06cb43cac4d553cea232ae1cd1f9ed4ee0c4ff4/sdk/packages/pocket_hardware_core/lib/pocket_hardware_core.dart)
 
 ### `HardwareCapabilities`
 
@@ -3280,7 +3280,7 @@ Members:
 - `static const String weatherCurrent = 'hardware.weather.current'`
 - `static const Set<String> all = <String>{permissions, requestPermission, cameraPreviewStart, cameraPreviewStop, cameraLensSwitch, cameraFlashToggle, cameraCapture, photosList, photosDelete, bluetoothScan, bluetoothConnect, bluetoothDisconnect, bluetoothRead, bluetoothWrite, bluetoothNotifications, sensorsRead, sensorsWatch, biometricAuthenticate, locationCurrent, weatherCurrent}`
 
-Source: [packages/pocket_hardware_core/lib/src/hardware_plugin.dart](https://github.com/PocketFlutter/Pocket/blob/235b5b5589faf492f4a9fc3b7c0827bcd1d9de2c/sdk/packages/pocket_hardware_core/lib/src/hardware_plugin.dart#L201)
+Source: [packages/pocket_hardware_core/lib/src/hardware_plugin.dart](https://github.com/PocketFlutter/Pocket/blob/b06cb43cac4d553cea232ae1cd1f9ed4ee0c4ff4/sdk/packages/pocket_hardware_core/lib/src/hardware_plugin.dart#L201)
 
 ### `HardwareCapabilityPlugin`
 
@@ -3300,7 +3300,7 @@ Members:
 - `Future<void> deactivate(PocketPluginContext context)`
 - `Future<void> dispose()`
 
-Source: [packages/pocket_hardware_core/lib/src/hardware_plugin.dart](https://github.com/PocketFlutter/Pocket/blob/235b5b5589faf492f4a9fc3b7c0827bcd1d9de2c/sdk/packages/pocket_hardware_core/lib/src/hardware_plugin.dart#L434)
+Source: [packages/pocket_hardware_core/lib/src/hardware_plugin.dart](https://github.com/PocketFlutter/Pocket/blob/b06cb43cac4d553cea232ae1cd1f9ed4ee0c4ff4/sdk/packages/pocket_hardware_core/lib/src/hardware_plugin.dart#L434)
 
 ### `HardwareFeature`
 
@@ -3314,7 +3314,7 @@ Values:
 - `biometrics`
 - `weather`
 
-Source: [packages/pocket_hardware_core/lib/src/hardware_plugin.dart](https://github.com/PocketFlutter/Pocket/blob/235b5b5589faf492f4a9fc3b7c0827bcd1d9de2c/sdk/packages/pocket_hardware_core/lib/src/hardware_plugin.dart#L16)
+Source: [packages/pocket_hardware_core/lib/src/hardware_plugin.dart](https://github.com/PocketFlutter/Pocket/blob/b06cb43cac4d553cea232ae1cd1f9ed4ee0c4ff4/sdk/packages/pocket_hardware_core/lib/src/hardware_plugin.dart#L16)
 
 ### `HardwareFeatures`
 
@@ -3324,13 +3324,13 @@ Members:
 - `static const all = <HardwareFeature>{HardwareFeature.camera, HardwareFeature.bluetooth, HardwareFeature.sensors, HardwareFeature.location, HardwareFeature.biometrics, HardwareFeature.weather}`
 - `static Set<String> capabilities(HardwareFeature feature)`
 
-Source: [packages/pocket_hardware_core/lib/src/hardware_plugin.dart](https://github.com/PocketFlutter/Pocket/blob/235b5b5589faf492f4a9fc3b7c0827bcd1d9de2c/sdk/packages/pocket_hardware_core/lib/src/hardware_plugin.dart#L25)
+Source: [packages/pocket_hardware_core/lib/src/hardware_plugin.dart](https://github.com/PocketFlutter/Pocket/blob/b06cb43cac4d553cea232ae1cd1f9ed4ee0c4ff4/sdk/packages/pocket_hardware_core/lib/src/hardware_plugin.dart#L25)
 
 ### `HardwarePermissionHandler`
 
 **Typedef** `typedef HardwarePermissionHandler = Future<Map<String, dynamic>> Function( String permission, { required bool request, });`
 
-Source: [packages/pocket_hardware_core/lib/src/hardware_plugin.dart](https://github.com/PocketFlutter/Pocket/blob/235b5b5589faf492f4a9fc3b7c0827bcd1d9de2c/sdk/packages/pocket_hardware_core/lib/src/hardware_plugin.dart#L358)
+Source: [packages/pocket_hardware_core/lib/src/hardware_plugin.dart](https://github.com/PocketFlutter/Pocket/blob/b06cb43cac4d553cea232ae1cd1f9ed4ee0c4ff4/sdk/packages/pocket_hardware_core/lib/src/hardware_plugin.dart#L358)
 
 ### `HardwarePermissions`
 
@@ -3347,7 +3347,7 @@ Members:
 - `static const String network = 'hardware.network'`
 - `static const Set<String> all = <String>{camera, photos, bluetooth, sensors, biometrics, location, microphone, network}`
 
-Source: [packages/pocket_hardware_core/lib/src/hardware_plugin.dart](https://github.com/PocketFlutter/Pocket/blob/235b5b5589faf492f4a9fc3b7c0827bcd1d9de2c/sdk/packages/pocket_hardware_core/lib/src/hardware_plugin.dart#L179)
+Source: [packages/pocket_hardware_core/lib/src/hardware_plugin.dart](https://github.com/PocketFlutter/Pocket/blob/b06cb43cac4d553cea232ae1cd1f9ed4ee0c4ff4/sdk/packages/pocket_hardware_core/lib/src/hardware_plugin.dart#L179)
 
 ### `HardwarePlatform`
 
@@ -3356,7 +3356,7 @@ Source: [packages/pocket_hardware_core/lib/src/hardware_plugin.dart](https://git
 Members:
 - `Future<Map<String, dynamic>> invoke( String method, [ Map<String, dynamic> arguments = const <String, dynamic>{}, ])`
 
-Source: [packages/pocket_hardware_core/lib/src/hardware_plugin.dart](https://github.com/PocketFlutter/Pocket/blob/235b5b5589faf492f4a9fc3b7c0827bcd1d9de2c/sdk/packages/pocket_hardware_core/lib/src/hardware_plugin.dart#L254)
+Source: [packages/pocket_hardware_core/lib/src/hardware_plugin.dart](https://github.com/PocketFlutter/Pocket/blob/b06cb43cac4d553cea232ae1cd1f9ed4ee0c4ff4/sdk/packages/pocket_hardware_core/lib/src/hardware_plugin.dart#L254)
 
 ### `HardwarePlatformException`
 
@@ -3368,7 +3368,7 @@ Members:
 - `final String message`
 - `String toString()`
 
-Source: [packages/pocket_hardware_core/lib/src/hardware_plugin.dart](https://github.com/PocketFlutter/Pocket/blob/235b5b5589faf492f4a9fc3b7c0827bcd1d9de2c/sdk/packages/pocket_hardware_core/lib/src/hardware_plugin.dart#L281)
+Source: [packages/pocket_hardware_core/lib/src/hardware_plugin.dart](https://github.com/PocketFlutter/Pocket/blob/b06cb43cac4d553cea232ae1cd1f9ed4ee0c4ff4/sdk/packages/pocket_hardware_core/lib/src/hardware_plugin.dart#L281)
 
 ### `HardwareStreamingPlatform`
 
@@ -3379,19 +3379,19 @@ Members:
 - `Future<Map<String, dynamic>> startHardwareStream( Map<String, dynamic> arguments, )`
 - `Future<Map<String, dynamic>> stopHardwareStream( Map<String, dynamic> arguments, )`
 
-Source: [packages/pocket_hardware_core/lib/src/hardware_plugin.dart](https://github.com/PocketFlutter/Pocket/blob/235b5b5589faf492f4a9fc3b7c0827bcd1d9de2c/sdk/packages/pocket_hardware_core/lib/src/hardware_plugin.dart#L265)
+Source: [packages/pocket_hardware_core/lib/src/hardware_plugin.dart](https://github.com/PocketFlutter/Pocket/blob/b06cb43cac4d553cea232ae1cd1f9ed4ee0c4ff4/sdk/packages/pocket_hardware_core/lib/src/hardware_plugin.dart#L265)
 
 ### `HardwareTextureCallback`
 
 **Typedef** `typedef HardwareTextureCallback = void Function(int textureId);`
 
-Source: [packages/pocket_hardware_core/lib/src/hardware_plugin.dart](https://github.com/PocketFlutter/Pocket/blob/235b5b5589faf492f4a9fc3b7c0827bcd1d9de2c/sdk/packages/pocket_hardware_core/lib/src/hardware_plugin.dart#L249)
+Source: [packages/pocket_hardware_core/lib/src/hardware_plugin.dart](https://github.com/PocketFlutter/Pocket/blob/b06cb43cac4d553cea232ae1cd1f9ed4ee0c4ff4/sdk/packages/pocket_hardware_core/lib/src/hardware_plugin.dart#L249)
 
 ### `HardwareWeatherFetcher`
 
 **Typedef** `typedef HardwareWeatherFetcher = Future<Map<String, dynamic>> Function(Uri uri);`
 
-Source: [packages/pocket_hardware_core/lib/src/hardware_plugin.dart](https://github.com/PocketFlutter/Pocket/blob/235b5b5589faf492f4a9fc3b7c0827bcd1d9de2c/sdk/packages/pocket_hardware_core/lib/src/hardware_plugin.dart#L364)
+Source: [packages/pocket_hardware_core/lib/src/hardware_plugin.dart](https://github.com/PocketFlutter/Pocket/blob/b06cb43cac4d553cea232ae1cd1f9ed4ee0c4ff4/sdk/packages/pocket_hardware_core/lib/src/hardware_plugin.dart#L364)
 
 ### `MethodChannelHardwarePlatform`
 
@@ -3406,36 +3406,36 @@ Members:
 - `Future<Map<String, dynamic>> stopHardwareStream( Map<String, dynamic> arguments, )`
 - `Future<Map<String, dynamic>> invoke( String method, [ Map<String, dynamic> arguments = const <String, dynamic>{}, ])`
 
-Source: [packages/pocket_hardware_core/lib/src/hardware_plugin.dart](https://github.com/PocketFlutter/Pocket/blob/235b5b5589faf492f4a9fc3b7c0827bcd1d9de2c/sdk/packages/pocket_hardware_core/lib/src/hardware_plugin.dart#L291)
+Source: [packages/pocket_hardware_core/lib/src/hardware_plugin.dart](https://github.com/PocketFlutter/Pocket/blob/b06cb43cac4d553cea232ae1cd1f9ed4ee0c4ff4/sdk/packages/pocket_hardware_core/lib/src/hardware_plugin.dart#L291)
 
 ### `createHardwarePlatform`
 
 **function** `HardwarePlatform createHardwarePlatform(Set<HardwareFeature> features)`
 
-Source: [packages/pocket_hardware_core/lib/src/hardware_plugin.dart](https://github.com/PocketFlutter/Pocket/blob/235b5b5589faf492f4a9fc3b7c0827bcd1d9de2c/sdk/packages/pocket_hardware_core/lib/src/hardware_plugin.dart#L66)
+Source: [packages/pocket_hardware_core/lib/src/hardware_plugin.dart](https://github.com/PocketFlutter/Pocket/blob/b06cb43cac4d553cea232ae1cd1f9ed4ee0c4ff4/sdk/packages/pocket_hardware_core/lib/src/hardware_plugin.dart#L66)
 
 ### `hardwareEventsChannelName`
 
 **Top-level variable** `const String hardwareEventsChannelName = 'com.pocketnexus.host/hardware/events'`
 
-Source: [packages/pocket_hardware_core/lib/src/hardware_plugin.dart](https://github.com/PocketFlutter/Pocket/blob/235b5b5589faf492f4a9fc3b7c0827bcd1d9de2c/sdk/packages/pocket_hardware_core/lib/src/hardware_plugin.dart#L14)
+Source: [packages/pocket_hardware_core/lib/src/hardware_plugin.dart](https://github.com/PocketFlutter/Pocket/blob/b06cb43cac4d553cea232ae1cd1f9ed4ee0c4ff4/sdk/packages/pocket_hardware_core/lib/src/hardware_plugin.dart#L14)
 
 ### `hardwareMethodChannelName`
 
 **Top-level variable** `const String hardwareMethodChannelName = 'com.pocketnexus.host/hardware'`
 
-Source: [packages/pocket_hardware_core/lib/src/hardware_plugin.dart](https://github.com/PocketFlutter/Pocket/blob/235b5b5589faf492f4a9fc3b7c0827bcd1d9de2c/sdk/packages/pocket_hardware_core/lib/src/hardware_plugin.dart#L13)
+Source: [packages/pocket_hardware_core/lib/src/hardware_plugin.dart](https://github.com/PocketFlutter/Pocket/blob/b06cb43cac4d553cea232ae1cd1f9ed4ee0c4ff4/sdk/packages/pocket_hardware_core/lib/src/hardware_plugin.dart#L13)
 
 ### `hardwarePluginId`
 
 **Top-level variable** `const String hardwarePluginId = 'flutter.hardware'`
 
-Source: [packages/pocket_hardware_core/lib/src/hardware_plugin.dart](https://github.com/PocketFlutter/Pocket/blob/235b5b5589faf492f4a9fc3b7c0827bcd1d9de2c/sdk/packages/pocket_hardware_core/lib/src/hardware_plugin.dart#L12)
+Source: [packages/pocket_hardware_core/lib/src/hardware_plugin.dart](https://github.com/PocketFlutter/Pocket/blob/b06cb43cac4d553cea232ae1cd1f9ed4ee0c4ff4/sdk/packages/pocket_hardware_core/lib/src/hardware_plugin.dart#L12)
 ## `pocket_live2d`
 
 ### Import `package:pocket_live2d/pocket_live2d.dart`
 
-Entry: [packages/pocket_live2d/lib/pocket_live2d.dart](https://github.com/PocketFlutter/Pocket/blob/235b5b5589faf492f4a9fc3b7c0827bcd1d9de2c/sdk/packages/pocket_live2d/lib/pocket_live2d.dart)
+Entry: [packages/pocket_live2d/lib/pocket_live2d.dart](https://github.com/PocketFlutter/Pocket/blob/b06cb43cac4d553cea232ae1cd1f9ed4ee0c4ff4/sdk/packages/pocket_live2d/lib/pocket_live2d.dart)
 
 ### `PocketLive2dCanvas`
 
@@ -3450,13 +3450,13 @@ Members:
 - `final double pixelsPerUnit`
 - `Map<String, Object?> toJson()`
 
-Source: [packages/pocket_live2d/lib/src/pocket_live2d_types.dart](https://github.com/PocketFlutter/Pocket/blob/235b5b5589faf492f4a9fc3b7c0827bcd1d9de2c/sdk/packages/pocket_live2d/lib/src/pocket_live2d_types.dart#L109)
+Source: [packages/pocket_live2d/lib/src/pocket_live2d_types.dart](https://github.com/PocketFlutter/Pocket/blob/b06cb43cac4d553cea232ae1cd1f9ed4ee0c4ff4/sdk/packages/pocket_live2d/lib/src/pocket_live2d_types.dart#L109)
 
 ### `PocketLive2dCoreFactory`
 
 **Typedef** `typedef PocketLive2dCoreFactory = PocketLive2dCoreModel Function(Uint8List moc3Bytes);`
 
-Source: [packages/pocket_live2d/lib/src/pocket_live2d_types.dart](https://github.com/PocketFlutter/Pocket/blob/235b5b5589faf492f4a9fc3b7c0827bcd1d9de2c/sdk/packages/pocket_live2d/lib/src/pocket_live2d_types.dart#L6)
+Source: [packages/pocket_live2d/lib/src/pocket_live2d_types.dart](https://github.com/PocketFlutter/Pocket/blob/b06cb43cac4d553cea232ae1cd1f9ed4ee0c4ff4/sdk/packages/pocket_live2d/lib/src/pocket_live2d_types.dart#L6)
 
 ### `PocketLive2dCoreMetadata`
 
@@ -3466,7 +3466,7 @@ Members:
 - `List<PocketLive2dParameterMetadata> get parameterMetadata`
 - `List<PocketLive2dPartMetadata> get parts`
 
-Source: [packages/pocket_live2d/lib/src/pocket_live2d_types.dart](https://github.com/PocketFlutter/Pocket/blob/235b5b5589faf492f4a9fc3b7c0827bcd1d9de2c/sdk/packages/pocket_live2d/lib/src/pocket_live2d_types.dart#L63)
+Source: [packages/pocket_live2d/lib/src/pocket_live2d_types.dart](https://github.com/PocketFlutter/Pocket/blob/b06cb43cac4d553cea232ae1cd1f9ed4ee0c4ff4/sdk/packages/pocket_live2d/lib/src/pocket_live2d_types.dart#L63)
 
 ### `PocketLive2dCoreModel`
 
@@ -3486,7 +3486,7 @@ Members:
 - `PocketLive2dDrawable drawableAt(int index)`
 - `void dispose()`
 
-Source: [packages/pocket_live2d/lib/src/pocket_live2d_types.dart](https://github.com/PocketFlutter/Pocket/blob/235b5b5589faf492f4a9fc3b7c0827bcd1d9de2c/sdk/packages/pocket_live2d/lib/src/pocket_live2d_types.dart#L27)
+Source: [packages/pocket_live2d/lib/src/pocket_live2d_types.dart](https://github.com/PocketFlutter/Pocket/blob/b06cb43cac4d553cea232ae1cd1f9ed4ee0c4ff4/sdk/packages/pocket_live2d/lib/src/pocket_live2d_types.dart#L27)
 
 ### `PocketLive2dCorePlacementUpdater`
 
@@ -3495,7 +3495,7 @@ Source: [packages/pocket_live2d/lib/src/pocket_live2d_types.dart](https://github
 Members:
 - `void updateWithPlacement(PocketLive2dPlacement placement)`
 
-Source: [packages/pocket_live2d/lib/src/pocket_live2d_types.dart](https://github.com/PocketFlutter/Pocket/blob/235b5b5589faf492f4a9fc3b7c0827bcd1d9de2c/sdk/packages/pocket_live2d/lib/src/pocket_live2d_types.dart#L47)
+Source: [packages/pocket_live2d/lib/src/pocket_live2d_types.dart](https://github.com/PocketFlutter/Pocket/blob/b06cb43cac4d553cea232ae1cd1f9ed4ee0c4ff4/sdk/packages/pocket_live2d/lib/src/pocket_live2d_types.dart#L47)
 
 ### `PocketLive2dCoreTopologyReader`
 
@@ -3504,7 +3504,7 @@ Source: [packages/pocket_live2d/lib/src/pocket_live2d_types.dart](https://github
 Members:
 - `PocketLive2dDrawable drawableAtWithTopology( int index, { bool includeTopology = true, })`
 
-Source: [packages/pocket_live2d/lib/src/pocket_live2d_types.dart](https://github.com/PocketFlutter/Pocket/blob/235b5b5589faf492f4a9fc3b7c0827bcd1d9de2c/sdk/packages/pocket_live2d/lib/src/pocket_live2d_types.dart#L54)
+Source: [packages/pocket_live2d/lib/src/pocket_live2d_types.dart](https://github.com/PocketFlutter/Pocket/blob/b06cb43cac4d553cea232ae1cd1f9ed4ee0c4ff4/sdk/packages/pocket_live2d/lib/src/pocket_live2d_types.dart#L54)
 
 ### `PocketLive2dDrawable`
 
@@ -3533,7 +3533,7 @@ Members:
 - `Uint8List packPms1({ PocketLive2dPlacement placement = PocketLive2dPlacement.identity, List<double>? uvsOverride, List<int>? indicesOverride, })`
 - `Map<String, Object?> toJson({ bool packedMesh = true, bool includeTopology = true, PocketLive2dPlacement placement = PocketLive2dPlacement.identity, List<double>? uvsOverride, List<int>? indicesOverride, })`
 
-Source: [packages/pocket_live2d/lib/src/pocket_live2d_types.dart](https://github.com/PocketFlutter/Pocket/blob/235b5b5589faf492f4a9fc3b7c0827bcd1d9de2c/sdk/packages/pocket_live2d/lib/src/pocket_live2d_types.dart#L133)
+Source: [packages/pocket_live2d/lib/src/pocket_live2d_types.dart](https://github.com/PocketFlutter/Pocket/blob/b06cb43cac4d553cea232ae1cd1f9ed4ee0c4ff4/sdk/packages/pocket_live2d/lib/src/pocket_live2d_types.dart#L133)
 
 ### `PocketLive2dParameterDefault`
 
@@ -3545,7 +3545,7 @@ Members:
 - `final double value`
 - `Map<String, Object?> toJson()`
 
-Source: [packages/pocket_live2d/lib/src/pocket_live2d_types.dart](https://github.com/PocketFlutter/Pocket/blob/235b5b5589faf492f4a9fc3b7c0827bcd1d9de2c/sdk/packages/pocket_live2d/lib/src/pocket_live2d_types.dart#L100)
+Source: [packages/pocket_live2d/lib/src/pocket_live2d_types.dart](https://github.com/PocketFlutter/Pocket/blob/b06cb43cac4d553cea232ae1cd1f9ed4ee0c4ff4/sdk/packages/pocket_live2d/lib/src/pocket_live2d_types.dart#L100)
 
 ### `PocketLive2dParameterMetadata`
 
@@ -3559,7 +3559,7 @@ Members:
 - `final double defaultValue`
 - `Map<String, Object?> toJson()`
 
-Source: [packages/pocket_live2d/lib/src/pocket_live2d_types.dart](https://github.com/PocketFlutter/Pocket/blob/235b5b5589faf492f4a9fc3b7c0827bcd1d9de2c/sdk/packages/pocket_live2d/lib/src/pocket_live2d_types.dart#L68)
+Source: [packages/pocket_live2d/lib/src/pocket_live2d_types.dart](https://github.com/PocketFlutter/Pocket/blob/b06cb43cac4d553cea232ae1cd1f9ed4ee0c4ff4/sdk/packages/pocket_live2d/lib/src/pocket_live2d_types.dart#L68)
 
 ### `PocketLive2dPartMetadata`
 
@@ -3571,7 +3571,7 @@ Members:
 - `final double defaultOpacity`
 - `Map<String, Object?> toJson()`
 
-Source: [packages/pocket_live2d/lib/src/pocket_live2d_types.dart](https://github.com/PocketFlutter/Pocket/blob/235b5b5589faf492f4a9fc3b7c0827bcd1d9de2c/sdk/packages/pocket_live2d/lib/src/pocket_live2d_types.dart#L87)
+Source: [packages/pocket_live2d/lib/src/pocket_live2d_types.dart](https://github.com/PocketFlutter/Pocket/blob/b06cb43cac4d553cea232ae1cd1f9ed4ee0c4ff4/sdk/packages/pocket_live2d/lib/src/pocket_live2d_types.dart#L87)
 
 ### `PocketLive2dPlacement`
 
@@ -3585,7 +3585,7 @@ Members:
 - `final double scale`
 - `final double opacity`
 
-Source: [packages/pocket_live2d/lib/src/pocket_live2d_types.dart](https://github.com/PocketFlutter/Pocket/blob/235b5b5589faf492f4a9fc3b7c0827bcd1d9de2c/sdk/packages/pocket_live2d/lib/src/pocket_live2d_types.dart#L11)
+Source: [packages/pocket_live2d/lib/src/pocket_live2d_types.dart](https://github.com/PocketFlutter/Pocket/blob/b06cb43cac4d553cea232ae1cd1f9ed4ee0c4ff4/sdk/packages/pocket_live2d/lib/src/pocket_live2d_types.dart#L11)
 
 ### `PocketLive2dPlugin`
 
@@ -3606,72 +3606,72 @@ Members:
 - `Future<void> activate(PocketPluginContext context)`
 - `Future<void> dispose()`
 
-Source: [packages/pocket_live2d/lib/src/pocket_live2d_plugin.dart](https://github.com/PocketFlutter/Pocket/blob/235b5b5589faf492f4a9fc3b7c0827bcd1d9de2c/sdk/packages/pocket_live2d/lib/src/pocket_live2d_plugin.dart#L205)
+Source: [packages/pocket_live2d/lib/src/pocket_live2d_plugin.dart](https://github.com/PocketFlutter/Pocket/blob/b06cb43cac4d553cea232ae1cd1f9ed4ee0c4ff4/sdk/packages/pocket_live2d/lib/src/pocket_live2d_plugin.dart#L205)
 
 ### `packPocketLive2dDrawablePms1`
 
 **function** `Uint8List packPocketLive2dDrawablePms1({ required List<double> positionsXYPixels, required List<double> uvs, required List<int> indices, required double drawableOpacity, PocketLive2dPlacement placement = PocketLive2dPlacement.identity, })`
 
-Source: [packages/pocket_live2d/lib/src/pocket_live2d_types.dart](https://github.com/PocketFlutter/Pocket/blob/235b5b5589faf492f4a9fc3b7c0827bcd1d9de2c/sdk/packages/pocket_live2d/lib/src/pocket_live2d_types.dart#L240)
+Source: [packages/pocket_live2d/lib/src/pocket_live2d_types.dart](https://github.com/PocketFlutter/Pocket/blob/b06cb43cac4d553cea232ae1cd1f9ed4ee0c4ff4/sdk/packages/pocket_live2d/lib/src/pocket_live2d_types.dart#L240)
 
 ### `pocketLive2dLoadCapability`
 
 **Top-level variable** `const String pocketLive2dLoadCapability = 'media.live2d.model.load'`
 
-Source: [packages/pocket_live2d/lib/src/pocket_live2d_plugin.dart](https://github.com/PocketFlutter/Pocket/blob/235b5b5589faf492f4a9fc3b7c0827bcd1d9de2c/sdk/packages/pocket_live2d/lib/src/pocket_live2d_plugin.dart#L11)
+Source: [packages/pocket_live2d/lib/src/pocket_live2d_plugin.dart](https://github.com/PocketFlutter/Pocket/blob/b06cb43cac4d553cea232ae1cd1f9ed4ee0c4ff4/sdk/packages/pocket_live2d/lib/src/pocket_live2d_plugin.dart#L11)
 
 ### `pocketLive2dMaxMocBytes`
 
 **Top-level variable** `const int pocketLive2dMaxMocBytes = 32 * 1024 * 1024`
 
-Source: [packages/pocket_live2d/lib/src/pocket_live2d_plugin.dart](https://github.com/PocketFlutter/Pocket/blob/235b5b5589faf492f4a9fc3b7c0827bcd1d9de2c/sdk/packages/pocket_live2d/lib/src/pocket_live2d_plugin.dart#L16)
+Source: [packages/pocket_live2d/lib/src/pocket_live2d_plugin.dart](https://github.com/PocketFlutter/Pocket/blob/b06cb43cac4d553cea232ae1cd1f9ed4ee0c4ff4/sdk/packages/pocket_live2d/lib/src/pocket_live2d_plugin.dart#L16)
 
 ### `pocketLive2dMaxModels`
 
 **Top-level variable** `const int pocketLive2dMaxModels = 4`
 
-Source: [packages/pocket_live2d/lib/src/pocket_live2d_plugin.dart](https://github.com/PocketFlutter/Pocket/blob/235b5b5589faf492f4a9fc3b7c0827bcd1d9de2c/sdk/packages/pocket_live2d/lib/src/pocket_live2d_plugin.dart#L15)
+Source: [packages/pocket_live2d/lib/src/pocket_live2d_plugin.dart](https://github.com/PocketFlutter/Pocket/blob/b06cb43cac4d553cea232ae1cd1f9ed4ee0c4ff4/sdk/packages/pocket_live2d/lib/src/pocket_live2d_plugin.dart#L15)
 
 ### `pocketLive2dMaxNativeBytes`
 
 **Top-level variable** `const int pocketLive2dMaxNativeBytes = 128 * 1024 * 1024`
 
-Source: [packages/pocket_live2d/lib/src/pocket_live2d_plugin.dart](https://github.com/PocketFlutter/Pocket/blob/235b5b5589faf492f4a9fc3b7c0827bcd1d9de2c/sdk/packages/pocket_live2d/lib/src/pocket_live2d_plugin.dart#L17)
+Source: [packages/pocket_live2d/lib/src/pocket_live2d_plugin.dart](https://github.com/PocketFlutter/Pocket/blob/b06cb43cac4d553cea232ae1cd1f9ed4ee0c4ff4/sdk/packages/pocket_live2d/lib/src/pocket_live2d_plugin.dart#L17)
 
 ### `pocketLive2dMaxTextures`
 
 **Top-level variable** `const int pocketLive2dMaxTextures = 16`
 
-Source: [packages/pocket_live2d/lib/src/pocket_live2d_plugin.dart](https://github.com/PocketFlutter/Pocket/blob/235b5b5589faf492f4a9fc3b7c0827bcd1d9de2c/sdk/packages/pocket_live2d/lib/src/pocket_live2d_plugin.dart#L18)
+Source: [packages/pocket_live2d/lib/src/pocket_live2d_plugin.dart](https://github.com/PocketFlutter/Pocket/blob/b06cb43cac4d553cea232ae1cd1f9ed4ee0c4ff4/sdk/packages/pocket_live2d/lib/src/pocket_live2d_plugin.dart#L18)
 
 ### `pocketLive2dPluginId`
 
 **Top-level variable** `const String pocketLive2dPluginId = 'dart.live2d'`
 
-Source: [packages/pocket_live2d/lib/src/pocket_live2d_plugin.dart](https://github.com/PocketFlutter/Pocket/blob/235b5b5589faf492f4a9fc3b7c0827bcd1d9de2c/sdk/packages/pocket_live2d/lib/src/pocket_live2d_plugin.dart#L10)
+Source: [packages/pocket_live2d/lib/src/pocket_live2d_plugin.dart](https://github.com/PocketFlutter/Pocket/blob/b06cb43cac4d553cea232ae1cd1f9ed4ee0c4ff4/sdk/packages/pocket_live2d/lib/src/pocket_live2d_plugin.dart#L10)
 
 ### `pocketLive2dPms1Magic`
 
 **Top-level variable** `const int pocketLive2dPms1Magic = 0x31534d50`
 
-Source: [packages/pocket_live2d/lib/src/pocket_live2d_types.dart](https://github.com/PocketFlutter/Pocket/blob/235b5b5589faf492f4a9fc3b7c0827bcd1d9de2c/sdk/packages/pocket_live2d/lib/src/pocket_live2d_types.dart#L9)
+Source: [packages/pocket_live2d/lib/src/pocket_live2d_types.dart](https://github.com/PocketFlutter/Pocket/blob/b06cb43cac4d553cea232ae1cd1f9ed4ee0c4ff4/sdk/packages/pocket_live2d/lib/src/pocket_live2d_types.dart#L9)
 
 ### `pocketLive2dReleaseCapability`
 
 **Top-level variable** `const String pocketLive2dReleaseCapability = 'media.live2d.model.release'`
 
-Source: [packages/pocket_live2d/lib/src/pocket_live2d_plugin.dart](https://github.com/PocketFlutter/Pocket/blob/235b5b5589faf492f4a9fc3b7c0827bcd1d9de2c/sdk/packages/pocket_live2d/lib/src/pocket_live2d_plugin.dart#L13)
+Source: [packages/pocket_live2d/lib/src/pocket_live2d_plugin.dart](https://github.com/PocketFlutter/Pocket/blob/b06cb43cac4d553cea232ae1cd1f9ed4ee0c4ff4/sdk/packages/pocket_live2d/lib/src/pocket_live2d_plugin.dart#L13)
 
 ### `pocketLive2dUpdateCapability`
 
 **Top-level variable** `const String pocketLive2dUpdateCapability = 'media.live2d.model.update'`
 
-Source: [packages/pocket_live2d/lib/src/pocket_live2d_plugin.dart](https://github.com/PocketFlutter/Pocket/blob/235b5b5589faf492f4a9fc3b7c0827bcd1d9de2c/sdk/packages/pocket_live2d/lib/src/pocket_live2d_plugin.dart#L12)
+Source: [packages/pocket_live2d/lib/src/pocket_live2d_plugin.dart](https://github.com/PocketFlutter/Pocket/blob/b06cb43cac4d553cea232ae1cd1f9ed4ee0c4ff4/sdk/packages/pocket_live2d/lib/src/pocket_live2d_plugin.dart#L12)
 ## `pocket_location`
 
 ### Import `package:pocket_location/pocket_location.dart`
 
-Entry: [packages/pocket_location/lib/pocket_location.dart](https://github.com/PocketFlutter/Pocket/blob/235b5b5589faf492f4a9fc3b7c0827bcd1d9de2c/sdk/packages/pocket_location/lib/pocket_location.dart)
+Entry: [packages/pocket_location/lib/pocket_location.dart](https://github.com/PocketFlutter/Pocket/blob/b06cb43cac4d553cea232ae1cd1f9ed4ee0c4ff4/sdk/packages/pocket_location/lib/pocket_location.dart)
 
 ### `HardwareCapabilities`
 
@@ -3700,7 +3700,7 @@ Members:
 - `static const String weatherCurrent = 'hardware.weather.current'`
 - `static const Set<String> all = <String>{permissions, requestPermission, cameraPreviewStart, cameraPreviewStop, cameraLensSwitch, cameraFlashToggle, cameraCapture, photosList, photosDelete, bluetoothScan, bluetoothConnect, bluetoothDisconnect, bluetoothRead, bluetoothWrite, bluetoothNotifications, sensorsRead, sensorsWatch, biometricAuthenticate, locationCurrent, weatherCurrent}`
 
-Source: [packages/pocket_hardware_core/lib/src/hardware_plugin.dart](https://github.com/PocketFlutter/Pocket/blob/235b5b5589faf492f4a9fc3b7c0827bcd1d9de2c/sdk/packages/pocket_hardware_core/lib/src/hardware_plugin.dart#L201)
+Source: [packages/pocket_hardware_core/lib/src/hardware_plugin.dart](https://github.com/PocketFlutter/Pocket/blob/b06cb43cac4d553cea232ae1cd1f9ed4ee0c4ff4/sdk/packages/pocket_hardware_core/lib/src/hardware_plugin.dart#L201)
 
 ### `HardwarePermissions`
 
@@ -3717,7 +3717,7 @@ Members:
 - `static const String network = 'hardware.network'`
 - `static const Set<String> all = <String>{camera, photos, bluetooth, sensors, biometrics, location, microphone, network}`
 
-Source: [packages/pocket_hardware_core/lib/src/hardware_plugin.dart](https://github.com/PocketFlutter/Pocket/blob/235b5b5589faf492f4a9fc3b7c0827bcd1d9de2c/sdk/packages/pocket_hardware_core/lib/src/hardware_plugin.dart#L179)
+Source: [packages/pocket_hardware_core/lib/src/hardware_plugin.dart](https://github.com/PocketFlutter/Pocket/blob/b06cb43cac4d553cea232ae1cd1f9ed4ee0c4ff4/sdk/packages/pocket_hardware_core/lib/src/hardware_plugin.dart#L179)
 
 ### `HardwarePlatform`
 
@@ -3726,7 +3726,7 @@ Source: [packages/pocket_hardware_core/lib/src/hardware_plugin.dart](https://git
 Members:
 - `Future<Map<String, dynamic>> invoke( String method, [ Map<String, dynamic> arguments = const <String, dynamic>{}, ])`
 
-Source: [packages/pocket_hardware_core/lib/src/hardware_plugin.dart](https://github.com/PocketFlutter/Pocket/blob/235b5b5589faf492f4a9fc3b7c0827bcd1d9de2c/sdk/packages/pocket_hardware_core/lib/src/hardware_plugin.dart#L254)
+Source: [packages/pocket_hardware_core/lib/src/hardware_plugin.dart](https://github.com/PocketFlutter/Pocket/blob/b06cb43cac4d553cea232ae1cd1f9ed4ee0c4ff4/sdk/packages/pocket_hardware_core/lib/src/hardware_plugin.dart#L254)
 
 ### `HardwarePlatformException`
 
@@ -3738,7 +3738,7 @@ Members:
 - `final String message`
 - `String toString()`
 
-Source: [packages/pocket_hardware_core/lib/src/hardware_plugin.dart](https://github.com/PocketFlutter/Pocket/blob/235b5b5589faf492f4a9fc3b7c0827bcd1d9de2c/sdk/packages/pocket_hardware_core/lib/src/hardware_plugin.dart#L281)
+Source: [packages/pocket_hardware_core/lib/src/hardware_plugin.dart](https://github.com/PocketFlutter/Pocket/blob/b06cb43cac4d553cea232ae1cd1f9ed4ee0c4ff4/sdk/packages/pocket_hardware_core/lib/src/hardware_plugin.dart#L281)
 
 ### `HardwareStreamingPlatform`
 
@@ -3749,19 +3749,19 @@ Members:
 - `Future<Map<String, dynamic>> startHardwareStream( Map<String, dynamic> arguments, )`
 - `Future<Map<String, dynamic>> stopHardwareStream( Map<String, dynamic> arguments, )`
 
-Source: [packages/pocket_hardware_core/lib/src/hardware_plugin.dart](https://github.com/PocketFlutter/Pocket/blob/235b5b5589faf492f4a9fc3b7c0827bcd1d9de2c/sdk/packages/pocket_hardware_core/lib/src/hardware_plugin.dart#L265)
+Source: [packages/pocket_hardware_core/lib/src/hardware_plugin.dart](https://github.com/PocketFlutter/Pocket/blob/b06cb43cac4d553cea232ae1cd1f9ed4ee0c4ff4/sdk/packages/pocket_hardware_core/lib/src/hardware_plugin.dart#L265)
 
 ### `HardwareTextureCallback`
 
 **Typedef** `typedef HardwareTextureCallback = void Function(int textureId);`
 
-Source: [packages/pocket_hardware_core/lib/src/hardware_plugin.dart](https://github.com/PocketFlutter/Pocket/blob/235b5b5589faf492f4a9fc3b7c0827bcd1d9de2c/sdk/packages/pocket_hardware_core/lib/src/hardware_plugin.dart#L249)
+Source: [packages/pocket_hardware_core/lib/src/hardware_plugin.dart](https://github.com/PocketFlutter/Pocket/blob/b06cb43cac4d553cea232ae1cd1f9ed4ee0c4ff4/sdk/packages/pocket_hardware_core/lib/src/hardware_plugin.dart#L249)
 
 ### `HardwareWeatherFetcher`
 
 **Typedef** `typedef HardwareWeatherFetcher = Future<Map<String, dynamic>> Function(Uri uri);`
 
-Source: [packages/pocket_hardware_core/lib/src/hardware_plugin.dart](https://github.com/PocketFlutter/Pocket/blob/235b5b5589faf492f4a9fc3b7c0827bcd1d9de2c/sdk/packages/pocket_hardware_core/lib/src/hardware_plugin.dart#L364)
+Source: [packages/pocket_hardware_core/lib/src/hardware_plugin.dart](https://github.com/PocketFlutter/Pocket/blob/b06cb43cac4d553cea232ae1cd1f9ed4ee0c4ff4/sdk/packages/pocket_hardware_core/lib/src/hardware_plugin.dart#L364)
 
 ### `PocketLocationPlugin`
 
@@ -3770,12 +3770,12 @@ Source: [packages/pocket_hardware_core/lib/src/hardware_plugin.dart](https://git
 Members:
 - `PocketLocationPlugin({ HardwarePlatform? platform, Duration requestTimeout = const Duration(seconds: 16), })`
 
-Source: [packages/pocket_location/lib/pocket_location.dart](https://github.com/PocketFlutter/Pocket/blob/235b5b5589faf492f4a9fc3b7c0827bcd1d9de2c/sdk/packages/pocket_location/lib/pocket_location.dart#L15)
+Source: [packages/pocket_location/lib/pocket_location.dart](https://github.com/PocketFlutter/Pocket/blob/b06cb43cac4d553cea232ae1cd1f9ed4ee0c4ff4/sdk/packages/pocket_location/lib/pocket_location.dart#L15)
 ## `pocket_permissions`
 
 ### Import `package:pocket_permissions/pocket_permissions.dart`
 
-Entry: [packages/pocket_permissions/lib/pocket_permissions.dart](https://github.com/PocketFlutter/Pocket/blob/235b5b5589faf492f4a9fc3b7c0827bcd1d9de2c/sdk/packages/pocket_permissions/lib/pocket_permissions.dart)
+Entry: [packages/pocket_permissions/lib/pocket_permissions.dart](https://github.com/PocketFlutter/Pocket/blob/b06cb43cac4d553cea232ae1cd1f9ed4ee0c4ff4/sdk/packages/pocket_permissions/lib/pocket_permissions.dart)
 
 ### `DeviceInfoPlusPocketDeviceInfo`
 
@@ -3787,7 +3787,7 @@ Members:
 - `bool get isIOS`
 - `Future<int> get androidSdkInt`
 
-Source: [packages/pocket_permissions/lib/src/permissions_plugin.dart](https://github.com/PocketFlutter/Pocket/blob/235b5b5589faf492f4a9fc3b7c0827bcd1d9de2c/sdk/packages/pocket_permissions/lib/src/permissions_plugin.dart#L243)
+Source: [packages/pocket_permissions/lib/src/permissions_plugin.dart](https://github.com/PocketFlutter/Pocket/blob/b06cb43cac4d553cea232ae1cd1f9ed4ee0c4ff4/sdk/packages/pocket_permissions/lib/src/permissions_plugin.dart#L243)
 
 ### `PocketDeviceInfo`
 
@@ -3798,7 +3798,7 @@ Members:
 - `bool get isIOS`
 - `Future<int> get androidSdkInt`
 
-Source: [packages/pocket_permissions/lib/src/permissions_plugin.dart](https://github.com/PocketFlutter/Pocket/blob/235b5b5589faf492f4a9fc3b7c0827bcd1d9de2c/sdk/packages/pocket_permissions/lib/src/permissions_plugin.dart#L235)
+Source: [packages/pocket_permissions/lib/src/permissions_plugin.dart](https://github.com/PocketFlutter/Pocket/blob/b06cb43cac4d553cea232ae1cd1f9ed4ee0c4ff4/sdk/packages/pocket_permissions/lib/src/permissions_plugin.dart#L235)
 
 ### `PocketPermissionNames`
 
@@ -3823,7 +3823,7 @@ Members:
 - `static const Set<String> all = <String>{camera, photos, photosAddOnly, bluetoothScan, bluetoothConnect, bluetooth, locationWhenInUse, microphone, sensors, hardwareCamera, hardwarePhotos, hardwareBluetooth, hardwareLocation, hardwareMicrophone, hardwareSensors}`
 - `static const Set<String> hardwareAliases = <String>{hardwareCamera, hardwarePhotos, hardwareBluetooth, hardwareLocation, hardwareMicrophone, hardwareSensors}`
 
-Source: [packages/pocket_permissions/lib/src/permissions_plugin.dart](https://github.com/PocketFlutter/Pocket/blob/235b5b5589faf492f4a9fc3b7c0827bcd1d9de2c/sdk/packages/pocket_permissions/lib/src/permissions_plugin.dart#L10)
+Source: [packages/pocket_permissions/lib/src/permissions_plugin.dart](https://github.com/PocketFlutter/Pocket/blob/b06cb43cac4d553cea232ae1cd1f9ed4ee0c4ff4/sdk/packages/pocket_permissions/lib/src/permissions_plugin.dart#L10)
 
 ### `PocketPermissionsCapabilities`
 
@@ -3835,7 +3835,7 @@ Members:
 - `static const String openSettings = 'permissions.openSettings'`
 - `static const Set<String> all = <String>{status, request, openSettings}`
 
-Source: [packages/pocket_permissions/lib/src/permissions_plugin.dart](https://github.com/PocketFlutter/Pocket/blob/235b5b5589faf492f4a9fc3b7c0827bcd1d9de2c/sdk/packages/pocket_permissions/lib/src/permissions_plugin.dart#L59)
+Source: [packages/pocket_permissions/lib/src/permissions_plugin.dart](https://github.com/PocketFlutter/Pocket/blob/b06cb43cac4d553cea232ae1cd1f9ed4ee0c4ff4/sdk/packages/pocket_permissions/lib/src/permissions_plugin.dart#L59)
 
 ### `PocketPermissionsPlugin`
 
@@ -3849,7 +3849,7 @@ Members:
 - `void register(PocketPluginContext context)`
 - `Future<void> dispose()`
 
-Source: [packages/pocket_permissions/lib/src/permissions_plugin.dart](https://github.com/PocketFlutter/Pocket/blob/235b5b5589faf492f4a9fc3b7c0827bcd1d9de2c/sdk/packages/pocket_permissions/lib/src/permissions_plugin.dart#L265)
+Source: [packages/pocket_permissions/lib/src/permissions_plugin.dart](https://github.com/PocketFlutter/Pocket/blob/b06cb43cac4d553cea232ae1cd1f9ed4ee0c4ff4/sdk/packages/pocket_permissions/lib/src/permissions_plugin.dart#L265)
 
 ### `PocketSystemPermissions`
 
@@ -3861,18 +3861,18 @@ Members:
 - `Future<Map<String, dynamic>> request(String policyKey)`
 - `Future<Map<String, dynamic>> openSettings()`
 
-Source: [packages/pocket_permissions/lib/src/permissions_plugin.dart](https://github.com/PocketFlutter/Pocket/blob/235b5b5589faf492f4a9fc3b7c0827bcd1d9de2c/sdk/packages/pocket_permissions/lib/src/permissions_plugin.dart#L70)
+Source: [packages/pocket_permissions/lib/src/permissions_plugin.dart](https://github.com/PocketFlutter/Pocket/blob/b06cb43cac4d553cea232ae1cd1f9ed4ee0c4ff4/sdk/packages/pocket_permissions/lib/src/permissions_plugin.dart#L70)
 
 ### `pocketPermissionsPluginId`
 
 **Top-level variable** `const String pocketPermissionsPluginId = 'flutter.permission_handler'`
 
-Source: [packages/pocket_permissions/lib/src/permissions_plugin.dart](https://github.com/PocketFlutter/Pocket/blob/235b5b5589faf492f4a9fc3b7c0827bcd1d9de2c/sdk/packages/pocket_permissions/lib/src/permissions_plugin.dart#L8)
+Source: [packages/pocket_permissions/lib/src/permissions_plugin.dart](https://github.com/PocketFlutter/Pocket/blob/b06cb43cac4d553cea232ae1cd1f9ed4ee0c4ff4/sdk/packages/pocket_permissions/lib/src/permissions_plugin.dart#L8)
 ## `pocket_platform`
 
 ### Import `package:pocket_platform/pocket_platform.dart`
 
-Entry: [packages/pocket_platform/lib/pocket_platform.dart](https://github.com/PocketFlutter/Pocket/blob/235b5b5589faf492f4a9fc3b7c0827bcd1d9de2c/sdk/packages/pocket_platform/lib/pocket_platform.dart)
+Entry: [packages/pocket_platform/lib/pocket_platform.dart](https://github.com/PocketFlutter/Pocket/blob/b06cb43cac4d553cea232ae1cd1f9ed4ee0c4ff4/sdk/packages/pocket_platform/lib/pocket_platform.dart)
 
 ### `FlutterPocketPlatformUi`
 
@@ -3883,7 +3883,7 @@ Members:
 - `Future<void> setSystemUi(SystemUiOverlayStyle style)`
 - `Future<void> performHaptic(String type)`
 
-Source: [packages/pocket_platform/lib/src/platform_plugin.dart](https://github.com/PocketFlutter/Pocket/blob/235b5b5589faf492f4a9fc3b7c0827bcd1d9de2c/sdk/packages/pocket_platform/lib/src/platform_plugin.dart#L88)
+Source: [packages/pocket_platform/lib/src/platform_plugin.dart](https://github.com/PocketFlutter/Pocket/blob/b06cb43cac4d553cea232ae1cd1f9ed4ee0c4ff4/sdk/packages/pocket_platform/lib/src/platform_plugin.dart#L88)
 
 ### `MethodChannelPocketPlatformTransport`
 
@@ -3895,7 +3895,7 @@ Members:
 - `Future<Object?> invoke( String method, [ Map<String, dynamic> arguments = const <String, dynamic>{}, ])`
 - `void setMethodCallHandler(PocketPlatformMethodCallHandler? handler)`
 
-Source: [packages/pocket_platform/lib/src/platform_plugin.dart](https://github.com/PocketFlutter/Pocket/blob/235b5b5589faf492f4a9fc3b7c0827bcd1d9de2c/sdk/packages/pocket_platform/lib/src/platform_plugin.dart#L54)
+Source: [packages/pocket_platform/lib/src/platform_plugin.dart](https://github.com/PocketFlutter/Pocket/blob/b06cb43cac4d553cea232ae1cd1f9ed4ee0c4ff4/sdk/packages/pocket_platform/lib/src/platform_plugin.dart#L54)
 
 ### `PocketDeepLinkPlugin`
 
@@ -3912,7 +3912,7 @@ Members:
 - `Future<void> deactivate(PocketPluginContext context)`
 - `Future<void> dispose()`
 
-Source: [packages/pocket_platform/lib/src/platform_plugin.dart](https://github.com/PocketFlutter/Pocket/blob/235b5b5589faf492f4a9fc3b7c0827bcd1d9de2c/sdk/packages/pocket_platform/lib/src/platform_plugin.dart#L984)
+Source: [packages/pocket_platform/lib/src/platform_plugin.dart](https://github.com/PocketFlutter/Pocket/blob/b06cb43cac4d553cea232ae1cd1f9ed4ee0c4ff4/sdk/packages/pocket_platform/lib/src/platform_plugin.dart#L984)
 
 ### `PocketPlatformCapabilities`
 
@@ -3927,7 +3927,7 @@ Members:
 - `static const Set<String> links = <String>{linksInitial, linksLatest, linksEvents}`
 - `static const Set<String> experience = <String>{systemUiSet, hapticsPerform}`
 
-Source: [packages/pocket_platform/lib/src/platform_plugin.dart](https://github.com/PocketFlutter/Pocket/blob/235b5b5589faf492f4a9fc3b7c0827bcd1d9de2c/sdk/packages/pocket_platform/lib/src/platform_plugin.dart#L16)
+Source: [packages/pocket_platform/lib/src/platform_plugin.dart](https://github.com/PocketFlutter/Pocket/blob/b06cb43cac4d553cea232ae1cd1f9ed4ee0c4ff4/sdk/packages/pocket_platform/lib/src/platform_plugin.dart#L16)
 
 ### `PocketPlatformClock`
 
@@ -3936,7 +3936,7 @@ Source: [packages/pocket_platform/lib/src/platform_plugin.dart](https://github.c
 Members:
 - `int get elapsedMicroseconds`
 
-Source: [packages/pocket_platform/lib/src/platform_plugin.dart](https://github.com/PocketFlutter/Pocket/blob/235b5b5589faf492f4a9fc3b7c0827bcd1d9de2c/sdk/packages/pocket_platform/lib/src/platform_plugin.dart#L135)
+Source: [packages/pocket_platform/lib/src/platform_plugin.dart](https://github.com/PocketFlutter/Pocket/blob/b06cb43cac4d553cea232ae1cd1f9ed4ee0c4ff4/sdk/packages/pocket_platform/lib/src/platform_plugin.dart#L135)
 
 ### `PocketPlatformHaptics`
 
@@ -3950,13 +3950,13 @@ Members:
 - `static const String vibrate = 'vibrate'`
 - `static const Set<String> all = <String>{selection, light, medium, heavy, vibrate}`
 
-Source: [packages/pocket_platform/lib/src/platform_plugin.dart](https://github.com/PocketFlutter/Pocket/blob/235b5b5589faf492f4a9fc3b7c0827bcd1d9de2c/sdk/packages/pocket_platform/lib/src/platform_plugin.dart#L116)
+Source: [packages/pocket_platform/lib/src/platform_plugin.dart](https://github.com/PocketFlutter/Pocket/blob/b06cb43cac4d553cea232ae1cd1f9ed4ee0c4ff4/sdk/packages/pocket_platform/lib/src/platform_plugin.dart#L116)
 
 ### `PocketPlatformMethodCallHandler`
 
 **Typedef** `typedef PocketPlatformMethodCallHandler = FutureOr<Object?> Function(String method, Object? arguments);`
 
-Source: [packages/pocket_platform/lib/src/platform_plugin.dart](https://github.com/PocketFlutter/Pocket/blob/235b5b5589faf492f4a9fc3b7c0827bcd1d9de2c/sdk/packages/pocket_platform/lib/src/platform_plugin.dart#L50)
+Source: [packages/pocket_platform/lib/src/platform_plugin.dart](https://github.com/PocketFlutter/Pocket/blob/b06cb43cac4d553cea232ae1cd1f9ed4ee0c4ff4/sdk/packages/pocket_platform/lib/src/platform_plugin.dart#L50)
 
 ### `PocketPlatformPlugin`
 
@@ -3970,7 +3970,7 @@ Members:
 - `Future<void> deactivate(PocketPluginContext context)`
 - `Future<void> dispose()`
 
-Source: [packages/pocket_platform/lib/src/platform_plugin.dart](https://github.com/PocketFlutter/Pocket/blob/235b5b5589faf492f4a9fc3b7c0827bcd1d9de2c/sdk/packages/pocket_platform/lib/src/platform_plugin.dart#L946)
+Source: [packages/pocket_platform/lib/src/platform_plugin.dart](https://github.com/PocketFlutter/Pocket/blob/b06cb43cac4d553cea232ae1cd1f9ed4ee0c4ff4/sdk/packages/pocket_platform/lib/src/platform_plugin.dart#L946)
 
 ### `PocketPlatformTransport`
 
@@ -3980,7 +3980,7 @@ Members:
 - `Future<Object?> invoke( String method, [ Map<String, dynamic> arguments = const <String, dynamic>{}, ])`
 - `void setMethodCallHandler(PocketPlatformMethodCallHandler? handler)`
 
-Source: [packages/pocket_platform/lib/src/platform_plugin.dart](https://github.com/PocketFlutter/Pocket/blob/235b5b5589faf492f4a9fc3b7c0827bcd1d9de2c/sdk/packages/pocket_platform/lib/src/platform_plugin.dart#L41)
+Source: [packages/pocket_platform/lib/src/platform_plugin.dart](https://github.com/PocketFlutter/Pocket/blob/b06cb43cac4d553cea232ae1cd1f9ed4ee0c4ff4/sdk/packages/pocket_platform/lib/src/platform_plugin.dart#L41)
 
 ### `PocketPlatformUi`
 
@@ -3990,7 +3990,40 @@ Members:
 - `Future<void> setSystemUi(SystemUiOverlayStyle style)`
 - `Future<void> performHaptic(String type)`
 
-Source: [packages/pocket_platform/lib/src/platform_plugin.dart](https://github.com/PocketFlutter/Pocket/blob/235b5b5589faf492f4a9fc3b7c0827bcd1d9de2c/sdk/packages/pocket_platform/lib/src/platform_plugin.dart#L83)
+Source: [packages/pocket_platform/lib/src/platform_plugin.dart](https://github.com/PocketFlutter/Pocket/blob/b06cb43cac4d553cea232ae1cd1f9ed4ee0c4ff4/sdk/packages/pocket_platform/lib/src/platform_plugin.dart#L83)
+
+### `PocketSurfaceBridgePlugin`
+
+**Class** `final class PocketSurfaceBridgePlugin extends PocketPlugin`
+
+Members:
+- `PocketSurfaceBridgePlugin({ this.appGroupId, this.deepLinkScheme, PocketPlatformTransport? transport, this.maxSnapshotBytes = 64 * 1024, })`
+- `final String? appGroupId`
+- `final String? deepLinkScheme`
+- `final int maxSnapshotBytes`
+- `bool get backgroundSafe`
+- `PocketPluginDescriptor get descriptor`
+- `void register(PocketPluginContext context)`
+- `Future<void> activate(PocketPluginContext context)`
+- `Future<void> deactivate(PocketPluginContext context)`
+- `Future<void> dispose()`
+
+Source: [packages/pocket_platform/lib/src/surface_bridge_plugin.dart](https://github.com/PocketFlutter/Pocket/blob/b06cb43cac4d553cea232ae1cd1f9ed4ee0c4ff4/sdk/packages/pocket_platform/lib/src/surface_bridge_plugin.dart#L137)
+
+### `PocketSurfaceCapabilities`
+
+**Class** `abstract final class PocketSurfaceCapabilities`
+
+Members:
+- `static const String surfaceGet = 'platform.surface.get'`
+- `static const String publishSnapshot = 'platform.widgets.publishSnapshot'`
+- `static const String drainActions = 'platform.widgets.drainActions'`
+- `static const String actionEvents = 'platform.widgets.actions'`
+- `static const String liveActivityUpsert = 'platform.liveActivity.upsert'`
+- `static const String liveActivityEnd = 'platform.liveActivity.end'`
+- `static const Set<String> all = <String>{surfaceGet, publishSnapshot, drainActions, actionEvents, liveActivityUpsert, liveActivityEnd}`
+
+Source: [packages/pocket_platform/lib/src/surface_bridge_plugin.dart](https://github.com/PocketFlutter/Pocket/blob/b06cb43cac4d553cea232ae1cd1f9ed4ee0c4ff4/sdk/packages/pocket_platform/lib/src/surface_bridge_plugin.dart#L12)
 
 ### `StopwatchPocketPlatformClock`
 
@@ -4000,30 +4033,42 @@ Members:
 - `StopwatchPocketPlatformClock()`
 - `int get elapsedMicroseconds`
 
-Source: [packages/pocket_platform/lib/src/platform_plugin.dart](https://github.com/PocketFlutter/Pocket/blob/235b5b5589faf492f4a9fc3b7c0827bcd1d9de2c/sdk/packages/pocket_platform/lib/src/platform_plugin.dart#L139)
+Source: [packages/pocket_platform/lib/src/platform_plugin.dart](https://github.com/PocketFlutter/Pocket/blob/b06cb43cac4d553cea232ae1cd1f9ed4ee0c4ff4/sdk/packages/pocket_platform/lib/src/platform_plugin.dart#L139)
 
 ### `pocketDeepLinkPluginId`
 
 **Top-level variable** `const String pocketDeepLinkPluginId = 'flutter.links'`
 
-Source: [packages/pocket_platform/lib/src/platform_plugin.dart](https://github.com/PocketFlutter/Pocket/blob/235b5b5589faf492f4a9fc3b7c0827bcd1d9de2c/sdk/packages/pocket_platform/lib/src/platform_plugin.dart#L33)
+Source: [packages/pocket_platform/lib/src/platform_plugin.dart](https://github.com/PocketFlutter/Pocket/blob/b06cb43cac4d553cea232ae1cd1f9ed4ee0c4ff4/sdk/packages/pocket_platform/lib/src/platform_plugin.dart#L33)
 
 ### `pocketPlatformMethodChannelName`
 
 **Top-level variable** `const String pocketPlatformMethodChannelName = 'com.pocketnexus.host/platform'`
 
-Source: [packages/pocket_platform/lib/src/platform_plugin.dart](https://github.com/PocketFlutter/Pocket/blob/235b5b5589faf492f4a9fc3b7c0827bcd1d9de2c/sdk/packages/pocket_platform/lib/src/platform_plugin.dart#L34)
+Source: [packages/pocket_platform/lib/src/platform_plugin.dart](https://github.com/PocketFlutter/Pocket/blob/b06cb43cac4d553cea232ae1cd1f9ed4ee0c4ff4/sdk/packages/pocket_platform/lib/src/platform_plugin.dart#L34)
 
 ### `pocketPlatformPluginId`
 
 **Top-level variable** `const String pocketPlatformPluginId = 'flutter.platform'`
 
-Source: [packages/pocket_platform/lib/src/platform_plugin.dart](https://github.com/PocketFlutter/Pocket/blob/235b5b5589faf492f4a9fc3b7c0827bcd1d9de2c/sdk/packages/pocket_platform/lib/src/platform_plugin.dart#L32)
+Source: [packages/pocket_platform/lib/src/platform_plugin.dart](https://github.com/PocketFlutter/Pocket/blob/b06cb43cac4d553cea232ae1cd1f9ed4ee0c4ff4/sdk/packages/pocket_platform/lib/src/platform_plugin.dart#L32)
+
+### `pocketSurfaceBridgePluginId`
+
+**Top-level variable** `const String pocketSurfaceBridgePluginId = 'flutter.surfaces'`
+
+Source: [packages/pocket_platform/lib/src/surface_bridge_plugin.dart](https://github.com/PocketFlutter/Pocket/blob/b06cb43cac4d553cea232ae1cd1f9ed4ee0c4ff4/sdk/packages/pocket_platform/lib/src/surface_bridge_plugin.dart#L30)
+
+### `pocketSurfaceMethodChannelName`
+
+**Top-level variable** `const String pocketSurfaceMethodChannelName = 'com.pocketnexus.host/surfaces'`
+
+Source: [packages/pocket_platform/lib/src/surface_bridge_plugin.dart](https://github.com/PocketFlutter/Pocket/blob/b06cb43cac4d553cea232ae1cd1f9ed4ee0c4ff4/sdk/packages/pocket_platform/lib/src/surface_bridge_plugin.dart#L31)
 ## `pocket_sensors`
 
 ### Import `package:pocket_sensors/pocket_sensors.dart`
 
-Entry: [packages/pocket_sensors/lib/pocket_sensors.dart](https://github.com/PocketFlutter/Pocket/blob/235b5b5589faf492f4a9fc3b7c0827bcd1d9de2c/sdk/packages/pocket_sensors/lib/pocket_sensors.dart)
+Entry: [packages/pocket_sensors/lib/pocket_sensors.dart](https://github.com/PocketFlutter/Pocket/blob/b06cb43cac4d553cea232ae1cd1f9ed4ee0c4ff4/sdk/packages/pocket_sensors/lib/pocket_sensors.dart)
 
 ### `HardwareCapabilities`
 
@@ -4052,7 +4097,7 @@ Members:
 - `static const String weatherCurrent = 'hardware.weather.current'`
 - `static const Set<String> all = <String>{permissions, requestPermission, cameraPreviewStart, cameraPreviewStop, cameraLensSwitch, cameraFlashToggle, cameraCapture, photosList, photosDelete, bluetoothScan, bluetoothConnect, bluetoothDisconnect, bluetoothRead, bluetoothWrite, bluetoothNotifications, sensorsRead, sensorsWatch, biometricAuthenticate, locationCurrent, weatherCurrent}`
 
-Source: [packages/pocket_hardware_core/lib/src/hardware_plugin.dart](https://github.com/PocketFlutter/Pocket/blob/235b5b5589faf492f4a9fc3b7c0827bcd1d9de2c/sdk/packages/pocket_hardware_core/lib/src/hardware_plugin.dart#L201)
+Source: [packages/pocket_hardware_core/lib/src/hardware_plugin.dart](https://github.com/PocketFlutter/Pocket/blob/b06cb43cac4d553cea232ae1cd1f9ed4ee0c4ff4/sdk/packages/pocket_hardware_core/lib/src/hardware_plugin.dart#L201)
 
 ### `HardwarePermissions`
 
@@ -4069,7 +4114,7 @@ Members:
 - `static const String network = 'hardware.network'`
 - `static const Set<String> all = <String>{camera, photos, bluetooth, sensors, biometrics, location, microphone, network}`
 
-Source: [packages/pocket_hardware_core/lib/src/hardware_plugin.dart](https://github.com/PocketFlutter/Pocket/blob/235b5b5589faf492f4a9fc3b7c0827bcd1d9de2c/sdk/packages/pocket_hardware_core/lib/src/hardware_plugin.dart#L179)
+Source: [packages/pocket_hardware_core/lib/src/hardware_plugin.dart](https://github.com/PocketFlutter/Pocket/blob/b06cb43cac4d553cea232ae1cd1f9ed4ee0c4ff4/sdk/packages/pocket_hardware_core/lib/src/hardware_plugin.dart#L179)
 
 ### `HardwarePlatform`
 
@@ -4078,7 +4123,7 @@ Source: [packages/pocket_hardware_core/lib/src/hardware_plugin.dart](https://git
 Members:
 - `Future<Map<String, dynamic>> invoke( String method, [ Map<String, dynamic> arguments = const <String, dynamic>{}, ])`
 
-Source: [packages/pocket_hardware_core/lib/src/hardware_plugin.dart](https://github.com/PocketFlutter/Pocket/blob/235b5b5589faf492f4a9fc3b7c0827bcd1d9de2c/sdk/packages/pocket_hardware_core/lib/src/hardware_plugin.dart#L254)
+Source: [packages/pocket_hardware_core/lib/src/hardware_plugin.dart](https://github.com/PocketFlutter/Pocket/blob/b06cb43cac4d553cea232ae1cd1f9ed4ee0c4ff4/sdk/packages/pocket_hardware_core/lib/src/hardware_plugin.dart#L254)
 
 ### `HardwarePlatformException`
 
@@ -4090,7 +4135,7 @@ Members:
 - `final String message`
 - `String toString()`
 
-Source: [packages/pocket_hardware_core/lib/src/hardware_plugin.dart](https://github.com/PocketFlutter/Pocket/blob/235b5b5589faf492f4a9fc3b7c0827bcd1d9de2c/sdk/packages/pocket_hardware_core/lib/src/hardware_plugin.dart#L281)
+Source: [packages/pocket_hardware_core/lib/src/hardware_plugin.dart](https://github.com/PocketFlutter/Pocket/blob/b06cb43cac4d553cea232ae1cd1f9ed4ee0c4ff4/sdk/packages/pocket_hardware_core/lib/src/hardware_plugin.dart#L281)
 
 ### `HardwareStreamingPlatform`
 
@@ -4101,19 +4146,19 @@ Members:
 - `Future<Map<String, dynamic>> startHardwareStream( Map<String, dynamic> arguments, )`
 - `Future<Map<String, dynamic>> stopHardwareStream( Map<String, dynamic> arguments, )`
 
-Source: [packages/pocket_hardware_core/lib/src/hardware_plugin.dart](https://github.com/PocketFlutter/Pocket/blob/235b5b5589faf492f4a9fc3b7c0827bcd1d9de2c/sdk/packages/pocket_hardware_core/lib/src/hardware_plugin.dart#L265)
+Source: [packages/pocket_hardware_core/lib/src/hardware_plugin.dart](https://github.com/PocketFlutter/Pocket/blob/b06cb43cac4d553cea232ae1cd1f9ed4ee0c4ff4/sdk/packages/pocket_hardware_core/lib/src/hardware_plugin.dart#L265)
 
 ### `HardwareTextureCallback`
 
 **Typedef** `typedef HardwareTextureCallback = void Function(int textureId);`
 
-Source: [packages/pocket_hardware_core/lib/src/hardware_plugin.dart](https://github.com/PocketFlutter/Pocket/blob/235b5b5589faf492f4a9fc3b7c0827bcd1d9de2c/sdk/packages/pocket_hardware_core/lib/src/hardware_plugin.dart#L249)
+Source: [packages/pocket_hardware_core/lib/src/hardware_plugin.dart](https://github.com/PocketFlutter/Pocket/blob/b06cb43cac4d553cea232ae1cd1f9ed4ee0c4ff4/sdk/packages/pocket_hardware_core/lib/src/hardware_plugin.dart#L249)
 
 ### `HardwareWeatherFetcher`
 
 **Typedef** `typedef HardwareWeatherFetcher = Future<Map<String, dynamic>> Function(Uri uri);`
 
-Source: [packages/pocket_hardware_core/lib/src/hardware_plugin.dart](https://github.com/PocketFlutter/Pocket/blob/235b5b5589faf492f4a9fc3b7c0827bcd1d9de2c/sdk/packages/pocket_hardware_core/lib/src/hardware_plugin.dart#L364)
+Source: [packages/pocket_hardware_core/lib/src/hardware_plugin.dart](https://github.com/PocketFlutter/Pocket/blob/b06cb43cac4d553cea232ae1cd1f9ed4ee0c4ff4/sdk/packages/pocket_hardware_core/lib/src/hardware_plugin.dart#L364)
 
 ### `PocketSensorsPlugin`
 
@@ -4122,18 +4167,18 @@ Source: [packages/pocket_hardware_core/lib/src/hardware_plugin.dart](https://git
 Members:
 - `PocketSensorsPlugin({ HardwarePlatform? platform, Duration requestTimeout = const Duration(seconds: 16), })`
 
-Source: [packages/pocket_sensors/lib/pocket_sensors.dart](https://github.com/PocketFlutter/Pocket/blob/235b5b5589faf492f4a9fc3b7c0827bcd1d9de2c/sdk/packages/pocket_sensors/lib/pocket_sensors.dart#L15)
+Source: [packages/pocket_sensors/lib/pocket_sensors.dart](https://github.com/PocketFlutter/Pocket/blob/b06cb43cac4d553cea232ae1cd1f9ed4ee0c4ff4/sdk/packages/pocket_sensors/lib/pocket_sensors.dart#L15)
 ## `pocket_services`
 
 ### Import `package:pocket_services/pocket_services.dart`
 
-Entry: [packages/pocket_services/lib/pocket_services.dart](https://github.com/PocketFlutter/Pocket/blob/235b5b5589faf492f4a9fc3b7c0827bcd1d9de2c/sdk/packages/pocket_services/lib/pocket_services.dart)
+Entry: [packages/pocket_services/lib/pocket_services.dart](https://github.com/PocketFlutter/Pocket/blob/b06cb43cac4d553cea232ae1cd1f9ed4ee0c4ff4/sdk/packages/pocket_services/lib/pocket_services.dart)
 
 ### `GuestManifest`
 
 **Typedef** `typedef GuestManifest = PocketGuestManifest;`
 
-Source: [packages/pocket_services/lib/src/pocket_guest_manifest.dart](https://github.com/PocketFlutter/Pocket/blob/235b5b5589faf492f4a9fc3b7c0827bcd1d9de2c/sdk/packages/pocket_services/lib/src/pocket_guest_manifest.dart#L123)
+Source: [packages/pocket_services/lib/src/pocket_guest_manifest.dart](https://github.com/PocketFlutter/Pocket/blob/b06cb43cac4d553cea232ae1cd1f9ed4ee0c4ff4/sdk/packages/pocket_services/lib/src/pocket_guest_manifest.dart#L123)
 
 ### `HttpPocketUpdateTransport`
 
@@ -4146,13 +4191,13 @@ Members:
 - `Future<PocketDownloadResponse> open( Uri uri, { required PocketCancellationToken cancellation, })`
 - `void close()`
 
-Source: [packages/pocket_services/lib/src/pocket_update.dart](https://github.com/PocketFlutter/Pocket/blob/235b5b5589faf492f4a9fc3b7c0827bcd1d9de2c/sdk/packages/pocket_services/lib/src/pocket_update.dart#L30)
+Source: [packages/pocket_services/lib/src/pocket_update.dart](https://github.com/PocketFlutter/Pocket/blob/b06cb43cac4d553cea232ae1cd1f9ed4ee0c4ff4/sdk/packages/pocket_services/lib/src/pocket_update.dart#L30)
 
 ### `PocketArchiveExtractor`
 
 **Typedef** `typedef PocketArchiveExtractor = Future<void> Function({ required String archivePath, required String destinationPath, required int maxOutputBytes, });`
 
-Source: [packages/pocket_services/lib/src/pocket_package.dart](https://github.com/PocketFlutter/Pocket/blob/235b5b5589faf492f4a9fc3b7c0827bcd1d9de2c/sdk/packages/pocket_services/lib/src/pocket_package.dart#L67)
+Source: [packages/pocket_services/lib/src/pocket_package.dart](https://github.com/PocketFlutter/Pocket/blob/b06cb43cac4d553cea232ae1cd1f9ed4ee0c4ff4/sdk/packages/pocket_services/lib/src/pocket_package.dart#L67)
 
 ### `PocketCancellationToken`
 
@@ -4165,7 +4210,7 @@ Members:
 - `void throwIfCancelled()`
 - `PocketCancellationToken()` _(implicit)_
 
-Source: [packages/pocket_services/lib/src/pocket_package.dart](https://github.com/PocketFlutter/Pocket/blob/235b5b5589faf492f4a9fc3b7c0827bcd1d9de2c/sdk/packages/pocket_services/lib/src/pocket_package.dart#L81)
+Source: [packages/pocket_services/lib/src/pocket_package.dart](https://github.com/PocketFlutter/Pocket/blob/b06cb43cac4d553cea232ae1cd1f9ed4ee0c4ff4/sdk/packages/pocket_services/lib/src/pocket_package.dart#L81)
 
 ### `PocketCapabilityAvailability`
 
@@ -4181,7 +4226,7 @@ Members:
 - `bool get satisfied`
 - `Map<String, dynamic> toJson()`
 
-Source: [packages/pocket_services/lib/src/pocket_host.dart](https://github.com/PocketFlutter/Pocket/blob/235b5b5589faf492f4a9fc3b7c0827bcd1d9de2c/sdk/packages/pocket_services/lib/src/pocket_host.dart#L18)
+Source: [packages/pocket_services/lib/src/pocket_host.dart](https://github.com/PocketFlutter/Pocket/blob/b06cb43cac4d553cea232ae1cd1f9ed4ee0c4ff4/sdk/packages/pocket_services/lib/src/pocket_host.dart#L18)
 
 ### `PocketCapabilityDescriptor`
 
@@ -4194,7 +4239,7 @@ Members:
 - `final String description`
 - `Map<String, dynamic> toJson()`
 
-Source: [packages/pocket_services/lib/src/pocket_host.dart](https://github.com/PocketFlutter/Pocket/blob/235b5b5589faf492f4a9fc3b7c0827bcd1d9de2c/sdk/packages/pocket_services/lib/src/pocket_host.dart#L45)
+Source: [packages/pocket_services/lib/src/pocket_host.dart](https://github.com/PocketFlutter/Pocket/blob/b06cb43cac4d553cea232ae1cd1f9ed4ee0c4ff4/sdk/packages/pocket_services/lib/src/pocket_host.dart#L45)
 
 ### `PocketCapabilityException`
 
@@ -4206,7 +4251,7 @@ Members:
 - `final String message`
 - `String toString()`
 
-Source: [packages/pocket_services/lib/src/pocket_host.dart](https://github.com/PocketFlutter/Pocket/blob/235b5b5589faf492f4a9fc3b7c0827bcd1d9de2c/sdk/packages/pocket_services/lib/src/pocket_host.dart#L124)
+Source: [packages/pocket_services/lib/src/pocket_host.dart](https://github.com/PocketFlutter/Pocket/blob/b06cb43cac4d553cea232ae1cd1f9ed4ee0c4ff4/sdk/packages/pocket_services/lib/src/pocket_host.dart#L124)
 
 ### `PocketCapabilityKind`
 
@@ -4216,7 +4261,7 @@ Values:
 - `request`
 - `stream`
 
-Source: [packages/pocket_services/lib/src/pocket_host.dart](https://github.com/PocketFlutter/Pocket/blob/235b5b5589faf492f4a9fc3b7c0827bcd1d9de2c/sdk/packages/pocket_services/lib/src/pocket_host.dart#L16)
+Source: [packages/pocket_services/lib/src/pocket_host.dart](https://github.com/PocketFlutter/Pocket/blob/b06cb43cac4d553cea232ae1cd1f9ed4ee0c4ff4/sdk/packages/pocket_services/lib/src/pocket_host.dart#L16)
 
 ### `PocketCapabilityName`
 
@@ -4225,19 +4270,19 @@ Source: [packages/pocket_services/lib/src/pocket_host.dart](https://github.com/P
 Members:
 - `static bool isValid(String value)`
 
-Source: [packages/pocket_services/lib/src/pocket_guest_manifest.dart](https://github.com/PocketFlutter/Pocket/blob/235b5b5589faf492f4a9fc3b7c0827bcd1d9de2c/sdk/packages/pocket_services/lib/src/pocket_guest_manifest.dart#L125)
+Source: [packages/pocket_services/lib/src/pocket_guest_manifest.dart](https://github.com/PocketFlutter/Pocket/blob/b06cb43cac4d553cea232ae1cd1f9ed4ee0c4ff4/sdk/packages/pocket_services/lib/src/pocket_guest_manifest.dart#L125)
 
 ### `PocketCapabilityRequest`
 
 **Typedef** `typedef PocketCapabilityRequest = FutureOr<Object?> Function(Map<String, dynamic> params);`
 
-Source: [packages/pocket_services/lib/src/pocket_host.dart](https://github.com/PocketFlutter/Pocket/blob/235b5b5589faf492f4a9fc3b7c0827bcd1d9de2c/sdk/packages/pocket_services/lib/src/pocket_host.dart#L11)
+Source: [packages/pocket_services/lib/src/pocket_host.dart](https://github.com/PocketFlutter/Pocket/blob/b06cb43cac4d553cea232ae1cd1f9ed4ee0c4ff4/sdk/packages/pocket_services/lib/src/pocket_host.dart#L11)
 
 ### `PocketCapabilityStream`
 
 **Typedef** `typedef PocketCapabilityStream = Stream<Object?> Function(PocketHostStreamContext context);`
 
-Source: [packages/pocket_services/lib/src/pocket_host.dart](https://github.com/PocketFlutter/Pocket/blob/235b5b5589faf492f4a9fc3b7c0827bcd1d9de2c/sdk/packages/pocket_services/lib/src/pocket_host.dart#L13)
+Source: [packages/pocket_services/lib/src/pocket_host.dart](https://github.com/PocketFlutter/Pocket/blob/b06cb43cac4d553cea232ae1cd1f9ed4ee0c4ff4/sdk/packages/pocket_services/lib/src/pocket_host.dart#L13)
 
 ### `PocketDownloadResponse`
 
@@ -4248,7 +4293,7 @@ Members:
 - `final Stream<List<int>> bytes`
 - `final int? contentLength`
 
-Source: [packages/pocket_services/lib/src/pocket_update.dart](https://github.com/PocketFlutter/Pocket/blob/235b5b5589faf492f4a9fc3b7c0827bcd1d9de2c/sdk/packages/pocket_services/lib/src/pocket_update.dart#L15)
+Source: [packages/pocket_services/lib/src/pocket_update.dart](https://github.com/PocketFlutter/Pocket/blob/b06cb43cac4d553cea232ae1cd1f9ed4ee0c4ff4/sdk/packages/pocket_services/lib/src/pocket_update.dart#L15)
 
 ### `PocketDuplexStream`
 
@@ -4264,7 +4309,7 @@ Members:
 - `bool close([String? reason])`
 - `bool cancel([String? reason])`
 
-Source: [packages/pocket_services/lib/src/pocket_stream.dart](https://github.com/PocketFlutter/Pocket/blob/235b5b5589faf492f4a9fc3b7c0827bcd1d9de2c/sdk/packages/pocket_services/lib/src/pocket_stream.dart#L9)
+Source: [packages/pocket_services/lib/src/pocket_stream.dart](https://github.com/PocketFlutter/Pocket/blob/b06cb43cac4d553cea232ae1cd1f9ed4ee0c4ff4/sdk/packages/pocket_services/lib/src/pocket_stream.dart#L9)
 
 ### `PocketGuestManifest`
 
@@ -4283,7 +4328,7 @@ Members:
 - `Set<String> get declaredPermissions`
 - `Map<String, dynamic> toJson()`
 
-Source: [packages/pocket_services/lib/src/pocket_guest_manifest.dart](https://github.com/PocketFlutter/Pocket/blob/235b5b5589faf492f4a9fc3b7c0827bcd1d9de2c/sdk/packages/pocket_services/lib/src/pocket_guest_manifest.dart#L10)
+Source: [packages/pocket_services/lib/src/pocket_guest_manifest.dart](https://github.com/PocketFlutter/Pocket/blob/b06cb43cac4d553cea232ae1cd1f9ed4ee0c4ff4/sdk/packages/pocket_services/lib/src/pocket_guest_manifest.dart#L10)
 
 ### `PocketHost`
 
@@ -4309,13 +4354,13 @@ Members:
 - `void dispose()`
 - `bool send(String method, Map<String, dynamic> params)`
 
-Source: [packages/pocket_services/lib/src/pocket_host.dart](https://github.com/PocketFlutter/Pocket/blob/235b5b5589faf492f4a9fc3b7c0827bcd1d9de2c/sdk/packages/pocket_services/lib/src/pocket_host.dart#L136)
+Source: [packages/pocket_services/lib/src/pocket_host.dart](https://github.com/PocketFlutter/Pocket/blob/b06cb43cac4d553cea232ae1cd1f9ed4ee0c4ff4/sdk/packages/pocket_services/lib/src/pocket_host.dart#L136)
 
 ### `PocketHostRawSend`
 
 **Typedef** `typedef PocketHostRawSend = bool Function(Map<String, dynamic> message);`
 
-Source: [packages/pocket_services/lib/src/pocket_host.dart](https://github.com/PocketFlutter/Pocket/blob/235b5b5589faf492f4a9fc3b7c0827bcd1d9de2c/sdk/packages/pocket_services/lib/src/pocket_host.dart#L10)
+Source: [packages/pocket_services/lib/src/pocket_host.dart](https://github.com/PocketFlutter/Pocket/blob/b06cb43cac4d553cea232ae1cd1f9ed4ee0c4ff4/sdk/packages/pocket_services/lib/src/pocket_host.dart#L10)
 
 ### `PocketHostRegistry`
 
@@ -4331,13 +4376,13 @@ Members:
 - `_Registration? registrationFor(String name)`
 - `PocketHostRegistry()` _(implicit)_
 
-Source: [packages/pocket_services/lib/src/pocket_host.dart](https://github.com/PocketFlutter/Pocket/blob/235b5b5589faf492f4a9fc3b7c0827bcd1d9de2c/sdk/packages/pocket_services/lib/src/pocket_host.dart#L63)
+Source: [packages/pocket_services/lib/src/pocket_host.dart](https://github.com/PocketFlutter/Pocket/blob/b06cb43cac4d553cea232ae1cd1f9ed4ee0c4ff4/sdk/packages/pocket_services/lib/src/pocket_host.dart#L63)
 
 ### `PocketHostSend`
 
 **Typedef** `typedef PocketHostSend = PocketStreamSend;`
 
-Source: [packages/pocket_services/lib/src/pocket_host.dart](https://github.com/PocketFlutter/Pocket/blob/235b5b5589faf492f4a9fc3b7c0827bcd1d9de2c/sdk/packages/pocket_services/lib/src/pocket_host.dart#L9)
+Source: [packages/pocket_services/lib/src/pocket_host.dart](https://github.com/PocketFlutter/Pocket/blob/b06cb43cac4d553cea232ae1cd1f9ed4ee0c4ff4/sdk/packages/pocket_services/lib/src/pocket_host.dart#L9)
 
 ### `PocketHostStreamContext`
 
@@ -4352,7 +4397,7 @@ Members:
 - `Map<String, dynamic> get params`
 - `Stream<Object?> get incoming`
 
-Source: [packages/pocket_services/lib/src/pocket_host.dart](https://github.com/PocketFlutter/Pocket/blob/235b5b5589faf492f4a9fc3b7c0827bcd1d9de2c/sdk/packages/pocket_services/lib/src/pocket_host.dart#L108)
+Source: [packages/pocket_services/lib/src/pocket_host.dart](https://github.com/PocketFlutter/Pocket/blob/b06cb43cac4d553cea232ae1cd1f9ed4ee0c4ff4/sdk/packages/pocket_services/lib/src/pocket_host.dart#L108)
 
 ### `PocketManifestAsset`
 
@@ -4365,7 +4410,7 @@ Members:
 - `final int size`
 - `Map<String, dynamic> toJson()`
 
-Source: [packages/pocket_services/lib/src/pocket_package.dart](https://github.com/PocketFlutter/Pocket/blob/235b5b5589faf492f4a9fc3b7c0827bcd1d9de2c/sdk/packages/pocket_services/lib/src/pocket_package.dart#L314)
+Source: [packages/pocket_services/lib/src/pocket_package.dart](https://github.com/PocketFlutter/Pocket/blob/b06cb43cac4d553cea232ae1cd1f9ed4ee0c4ff4/sdk/packages/pocket_services/lib/src/pocket_package.dart#L314)
 
 ### `PocketManifestBundle`
 
@@ -4381,7 +4426,7 @@ Members:
 - `final List<String>? blobs`
 - `Map<String, dynamic> toJson()`
 
-Source: [packages/pocket_services/lib/src/pocket_package.dart](https://github.com/PocketFlutter/Pocket/blob/235b5b5589faf492f4a9fc3b7c0827bcd1d9de2c/sdk/packages/pocket_services/lib/src/pocket_package.dart#L222)
+Source: [packages/pocket_services/lib/src/pocket_package.dart](https://github.com/PocketFlutter/Pocket/blob/b06cb43cac4d553cea232ae1cd1f9ed4ee0c4ff4/sdk/packages/pocket_services/lib/src/pocket_package.dart#L222)
 
 ### `PocketManifestEntry`
 
@@ -4394,7 +4439,7 @@ Members:
 - `final int size`
 - `Map<String, dynamic> toJson()`
 
-Source: [packages/pocket_services/lib/src/pocket_package.dart](https://github.com/PocketFlutter/Pocket/blob/235b5b5589faf492f4a9fc3b7c0827bcd1d9de2c/sdk/packages/pocket_services/lib/src/pocket_package.dart#L126)
+Source: [packages/pocket_services/lib/src/pocket_package.dart](https://github.com/PocketFlutter/Pocket/blob/b06cb43cac4d553cea232ae1cd1f9ed4ee0c4ff4/sdk/packages/pocket_services/lib/src/pocket_package.dart#L126)
 
 ### `PocketManifestFile`
 
@@ -4408,7 +4453,7 @@ Members:
 - `final String url`
 - `Map<String, dynamic> toJson()`
 
-Source: [packages/pocket_services/lib/src/pocket_package.dart](https://github.com/PocketFlutter/Pocket/blob/235b5b5589faf492f4a9fc3b7c0827bcd1d9de2c/sdk/packages/pocket_services/lib/src/pocket_package.dart#L99)
+Source: [packages/pocket_services/lib/src/pocket_package.dart](https://github.com/PocketFlutter/Pocket/blob/b06cb43cac4d553cea232ae1cd1f9ed4ee0c4ff4/sdk/packages/pocket_services/lib/src/pocket_package.dart#L99)
 
 ### `PocketManifestVerifier`
 
@@ -4430,7 +4475,7 @@ Members:
 - `Future<T> withVerified<T>( PocketSignedManifest signed, FutureOr<T> Function() use, )`
 - `Future<void> verify(PocketSignedManifest signed)`
 
-Source: [packages/pocket_services/lib/src/pocket_package.dart](https://github.com/PocketFlutter/Pocket/blob/235b5b5589faf492f4a9fc3b7c0827bcd1d9de2c/sdk/packages/pocket_services/lib/src/pocket_package.dart#L2294)
+Source: [packages/pocket_services/lib/src/pocket_package.dart](https://github.com/PocketFlutter/Pocket/blob/b06cb43cac4d553cea232ae1cd1f9ed4ee0c4ff4/sdk/packages/pocket_services/lib/src/pocket_package.dart#L2294)
 
 ### `PocketPackage`
 
@@ -4446,7 +4491,7 @@ Members:
 - `PocketPackageSource get source`
 - `Future<PocketPackageArtifact> readArtifact()`
 
-Source: [packages/pocket_services/lib/src/pocket_package.dart](https://github.com/PocketFlutter/Pocket/blob/235b5b5589faf492f4a9fc3b7c0827bcd1d9de2c/sdk/packages/pocket_services/lib/src/pocket_package.dart#L731)
+Source: [packages/pocket_services/lib/src/pocket_package.dart](https://github.com/PocketFlutter/Pocket/blob/b06cb43cac4d553cea232ae1cd1f9ed4ee0c4ff4/sdk/packages/pocket_services/lib/src/pocket_package.dart#L731)
 
 ### `PocketPackageArtifact`
 
@@ -4459,7 +4504,7 @@ Members:
 - `final String? entrySource`
 - `final Uint8List pakBytes`
 
-Source: [packages/pocket_services/lib/src/pocket_package.dart](https://github.com/PocketFlutter/Pocket/blob/235b5b5589faf492f4a9fc3b7c0827bcd1d9de2c/sdk/packages/pocket_services/lib/src/pocket_package.dart#L768)
+Source: [packages/pocket_services/lib/src/pocket_package.dart](https://github.com/PocketFlutter/Pocket/blob/b06cb43cac4d553cea232ae1cd1f9ed4ee0c4ff4/sdk/packages/pocket_services/lib/src/pocket_package.dart#L768)
 
 ### `PocketPackageException`
 
@@ -4471,7 +4516,7 @@ Members:
 - `final String code`
 - `String toString()`
 
-Source: [packages/pocket_services/lib/src/pocket_package.dart](https://github.com/PocketFlutter/Pocket/blob/235b5b5589faf492f4a9fc3b7c0827bcd1d9de2c/sdk/packages/pocket_services/lib/src/pocket_package.dart#L17)
+Source: [packages/pocket_services/lib/src/pocket_package.dart](https://github.com/PocketFlutter/Pocket/blob/b06cb43cac4d553cea232ae1cd1f9ed4ee0c4ff4/sdk/packages/pocket_services/lib/src/pocket_package.dart#L17)
 
 ### `PocketPackageFormatException`
 
@@ -4480,7 +4525,7 @@ Source: [packages/pocket_services/lib/src/pocket_package.dart](https://github.co
 Members:
 - `const PocketPackageFormatException( super.message, { super.code = 'manifest-format', })`
 
-Source: [packages/pocket_services/lib/src/pocket_package.dart](https://github.com/PocketFlutter/Pocket/blob/235b5b5589faf492f4a9fc3b7c0827bcd1d9de2c/sdk/packages/pocket_services/lib/src/pocket_package.dart#L27)
+Source: [packages/pocket_services/lib/src/pocket_package.dart](https://github.com/PocketFlutter/Pocket/blob/b06cb43cac4d553cea232ae1cd1f9ed4ee0c4ff4/sdk/packages/pocket_services/lib/src/pocket_package.dart#L27)
 
 ### `PocketPackageManifest`
 
@@ -4511,7 +4556,7 @@ Members:
 - `Map<String, PocketManifestFile> get filesByHash`
 - `void validate({ required String expectedAppId, required int hostVersion, int expectedProtocol = 1, int maxFileBytes = 256 * 1024 * 1024, int maxEntryBytes = 16 * 1024 * 1024, int maxPakBytes = 256 * 1024 * 1024, int maxTotalBytes = 768 * 1024 * 1024, })`
 
-Source: [packages/pocket_services/lib/src/pocket_package.dart](https://github.com/PocketFlutter/Pocket/blob/235b5b5589faf492f4a9fc3b7c0827bcd1d9de2c/sdk/packages/pocket_services/lib/src/pocket_package.dart#L339)
+Source: [packages/pocket_services/lib/src/pocket_package.dart](https://github.com/PocketFlutter/Pocket/blob/b06cb43cac4d553cea232ae1cd1f9ed4ee0c4ff4/sdk/packages/pocket_services/lib/src/pocket_package.dart#L339)
 
 ### `PocketPackagePreparationProgress`
 
@@ -4525,7 +4570,7 @@ Members:
 - `final int? processedFiles`
 - `final int? totalFiles`
 
-Source: [packages/pocket_services/lib/src/pocket_package.dart](https://github.com/PocketFlutter/Pocket/blob/235b5b5589faf492f4a9fc3b7c0827bcd1d9de2c/sdk/packages/pocket_services/lib/src/pocket_package.dart#L46)
+Source: [packages/pocket_services/lib/src/pocket_package.dart](https://github.com/PocketFlutter/Pocket/blob/b06cb43cac4d553cea232ae1cd1f9ed4ee0c4ff4/sdk/packages/pocket_services/lib/src/pocket_package.dart#L46)
 
 ### `PocketPackagePreparationStage`
 
@@ -4536,7 +4581,7 @@ Values:
 - `verifyingFiles`
 - `assemblingPackage`
 
-Source: [packages/pocket_services/lib/src/pocket_package.dart](https://github.com/PocketFlutter/Pocket/blob/235b5b5589faf492f4a9fc3b7c0827bcd1d9de2c/sdk/packages/pocket_services/lib/src/pocket_package.dart#L36)
+Source: [packages/pocket_services/lib/src/pocket_package.dart](https://github.com/PocketFlutter/Pocket/blob/b06cb43cac4d553cea232ae1cd1f9ed4ee0c4ff4/sdk/packages/pocket_services/lib/src/pocket_package.dart#L36)
 
 ### `PocketPackageStore`
 
@@ -4569,7 +4614,7 @@ Members:
 - `Future<void> pruneInactiveVersions([ String? applicationId, int keep = 2, PocketManifestVerifier? verifier, ])`
 - `Future<String?> readPointerId(String name)`
 
-Source: [packages/pocket_services/lib/src/pocket_package.dart](https://github.com/PocketFlutter/Pocket/blob/235b5b5589faf492f4a9fc3b7c0827bcd1d9de2c/sdk/packages/pocket_services/lib/src/pocket_package.dart#L813)
+Source: [packages/pocket_services/lib/src/pocket_package.dart](https://github.com/PocketFlutter/Pocket/blob/b06cb43cac4d553cea232ae1cd1f9ed4ee0c4ff4/sdk/packages/pocket_services/lib/src/pocket_package.dart#L813)
 
 ### `PocketPakBlobEntry`
 
@@ -4581,7 +4626,7 @@ Members:
 - `final List<int> data`
 - `final int dtype`
 
-Source: [packages/pocket_services/lib/src/pocket_package.dart](https://github.com/PocketFlutter/Pocket/blob/235b5b5589faf492f4a9fc3b7c0827bcd1d9de2c/sdk/packages/pocket_services/lib/src/pocket_package.dart#L2462)
+Source: [packages/pocket_services/lib/src/pocket_package.dart](https://github.com/PocketFlutter/Pocket/blob/b06cb43cac4d553cea232ae1cd1f9ed4ee0c4ff4/sdk/packages/pocket_services/lib/src/pocket_package.dart#L2462)
 
 ### `PocketPakManifest`
 
@@ -4595,7 +4640,7 @@ Members:
 - `final List<PocketPakPart> parts`
 - `Map<String, dynamic> toJson()`
 
-Source: [packages/pocket_services/lib/src/pocket_package.dart](https://github.com/PocketFlutter/Pocket/blob/235b5b5589faf492f4a9fc3b7c0827bcd1d9de2c/sdk/packages/pocket_services/lib/src/pocket_package.dart#L279)
+Source: [packages/pocket_services/lib/src/pocket_package.dart](https://github.com/PocketFlutter/Pocket/blob/b06cb43cac4d553cea232ae1cd1f9ed4ee0c4ff4/sdk/packages/pocket_services/lib/src/pocket_package.dart#L279)
 
 ### `PocketPakPart`
 
@@ -4612,7 +4657,7 @@ Members:
 - `final int? dtype`
 - `Map<String, dynamic> toJson()`
 
-Source: [packages/pocket_services/lib/src/pocket_package.dart](https://github.com/PocketFlutter/Pocket/blob/235b5b5589faf492f4a9fc3b7c0827bcd1d9de2c/sdk/packages/pocket_services/lib/src/pocket_package.dart#L146)
+Source: [packages/pocket_services/lib/src/pocket_package.dart](https://github.com/PocketFlutter/Pocket/blob/b06cb43cac4d553cea232ae1cd1f9ed4ee0c4ff4/sdk/packages/pocket_services/lib/src/pocket_package.dart#L146)
 
 ### `PocketPermissionName`
 
@@ -4621,7 +4666,7 @@ Source: [packages/pocket_services/lib/src/pocket_package.dart](https://github.co
 Members:
 - `static bool isValid(String value)`
 
-Source: [packages/pocket_services/lib/src/pocket_guest_manifest.dart](https://github.com/PocketFlutter/Pocket/blob/235b5b5589faf492f4a9fc3b7c0827bcd1d9de2c/sdk/packages/pocket_services/lib/src/pocket_guest_manifest.dart#L131)
+Source: [packages/pocket_services/lib/src/pocket_guest_manifest.dart](https://github.com/PocketFlutter/Pocket/blob/b06cb43cac4d553cea232ae1cd1f9ed4ee0c4ff4/sdk/packages/pocket_services/lib/src/pocket_guest_manifest.dart#L131)
 
 ### `PocketPermissionRequest`
 
@@ -4634,13 +4679,13 @@ Members:
 - `final Set<String> requested`
 - `final String reason`
 
-Source: [packages/pocket_services/lib/src/pocket_plugin.dart](https://github.com/PocketFlutter/Pocket/blob/235b5b5589faf492f4a9fc3b7c0827bcd1d9de2c/sdk/packages/pocket_services/lib/src/pocket_plugin.dart#L21)
+Source: [packages/pocket_services/lib/src/pocket_plugin.dart](https://github.com/PocketFlutter/Pocket/blob/b06cb43cac4d553cea232ae1cd1f9ed4ee0c4ff4/sdk/packages/pocket_services/lib/src/pocket_plugin.dart#L21)
 
 ### `PocketPermissionRequestHandler`
 
 **Typedef** `typedef PocketPermissionRequestHandler = FutureOr<Set<String>> Function(PocketPermissionRequest request);`
 
-Source: [packages/pocket_services/lib/src/pocket_plugin.dart](https://github.com/PocketFlutter/Pocket/blob/235b5b5589faf492f4a9fc3b7c0827bcd1d9de2c/sdk/packages/pocket_services/lib/src/pocket_plugin.dart#L35)
+Source: [packages/pocket_services/lib/src/pocket_plugin.dart](https://github.com/PocketFlutter/Pocket/blob/b06cb43cac4d553cea232ae1cd1f9ed4ee0c4ff4/sdk/packages/pocket_services/lib/src/pocket_plugin.dart#L35)
 
 ### `PocketPlugin`
 
@@ -4654,7 +4699,7 @@ Members:
 - `FutureOr<void> deactivate(PocketPluginContext context)`
 - `FutureOr<void> dispose()`
 
-Source: [packages/pocket_services/lib/src/pocket_plugin.dart](https://github.com/PocketFlutter/Pocket/blob/235b5b5589faf492f4a9fc3b7c0827bcd1d9de2c/sdk/packages/pocket_services/lib/src/pocket_plugin.dart#L9)
+Source: [packages/pocket_services/lib/src/pocket_plugin.dart](https://github.com/PocketFlutter/Pocket/blob/b06cb43cac4d553cea232ae1cd1f9ed4ee0c4ff4/sdk/packages/pocket_services/lib/src/pocket_plugin.dart#L9)
 
 ### `PocketPluginBudget`
 
@@ -4669,7 +4714,7 @@ Members:
 - `final int maxStreamEventBytes`
 - `void validate()`
 
-Source: [packages/pocket_services/lib/src/pocket_plugin.dart](https://github.com/PocketFlutter/Pocket/blob/235b5b5589faf492f4a9fc3b7c0827bcd1d9de2c/sdk/packages/pocket_services/lib/src/pocket_plugin.dart#L652)
+Source: [packages/pocket_services/lib/src/pocket_plugin.dart](https://github.com/PocketFlutter/Pocket/blob/b06cb43cac4d553cea232ae1cd1f9ed4ee0c4ff4/sdk/packages/pocket_services/lib/src/pocket_plugin.dart#L652)
 
 ### `PocketPluginCapability`
 
@@ -4685,7 +4730,7 @@ Members:
 - `final PocketPluginCapabilitySchema? schema`
 - `Map<String, dynamic> toJson()`
 
-Source: [packages/pocket_services/lib/src/pocket_plugin.dart](https://github.com/PocketFlutter/Pocket/blob/235b5b5589faf492f4a9fc3b7c0827bcd1d9de2c/sdk/packages/pocket_services/lib/src/pocket_plugin.dart#L481)
+Source: [packages/pocket_services/lib/src/pocket_plugin.dart](https://github.com/PocketFlutter/Pocket/blob/b06cb43cac4d553cea232ae1cd1f9ed4ee0c4ff4/sdk/packages/pocket_services/lib/src/pocket_plugin.dart#L481)
 
 ### `PocketPluginCapabilitySchema`
 
@@ -4700,7 +4745,7 @@ Members:
 - `Map<String, dynamic> toJson()`
 - `factory PocketPluginCapabilitySchema.fromJson(Object? value)`
 
-Source: [packages/pocket_services/lib/src/pocket_plugin.dart](https://github.com/PocketFlutter/Pocket/blob/235b5b5589faf492f4a9fc3b7c0827bcd1d9de2c/sdk/packages/pocket_services/lib/src/pocket_plugin.dart#L438)
+Source: [packages/pocket_services/lib/src/pocket_plugin.dart](https://github.com/PocketFlutter/Pocket/blob/b06cb43cac4d553cea232ae1cd1f9ed4ee0c4ff4/sdk/packages/pocket_services/lib/src/pocket_plugin.dart#L438)
 
 ### `PocketPluginContext`
 
@@ -4723,7 +4768,7 @@ Members:
 - `void revoke()`
 - `void dispose()`
 
-Source: [packages/pocket_services/lib/src/pocket_plugin.dart](https://github.com/PocketFlutter/Pocket/blob/235b5b5589faf492f4a9fc3b7c0827bcd1d9de2c/sdk/packages/pocket_services/lib/src/pocket_plugin.dart#L678)
+Source: [packages/pocket_services/lib/src/pocket_plugin.dart](https://github.com/PocketFlutter/Pocket/blob/b06cb43cac4d553cea232ae1cd1f9ed4ee0c4ff4/sdk/packages/pocket_services/lib/src/pocket_plugin.dart#L678)
 
 ### `PocketPluginDescriptor`
 
@@ -4745,7 +4790,7 @@ Members:
 - `Map<String, dynamic> toJson()`
 - `void validateSchemas()`
 
-Source: [packages/pocket_services/lib/src/pocket_plugin.dart](https://github.com/PocketFlutter/Pocket/blob/235b5b5589faf492f4a9fc3b7c0827bcd1d9de2c/sdk/packages/pocket_services/lib/src/pocket_plugin.dart#L548)
+Source: [packages/pocket_services/lib/src/pocket_plugin.dart](https://github.com/PocketFlutter/Pocket/blob/b06cb43cac4d553cea232ae1cd1f9ed4ee0c4ff4/sdk/packages/pocket_services/lib/src/pocket_plugin.dart#L548)
 
 ### `PocketPluginLimits`
 
@@ -4762,7 +4807,7 @@ Members:
 - `bool get isEmpty`
 - `Map<String, dynamic> toJson()`
 
-Source: [packages/pocket_services/lib/src/pocket_plugin.dart](https://github.com/PocketFlutter/Pocket/blob/235b5b5589faf492f4a9fc3b7c0827bcd1d9de2c/sdk/packages/pocket_services/lib/src/pocket_plugin.dart#L512)
+Source: [packages/pocket_services/lib/src/pocket_plugin.dart](https://github.com/PocketFlutter/Pocket/blob/b06cb43cac4d553cea232ae1cd1f9ed4ee0c4ff4/sdk/packages/pocket_services/lib/src/pocket_plugin.dart#L512)
 
 ### `PocketPluginManager`
 
@@ -4789,19 +4834,19 @@ Members:
 - `Set<String> grantedPermissionsFor(String pluginId)`
 - `Future<Object?> invoke( String capabilityName, [ Map<String, dynamic> params = const <String, dynamic>{}, ])`
 
-Source: [packages/pocket_services/lib/src/pocket_plugin.dart](https://github.com/PocketFlutter/Pocket/blob/235b5b5589faf492f4a9fc3b7c0827bcd1d9de2c/sdk/packages/pocket_services/lib/src/pocket_plugin.dart#L983)
+Source: [packages/pocket_services/lib/src/pocket_plugin.dart](https://github.com/PocketFlutter/Pocket/blob/b06cb43cac4d553cea232ae1cd1f9ed4ee0c4ff4/sdk/packages/pocket_services/lib/src/pocket_plugin.dart#L983)
 
 ### `PocketPluginMethod`
 
 **Typedef** `typedef PocketPluginMethod = PocketPluginCapability;`
 
-Source: [packages/pocket_services/lib/src/pocket_plugin.dart](https://github.com/PocketFlutter/Pocket/blob/235b5b5589faf492f4a9fc3b7c0827bcd1d9de2c/sdk/packages/pocket_services/lib/src/pocket_plugin.dart#L510)
+Source: [packages/pocket_services/lib/src/pocket_plugin.dart](https://github.com/PocketFlutter/Pocket/blob/b06cb43cac4d553cea232ae1cd1f9ed4ee0c4ff4/sdk/packages/pocket_services/lib/src/pocket_plugin.dart#L510)
 
 ### `PocketPluginRegistry`
 
 **Typedef** `typedef PocketPluginRegistry = PocketPluginManager;`
 
-Source: [packages/pocket_services/lib/src/pocket_plugin.dart](https://github.com/PocketFlutter/Pocket/blob/235b5b5589faf492f4a9fc3b7c0827bcd1d9de2c/sdk/packages/pocket_services/lib/src/pocket_plugin.dart#L1424)
+Source: [packages/pocket_services/lib/src/pocket_plugin.dart](https://github.com/PocketFlutter/Pocket/blob/b06cb43cac4d553cea232ae1cd1f9ed4ee0c4ff4/sdk/packages/pocket_services/lib/src/pocket_plugin.dart#L1424)
 
 ### `PocketPluginSchema`
 
@@ -4834,7 +4879,7 @@ Members:
 - `factory PocketPluginSchema.fromJson(Object? value)`
 - `void validate()`
 
-Source: [packages/pocket_services/lib/src/pocket_plugin.dart](https://github.com/PocketFlutter/Pocket/blob/235b5b5589faf492f4a9fc3b7c0827bcd1d9de2c/sdk/packages/pocket_services/lib/src/pocket_plugin.dart#L60)
+Source: [packages/pocket_services/lib/src/pocket_plugin.dart](https://github.com/PocketFlutter/Pocket/blob/b06cb43cac4d553cea232ae1cd1f9ed4ee0c4ff4/sdk/packages/pocket_services/lib/src/pocket_plugin.dart#L60)
 
 ### `PocketPluginSchemaType`
 
@@ -4852,7 +4897,7 @@ Values:
 - `reference`
 - `unknown`
 
-Source: [packages/pocket_services/lib/src/pocket_plugin.dart](https://github.com/PocketFlutter/Pocket/blob/235b5b5589faf492f4a9fc3b7c0827bcd1d9de2c/sdk/packages/pocket_services/lib/src/pocket_plugin.dart#L41)
+Source: [packages/pocket_services/lib/src/pocket_plugin.dart](https://github.com/PocketFlutter/Pocket/blob/b06cb43cac4d553cea232ae1cd1f9ed4ee0c4ff4/sdk/packages/pocket_services/lib/src/pocket_plugin.dart#L41)
 
 ### `PocketPluginSession`
 
@@ -4866,7 +4911,7 @@ Members:
 - `Future<void> unmountGuest()`
 - `Future<void> dispose()`
 
-Source: [packages/pocket_services/lib/src/pocket_plugin.dart](https://github.com/PocketFlutter/Pocket/blob/235b5b5589faf492f4a9fc3b7c0827bcd1d9de2c/sdk/packages/pocket_services/lib/src/pocket_plugin.dart#L1426)
+Source: [packages/pocket_services/lib/src/pocket_plugin.dart](https://github.com/PocketFlutter/Pocket/blob/b06cb43cac4d553cea232ae1cd1f9ed4ee0c4ff4/sdk/packages/pocket_services/lib/src/pocket_plugin.dart#L1426)
 
 ### `PocketPreparedPackage`
 
@@ -4890,7 +4935,7 @@ Members:
 - `Future<PocketPackageArtifact> readArtifact()`
 - `Map<String, dynamic> toSummaryJson()`
 
-Source: [packages/pocket_services/lib/src/pocket_update.dart](https://github.com/PocketFlutter/Pocket/blob/235b5b5589faf492f4a9fc3b7c0827bcd1d9de2c/sdk/packages/pocket_services/lib/src/pocket_update.dart#L191)
+Source: [packages/pocket_services/lib/src/pocket_update.dart](https://github.com/PocketFlutter/Pocket/blob/b06cb43cac4d553cea232ae1cd1f9ed4ee0c4ff4/sdk/packages/pocket_services/lib/src/pocket_update.dart#L191)
 
 ### `PocketReleaseKey`
 
@@ -4908,7 +4953,7 @@ Members:
 - `void validateStructure()`
 - `void validate({required String appId, required int nowSeconds})`
 
-Source: [packages/pocket_services/lib/src/pocket_trust.dart](https://github.com/PocketFlutter/Pocket/blob/235b5b5589faf492f4a9fc3b7c0827bcd1d9de2c/sdk/packages/pocket_services/lib/src/pocket_trust.dart#L24)
+Source: [packages/pocket_services/lib/src/pocket_trust.dart](https://github.com/PocketFlutter/Pocket/blob/b06cb43cac4d553cea232ae1cd1f9ed4ee0c4ff4/sdk/packages/pocket_services/lib/src/pocket_trust.dart#L24)
 
 ### `PocketSignedManifest`
 
@@ -4924,7 +4969,7 @@ Members:
 - `final Uint8List envelopeBytes`
 - `Future<void> verify({required Map<String, List<int>> trustedKeys})`
 
-Source: [packages/pocket_services/lib/src/pocket_package.dart](https://github.com/PocketFlutter/Pocket/blob/235b5b5589faf492f4a9fc3b7c0827bcd1d9de2c/sdk/packages/pocket_services/lib/src/pocket_package.dart#L663)
+Source: [packages/pocket_services/lib/src/pocket_package.dart](https://github.com/PocketFlutter/Pocket/blob/b06cb43cac4d553cea232ae1cd1f9ed4ee0c4ff4/sdk/packages/pocket_services/lib/src/pocket_package.dart#L663)
 
 ### `PocketSignedTrustPolicy`
 
@@ -4941,7 +4986,7 @@ Members:
 - `Future<void> verifyRoot({ required String rootKeyId, required List<int> rootPublicKey, })`
 - `String get payloadHash`
 
-Source: [packages/pocket_services/lib/src/pocket_trust.dart](https://github.com/PocketFlutter/Pocket/blob/235b5b5589faf492f4a9fc3b7c0827bcd1d9de2c/sdk/packages/pocket_services/lib/src/pocket_trust.dart#L274)
+Source: [packages/pocket_services/lib/src/pocket_trust.dart](https://github.com/PocketFlutter/Pocket/blob/b06cb43cac4d553cea232ae1cd1f9ed4ee0c4ff4/sdk/packages/pocket_services/lib/src/pocket_trust.dart#L274)
 
 ### `PocketStreamBridge`
 
@@ -4960,7 +5005,7 @@ Members:
 - `void handle(PocketEvent event)`
 - `void dispose()`
 
-Source: [packages/pocket_services/lib/src/pocket_stream.dart](https://github.com/PocketFlutter/Pocket/blob/235b5b5589faf492f4a9fc3b7c0827bcd1d9de2c/sdk/packages/pocket_services/lib/src/pocket_stream.dart#L22)
+Source: [packages/pocket_services/lib/src/pocket_stream.dart](https://github.com/PocketFlutter/Pocket/blob/b06cb43cac4d553cea232ae1cd1f9ed4ee0c4ff4/sdk/packages/pocket_services/lib/src/pocket_stream.dart#L22)
 
 ### `PocketStreamBufferOverflowException`
 
@@ -4972,7 +5017,7 @@ Members:
 - `final int limit`
 - `String toString()`
 
-Source: [packages/pocket_services/lib/src/pocket_stream.dart](https://github.com/PocketFlutter/Pocket/blob/235b5b5589faf492f4a9fc3b7c0827bcd1d9de2c/sdk/packages/pocket_services/lib/src/pocket_stream.dart#L253)
+Source: [packages/pocket_services/lib/src/pocket_stream.dart](https://github.com/PocketFlutter/Pocket/blob/b06cb43cac4d553cea232ae1cd1f9ed4ee0c4ff4/sdk/packages/pocket_services/lib/src/pocket_stream.dart#L253)
 
 ### `PocketStreamProtocolException`
 
@@ -4984,7 +5029,7 @@ Members:
 - `final String message`
 - `String toString()`
 
-Source: [packages/pocket_services/lib/src/pocket_stream.dart](https://github.com/PocketFlutter/Pocket/blob/235b5b5589faf492f4a9fc3b7c0827bcd1d9de2c/sdk/packages/pocket_services/lib/src/pocket_stream.dart#L233)
+Source: [packages/pocket_services/lib/src/pocket_stream.dart](https://github.com/PocketFlutter/Pocket/blob/b06cb43cac4d553cea232ae1cd1f9ed4ee0c4ff4/sdk/packages/pocket_services/lib/src/pocket_stream.dart#L233)
 
 ### `PocketStreamRemoteException`
 
@@ -4996,13 +5041,13 @@ Members:
 - `final Object? value`
 - `String toString()`
 
-Source: [packages/pocket_services/lib/src/pocket_stream.dart](https://github.com/PocketFlutter/Pocket/blob/235b5b5589faf492f4a9fc3b7c0827bcd1d9de2c/sdk/packages/pocket_services/lib/src/pocket_stream.dart#L243)
+Source: [packages/pocket_services/lib/src/pocket_stream.dart](https://github.com/PocketFlutter/Pocket/blob/b06cb43cac4d553cea232ae1cd1f9ed4ee0c4ff4/sdk/packages/pocket_services/lib/src/pocket_stream.dart#L243)
 
 ### `PocketStreamSend`
 
 **Typedef** `typedef PocketStreamSend = bool Function(String method, Map<String, dynamic> params);`
 
-Source: [packages/pocket_services/lib/src/pocket_stream.dart](https://github.com/PocketFlutter/Pocket/blob/235b5b5589faf492f4a9fc3b7c0827bcd1d9de2c/sdk/packages/pocket_services/lib/src/pocket_stream.dart#L6)
+Source: [packages/pocket_services/lib/src/pocket_stream.dart](https://github.com/PocketFlutter/Pocket/blob/b06cb43cac4d553cea232ae1cd1f9ed4ee0c4ff4/sdk/packages/pocket_services/lib/src/pocket_stream.dart#L6)
 
 ### `PocketTrustException`
 
@@ -5014,7 +5059,7 @@ Members:
 - `final String code`
 - `String toString()`
 
-Source: [packages/pocket_services/lib/src/pocket_trust.dart](https://github.com/PocketFlutter/Pocket/blob/235b5b5589faf492f4a9fc3b7c0827bcd1d9de2c/sdk/packages/pocket_services/lib/src/pocket_trust.dart#L13)
+Source: [packages/pocket_services/lib/src/pocket_trust.dart](https://github.com/PocketFlutter/Pocket/blob/b06cb43cac4d553cea232ae1cd1f9ed4ee0c4ff4/sdk/packages/pocket_services/lib/src/pocket_trust.dart#L13)
 
 ### `PocketTrustPolicy`
 
@@ -5035,7 +5080,7 @@ Members:
 - `Map<String, dynamic> toJson()`
 - `void validate({required String expectedAppId, required int nowSeconds})`
 
-Source: [packages/pocket_services/lib/src/pocket_trust.dart](https://github.com/PocketFlutter/Pocket/blob/235b5b5589faf492f4a9fc3b7c0827bcd1d9de2c/sdk/packages/pocket_services/lib/src/pocket_trust.dart#L126)
+Source: [packages/pocket_services/lib/src/pocket_trust.dart](https://github.com/PocketFlutter/Pocket/blob/b06cb43cac4d553cea232ae1cd1f9ed4ee0c4ff4/sdk/packages/pocket_services/lib/src/pocket_trust.dart#L126)
 
 ### `PocketTrustStore`
 
@@ -5056,7 +5101,7 @@ Members:
 - `Future<PocketTrustPolicy> current()`
 - `Future<List<int>> publicKeyForPackage({ required String keyId, required String packageAppId, required int? signedAt, required String contentHash, required Uint8List payloadBytes, })`
 
-Source: [packages/pocket_services/lib/src/pocket_trust.dart](https://github.com/PocketFlutter/Pocket/blob/235b5b5589faf492f4a9fc3b7c0827bcd1d9de2c/sdk/packages/pocket_services/lib/src/pocket_trust.dart#L367)
+Source: [packages/pocket_services/lib/src/pocket_trust.dart](https://github.com/PocketFlutter/Pocket/blob/b06cb43cac4d553cea232ae1cd1f9ed4ee0c4ff4/sdk/packages/pocket_services/lib/src/pocket_trust.dart#L367)
 
 ### `PocketUpdateCancellation`
 
@@ -5066,7 +5111,7 @@ Members:
 - `const PocketUpdateCancellation()`
 - `String toString()`
 
-Source: [packages/pocket_services/lib/src/pocket_package.dart](https://github.com/PocketFlutter/Pocket/blob/235b5b5589faf492f4a9fc3b7c0827bcd1d9de2c/sdk/packages/pocket_services/lib/src/pocket_package.dart#L74)
+Source: [packages/pocket_services/lib/src/pocket_package.dart](https://github.com/PocketFlutter/Pocket/blob/b06cb43cac4d553cea232ae1cd1f9ed4ee0c4ff4/sdk/packages/pocket_services/lib/src/pocket_package.dart#L74)
 
 ### `PocketUpdateCoordinator`
 
@@ -5108,7 +5153,7 @@ Members:
 - `Future<void> rollback({String? versionId})`
 - `Future<void> resetToEmbedded()`
 
-Source: [packages/pocket_services/lib/src/pocket_update.dart](https://github.com/PocketFlutter/Pocket/blob/235b5b5589faf492f4a9fc3b7c0827bcd1d9de2c/sdk/packages/pocket_services/lib/src/pocket_update.dart#L275)
+Source: [packages/pocket_services/lib/src/pocket_update.dart](https://github.com/PocketFlutter/Pocket/blob/b06cb43cac4d553cea232ae1cd1f9ed4ee0c4ff4/sdk/packages/pocket_services/lib/src/pocket_update.dart#L275)
 
 ### `PocketUpdateInspection`
 
@@ -5126,7 +5171,7 @@ Members:
 - `final String? baselineVersionId`
 - `bool get updateAvailable`
 
-Source: [packages/pocket_services/lib/src/pocket_update.dart](https://github.com/PocketFlutter/Pocket/blob/235b5b5589faf492f4a9fc3b7c0827bcd1d9de2c/sdk/packages/pocket_services/lib/src/pocket_update.dart#L244)
+Source: [packages/pocket_services/lib/src/pocket_update.dart](https://github.com/PocketFlutter/Pocket/blob/b06cb43cac4d553cea232ae1cd1f9ed4ee0c4ff4/sdk/packages/pocket_services/lib/src/pocket_update.dart#L244)
 
 ### `PocketUpdateMode`
 
@@ -5137,7 +5182,7 @@ Values:
 - `zip`
 - `granular`
 
-Source: [packages/pocket_services/lib/src/pocket_update.dart](https://github.com/PocketFlutter/Pocket/blob/235b5b5589faf492f4a9fc3b7c0827bcd1d9de2c/sdk/packages/pocket_services/lib/src/pocket_update.dart#L164)
+Source: [packages/pocket_services/lib/src/pocket_update.dart](https://github.com/PocketFlutter/Pocket/blob/b06cb43cac4d553cea232ae1cd1f9ed4ee0c4ff4/sdk/packages/pocket_services/lib/src/pocket_update.dart#L164)
 
 ### `PocketUpdateProgress`
 
@@ -5154,13 +5199,13 @@ Members:
 - `final PocketPackagePreparationProgress? preparationProgress`
 - `double? get fraction`
 
-Source: [packages/pocket_services/lib/src/pocket_update.dart](https://github.com/PocketFlutter/Pocket/blob/235b5b5589faf492f4a9fc3b7c0827bcd1d9de2c/sdk/packages/pocket_services/lib/src/pocket_update.dart#L135)
+Source: [packages/pocket_services/lib/src/pocket_update.dart](https://github.com/PocketFlutter/Pocket/blob/b06cb43cac4d553cea232ae1cd1f9ed4ee0c4ff4/sdk/packages/pocket_services/lib/src/pocket_update.dart#L135)
 
 ### `PocketUpdateProgressCallback`
 
 **Typedef** `typedef PocketUpdateProgressCallback = void Function(PocketUpdateProgress progress);`
 
-Source: [packages/pocket_services/lib/src/pocket_update.dart](https://github.com/PocketFlutter/Pocket/blob/235b5b5589faf492f4a9fc3b7c0827bcd1d9de2c/sdk/packages/pocket_services/lib/src/pocket_update.dart#L161)
+Source: [packages/pocket_services/lib/src/pocket_update.dart](https://github.com/PocketFlutter/Pocket/blob/b06cb43cac4d553cea232ae1cd1f9ed4ee0c4ff4/sdk/packages/pocket_services/lib/src/pocket_update.dart#L161)
 
 ### `PocketUpdateScope`
 
@@ -5171,7 +5216,7 @@ Values:
 - `code`
 - `resource`
 
-Source: [packages/pocket_services/lib/src/pocket_update.dart](https://github.com/PocketFlutter/Pocket/blob/235b5b5589faf492f4a9fc3b7c0827bcd1d9de2c/sdk/packages/pocket_services/lib/src/pocket_update.dart#L166)
+Source: [packages/pocket_services/lib/src/pocket_update.dart](https://github.com/PocketFlutter/Pocket/blob/b06cb43cac4d553cea232ae1cd1f9ed4ee0c4ff4/sdk/packages/pocket_services/lib/src/pocket_update.dart#L166)
 
 ### `PocketUpdateStage`
 
@@ -5186,7 +5231,7 @@ Values:
 - `error`
 - `retry`
 
-Source: [packages/pocket_services/lib/src/pocket_update.dart](https://github.com/PocketFlutter/Pocket/blob/235b5b5589faf492f4a9fc3b7c0827bcd1d9de2c/sdk/packages/pocket_services/lib/src/pocket_update.dart#L125)
+Source: [packages/pocket_services/lib/src/pocket_update.dart](https://github.com/PocketFlutter/Pocket/blob/b06cb43cac4d553cea232ae1cd1f9ed4ee0c4ff4/sdk/packages/pocket_services/lib/src/pocket_update.dart#L125)
 
 ### `PocketUpdateTarget`
 
@@ -5199,7 +5244,7 @@ Members:
 - `final PocketUpdateScope scope`
 - `final String? resource`
 
-Source: [packages/pocket_services/lib/src/pocket_update.dart](https://github.com/PocketFlutter/Pocket/blob/235b5b5589faf492f4a9fc3b7c0827bcd1d9de2c/sdk/packages/pocket_services/lib/src/pocket_update.dart#L168)
+Source: [packages/pocket_services/lib/src/pocket_update.dart](https://github.com/PocketFlutter/Pocket/blob/b06cb43cac4d553cea232ae1cd1f9ed4ee0c4ff4/sdk/packages/pocket_services/lib/src/pocket_update.dart#L168)
 
 ### `PocketUpdateTransport`
 
@@ -5209,7 +5254,7 @@ Members:
 - `Future<PocketDownloadResponse> open( Uri uri, { required PocketCancellationToken cancellation, })`
 - `void close()`
 
-Source: [packages/pocket_services/lib/src/pocket_update.dart](https://github.com/PocketFlutter/Pocket/blob/235b5b5589faf492f4a9fc3b7c0827bcd1d9de2c/sdk/packages/pocket_services/lib/src/pocket_update.dart#L22)
+Source: [packages/pocket_services/lib/src/pocket_update.dart](https://github.com/PocketFlutter/Pocket/blob/b06cb43cac4d553cea232ae1cd1f9ed4ee0c4ff4/sdk/packages/pocket_services/lib/src/pocket_update.dart#L22)
 
 ### `PocketVersionInfo`
 
@@ -5227,42 +5272,42 @@ Members:
 - `String get contentHash`
 - `Map<String, dynamic> toJson()`
 
-Source: [packages/pocket_services/lib/src/pocket_package.dart](https://github.com/PocketFlutter/Pocket/blob/235b5b5589faf492f4a9fc3b7c0827bcd1d9de2c/sdk/packages/pocket_services/lib/src/pocket_package.dart#L782)
+Source: [packages/pocket_services/lib/src/pocket_package.dart](https://github.com/PocketFlutter/Pocket/blob/b06cb43cac4d553cea232ae1cd1f9ed4ee0c4ff4/sdk/packages/pocket_services/lib/src/pocket_package.dart#L782)
 
 ### `decodePocketZip`
 
 **function** `Map<String, Uint8List> decodePocketZip( Uint8List archive, { int maxTotalBytes = 768 * 1024 * 1024, void Function(int decodedBytes)? onOutputBytes, })`
 
-Source: [packages/pocket_services/lib/src/pocket_package.dart](https://github.com/PocketFlutter/Pocket/blob/235b5b5589faf492f4a9fc3b7c0827bcd1d9de2c/sdk/packages/pocket_services/lib/src/pocket_package.dart#L3298)
+Source: [packages/pocket_services/lib/src/pocket_package.dart](https://github.com/PocketFlutter/Pocket/blob/b06cb43cac4d553cea232ae1cd1f9ed4ee0c4ff4/sdk/packages/pocket_services/lib/src/pocket_package.dart#L3298)
 
 ### `encodePocketPak`
 
 **function** `Uint8List encodePocketPak(List<PocketPakBlobEntry> entriesIn)`
 
-Source: [packages/pocket_services/lib/src/pocket_package.dart](https://github.com/PocketFlutter/Pocket/blob/235b5b5589faf492f4a9fc3b7c0827bcd1d9de2c/sdk/packages/pocket_services/lib/src/pocket_package.dart#L2486)
+Source: [packages/pocket_services/lib/src/pocket_package.dart](https://github.com/PocketFlutter/Pocket/blob/b06cb43cac4d553cea232ae1cd1f9ed4ee0c4ff4/sdk/packages/pocket_services/lib/src/pocket_package.dart#L2486)
 
 ### `encodePocketZip`
 
 **function** `Uint8List encodePocketZip(Map<String, List<int>> entries)`
 
-Source: [packages/pocket_services/lib/src/pocket_package.dart](https://github.com/PocketFlutter/Pocket/blob/235b5b5589faf492f4a9fc3b7c0827bcd1d9de2c/sdk/packages/pocket_services/lib/src/pocket_package.dart#L3105)
+Source: [packages/pocket_services/lib/src/pocket_package.dart](https://github.com/PocketFlutter/Pocket/blob/b06cb43cac4d553cea232ae1cd1f9ed4ee0c4ff4/sdk/packages/pocket_services/lib/src/pocket_package.dart#L3105)
 
 ### `pocketCrc32`
 
 **function** `int pocketCrc32(List<int> bytes)`
 
-Source: [packages/pocket_services/lib/src/pocket_package.dart](https://github.com/PocketFlutter/Pocket/blob/235b5b5589faf492f4a9fc3b7c0827bcd1d9de2c/sdk/packages/pocket_services/lib/src/pocket_package.dart#L3096)
+Source: [packages/pocket_services/lib/src/pocket_package.dart](https://github.com/PocketFlutter/Pocket/blob/b06cb43cac4d553cea232ae1cd1f9ed4ee0c4ff4/sdk/packages/pocket_services/lib/src/pocket_package.dart#L3096)
 
 ### `pocketVersionId`
 
 **function** `String pocketVersionId(PocketPackageManifest manifest)`
 
-Source: [packages/pocket_services/lib/src/pocket_package.dart](https://github.com/PocketFlutter/Pocket/blob/235b5b5589faf492f4a9fc3b7c0827bcd1d9de2c/sdk/packages/pocket_services/lib/src/pocket_package.dart#L2385)
+Source: [packages/pocket_services/lib/src/pocket_package.dart](https://github.com/PocketFlutter/Pocket/blob/b06cb43cac4d553cea232ae1cd1f9ed4ee0c4ff4/sdk/packages/pocket_services/lib/src/pocket_package.dart#L2385)
 ## `pocket_studio`
 
 ### Import `package:pocket_studio/pocket_studio.dart`
 
-Entry: [packages/pocket_studio/lib/pocket_studio.dart](https://github.com/PocketFlutter/Pocket/blob/235b5b5589faf492f4a9fc3b7c0827bcd1d9de2c/sdk/packages/pocket_studio/lib/pocket_studio.dart)
+Entry: [packages/pocket_studio/lib/pocket_studio.dart](https://github.com/PocketFlutter/Pocket/blob/b06cb43cac4d553cea232ae1cd1f9ed4ee0c4ff4/sdk/packages/pocket_studio/lib/pocket_studio.dart)
 
 ### `PocketStudioConfig`
 
@@ -5294,7 +5339,7 @@ Members:
 - `({String keyId, String publicKey})? readPreviewKey()`
 - `({String keyId, String publicKey})? readUpdateKey()`
 
-Source: [packages/pocket_studio/lib/src/studio_config.dart](https://github.com/PocketFlutter/Pocket/blob/235b5b5589faf492f4a9fc3b7c0827bcd1d9de2c/sdk/packages/pocket_studio/lib/src/studio_config.dart#L10)
+Source: [packages/pocket_studio/lib/src/studio_config.dart](https://github.com/PocketFlutter/Pocket/blob/b06cb43cac4d553cea232ae1cd1f9ed4ee0c4ff4/sdk/packages/pocket_studio/lib/src/studio_config.dart#L10)
 
 ### `PocketStudioPermissions`
 
@@ -5308,7 +5353,7 @@ Members:
 - `static const String publish = 'studio.publish'`
 - `static const Set<String> all = <String>{read, write, build, deploy, publish}`
 
-Source: [packages/pocket_studio/lib/src/studio_routes.dart](https://github.com/PocketFlutter/Pocket/blob/235b5b5589faf492f4a9fc3b7c0827bcd1d9de2c/sdk/packages/pocket_studio/lib/src/studio_routes.dart#L10)
+Source: [packages/pocket_studio/lib/src/studio_routes.dart](https://github.com/PocketFlutter/Pocket/blob/b06cb43cac4d553cea232ae1cd1f9ed4ee0c4ff4/sdk/packages/pocket_studio/lib/src/studio_routes.dart#L10)
 
 ### `PocketStudioPlugin`
 
@@ -5325,7 +5370,7 @@ Members:
 - `Future<Object?> invoke(String name, Map<String, dynamic> params)`
 - `Stream<Object?> openStream(String name, Map<String, dynamic> params)`
 
-Source: [packages/pocket_studio/lib/src/studio_plugin.dart](https://github.com/PocketFlutter/Pocket/blob/235b5b5589faf492f4a9fc3b7c0827bcd1d9de2c/sdk/packages/pocket_studio/lib/src/studio_plugin.dart#L39)
+Source: [packages/pocket_studio/lib/src/studio_plugin.dart](https://github.com/PocketFlutter/Pocket/blob/b06cb43cac4d553cea232ae1cd1f9ed4ee0c4ff4/sdk/packages/pocket_studio/lib/src/studio_plugin.dart#L39)
 
 ### `PocketStudioService`
 
@@ -5341,7 +5386,7 @@ Members:
 - `Future<void> start()`
 - `Future<void> stop()`
 
-Source: [packages/pocket_studio/lib/src/studio_service.dart](https://github.com/PocketFlutter/Pocket/blob/235b5b5589faf492f4a9fc3b7c0827bcd1d9de2c/sdk/packages/pocket_studio/lib/src/studio_service.dart#L23)
+Source: [packages/pocket_studio/lib/src/studio_service.dart](https://github.com/PocketFlutter/Pocket/blob/b06cb43cac4d553cea232ae1cd1f9ed4ee0c4ff4/sdk/packages/pocket_studio/lib/src/studio_service.dart#L23)
 
 ### `PocketStudioServiceException`
 
@@ -5353,7 +5398,7 @@ Members:
 - `final String message`
 - `String toString()`
 
-Source: [packages/pocket_studio/lib/src/studio_service.dart](https://github.com/PocketFlutter/Pocket/blob/235b5b5589faf492f4a9fc3b7c0827bcd1d9de2c/sdk/packages/pocket_studio/lib/src/studio_service.dart#L11)
+Source: [packages/pocket_studio/lib/src/studio_service.dart](https://github.com/PocketFlutter/Pocket/blob/b06cb43cac4d553cea232ae1cd1f9ed4ee0c4ff4/sdk/packages/pocket_studio/lib/src/studio_service.dart#L11)
 
 ### `StudioImagePreview`
 
@@ -5370,7 +5415,7 @@ Members:
 - `final Uint8List img`
 - `Map<String, Object?> toResult(Map<String, Object?> identity)`
 
-Source: [packages/pocket_studio/lib/src/studio_image.dart](https://github.com/PocketFlutter/Pocket/blob/235b5b5589faf492f4a9fc3b7c0827bcd1d9de2c/sdk/packages/pocket_studio/lib/src/studio_image.dart#L22)
+Source: [packages/pocket_studio/lib/src/studio_image.dart](https://github.com/PocketFlutter/Pocket/blob/b06cb43cac4d553cea232ae1cd1f9ed4ee0c4ff4/sdk/packages/pocket_studio/lib/src/studio_image.dart#L22)
 
 ### `StudioPathScrubber`
 
@@ -5384,84 +5429,84 @@ Members:
 - `String scrubString(String input)`
 - `Object? scrubJson(Object? value)`
 
-Source: [packages/pocket_studio/lib/src/studio_scrub.dart](https://github.com/PocketFlutter/Pocket/blob/235b5b5589faf492f4a9fc3b7c0827bcd1d9de2c/sdk/packages/pocket_studio/lib/src/studio_scrub.dart#L16)
+Source: [packages/pocket_studio/lib/src/studio_scrub.dart](https://github.com/PocketFlutter/Pocket/blob/b06cb43cac4d553cea232ae1cd1f9ed4ee0c4ff4/sdk/packages/pocket_studio/lib/src/studio_scrub.dart#L16)
 
 ### `decodeStudioImagePreview`
 
 **function** `Future<StudioImagePreview> decodeStudioImagePreview(Uint8List bytes, {int maxEdge = pocketStudioPreviewMaxEdge})`
 
-Source: [packages/pocket_studio/lib/src/studio_image.dart](https://github.com/PocketFlutter/Pocket/blob/235b5b5589faf492f4a9fc3b7c0827bcd1d9de2c/sdk/packages/pocket_studio/lib/src/studio_image.dart#L63)
+Source: [packages/pocket_studio/lib/src/studio_image.dart](https://github.com/PocketFlutter/Pocket/blob/b06cb43cac4d553cea232ae1cd1f9ed4ee0c4ff4/sdk/packages/pocket_studio/lib/src/studio_image.dart#L63)
 
 ### `pocketStudioCapabilityNames`
 
 **Top-level variable** `final Set<String> pocketStudioCapabilityNames = studioCallsByName.keys.toSet()`
 
-Source: [packages/pocket_studio/lib/src/studio_routes.dart](https://github.com/PocketFlutter/Pocket/blob/235b5b5589faf492f4a9fc3b7c0827bcd1d9de2c/sdk/packages/pocket_studio/lib/src/studio_routes.dart#L553)
+Source: [packages/pocket_studio/lib/src/studio_routes.dart](https://github.com/PocketFlutter/Pocket/blob/b06cb43cac4d553cea232ae1cd1f9ed4ee0c4ff4/sdk/packages/pocket_studio/lib/src/studio_routes.dart#L553)
 
 ### `pocketStudioChunkBytes`
 
 **Top-level variable** `const int pocketStudioChunkBytes = 128 * 1024`
 
-Source: [packages/pocket_studio/lib/src/studio_routes.dart](https://github.com/PocketFlutter/Pocket/blob/235b5b5589faf492f4a9fc3b7c0827bcd1d9de2c/sdk/packages/pocket_studio/lib/src/studio_routes.dart#L21)
+Source: [packages/pocket_studio/lib/src/studio_routes.dart](https://github.com/PocketFlutter/Pocket/blob/b06cb43cac4d553cea232ae1cd1f9ed4ee0c4ff4/sdk/packages/pocket_studio/lib/src/studio_routes.dart#L21)
 
 ### `pocketStudioDecodableImageExtensions`
 
 **Top-level variable** `const Set<String> pocketStudioDecodableImageExtensions = <String>{'png', 'jpg', 'jpeg', 'gif', 'webp', 'bmp'}`
 
-Source: [packages/pocket_studio/lib/src/studio_image.dart](https://github.com/PocketFlutter/Pocket/blob/235b5b5589faf492f4a9fc3b7c0827bcd1d9de2c/sdk/packages/pocket_studio/lib/src/studio_image.dart#L15)
+Source: [packages/pocket_studio/lib/src/studio_image.dart](https://github.com/PocketFlutter/Pocket/blob/b06cb43cac4d553cea232ae1cd1f9ed4ee0c4ff4/sdk/packages/pocket_studio/lib/src/studio_image.dart#L15)
 
 ### `pocketStudioMaxAssetBytes`
 
 **Top-level variable** `const int pocketStudioMaxAssetBytes = 32 * 1024 * 1024`
 
-Source: [packages/pocket_studio/lib/src/studio_routes.dart](https://github.com/PocketFlutter/Pocket/blob/235b5b5589faf492f4a9fc3b7c0827bcd1d9de2c/sdk/packages/pocket_studio/lib/src/studio_routes.dart#L28)
+Source: [packages/pocket_studio/lib/src/studio_routes.dart](https://github.com/PocketFlutter/Pocket/blob/b06cb43cac4d553cea232ae1cd1f9ed4ee0c4ff4/sdk/packages/pocket_studio/lib/src/studio_routes.dart#L28)
 
 ### `pocketStudioMaxResultBytes`
 
 **Top-level variable** `const int pocketStudioMaxResultBytes = 240 * 1024`
 
-Source: [packages/pocket_studio/lib/src/studio_routes.dart](https://github.com/PocketFlutter/Pocket/blob/235b5b5589faf492f4a9fc3b7c0827bcd1d9de2c/sdk/packages/pocket_studio/lib/src/studio_routes.dart#L25)
+Source: [packages/pocket_studio/lib/src/studio_routes.dart](https://github.com/PocketFlutter/Pocket/blob/b06cb43cac4d553cea232ae1cd1f9ed4ee0c4ff4/sdk/packages/pocket_studio/lib/src/studio_routes.dart#L25)
 
 ### `pocketStudioPluginId`
 
 **Top-level variable** `const String pocketStudioPluginId = 'pocket.studio'`
 
-Source: [packages/pocket_studio/lib/src/studio_plugin.dart](https://github.com/PocketFlutter/Pocket/blob/235b5b5589faf492f4a9fc3b7c0827bcd1d9de2c/sdk/packages/pocket_studio/lib/src/studio_plugin.dart#L22)
+Source: [packages/pocket_studio/lib/src/studio_plugin.dart](https://github.com/PocketFlutter/Pocket/blob/b06cb43cac4d553cea232ae1cd1f9ed4ee0c4ff4/sdk/packages/pocket_studio/lib/src/studio_plugin.dart#L22)
 
 ### `pocketStudioPreviewMaxEdge`
 
 **Top-level variable** `const int pocketStudioPreviewMaxEdge = 128`
 
-Source: [packages/pocket_studio/lib/src/studio_image.dart](https://github.com/PocketFlutter/Pocket/blob/235b5b5589faf492f4a9fc3b7c0827bcd1d9de2c/sdk/packages/pocket_studio/lib/src/studio_image.dart#L9)
+Source: [packages/pocket_studio/lib/src/studio_image.dart](https://github.com/PocketFlutter/Pocket/blob/b06cb43cac4d553cea232ae1cd1f9ed4ee0c4ff4/sdk/packages/pocket_studio/lib/src/studio_image.dart#L9)
 
 ### `pocketStudioPreviewMaxSourcePixels`
 
 **Top-level variable** `const int pocketStudioPreviewMaxSourcePixels = 100 * 1000 * 1000`
 
-Source: [packages/pocket_studio/lib/src/studio_image.dart](https://github.com/PocketFlutter/Pocket/blob/235b5b5589faf492f4a9fc3b7c0827bcd1d9de2c/sdk/packages/pocket_studio/lib/src/studio_image.dart#L12)
+Source: [packages/pocket_studio/lib/src/studio_image.dart](https://github.com/PocketFlutter/Pocket/blob/b06cb43cac4d553cea232ae1cd1f9ed4ee0c4ff4/sdk/packages/pocket_studio/lib/src/studio_image.dart#L12)
 
 ### `studioOpaqueId`
 
 **function** `String studioOpaqueId(Object? value, String name)`
 
-Source: [packages/pocket_studio/lib/src/studio_paths.dart](https://github.com/PocketFlutter/Pocket/blob/235b5b5589faf492f4a9fc3b7c0827bcd1d9de2c/sdk/packages/pocket_studio/lib/src/studio_paths.dart#L20)
+Source: [packages/pocket_studio/lib/src/studio_paths.dart](https://github.com/PocketFlutter/Pocket/blob/b06cb43cac4d553cea232ae1cd1f9ed4ee0c4ff4/sdk/packages/pocket_studio/lib/src/studio_paths.dart#L20)
 
 ### `studioProjectId`
 
 **function** `String studioProjectId(Object? value, [String name = 'project'])`
 
-Source: [packages/pocket_studio/lib/src/studio_paths.dart](https://github.com/PocketFlutter/Pocket/blob/235b5b5589faf492f4a9fc3b7c0827bcd1d9de2c/sdk/packages/pocket_studio/lib/src/studio_paths.dart#L12)
+Source: [packages/pocket_studio/lib/src/studio_paths.dart](https://github.com/PocketFlutter/Pocket/blob/b06cb43cac4d553cea232ae1cd1f9ed4ee0c4ff4/sdk/packages/pocket_studio/lib/src/studio_paths.dart#L12)
 
 ### `studioRelativePath`
 
 **function** `List<String> studioRelativePath(Object? value, [String name = 'path'])`
 
-Source: [packages/pocket_studio/lib/src/studio_paths.dart](https://github.com/PocketFlutter/Pocket/blob/235b5b5589faf492f4a9fc3b7c0827bcd1d9de2c/sdk/packages/pocket_studio/lib/src/studio_paths.dart#L31)
+Source: [packages/pocket_studio/lib/src/studio_paths.dart](https://github.com/PocketFlutter/Pocket/blob/b06cb43cac4d553cea232ae1cd1f9ed4ee0c4ff4/sdk/packages/pocket_studio/lib/src/studio_paths.dart#L31)
 ## `pocket_sync`
 
 ### Import `package:pocket_sync/pocket_sync.dart`
 
-Entry: [packages/pocket_sync/lib/pocket_sync.dart](https://github.com/PocketFlutter/Pocket/blob/235b5b5589faf492f4a9fc3b7c0827bcd1d9de2c/sdk/packages/pocket_sync/lib/pocket_sync.dart)
+Entry: [packages/pocket_sync/lib/pocket_sync.dart](https://github.com/PocketFlutter/Pocket/blob/b06cb43cac4d553cea232ae1cd1f9ed4ee0c4ff4/sdk/packages/pocket_sync/lib/pocket_sync.dart)
 
 ### `PocketSyncPlugin`
 
@@ -5478,60 +5523,60 @@ Members:
 - `Future<void> deactivate(PocketPluginContext context)`
 - `Future<void> dispose()`
 
-Source: [packages/pocket_sync/lib/src/sync_plugin.dart](https://github.com/PocketFlutter/Pocket/blob/235b5b5589faf492f4a9fc3b7c0827bcd1d9de2c/sdk/packages/pocket_sync/lib/src/sync_plugin.dart#L34)
+Source: [packages/pocket_sync/lib/src/sync_plugin.dart](https://github.com/PocketFlutter/Pocket/blob/b06cb43cac4d553cea232ae1cd1f9ed4ee0c4ff4/sdk/packages/pocket_sync/lib/src/sync_plugin.dart#L34)
 
 ### `pocketSyncClientRequestCapability`
 
 **Top-level variable** `const String pocketSyncClientRequestCapability = 'sync.client.request'`
 
-Source: [packages/pocket_sync/lib/src/sync_plugin.dart](https://github.com/PocketFlutter/Pocket/blob/235b5b5589faf492f4a9fc3b7c0827bcd1d9de2c/sdk/packages/pocket_sync/lib/src/sync_plugin.dart#L22)
+Source: [packages/pocket_sync/lib/src/sync_plugin.dart](https://github.com/PocketFlutter/Pocket/blob/b06cb43cac4d553cea232ae1cd1f9ed4ee0c4ff4/sdk/packages/pocket_sync/lib/src/sync_plugin.dart#L22)
 
 ### `pocketSyncNetworkPermission`
 
 **Top-level variable** `const String pocketSyncNetworkPermission = 'network'`
 
-Source: [packages/pocket_sync/lib/src/sync_plugin.dart](https://github.com/PocketFlutter/Pocket/blob/235b5b5589faf492f4a9fc3b7c0827bcd1d9de2c/sdk/packages/pocket_sync/lib/src/sync_plugin.dart#L15)
+Source: [packages/pocket_sync/lib/src/sync_plugin.dart](https://github.com/PocketFlutter/Pocket/blob/b06cb43cac4d553cea232ae1cd1f9ed4ee0c4ff4/sdk/packages/pocket_sync/lib/src/sync_plugin.dart#L15)
 
 ### `pocketSyncPluginId`
 
 **Top-level variable** `const String pocketSyncPluginId = 'dart.pocket_sync'`
 
-Source: [packages/pocket_sync/lib/src/sync_plugin.dart](https://github.com/PocketFlutter/Pocket/blob/235b5b5589faf492f4a9fc3b7c0827bcd1d9de2c/sdk/packages/pocket_sync/lib/src/sync_plugin.dart#L14)
+Source: [packages/pocket_sync/lib/src/sync_plugin.dart](https://github.com/PocketFlutter/Pocket/blob/b06cb43cac4d553cea232ae1cd1f9ed4ee0c4ff4/sdk/packages/pocket_sync/lib/src/sync_plugin.dart#L14)
 
 ### `pocketSyncServerEventsCapability`
 
 **Top-level variable** `const String pocketSyncServerEventsCapability = 'sync.server.events'`
 
-Source: [packages/pocket_sync/lib/src/sync_plugin.dart](https://github.com/PocketFlutter/Pocket/blob/235b5b5589faf492f4a9fc3b7c0827bcd1d9de2c/sdk/packages/pocket_sync/lib/src/sync_plugin.dart#L21)
+Source: [packages/pocket_sync/lib/src/sync_plugin.dart](https://github.com/PocketFlutter/Pocket/blob/b06cb43cac4d553cea232ae1cd1f9ed4ee0c4ff4/sdk/packages/pocket_sync/lib/src/sync_plugin.dart#L21)
 
 ### `pocketSyncServerIngestCapability`
 
 **Top-level variable** `const String pocketSyncServerIngestCapability = 'sync.server.ingestLocalOps'`
 
-Source: [packages/pocket_sync/lib/src/sync_plugin.dart](https://github.com/PocketFlutter/Pocket/blob/235b5b5589faf492f4a9fc3b7c0827bcd1d9de2c/sdk/packages/pocket_sync/lib/src/sync_plugin.dart#L20)
+Source: [packages/pocket_sync/lib/src/sync_plugin.dart](https://github.com/PocketFlutter/Pocket/blob/b06cb43cac4d553cea232ae1cd1f9ed4ee0c4ff4/sdk/packages/pocket_sync/lib/src/sync_plugin.dart#L20)
 
 ### `pocketSyncServerStartCapability`
 
 **Top-level variable** `const String pocketSyncServerStartCapability = 'sync.server.start'`
 
-Source: [packages/pocket_sync/lib/src/sync_plugin.dart](https://github.com/PocketFlutter/Pocket/blob/235b5b5589faf492f4a9fc3b7c0827bcd1d9de2c/sdk/packages/pocket_sync/lib/src/sync_plugin.dart#L17)
+Source: [packages/pocket_sync/lib/src/sync_plugin.dart](https://github.com/PocketFlutter/Pocket/blob/b06cb43cac4d553cea232ae1cd1f9ed4ee0c4ff4/sdk/packages/pocket_sync/lib/src/sync_plugin.dart#L17)
 
 ### `pocketSyncServerStatusCapability`
 
 **Top-level variable** `const String pocketSyncServerStatusCapability = 'sync.server.status'`
 
-Source: [packages/pocket_sync/lib/src/sync_plugin.dart](https://github.com/PocketFlutter/Pocket/blob/235b5b5589faf492f4a9fc3b7c0827bcd1d9de2c/sdk/packages/pocket_sync/lib/src/sync_plugin.dart#L19)
+Source: [packages/pocket_sync/lib/src/sync_plugin.dart](https://github.com/PocketFlutter/Pocket/blob/b06cb43cac4d553cea232ae1cd1f9ed4ee0c4ff4/sdk/packages/pocket_sync/lib/src/sync_plugin.dart#L19)
 
 ### `pocketSyncServerStopCapability`
 
 **Top-level variable** `const String pocketSyncServerStopCapability = 'sync.server.stop'`
 
-Source: [packages/pocket_sync/lib/src/sync_plugin.dart](https://github.com/PocketFlutter/Pocket/blob/235b5b5589faf492f4a9fc3b7c0827bcd1d9de2c/sdk/packages/pocket_sync/lib/src/sync_plugin.dart#L18)
+Source: [packages/pocket_sync/lib/src/sync_plugin.dart](https://github.com/PocketFlutter/Pocket/blob/b06cb43cac4d553cea232ae1cd1f9ed4ee0c4ff4/sdk/packages/pocket_sync/lib/src/sync_plugin.dart#L18)
 ## `pocket_weather`
 
 ### Import `package:pocket_weather/pocket_weather.dart`
 
-Entry: [packages/pocket_weather/lib/pocket_weather.dart](https://github.com/PocketFlutter/Pocket/blob/235b5b5589faf492f4a9fc3b7c0827bcd1d9de2c/sdk/packages/pocket_weather/lib/pocket_weather.dart)
+Entry: [packages/pocket_weather/lib/pocket_weather.dart](https://github.com/PocketFlutter/Pocket/blob/b06cb43cac4d553cea232ae1cd1f9ed4ee0c4ff4/sdk/packages/pocket_weather/lib/pocket_weather.dart)
 
 ### `HardwareCapabilities`
 
@@ -5560,7 +5605,7 @@ Members:
 - `static const String weatherCurrent = 'hardware.weather.current'`
 - `static const Set<String> all = <String>{permissions, requestPermission, cameraPreviewStart, cameraPreviewStop, cameraLensSwitch, cameraFlashToggle, cameraCapture, photosList, photosDelete, bluetoothScan, bluetoothConnect, bluetoothDisconnect, bluetoothRead, bluetoothWrite, bluetoothNotifications, sensorsRead, sensorsWatch, biometricAuthenticate, locationCurrent, weatherCurrent}`
 
-Source: [packages/pocket_hardware_core/lib/src/hardware_plugin.dart](https://github.com/PocketFlutter/Pocket/blob/235b5b5589faf492f4a9fc3b7c0827bcd1d9de2c/sdk/packages/pocket_hardware_core/lib/src/hardware_plugin.dart#L201)
+Source: [packages/pocket_hardware_core/lib/src/hardware_plugin.dart](https://github.com/PocketFlutter/Pocket/blob/b06cb43cac4d553cea232ae1cd1f9ed4ee0c4ff4/sdk/packages/pocket_hardware_core/lib/src/hardware_plugin.dart#L201)
 
 ### `HardwarePermissions`
 
@@ -5577,7 +5622,7 @@ Members:
 - `static const String network = 'hardware.network'`
 - `static const Set<String> all = <String>{camera, photos, bluetooth, sensors, biometrics, location, microphone, network}`
 
-Source: [packages/pocket_hardware_core/lib/src/hardware_plugin.dart](https://github.com/PocketFlutter/Pocket/blob/235b5b5589faf492f4a9fc3b7c0827bcd1d9de2c/sdk/packages/pocket_hardware_core/lib/src/hardware_plugin.dart#L179)
+Source: [packages/pocket_hardware_core/lib/src/hardware_plugin.dart](https://github.com/PocketFlutter/Pocket/blob/b06cb43cac4d553cea232ae1cd1f9ed4ee0c4ff4/sdk/packages/pocket_hardware_core/lib/src/hardware_plugin.dart#L179)
 
 ### `HardwarePlatform`
 
@@ -5586,7 +5631,7 @@ Source: [packages/pocket_hardware_core/lib/src/hardware_plugin.dart](https://git
 Members:
 - `Future<Map<String, dynamic>> invoke( String method, [ Map<String, dynamic> arguments = const <String, dynamic>{}, ])`
 
-Source: [packages/pocket_hardware_core/lib/src/hardware_plugin.dart](https://github.com/PocketFlutter/Pocket/blob/235b5b5589faf492f4a9fc3b7c0827bcd1d9de2c/sdk/packages/pocket_hardware_core/lib/src/hardware_plugin.dart#L254)
+Source: [packages/pocket_hardware_core/lib/src/hardware_plugin.dart](https://github.com/PocketFlutter/Pocket/blob/b06cb43cac4d553cea232ae1cd1f9ed4ee0c4ff4/sdk/packages/pocket_hardware_core/lib/src/hardware_plugin.dart#L254)
 
 ### `HardwarePlatformException`
 
@@ -5598,7 +5643,7 @@ Members:
 - `final String message`
 - `String toString()`
 
-Source: [packages/pocket_hardware_core/lib/src/hardware_plugin.dart](https://github.com/PocketFlutter/Pocket/blob/235b5b5589faf492f4a9fc3b7c0827bcd1d9de2c/sdk/packages/pocket_hardware_core/lib/src/hardware_plugin.dart#L281)
+Source: [packages/pocket_hardware_core/lib/src/hardware_plugin.dart](https://github.com/PocketFlutter/Pocket/blob/b06cb43cac4d553cea232ae1cd1f9ed4ee0c4ff4/sdk/packages/pocket_hardware_core/lib/src/hardware_plugin.dart#L281)
 
 ### `HardwareStreamingPlatform`
 
@@ -5609,19 +5654,19 @@ Members:
 - `Future<Map<String, dynamic>> startHardwareStream( Map<String, dynamic> arguments, )`
 - `Future<Map<String, dynamic>> stopHardwareStream( Map<String, dynamic> arguments, )`
 
-Source: [packages/pocket_hardware_core/lib/src/hardware_plugin.dart](https://github.com/PocketFlutter/Pocket/blob/235b5b5589faf492f4a9fc3b7c0827bcd1d9de2c/sdk/packages/pocket_hardware_core/lib/src/hardware_plugin.dart#L265)
+Source: [packages/pocket_hardware_core/lib/src/hardware_plugin.dart](https://github.com/PocketFlutter/Pocket/blob/b06cb43cac4d553cea232ae1cd1f9ed4ee0c4ff4/sdk/packages/pocket_hardware_core/lib/src/hardware_plugin.dart#L265)
 
 ### `HardwareTextureCallback`
 
 **Typedef** `typedef HardwareTextureCallback = void Function(int textureId);`
 
-Source: [packages/pocket_hardware_core/lib/src/hardware_plugin.dart](https://github.com/PocketFlutter/Pocket/blob/235b5b5589faf492f4a9fc3b7c0827bcd1d9de2c/sdk/packages/pocket_hardware_core/lib/src/hardware_plugin.dart#L249)
+Source: [packages/pocket_hardware_core/lib/src/hardware_plugin.dart](https://github.com/PocketFlutter/Pocket/blob/b06cb43cac4d553cea232ae1cd1f9ed4ee0c4ff4/sdk/packages/pocket_hardware_core/lib/src/hardware_plugin.dart#L249)
 
 ### `HardwareWeatherFetcher`
 
 **Typedef** `typedef HardwareWeatherFetcher = Future<Map<String, dynamic>> Function(Uri uri);`
 
-Source: [packages/pocket_hardware_core/lib/src/hardware_plugin.dart](https://github.com/PocketFlutter/Pocket/blob/235b5b5589faf492f4a9fc3b7c0827bcd1d9de2c/sdk/packages/pocket_hardware_core/lib/src/hardware_plugin.dart#L364)
+Source: [packages/pocket_hardware_core/lib/src/hardware_plugin.dart](https://github.com/PocketFlutter/Pocket/blob/b06cb43cac4d553cea232ae1cd1f9ed4ee0c4ff4/sdk/packages/pocket_hardware_core/lib/src/hardware_plugin.dart#L364)
 
 ### `PocketWeatherPlugin`
 
@@ -5630,12 +5675,12 @@ Source: [packages/pocket_hardware_core/lib/src/hardware_plugin.dart](https://git
 Members:
 - `PocketWeatherPlugin({ HardwarePlatform? platform, HardwareWeatherFetcher? weatherFetcher, Duration requestTimeout = const Duration(seconds: 16), })`
 
-Source: [packages/pocket_weather/lib/pocket_weather.dart](https://github.com/PocketFlutter/Pocket/blob/235b5b5589faf492f4a9fc3b7c0827bcd1d9de2c/sdk/packages/pocket_weather/lib/pocket_weather.dart#L15)
+Source: [packages/pocket_weather/lib/pocket_weather.dart](https://github.com/PocketFlutter/Pocket/blob/b06cb43cac4d553cea232ae1cd1f9ed4ee0c4ff4/sdk/packages/pocket_weather/lib/pocket_weather.dart#L15)
 ## `pocket_sdk`
 
 ### Import `package:pocket_sdk/pocket_sdk.dart`
 
-Entry: [lib/pocket_sdk.dart](https://github.com/PocketFlutter/Pocket/blob/235b5b5589faf492f4a9fc3b7c0827bcd1d9de2c/sdk/lib/pocket_sdk.dart)
+Entry: [lib/pocket_sdk.dart](https://github.com/PocketFlutter/Pocket/blob/b06cb43cac4d553cea232ae1cd1f9ed4ee0c4ff4/sdk/lib/pocket_sdk.dart)
 
 ### `DiagnosticClearFilter`
 
@@ -5650,7 +5695,7 @@ Members:
 - `final String? runtimeId`
 - `final Object? before`
 
-Source: [packages/pocket_diagnostics/lib/src/types.dart](https://github.com/PocketFlutter/Pocket/blob/235b5b5589faf492f4a9fc3b7c0827bcd1d9de2c/sdk/packages/pocket_diagnostics/lib/src/types.dart#L713)
+Source: [packages/pocket_diagnostics/lib/src/types.dart](https://github.com/PocketFlutter/Pocket/blob/b06cb43cac4d553cea232ae1cd1f9ed4ee0c4ff4/sdk/packages/pocket_diagnostics/lib/src/types.dart#L713)
 
 ### `DiagnosticContext`
 
@@ -5672,7 +5717,7 @@ Members:
 - `bool operator ==(Object other)`
 - `int get hashCode`
 
-Source: [packages/pocket_diagnostics/lib/src/types.dart](https://github.com/PocketFlutter/Pocket/blob/235b5b5589faf492f4a9fc3b7c0827bcd1d9de2c/sdk/packages/pocket_diagnostics/lib/src/types.dart#L68)
+Source: [packages/pocket_diagnostics/lib/src/types.dart](https://github.com/PocketFlutter/Pocket/blob/b06cb43cac4d553cea232ae1cd1f9ed4ee0c4ff4/sdk/packages/pocket_diagnostics/lib/src/types.dart#L68)
 
 ### `DiagnosticCrashInput`
 
@@ -5697,7 +5742,7 @@ Members:
 - `final Object? data`
 - `final int? recentLogLimit`
 
-Source: [packages/pocket_diagnostics/lib/src/types.dart](https://github.com/PocketFlutter/Pocket/blob/235b5b5589faf492f4a9fc3b7c0827bcd1d9de2c/sdk/packages/pocket_diagnostics/lib/src/types.dart#L599)
+Source: [packages/pocket_diagnostics/lib/src/types.dart](https://github.com/PocketFlutter/Pocket/blob/b06cb43cac4d553cea232ae1cd1f9ed4ee0c4ff4/sdk/packages/pocket_diagnostics/lib/src/types.dart#L599)
 
 ### `DiagnosticCrashRecord`
 
@@ -5711,7 +5756,7 @@ Members:
 - `final List<DiagnosticRecentLogSummary>? recentLogs`
 - `Map<String, Object?> toJson()`
 
-Source: [packages/pocket_diagnostics/lib/src/types.dart](https://github.com/PocketFlutter/Pocket/blob/235b5b5589faf492f4a9fc3b7c0827bcd1d9de2c/sdk/packages/pocket_diagnostics/lib/src/types.dart#L511)
+Source: [packages/pocket_diagnostics/lib/src/types.dart](https://github.com/PocketFlutter/Pocket/blob/b06cb43cac4d553cea232ae1cd1f9ed4ee0c4ff4/sdk/packages/pocket_diagnostics/lib/src/types.dart#L511)
 
 ### `DiagnosticExportBundle`
 
@@ -5729,7 +5774,7 @@ Members:
 - `int get schemaVersion`
 - `Map<String, Object?> toJson()`
 
-Source: [packages/pocket_diagnostics/lib/src/types.dart](https://github.com/PocketFlutter/Pocket/blob/235b5b5589faf492f4a9fc3b7c0827bcd1d9de2c/sdk/packages/pocket_diagnostics/lib/src/types.dart#L755)
+Source: [packages/pocket_diagnostics/lib/src/types.dart](https://github.com/PocketFlutter/Pocket/blob/b06cb43cac4d553cea232ae1cd1f9ed4ee0c4ff4/sdk/packages/pocket_diagnostics/lib/src/types.dart#L755)
 
 ### `DiagnosticLogInput`
 
@@ -5751,7 +5796,7 @@ Members:
 - `final DiagnosticContext? context`
 - `final Object? data`
 
-Source: [packages/pocket_diagnostics/lib/src/types.dart](https://github.com/PocketFlutter/Pocket/blob/235b5b5589faf492f4a9fc3b7c0827bcd1d9de2c/sdk/packages/pocket_diagnostics/lib/src/types.dart#L566)
+Source: [packages/pocket_diagnostics/lib/src/types.dart](https://github.com/PocketFlutter/Pocket/blob/b06cb43cac4d553cea232ae1cd1f9ed4ee0c4ff4/sdk/packages/pocket_diagnostics/lib/src/types.dart#L566)
 
 ### `DiagnosticLogRecord`
 
@@ -5762,7 +5807,7 @@ Members:
 - `final double? durationMs`
 - `Map<String, Object?> toJson()`
 
-Source: [packages/pocket_diagnostics/lib/src/types.dart](https://github.com/PocketFlutter/Pocket/blob/235b5b5589faf492f4a9fc3b7c0827bcd1d9de2c/sdk/packages/pocket_diagnostics/lib/src/types.dart#L470)
+Source: [packages/pocket_diagnostics/lib/src/types.dart](https://github.com/PocketFlutter/Pocket/blob/b06cb43cac4d553cea232ae1cd1f9ed4ee0c4ff4/sdk/packages/pocket_diagnostics/lib/src/types.dart#L470)
 
 ### `DiagnosticNormalizationLimits`
 
@@ -5779,7 +5824,7 @@ Members:
 - `final int maxCauseDepth`
 - `final int maxDataBytes`
 
-Source: [packages/pocket_diagnostics/lib/src/types.dart](https://github.com/PocketFlutter/Pocket/blob/235b5b5589faf492f4a9fc3b7c0827bcd1d9de2c/sdk/packages/pocket_diagnostics/lib/src/types.dart#L732)
+Source: [packages/pocket_diagnostics/lib/src/types.dart](https://github.com/PocketFlutter/Pocket/blob/b06cb43cac4d553cea232ae1cd1f9ed4ee0c4ff4/sdk/packages/pocket_diagnostics/lib/src/types.dart#L732)
 
 ### `DiagnosticQuery`
 
@@ -5805,7 +5850,7 @@ Members:
 - `final bool descending`
 - `DiagnosticQuery copyWith({ DiagnosticRecordKind? kind, List<DiagnosticRecordKind>? kinds, DiagnosticSeverity? severity, List<DiagnosticSeverity>? severities, DiagnosticSeverity? minSeverity, String? source, String? projectId, String? sessionId, String? runtimeId, Object? revision, String? tag, Object? since, Object? until, String? search, int? limit, bool? descending, })`
 
-Source: [packages/pocket_diagnostics/lib/src/types.dart](https://github.com/PocketFlutter/Pocket/blob/235b5b5589faf492f4a9fc3b7c0827bcd1d9de2c/sdk/packages/pocket_diagnostics/lib/src/types.dart#L638)
+Source: [packages/pocket_diagnostics/lib/src/types.dart](https://github.com/PocketFlutter/Pocket/blob/b06cb43cac4d553cea232ae1cd1f9ed4ee0c4ff4/sdk/packages/pocket_diagnostics/lib/src/types.dart#L638)
 
 ### `DiagnosticRecentLogSummary`
 
@@ -5827,7 +5872,7 @@ Members:
 - `String get level`
 - `Map<String, Object?> toJson()`
 
-Source: [packages/pocket_diagnostics/lib/src/types.dart](https://github.com/PocketFlutter/Pocket/blob/235b5b5589faf492f4a9fc3b7c0827bcd1d9de2c/sdk/packages/pocket_diagnostics/lib/src/types.dart#L243)
+Source: [packages/pocket_diagnostics/lib/src/types.dart](https://github.com/PocketFlutter/Pocket/blob/b06cb43cac4d553cea232ae1cd1f9ed4ee0c4ff4/sdk/packages/pocket_diagnostics/lib/src/types.dart#L243)
 
 ### `DiagnosticRecord`
 
@@ -5854,7 +5899,7 @@ Members:
 - `Map<String, Object?> toJson()`
 - `static DiagnosticRecord? tryFromJson(Object? raw)`
 
-Source: [packages/pocket_diagnostics/lib/src/types.dart](https://github.com/PocketFlutter/Pocket/blob/235b5b5589faf492f4a9fc3b7c0827bcd1d9de2c/sdk/packages/pocket_diagnostics/lib/src/types.dart#L301)
+Source: [packages/pocket_diagnostics/lib/src/types.dart](https://github.com/PocketFlutter/Pocket/blob/b06cb43cac4d553cea232ae1cd1f9ed4ee0c4ff4/sdk/packages/pocket_diagnostics/lib/src/types.dart#L301)
 
 ### `DiagnosticRecordKind`
 
@@ -5869,7 +5914,7 @@ Members:
 - `final String value`
 - `static DiagnosticRecordKind? tryParse(Object? raw)`
 
-Source: [packages/pocket_diagnostics/lib/src/types.dart](https://github.com/PocketFlutter/Pocket/blob/235b5b5589faf492f4a9fc3b7c0827bcd1d9de2c/sdk/packages/pocket_diagnostics/lib/src/types.dart#L20)
+Source: [packages/pocket_diagnostics/lib/src/types.dart](https://github.com/PocketFlutter/Pocket/blob/b06cb43cac4d553cea232ae1cd1f9ed4ee0c4ff4/sdk/packages/pocket_diagnostics/lib/src/types.dart#L20)
 
 ### `DiagnosticSeverity`
 
@@ -5888,7 +5933,7 @@ Members:
 - `final int rank`
 - `static DiagnosticSeverity? tryParse(Object? raw)`
 
-Source: [packages/pocket_diagnostics/lib/src/types.dart](https://github.com/PocketFlutter/Pocket/blob/235b5b5589faf492f4a9fc3b7c0827bcd1d9de2c/sdk/packages/pocket_diagnostics/lib/src/types.dart#L35)
+Source: [packages/pocket_diagnostics/lib/src/types.dart](https://github.com/PocketFlutter/Pocket/blob/b06cb43cac4d553cea232ae1cd1f9ed4ee0c4ff4/sdk/packages/pocket_diagnostics/lib/src/types.dart#L35)
 
 ### `DiagnosticsCollector`
 
@@ -5921,7 +5966,7 @@ Members:
 - `Future<void> flush()`
 - `Future<void> close()`
 
-Source: [packages/pocket_diagnostics/lib/src/collector.dart](https://github.com/PocketFlutter/Pocket/blob/235b5b5589faf492f4a9fc3b7c0827bcd1d9de2c/sdk/packages/pocket_diagnostics/lib/src/collector.dart#L219)
+Source: [packages/pocket_diagnostics/lib/src/collector.dart](https://github.com/PocketFlutter/Pocket/blob/b06cb43cac4d553cea232ae1cd1f9ed4ee0c4ff4/sdk/packages/pocket_diagnostics/lib/src/collector.dart#L219)
 
 ### `DiagnosticsStorage`
 
@@ -5935,7 +5980,7 @@ Members:
 - `Future<void> flush()`
 - `Future<void> close()`
 
-Source: [packages/pocket_diagnostics/lib/src/types.dart](https://github.com/PocketFlutter/Pocket/blob/235b5b5589faf492f4a9fc3b7c0827bcd1d9de2c/sdk/packages/pocket_diagnostics/lib/src/types.dart#L796)
+Source: [packages/pocket_diagnostics/lib/src/types.dart](https://github.com/PocketFlutter/Pocket/blob/b06cb43cac4d553cea232ae1cd1f9ed4ee0c4ff4/sdk/packages/pocket_diagnostics/lib/src/types.dart#L796)
 
 ### `DiagnosticsStorageAppendOptions`
 
@@ -5945,7 +5990,7 @@ Members:
 - `const DiagnosticsStorageAppendOptions({this.sync = false})`
 - `final bool sync`
 
-Source: [packages/pocket_diagnostics/lib/src/types.dart](https://github.com/PocketFlutter/Pocket/blob/235b5b5589faf492f4a9fc3b7c0827bcd1d9de2c/sdk/packages/pocket_diagnostics/lib/src/types.dart#L790)
+Source: [packages/pocket_diagnostics/lib/src/types.dart](https://github.com/PocketFlutter/Pocket/blob/b06cb43cac4d553cea232ae1cd1f9ed4ee0c4ff4/sdk/packages/pocket_diagnostics/lib/src/types.dart#L790)
 
 ### `FileDiagnosticsCollector`
 
@@ -5959,7 +6004,7 @@ Members:
 - `String get directory`
 - `String get journalPath`
 
-Source: [packages/pocket_diagnostics/lib/src/file_storage.dart](https://github.com/PocketFlutter/Pocket/blob/235b5b5589faf492f4a9fc3b7c0827bcd1d9de2c/sdk/packages/pocket_diagnostics/lib/src/file_storage.dart#L485)
+Source: [packages/pocket_diagnostics/lib/src/file_storage.dart](https://github.com/PocketFlutter/Pocket/blob/b06cb43cac4d553cea232ae1cd1f9ed4ee0c4ff4/sdk/packages/pocket_diagnostics/lib/src/file_storage.dart#L485)
 
 ### `FileDiagnosticsStorage`
 
@@ -5984,7 +6029,7 @@ Members:
 - `Future<void> flush()`
 - `Future<void> close()`
 
-Source: [packages/pocket_diagnostics/lib/src/file_storage.dart](https://github.com/PocketFlutter/Pocket/blob/235b5b5589faf492f4a9fc3b7c0827bcd1d9de2c/sdk/packages/pocket_diagnostics/lib/src/file_storage.dart#L97)
+Source: [packages/pocket_diagnostics/lib/src/file_storage.dart](https://github.com/PocketFlutter/Pocket/blob/b06cb43cac4d553cea232ae1cd1f9ed4ee0c4ff4/sdk/packages/pocket_diagnostics/lib/src/file_storage.dart#L97)
 
 ### `FlutterErrorCollector`
 
@@ -5993,7 +6038,7 @@ Source: [packages/pocket_diagnostics/lib/src/file_storage.dart](https://github.c
 Members:
 - `static FlutterErrorCollectorHandle attach({ required DiagnosticsCollector collector, DiagnosticContext? context, DiagnosticContext Function()? contextProvider, bool captureFlutterErrors = true, bool capturePlatformDispatcherErrors = true, void Function(DiagnosticCrashRecord record)? onCrashRecorded, PlatformDispatcher? platformDispatcher, })`
 
-Source: [packages/pocket_diagnostics/lib/src/flutter_adapter.dart](https://github.com/PocketFlutter/Pocket/blob/235b5b5589faf492f4a9fc3b7c0827bcd1d9de2c/sdk/packages/pocket_diagnostics/lib/src/flutter_adapter.dart#L19)
+Source: [packages/pocket_diagnostics/lib/src/flutter_adapter.dart](https://github.com/PocketFlutter/Pocket/blob/b06cb43cac4d553cea232ae1cd1f9ed4ee0c4ff4/sdk/packages/pocket_diagnostics/lib/src/flutter_adapter.dart#L19)
 
 ### `FlutterErrorCollectorHandle`
 
@@ -6003,7 +6048,7 @@ Members:
 - `bool get active`
 - `void detach()`
 
-Source: [packages/pocket_diagnostics/lib/src/flutter_adapter.dart](https://github.com/PocketFlutter/Pocket/blob/235b5b5589faf492f4a9fc3b7c0827bcd1d9de2c/sdk/packages/pocket_diagnostics/lib/src/flutter_adapter.dart#L14)
+Source: [packages/pocket_diagnostics/lib/src/flutter_adapter.dart](https://github.com/PocketFlutter/Pocket/blob/b06cb43cac4d553cea232ae1cd1f9ed4ee0c4ff4/sdk/packages/pocket_diagnostics/lib/src/flutter_adapter.dart#L14)
 
 ### `MemoryDiagnosticsStorage`
 
@@ -6020,7 +6065,7 @@ Members:
 - `Future<void> flush()`
 - `Future<void> close()`
 
-Source: [packages/pocket_diagnostics/lib/src/collector.dart](https://github.com/PocketFlutter/Pocket/blob/235b5b5589faf492f4a9fc3b7c0827bcd1d9de2c/sdk/packages/pocket_diagnostics/lib/src/collector.dart#L146)
+Source: [packages/pocket_diagnostics/lib/src/collector.dart](https://github.com/PocketFlutter/Pocket/blob/b06cb43cac4d553cea232ae1cd1f9ed4ee0c4ff4/sdk/packages/pocket_diagnostics/lib/src/collector.dart#L146)
 
 ### `NormalizedDiagnosticError`
 
@@ -6038,7 +6083,7 @@ Members:
 - `final bool? truncated`
 - `Map<String, Object?> toJson()`
 
-Source: [packages/pocket_diagnostics/lib/src/types.dart](https://github.com/PocketFlutter/Pocket/blob/235b5b5589faf492f4a9fc3b7c0827bcd1d9de2c/sdk/packages/pocket_diagnostics/lib/src/types.dart#L193)
+Source: [packages/pocket_diagnostics/lib/src/types.dart](https://github.com/PocketFlutter/Pocket/blob/b06cb43cac4d553cea232ae1cd1f9ed4ee0c4ff4/sdk/packages/pocket_diagnostics/lib/src/types.dart#L193)
 
 ### `PackageInfoPlugin`
 
@@ -6049,7 +6094,7 @@ Members:
 - `void register(PocketPluginContext context)`
 - `PackageInfoPlugin()` _(implicit)_
 
-Source: [lib/src/package_info_plugin.dart](https://github.com/PocketFlutter/Pocket/blob/235b5b5589faf492f4a9fc3b7c0827bcd1d9de2c/sdk/lib/src/package_info_plugin.dart#L5)
+Source: [lib/src/package_info_plugin.dart](https://github.com/PocketFlutter/Pocket/blob/b06cb43cac4d553cea232ae1cd1f9ed4ee0c4ff4/sdk/lib/src/package_info_plugin.dart#L5)
 
 ### `PerformanceHistory`
 
@@ -6071,7 +6116,7 @@ Members:
 - `Future<void> flush()`
 - `Future<void> dispose()`
 
-Source: [lib/src/performance_history.dart](https://github.com/PocketFlutter/Pocket/blob/235b5b5589faf492f4a9fc3b7c0827bcd1d9de2c/sdk/lib/src/performance_history.dart#L14)
+Source: [lib/src/performance_history.dart](https://github.com/PocketFlutter/Pocket/blob/b06cb43cac4d553cea232ae1cd1f9ed4ee0c4ff4/sdk/lib/src/performance_history.dart#L14)
 
 ### `PocketApp`
 
@@ -6085,7 +6130,7 @@ Members:
 - `final PocketLoadingBuilder? loadingBuilder`
 - `Widget build(BuildContext context)`
 
-Source: [lib/src/pocket_app.dart](https://github.com/PocketFlutter/Pocket/blob/235b5b5589faf492f4a9fc3b7c0827bcd1d9de2c/sdk/lib/src/pocket_app.dart#L12)
+Source: [lib/src/pocket_app.dart](https://github.com/PocketFlutter/Pocket/blob/b06cb43cac4d553cea232ae1cd1f9ed4ee0c4ff4/sdk/lib/src/pocket_app.dart#L12)
 
 ### `PocketAppConfig`
 
@@ -6125,7 +6170,7 @@ Members:
 - `bool operator ==(Object other)`
 - `int get hashCode`
 
-Source: [lib/src/pocket_config.dart](https://github.com/PocketFlutter/Pocket/blob/235b5b5589faf492f4a9fc3b7c0827bcd1d9de2c/sdk/lib/src/pocket_config.dart#L227)
+Source: [lib/src/pocket_config.dart](https://github.com/PocketFlutter/Pocket/blob/b06cb43cac4d553cea232ae1cd1f9ed4ee0c4ff4/sdk/lib/src/pocket_config.dart#L227)
 
 ### `PocketBoundedOffloadProvider`
 
@@ -6145,7 +6190,7 @@ Members:
 - `void cancel(PocketOffloadRequest request)`
 - `Future<void> close()`
 
-Source: [packages/pocket_flutter/lib/src/pocket_offload_runtime.dart](https://github.com/PocketFlutter/Pocket/blob/235b5b5589faf492f4a9fc3b7c0827bcd1d9de2c/sdk/packages/pocket_flutter/lib/src/pocket_offload_runtime.dart#L177)
+Source: [packages/pocket_flutter/lib/src/pocket_offload_runtime.dart](https://github.com/PocketFlutter/Pocket/blob/b06cb43cac4d553cea232ae1cd1f9ed4ee0c4ff4/sdk/packages/pocket_flutter/lib/src/pocket_offload_runtime.dart#L177)
 
 ### `PocketBundledApplicationCatalog`
 
@@ -6161,7 +6206,7 @@ Members:
 - `static Future<PocketBundledApplicationCatalog> loadFromBundle( String catalogAsset, { AssetBundle? bundle, required String assetPrefix, required int firstCompositorHandle, required int lastCompositorHandle, Set<String> reservedAppIds = const <String>{}, })`
 - `Map<String, PocketAppConfig> applicationsWithNativePolicies({ Map<String, PocketAppConfig> nativePolicies = const <String, PocketAppConfig>{}, })`
 
-Source: [lib/src/pocket_bundled_application_catalog.dart](https://github.com/PocketFlutter/Pocket/blob/235b5b5589faf492f4a9fc3b7c0827bcd1d9de2c/sdk/lib/src/pocket_bundled_application_catalog.dart#L56)
+Source: [lib/src/pocket_bundled_application_catalog.dart](https://github.com/PocketFlutter/Pocket/blob/b06cb43cac4d553cea232ae1cd1f9ed4ee0c4ff4/sdk/lib/src/pocket_bundled_application_catalog.dart#L56)
 
 ### `PocketBundledApplicationEntry`
 
@@ -6175,7 +6220,7 @@ Members:
 - `final String? workerBytecodeAsset`
 - `final bool declaresHttpWorker`
 
-Source: [lib/src/pocket_bundled_application_catalog.dart](https://github.com/PocketFlutter/Pocket/blob/235b5b5589faf492f4a9fc3b7c0827bcd1d9de2c/sdk/lib/src/pocket_bundled_application_catalog.dart#L12)
+Source: [lib/src/pocket_bundled_application_catalog.dart](https://github.com/PocketFlutter/Pocket/blob/b06cb43cac4d553cea232ae1cd1f9ed4ee0c4ff4/sdk/lib/src/pocket_bundled_application_catalog.dart#L12)
 
 ### `PocketCancellationToken`
 
@@ -6188,7 +6233,7 @@ Members:
 - `void throwIfCancelled()`
 - `PocketCancellationToken()` _(implicit)_
 
-Source: [packages/pocket_services/lib/src/pocket_package.dart](https://github.com/PocketFlutter/Pocket/blob/235b5b5589faf492f4a9fc3b7c0827bcd1d9de2c/sdk/packages/pocket_services/lib/src/pocket_package.dart#L81)
+Source: [packages/pocket_services/lib/src/pocket_package.dart](https://github.com/PocketFlutter/Pocket/blob/b06cb43cac4d553cea232ae1cd1f9ed4ee0c4ff4/sdk/packages/pocket_services/lib/src/pocket_package.dart#L81)
 
 ### `PocketCapabilityException`
 
@@ -6200,7 +6245,7 @@ Members:
 - `final String message`
 - `String toString()`
 
-Source: [packages/pocket_services/lib/src/pocket_host.dart](https://github.com/PocketFlutter/Pocket/blob/235b5b5589faf492f4a9fc3b7c0827bcd1d9de2c/sdk/packages/pocket_services/lib/src/pocket_host.dart#L124)
+Source: [packages/pocket_services/lib/src/pocket_host.dart](https://github.com/PocketFlutter/Pocket/blob/b06cb43cac4d553cea232ae1cd1f9ed4ee0c4ff4/sdk/packages/pocket_services/lib/src/pocket_host.dart#L124)
 
 ### `PocketCapabilityKind`
 
@@ -6210,7 +6255,7 @@ Values:
 - `request`
 - `stream`
 
-Source: [packages/pocket_services/lib/src/pocket_host.dart](https://github.com/PocketFlutter/Pocket/blob/235b5b5589faf492f4a9fc3b7c0827bcd1d9de2c/sdk/packages/pocket_services/lib/src/pocket_host.dart#L16)
+Source: [packages/pocket_services/lib/src/pocket_host.dart](https://github.com/PocketFlutter/Pocket/blob/b06cb43cac4d553cea232ae1cd1f9ed4ee0c4ff4/sdk/packages/pocket_services/lib/src/pocket_host.dart#L16)
 
 ### `PocketCompositorSlot`
 
@@ -6227,7 +6272,7 @@ Members:
 - `final int drawIndex`
 - `final bool preserveDisplayGeometry`
 
-Source: [packages/pocket_flutter/lib/src/pocket_compositor.dart](https://github.com/PocketFlutter/Pocket/blob/235b5b5589faf492f4a9fc3b7c0827bcd1d9de2c/sdk/packages/pocket_flutter/lib/src/pocket_compositor.dart#L13)
+Source: [packages/pocket_flutter/lib/src/pocket_compositor.dart](https://github.com/PocketFlutter/Pocket/blob/b06cb43cac4d553cea232ae1cd1f9ed4ee0c4ff4/sdk/packages/pocket_flutter/lib/src/pocket_compositor.dart#L13)
 
 ### `PocketDuplexChannel`
 
@@ -6252,7 +6297,7 @@ Members:
 - `List<PocketDuplexEvent> drainFromPocketJs({int maxBatch = 64})`
 - `void close()`
 
-Source: [packages/pocket_flutter/lib/src/pocket_duplex.dart](https://github.com/PocketFlutter/Pocket/blob/235b5b5589faf492f4a9fc3b7c0827bcd1d9de2c/sdk/packages/pocket_flutter/lib/src/pocket_duplex.dart#L63)
+Source: [packages/pocket_flutter/lib/src/pocket_duplex.dart](https://github.com/PocketFlutter/Pocket/blob/b06cb43cac4d553cea232ae1cd1f9ed4ee0c4ff4/sdk/packages/pocket_flutter/lib/src/pocket_duplex.dart#L63)
 
 ### `PocketDuplexEndpoint`
 
@@ -6267,7 +6312,7 @@ Members:
 - `void consumeEgress(int messageCount)`
 - `void close()`
 
-Source: [packages/pocket_flutter/lib/src/pocket_duplex.dart](https://github.com/PocketFlutter/Pocket/blob/235b5b5589faf492f4a9fc3b7c0827bcd1d9de2c/sdk/packages/pocket_flutter/lib/src/pocket_duplex.dart#L16)
+Source: [packages/pocket_flutter/lib/src/pocket_duplex.dart](https://github.com/PocketFlutter/Pocket/blob/b06cb43cac4d553cea232ae1cd1f9ed4ee0c4ff4/sdk/packages/pocket_flutter/lib/src/pocket_duplex.dart#L16)
 
 ### `PocketDuplexEvent`
 
@@ -6276,13 +6321,13 @@ Source: [packages/pocket_flutter/lib/src/pocket_duplex.dart](https://github.com/
 Members:
 - `const PocketDuplexEvent({ required super.msgType, super.flags, required super.targetId, super.arg0, super.arg1, })`
 
-Source: [packages/pocket_flutter/lib/src/pocket_duplex.dart](https://github.com/PocketFlutter/Pocket/blob/235b5b5589faf492f4a9fc3b7c0827bcd1d9de2c/sdk/packages/pocket_flutter/lib/src/pocket_duplex.dart#L405)
+Source: [packages/pocket_flutter/lib/src/pocket_duplex.dart](https://github.com/PocketFlutter/Pocket/blob/b06cb43cac4d553cea232ae1cd1f9ed4ee0c4ff4/sdk/packages/pocket_flutter/lib/src/pocket_duplex.dart#L405)
 
 ### `PocketDuplexEventCallback`
 
 **Typedef** `typedef PocketDuplexEventCallback = void Function(PocketDuplexEvent event);`
 
-Source: [packages/pocket_flutter/lib/src/pocket_view.dart](https://github.com/PocketFlutter/Pocket/blob/235b5b5589faf492f4a9fc3b7c0827bcd1d9de2c/sdk/packages/pocket_flutter/lib/src/pocket_view.dart#L41)
+Source: [packages/pocket_flutter/lib/src/pocket_view.dart](https://github.com/PocketFlutter/Pocket/blob/b06cb43cac4d553cea232ae1cd1f9ed4ee0c4ff4/sdk/packages/pocket_flutter/lib/src/pocket_view.dart#L41)
 
 ### `PocketDuplexMessage`
 
@@ -6296,7 +6341,7 @@ Members:
 - `final double arg0`
 - `final double arg1`
 
-Source: [packages/pocket_flutter/lib/src/pocket_duplex.dart](https://github.com/PocketFlutter/Pocket/blob/235b5b5589faf492f4a9fc3b7c0827bcd1d9de2c/sdk/packages/pocket_flutter/lib/src/pocket_duplex.dart#L389)
+Source: [packages/pocket_flutter/lib/src/pocket_duplex.dart](https://github.com/PocketFlutter/Pocket/blob/b06cb43cac4d553cea232ae1cd1f9ed4ee0c4ff4/sdk/packages/pocket_flutter/lib/src/pocket_duplex.dart#L389)
 
 ### `PocketEvent`
 
@@ -6310,7 +6355,7 @@ Members:
 - `final int? wireByteLength`
 - `factory PocketEvent.fromJson( Map<String, dynamic> json, { int? wireByteLength, })`
 
-Source: [packages/pocket_flutter/lib/src/pocket_model.dart](https://github.com/PocketFlutter/Pocket/blob/235b5b5589faf492f4a9fc3b7c0827bcd1d9de2c/sdk/packages/pocket_flutter/lib/src/pocket_model.dart#L690)
+Source: [packages/pocket_flutter/lib/src/pocket_model.dart](https://github.com/PocketFlutter/Pocket/blob/b06cb43cac4d553cea232ae1cd1f9ed4ee0c4ff4/sdk/packages/pocket_flutter/lib/src/pocket_model.dart#L690)
 
 ### `PocketGuest`
 
@@ -6324,7 +6369,7 @@ Members:
 - `final PocketLoadingBuilder? loadingBuilder`
 - `Widget build(BuildContext context)`
 
-Source: [lib/src/pocket_app.dart](https://github.com/PocketFlutter/Pocket/blob/235b5b5589faf492f4a9fc3b7c0827bcd1d9de2c/sdk/lib/src/pocket_app.dart#L52)
+Source: [lib/src/pocket_app.dart](https://github.com/PocketFlutter/Pocket/blob/b06cb43cac4d553cea232ae1cd1f9ed4ee0c4ff4/sdk/lib/src/pocket_app.dart#L52)
 
 ### `PocketHostCatalogEntry`
 
@@ -6339,7 +6384,7 @@ Members:
 - `final Uri hostConfigUrl`
 - `final String? rootPayloadSha256`
 
-Source: [lib/src/pocket_host_config.dart](https://github.com/PocketFlutter/Pocket/blob/235b5b5589faf492f4a9fc3b7c0827bcd1d9de2c/sdk/lib/src/pocket_host_config.dart#L57)
+Source: [lib/src/pocket_host_config.dart](https://github.com/PocketFlutter/Pocket/blob/b06cb43cac4d553cea232ae1cd1f9ed4ee0c4ff4/sdk/lib/src/pocket_host_config.dart#L57)
 
 ### `PocketHostConfig`
 
@@ -6360,7 +6405,7 @@ Members:
 - `static Future<PocketHostConfig?> loadFromEnvironment({ String? requiredRootPayloadSha256, bool cacheFirst = false, PocketHostLoadProgressCallback? onProgress, PocketCancellationToken? cancellation, })`
 - `Map<String, PocketAppConfig> get hostApplications`
 
-Source: [lib/src/pocket_host_config.dart](https://github.com/PocketFlutter/Pocket/blob/235b5b5589faf492f4a9fc3b7c0827bcd1d9de2c/sdk/lib/src/pocket_host_config.dart#L75)
+Source: [lib/src/pocket_host_config.dart](https://github.com/PocketFlutter/Pocket/blob/b06cb43cac4d553cea232ae1cd1f9ed4ee0c4ff4/sdk/lib/src/pocket_host_config.dart#L75)
 
 ### `PocketHostDiagnostics`
 
@@ -6394,7 +6439,7 @@ Members:
 - `Future<void> flush()`
 - `Future<void> close()`
 
-Source: [lib/src/pocket_diagnostics.dart](https://github.com/PocketFlutter/Pocket/blob/235b5b5589faf492f4a9fc3b7c0827bcd1d9de2c/sdk/lib/src/pocket_diagnostics.dart#L15)
+Source: [lib/src/pocket_diagnostics.dart](https://github.com/PocketFlutter/Pocket/blob/b06cb43cac4d553cea232ae1cd1f9ed4ee0c4ff4/sdk/lib/src/pocket_diagnostics.dart#L15)
 
 ### `PocketHostLoadProgress`
 
@@ -6406,13 +6451,13 @@ Members:
 - `final int downloadedBytes`
 - `final int? totalBytes`
 
-Source: [lib/src/pocket_host_config.dart](https://github.com/PocketFlutter/Pocket/blob/235b5b5589faf492f4a9fc3b7c0827bcd1d9de2c/sdk/lib/src/pocket_host_config.dart#L30)
+Source: [lib/src/pocket_host_config.dart](https://github.com/PocketFlutter/Pocket/blob/b06cb43cac4d553cea232ae1cd1f9ed4ee0c4ff4/sdk/lib/src/pocket_host_config.dart#L30)
 
 ### `PocketHostLoadProgressCallback`
 
 **Typedef** `typedef PocketHostLoadProgressCallback = void Function(PocketHostLoadProgress progress);`
 
-Source: [lib/src/pocket_host_config.dart](https://github.com/PocketFlutter/Pocket/blob/235b5b5589faf492f4a9fc3b7c0827bcd1d9de2c/sdk/lib/src/pocket_host_config.dart#L48)
+Source: [lib/src/pocket_host_config.dart](https://github.com/PocketFlutter/Pocket/blob/b06cb43cac4d553cea232ae1cd1f9ed4ee0c4ff4/sdk/lib/src/pocket_host_config.dart#L48)
 
 ### `PocketHostStreamContext`
 
@@ -6427,19 +6472,19 @@ Members:
 - `Map<String, dynamic> get params`
 - `Stream<Object?> get incoming`
 
-Source: [packages/pocket_services/lib/src/pocket_host.dart](https://github.com/PocketFlutter/Pocket/blob/235b5b5589faf492f4a9fc3b7c0827bcd1d9de2c/sdk/packages/pocket_services/lib/src/pocket_host.dart#L108)
+Source: [packages/pocket_services/lib/src/pocket_host.dart](https://github.com/PocketFlutter/Pocket/blob/b06cb43cac4d553cea232ae1cd1f9ed4ee0c4ff4/sdk/packages/pocket_services/lib/src/pocket_host.dart#L108)
 
 ### `PocketHostSurfaceBuilder`
 
 **Typedef** `typedef PocketHostSurfaceBuilder = Widget? Function(PocketCompositorSlot slot);`
 
-Source: [packages/pocket_flutter/lib/src/pocket_compositor.dart](https://github.com/PocketFlutter/Pocket/blob/235b5b5589faf492f4a9fc3b7c0827bcd1d9de2c/sdk/packages/pocket_flutter/lib/src/pocket_compositor.dart#L62)
+Source: [packages/pocket_flutter/lib/src/pocket_compositor.dart](https://github.com/PocketFlutter/Pocket/blob/b06cb43cac4d553cea232ae1cd1f9ed4ee0c4ff4/sdk/packages/pocket_flutter/lib/src/pocket_compositor.dart#L62)
 
 ### `PocketLoadingBuilder`
 
 **Typedef** `typedef PocketLoadingBuilder = Widget Function(BuildContext context, PocketStartupProgress progress);`
 
-Source: [packages/pocket_flutter/lib/src/pocket_startup_progress.dart](https://github.com/PocketFlutter/Pocket/blob/235b5b5589faf492f4a9fc3b7c0827bcd1d9de2c/sdk/packages/pocket_flutter/lib/src/pocket_startup_progress.dart#L101)
+Source: [packages/pocket_flutter/lib/src/pocket_startup_progress.dart](https://github.com/PocketFlutter/Pocket/blob/b06cb43cac4d553cea232ae1cd1f9ed4ee0c4ff4/sdk/packages/pocket_flutter/lib/src/pocket_startup_progress.dart#L101)
 
 ### `PocketLongFrameEvent`
 
@@ -6460,7 +6505,7 @@ Members:
 - `Map<String, dynamic> toJson()`
 - `PocketLongFrameEvent copyWith({ double? buildMs, double? rasterMs, double? nativeMs, double? activeGapMs, String? context, })`
 
-Source: [packages/pocket_flutter/lib/src/pocket_performance.dart](https://github.com/PocketFlutter/Pocket/blob/235b5b5589faf492f4a9fc3b7c0827bcd1d9de2c/sdk/packages/pocket_flutter/lib/src/pocket_performance.dart#L10)
+Source: [packages/pocket_flutter/lib/src/pocket_performance.dart](https://github.com/PocketFlutter/Pocket/blob/b06cb43cac4d553cea232ae1cd1f9ed4ee0c4ff4/sdk/packages/pocket_flutter/lib/src/pocket_performance.dart#L10)
 
 ### `PocketMemoryLimits`
 
@@ -6481,7 +6526,7 @@ Members:
 - `bool operator ==(Object other)`
 - `int get hashCode`
 
-Source: [packages/pocket_flutter/lib/src/pocket_memory_limits.dart](https://github.com/PocketFlutter/Pocket/blob/235b5b5589faf492f4a9fc3b7c0827bcd1d9de2c/sdk/packages/pocket_flutter/lib/src/pocket_memory_limits.dart#L3)
+Source: [packages/pocket_flutter/lib/src/pocket_memory_limits.dart](https://github.com/PocketFlutter/Pocket/blob/b06cb43cac4d553cea232ae1cd1f9ed4ee0c4ff4/sdk/packages/pocket_flutter/lib/src/pocket_memory_limits.dart#L3)
 
 ### `PocketOffloadCancellationToken`
 
@@ -6494,7 +6539,7 @@ Members:
 - `void throwIfCancelled()`
 - `PocketOffloadCancellationToken()` _(implicit)_
 
-Source: [packages/pocket_flutter/lib/src/pocket_offload_runtime.dart](https://github.com/PocketFlutter/Pocket/blob/235b5b5589faf492f4a9fc3b7c0827bcd1d9de2c/sdk/packages/pocket_flutter/lib/src/pocket_offload_runtime.dart#L125)
+Source: [packages/pocket_flutter/lib/src/pocket_offload_runtime.dart](https://github.com/PocketFlutter/Pocket/blob/b06cb43cac4d553cea232ae1cd1f9ed4ee0c4ff4/sdk/packages/pocket_flutter/lib/src/pocket_offload_runtime.dart#L125)
 
 ### `PocketOffloadCompletion`
 
@@ -6509,7 +6554,7 @@ Members:
 - `Map<String, Object> toJson()`
 - `String toNativeRecord()`
 
-Source: [packages/pocket_flutter/lib/src/pocket_offload_runtime.dart](https://github.com/PocketFlutter/Pocket/blob/235b5b5589faf492f4a9fc3b7c0827bcd1d9de2c/sdk/packages/pocket_flutter/lib/src/pocket_offload_runtime.dart#L98)
+Source: [packages/pocket_flutter/lib/src/pocket_offload_runtime.dart](https://github.com/PocketFlutter/Pocket/blob/b06cb43cac4d553cea232ae1cd1f9ed4ee0c4ff4/sdk/packages/pocket_flutter/lib/src/pocket_offload_runtime.dart#L98)
 
 ### `PocketOffloadKey`
 
@@ -6523,7 +6568,7 @@ Members:
 - `bool operator ==(Object other)`
 - `int get hashCode`
 
-Source: [packages/pocket_flutter/lib/src/pocket_offload_runtime.dart](https://github.com/PocketFlutter/Pocket/blob/235b5b5589faf492f4a9fc3b7c0827bcd1d9de2c/sdk/packages/pocket_flutter/lib/src/pocket_offload_runtime.dart#L8)
+Source: [packages/pocket_flutter/lib/src/pocket_offload_runtime.dart](https://github.com/PocketFlutter/Pocket/blob/b06cb43cac4d553cea232ae1cd1f9ed4ee0c4ff4/sdk/packages/pocket_flutter/lib/src/pocket_offload_runtime.dart#L8)
 
 ### `PocketOffloadProvider`
 
@@ -6536,13 +6581,13 @@ Members:
 - `void cancel(PocketOffloadRequest request)`
 - `Future<void> close()`
 
-Source: [packages/pocket_flutter/lib/src/pocket_offload_runtime.dart](https://github.com/PocketFlutter/Pocket/blob/235b5b5589faf492f4a9fc3b7c0827bcd1d9de2c/sdk/packages/pocket_flutter/lib/src/pocket_offload_runtime.dart#L150)
+Source: [packages/pocket_flutter/lib/src/pocket_offload_runtime.dart](https://github.com/PocketFlutter/Pocket/blob/b06cb43cac4d553cea232ae1cd1f9ed4ee0c4ff4/sdk/packages/pocket_flutter/lib/src/pocket_offload_runtime.dart#L150)
 
 ### `PocketOffloadProviderFactory`
 
 **Typedef** `typedef PocketOffloadProviderFactory = PocketOffloadProvider Function();`
 
-Source: [lib/src/pocket_config.dart](https://github.com/PocketFlutter/Pocket/blob/235b5b5589faf492f4a9fc3b7c0827bcd1d9de2c/sdk/lib/src/pocket_config.dart#L14)
+Source: [lib/src/pocket_config.dart](https://github.com/PocketFlutter/Pocket/blob/b06cb43cac4d553cea232ae1cd1f9ed4ee0c4ff4/sdk/lib/src/pocket_config.dart#L14)
 
 ### `PocketOffloadRequest`
 
@@ -6560,7 +6605,7 @@ Members:
 - `Map<String, Object> toJson()`
 - `static PocketOffloadRequest fromJson(Map<String, Object?> value)`
 
-Source: [packages/pocket_flutter/lib/src/pocket_offload_runtime.dart](https://github.com/PocketFlutter/Pocket/blob/235b5b5589faf492f4a9fc3b7c0827bcd1d9de2c/sdk/packages/pocket_flutter/lib/src/pocket_offload_runtime.dart#L31)
+Source: [packages/pocket_flutter/lib/src/pocket_offload_runtime.dart](https://github.com/PocketFlutter/Pocket/blob/b06cb43cac4d553cea232ae1cd1f9ed4ee0c4ff4/sdk/packages/pocket_flutter/lib/src/pocket_offload_runtime.dart#L31)
 
 ### `PocketPackagePreparationProgress`
 
@@ -6574,7 +6619,7 @@ Members:
 - `final int? processedFiles`
 - `final int? totalFiles`
 
-Source: [packages/pocket_services/lib/src/pocket_package.dart](https://github.com/PocketFlutter/Pocket/blob/235b5b5589faf492f4a9fc3b7c0827bcd1d9de2c/sdk/packages/pocket_services/lib/src/pocket_package.dart#L46)
+Source: [packages/pocket_services/lib/src/pocket_package.dart](https://github.com/PocketFlutter/Pocket/blob/b06cb43cac4d553cea232ae1cd1f9ed4ee0c4ff4/sdk/packages/pocket_services/lib/src/pocket_package.dart#L46)
 
 ### `PocketPackagePreparationStage`
 
@@ -6585,7 +6630,7 @@ Values:
 - `verifyingFiles`
 - `assemblingPackage`
 
-Source: [packages/pocket_services/lib/src/pocket_package.dart](https://github.com/PocketFlutter/Pocket/blob/235b5b5589faf492f4a9fc3b7c0827bcd1d9de2c/sdk/packages/pocket_services/lib/src/pocket_package.dart#L36)
+Source: [packages/pocket_services/lib/src/pocket_package.dart](https://github.com/PocketFlutter/Pocket/blob/b06cb43cac4d553cea232ae1cd1f9ed4ee0c4ff4/sdk/packages/pocket_services/lib/src/pocket_package.dart#L36)
 
 ### `PocketPerformanceSample`
 
@@ -6616,7 +6661,7 @@ Members:
 - `final List<PocketLongFrameEvent> longFrameEvents`
 - `Map<String, dynamic> toJson()`
 
-Source: [packages/pocket_flutter/lib/src/pocket_performance.dart](https://github.com/PocketFlutter/Pocket/blob/235b5b5589faf492f4a9fc3b7c0827bcd1d9de2c/sdk/packages/pocket_flutter/lib/src/pocket_performance.dart#L96)
+Source: [packages/pocket_flutter/lib/src/pocket_performance.dart](https://github.com/PocketFlutter/Pocket/blob/b06cb43cac4d553cea232ae1cd1f9ed4ee0c4ff4/sdk/packages/pocket_flutter/lib/src/pocket_performance.dart#L96)
 
 ### `PocketPermissionRequest`
 
@@ -6629,13 +6674,13 @@ Members:
 - `final Set<String> requested`
 - `final String reason`
 
-Source: [packages/pocket_services/lib/src/pocket_plugin.dart](https://github.com/PocketFlutter/Pocket/blob/235b5b5589faf492f4a9fc3b7c0827bcd1d9de2c/sdk/packages/pocket_services/lib/src/pocket_plugin.dart#L21)
+Source: [packages/pocket_services/lib/src/pocket_plugin.dart](https://github.com/PocketFlutter/Pocket/blob/b06cb43cac4d553cea232ae1cd1f9ed4ee0c4ff4/sdk/packages/pocket_services/lib/src/pocket_plugin.dart#L21)
 
 ### `PocketPermissionRequestHandler`
 
 **Typedef** `typedef PocketPermissionRequestHandler = FutureOr<Set<String>> Function(PocketPermissionRequest request);`
 
-Source: [packages/pocket_services/lib/src/pocket_plugin.dart](https://github.com/PocketFlutter/Pocket/blob/235b5b5589faf492f4a9fc3b7c0827bcd1d9de2c/sdk/packages/pocket_services/lib/src/pocket_plugin.dart#L35)
+Source: [packages/pocket_services/lib/src/pocket_plugin.dart](https://github.com/PocketFlutter/Pocket/blob/b06cb43cac4d553cea232ae1cd1f9ed4ee0c4ff4/sdk/packages/pocket_services/lib/src/pocket_plugin.dart#L35)
 
 ### `PocketPlugin`
 
@@ -6649,7 +6694,7 @@ Members:
 - `FutureOr<void> deactivate(PocketPluginContext context)`
 - `FutureOr<void> dispose()`
 
-Source: [packages/pocket_services/lib/src/pocket_plugin.dart](https://github.com/PocketFlutter/Pocket/blob/235b5b5589faf492f4a9fc3b7c0827bcd1d9de2c/sdk/packages/pocket_services/lib/src/pocket_plugin.dart#L9)
+Source: [packages/pocket_services/lib/src/pocket_plugin.dart](https://github.com/PocketFlutter/Pocket/blob/b06cb43cac4d553cea232ae1cd1f9ed4ee0c4ff4/sdk/packages/pocket_services/lib/src/pocket_plugin.dart#L9)
 
 ### `PocketPluginCapability`
 
@@ -6665,7 +6710,7 @@ Members:
 - `final PocketPluginCapabilitySchema? schema`
 - `Map<String, dynamic> toJson()`
 
-Source: [packages/pocket_services/lib/src/pocket_plugin.dart](https://github.com/PocketFlutter/Pocket/blob/235b5b5589faf492f4a9fc3b7c0827bcd1d9de2c/sdk/packages/pocket_services/lib/src/pocket_plugin.dart#L481)
+Source: [packages/pocket_services/lib/src/pocket_plugin.dart](https://github.com/PocketFlutter/Pocket/blob/b06cb43cac4d553cea232ae1cd1f9ed4ee0c4ff4/sdk/packages/pocket_services/lib/src/pocket_plugin.dart#L481)
 
 ### `PocketPluginContext`
 
@@ -6688,7 +6733,7 @@ Members:
 - `void revoke()`
 - `void dispose()`
 
-Source: [packages/pocket_services/lib/src/pocket_plugin.dart](https://github.com/PocketFlutter/Pocket/blob/235b5b5589faf492f4a9fc3b7c0827bcd1d9de2c/sdk/packages/pocket_services/lib/src/pocket_plugin.dart#L678)
+Source: [packages/pocket_services/lib/src/pocket_plugin.dart](https://github.com/PocketFlutter/Pocket/blob/b06cb43cac4d553cea232ae1cd1f9ed4ee0c4ff4/sdk/packages/pocket_services/lib/src/pocket_plugin.dart#L678)
 
 ### `PocketPluginDescriptor`
 
@@ -6710,13 +6755,13 @@ Members:
 - `Map<String, dynamic> toJson()`
 - `void validateSchemas()`
 
-Source: [packages/pocket_services/lib/src/pocket_plugin.dart](https://github.com/PocketFlutter/Pocket/blob/235b5b5589faf492f4a9fc3b7c0827bcd1d9de2c/sdk/packages/pocket_services/lib/src/pocket_plugin.dart#L548)
+Source: [packages/pocket_services/lib/src/pocket_plugin.dart](https://github.com/PocketFlutter/Pocket/blob/b06cb43cac4d553cea232ae1cd1f9ed4ee0c4ff4/sdk/packages/pocket_services/lib/src/pocket_plugin.dart#L548)
 
 ### `PocketPluginFactory`
 
 **Typedef** `typedef PocketPluginFactory = PocketPlugin Function(PocketViewController controller);`
 
-Source: [lib/src/pocket_config.dart](https://github.com/PocketFlutter/Pocket/blob/235b5b5589faf492f4a9fc3b7c0827bcd1d9de2c/sdk/lib/src/pocket_config.dart#L10)
+Source: [lib/src/pocket_config.dart](https://github.com/PocketFlutter/Pocket/blob/b06cb43cac4d553cea232ae1cd1f9ed4ee0c4ff4/sdk/lib/src/pocket_config.dart#L10)
 
 ### `PocketPluginLimits`
 
@@ -6733,13 +6778,13 @@ Members:
 - `bool get isEmpty`
 - `Map<String, dynamic> toJson()`
 
-Source: [packages/pocket_services/lib/src/pocket_plugin.dart](https://github.com/PocketFlutter/Pocket/blob/235b5b5589faf492f4a9fc3b7c0827bcd1d9de2c/sdk/packages/pocket_services/lib/src/pocket_plugin.dart#L512)
+Source: [packages/pocket_services/lib/src/pocket_plugin.dart](https://github.com/PocketFlutter/Pocket/blob/b06cb43cac4d553cea232ae1cd1f9ed4ee0c4ff4/sdk/packages/pocket_services/lib/src/pocket_plugin.dart#L512)
 
 ### `PocketPluginMethod`
 
 **Typedef** `typedef PocketPluginMethod = PocketPluginCapability;`
 
-Source: [packages/pocket_services/lib/src/pocket_plugin.dart](https://github.com/PocketFlutter/Pocket/blob/235b5b5589faf492f4a9fc3b7c0827bcd1d9de2c/sdk/packages/pocket_services/lib/src/pocket_plugin.dart#L510)
+Source: [packages/pocket_services/lib/src/pocket_plugin.dart](https://github.com/PocketFlutter/Pocket/blob/b06cb43cac4d553cea232ae1cd1f9ed4ee0c4ff4/sdk/packages/pocket_services/lib/src/pocket_plugin.dart#L510)
 
 ### `PocketRecording`
 
@@ -6761,7 +6806,7 @@ Members:
 - `Map<String, dynamic> toJson()`
 - `String toJsonString()`
 
-Source: [packages/pocket_flutter/lib/src/pocket_recording.dart](https://github.com/PocketFlutter/Pocket/blob/235b5b5589faf492f4a9fc3b7c0827bcd1d9de2c/sdk/packages/pocket_flutter/lib/src/pocket_recording.dart#L318)
+Source: [packages/pocket_flutter/lib/src/pocket_recording.dart](https://github.com/PocketFlutter/Pocket/blob/b06cb43cac4d553cea232ae1cd1f9ed4ee0c4ff4/sdk/packages/pocket_flutter/lib/src/pocket_recording.dart#L318)
 
 ### `PocketRecordingController`
 
@@ -6798,7 +6843,7 @@ Members:
 - `PocketRecording finish()`
 - `PocketRecording stop()`
 
-Source: [packages/pocket_flutter/lib/src/pocket_recording.dart](https://github.com/PocketFlutter/Pocket/blob/235b5b5589faf492f4a9fc3b7c0827bcd1d9de2c/sdk/packages/pocket_flutter/lib/src/pocket_recording.dart#L501)
+Source: [packages/pocket_flutter/lib/src/pocket_recording.dart](https://github.com/PocketFlutter/Pocket/blob/b06cb43cac4d553cea232ae1cd1f9ed4ee0c4ff4/sdk/packages/pocket_flutter/lib/src/pocket_recording.dart#L501)
 
 ### `PocketRecordingEntry`
 
@@ -6815,7 +6860,7 @@ Members:
 - `Map<String, dynamic> toJson()`
 - `PocketRecordingEntry withIndex(int nextIndex)`
 
-Source: [packages/pocket_flutter/lib/src/pocket_recording.dart](https://github.com/PocketFlutter/Pocket/blob/235b5b5589faf492f4a9fc3b7c0827bcd1d9de2c/sdk/packages/pocket_flutter/lib/src/pocket_recording.dart#L213)
+Source: [packages/pocket_flutter/lib/src/pocket_recording.dart](https://github.com/PocketFlutter/Pocket/blob/b06cb43cac4d553cea232ae1cd1f9ed4ee0c4ff4/sdk/packages/pocket_flutter/lib/src/pocket_recording.dart#L213)
 
 ### `PocketRecordingFormatException`
 
@@ -6824,7 +6869,7 @@ Source: [packages/pocket_flutter/lib/src/pocket_recording.dart](https://github.c
 Members:
 - `const PocketRecordingFormatException( super.message, [ super.source, super.offset, ])`
 
-Source: [packages/pocket_flutter/lib/src/pocket_recording.dart](https://github.com/PocketFlutter/Pocket/blob/235b5b5589faf492f4a9fc3b7c0827bcd1d9de2c/sdk/packages/pocket_flutter/lib/src/pocket_recording.dart#L12)
+Source: [packages/pocket_flutter/lib/src/pocket_recording.dart](https://github.com/PocketFlutter/Pocket/blob/b06cb43cac4d553cea232ae1cd1f9ed4ee0c4ff4/sdk/packages/pocket_flutter/lib/src/pocket_recording.dart#L12)
 
 ### `PocketRecordingLibrary`
 
@@ -6842,7 +6887,7 @@ Members:
 - `Future<Map<String, dynamic>> export({ Directory? directory, Object? inputTape, })`
 - `static Future<Map<String, dynamic>> replayArchive(File manifest)`
 
-Source: [lib/src/pocket_recordings.dart](https://github.com/PocketFlutter/Pocket/blob/235b5b5589faf492f4a9fc3b7c0827bcd1d9de2c/sdk/lib/src/pocket_recordings.dart#L16)
+Source: [lib/src/pocket_recordings.dart](https://github.com/PocketFlutter/Pocket/blob/b06cb43cac4d553cea232ae1cd1f9ed4ee0c4ff4/sdk/lib/src/pocket_recordings.dart#L16)
 
 ### `PocketRecordingMetadata`
 
@@ -6861,7 +6906,7 @@ Members:
 - `final Map<String, String> contentHashes`
 - `Map<String, dynamic> toJson()`
 
-Source: [packages/pocket_flutter/lib/src/pocket_recording.dart](https://github.com/PocketFlutter/Pocket/blob/235b5b5589faf492f4a9fc3b7c0827bcd1d9de2c/sdk/packages/pocket_flutter/lib/src/pocket_recording.dart#L103)
+Source: [packages/pocket_flutter/lib/src/pocket_recording.dart](https://github.com/PocketFlutter/Pocket/blob/b06cb43cac4d553cea232ae1cd1f9ed4ee0c4ff4/sdk/packages/pocket_flutter/lib/src/pocket_recording.dart#L103)
 
 ### `PocketRecordingReplay`
 
@@ -6870,7 +6915,7 @@ Source: [packages/pocket_flutter/lib/src/pocket_recording.dart](https://github.c
 Members:
 - `Future<PocketReplayResult> replay({ required PocketReplayAssets assets, PocketReplayRuntimeFactory? runtimeFactory, })`
 
-Source: [packages/pocket_flutter/lib/src/pocket_runtime.dart](https://github.com/PocketFlutter/Pocket/blob/235b5b5589faf492f4a9fc3b7c0827bcd1d9de2c/sdk/packages/pocket_flutter/lib/src/pocket_runtime.dart#L4144)
+Source: [packages/pocket_flutter/lib/src/pocket_runtime.dart](https://github.com/PocketFlutter/Pocket/blob/b06cb43cac4d553cea232ae1cd1f9ed4ee0c4ff4/sdk/packages/pocket_flutter/lib/src/pocket_runtime.dart#L4144)
 
 ### `PocketReplayAssets`
 
@@ -6886,7 +6931,7 @@ Members:
 - `final Uint8List? Function(String key, String? expectedSha256)? resolver`
 - `Uint8List? resolve({String? key, String? sha256})`
 
-Source: [packages/pocket_flutter/lib/src/pocket_recording.dart](https://github.com/PocketFlutter/Pocket/blob/235b5b5589faf492f4a9fc3b7c0827bcd1d9de2c/sdk/packages/pocket_flutter/lib/src/pocket_recording.dart#L751)
+Source: [packages/pocket_flutter/lib/src/pocket_recording.dart](https://github.com/PocketFlutter/Pocket/blob/b06cb43cac4d553cea232ae1cd1f9ed4ee0c4ff4/sdk/packages/pocket_flutter/lib/src/pocket_recording.dart#L751)
 
 ### `PocketReplayMismatch`
 
@@ -6903,7 +6948,7 @@ Members:
 - `Map<String, dynamic> toJson()`
 - `String toString()`
 
-Source: [packages/pocket_flutter/lib/src/pocket_recording.dart](https://github.com/PocketFlutter/Pocket/blob/235b5b5589faf492f4a9fc3b7c0827bcd1d9de2c/sdk/packages/pocket_flutter/lib/src/pocket_recording.dart#L786)
+Source: [packages/pocket_flutter/lib/src/pocket_recording.dart](https://github.com/PocketFlutter/Pocket/blob/b06cb43cac4d553cea232ae1cd1f9ed4ee0c4ff4/sdk/packages/pocket_flutter/lib/src/pocket_recording.dart#L786)
 
 ### `PocketReplayResult`
 
@@ -6920,7 +6965,7 @@ Members:
 - `bool get rejected`
 - `Map<String, dynamic> toJson()`
 
-Source: [packages/pocket_flutter/lib/src/pocket_recording.dart](https://github.com/PocketFlutter/Pocket/blob/235b5b5589faf492f4a9fc3b7c0827bcd1d9de2c/sdk/packages/pocket_flutter/lib/src/pocket_recording.dart#L817)
+Source: [packages/pocket_flutter/lib/src/pocket_recording.dart](https://github.com/PocketFlutter/Pocket/blob/b06cb43cac4d553cea232ae1cd1f9ed4ee0c4ff4/sdk/packages/pocket_flutter/lib/src/pocket_recording.dart#L817)
 
 ### `PocketReplayRunner`
 
@@ -6931,7 +6976,7 @@ Members:
 - `final PocketReplayRuntimeFactory? runtimeFactory`
 - `Future<PocketReplayResult> run( PocketRecording recording, { required PocketReplayAssets assets, })`
 
-Source: [packages/pocket_flutter/lib/src/pocket_runtime.dart](https://github.com/PocketFlutter/Pocket/blob/235b5b5589faf492f4a9fc3b7c0827bcd1d9de2c/sdk/packages/pocket_flutter/lib/src/pocket_runtime.dart#L3223)
+Source: [packages/pocket_flutter/lib/src/pocket_runtime.dart](https://github.com/PocketFlutter/Pocket/blob/b06cb43cac4d553cea232ae1cd1f9ed4ee0c4ff4/sdk/packages/pocket_flutter/lib/src/pocket_runtime.dart#L3223)
 
 ### `PocketSession`
 
@@ -6979,13 +7024,13 @@ Members:
 - `Future<void> close()`
 - `void dispose()`
 
-Source: [lib/src/pocket_session.dart](https://github.com/PocketFlutter/Pocket/blob/235b5b5589faf492f4a9fc3b7c0827bcd1d9de2c/sdk/lib/src/pocket_session.dart#L25)
+Source: [lib/src/pocket_session.dart](https://github.com/PocketFlutter/Pocket/blob/b06cb43cac4d553cea232ae1cd1f9ed4ee0c4ff4/sdk/lib/src/pocket_session.dart#L25)
 
 ### `PocketSessionGenerationMountHook`
 
 **Typedef** `typedef PocketSessionGenerationMountHook = Future<void> Function(String? mountedPayloadSha256, int targetGeneration);`
 
-Source: [lib/src/pocket_session.dart](https://github.com/PocketFlutter/Pocket/blob/235b5b5589faf492f4a9fc3b7c0827bcd1d9de2c/sdk/lib/src/pocket_session.dart#L19)
+Source: [lib/src/pocket_session.dart](https://github.com/PocketFlutter/Pocket/blob/b06cb43cac4d553cea232ae1cd1f9ed4ee0c4ff4/sdk/lib/src/pocket_session.dart#L19)
 
 ### `PocketStartupProgress`
 
@@ -7007,7 +7052,7 @@ Members:
 - `bool operator ==(Object other)`
 - `int get hashCode`
 
-Source: [packages/pocket_flutter/lib/src/pocket_startup_progress.dart](https://github.com/PocketFlutter/Pocket/blob/235b5b5589faf492f4a9fc3b7c0827bcd1d9de2c/sdk/packages/pocket_flutter/lib/src/pocket_startup_progress.dart#L25)
+Source: [packages/pocket_flutter/lib/src/pocket_startup_progress.dart](https://github.com/PocketFlutter/Pocket/blob/b06cb43cac4d553cea232ae1cd1f9ed4ee0c4ff4/sdk/packages/pocket_flutter/lib/src/pocket_startup_progress.dart#L25)
 
 ### `PocketStartupStage`
 
@@ -7019,7 +7064,7 @@ Values:
 - `decodingInitialResources`
 - `applyingDisplayGeometry`
 
-Source: [packages/pocket_flutter/lib/src/pocket_startup_progress.dart](https://github.com/PocketFlutter/Pocket/blob/235b5b5589faf492f4a9fc3b7c0827bcd1d9de2c/sdk/packages/pocket_flutter/lib/src/pocket_startup_progress.dart#L9)
+Source: [packages/pocket_flutter/lib/src/pocket_startup_progress.dart](https://github.com/PocketFlutter/Pocket/blob/b06cb43cac4d553cea232ae1cd1f9ed4ee0c4ff4/sdk/packages/pocket_flutter/lib/src/pocket_startup_progress.dart#L9)
 
 ### `PocketSystemHost`
 
@@ -7046,13 +7091,13 @@ Members:
 - `final TransitionRoute<dynamic>? nativeExitRoute`
 - `State<PocketSystemHost> createState()`
 
-Source: [lib/src/pocket_system_host.dart](https://github.com/PocketFlutter/Pocket/blob/235b5b5589faf492f4a9fc3b7c0827bcd1d9de2c/sdk/lib/src/pocket_system_host.dart#L917)
+Source: [lib/src/pocket_system_host.dart](https://github.com/PocketFlutter/Pocket/blob/b06cb43cac4d553cea232ae1cd1f9ed4ee0c4ff4/sdk/lib/src/pocket_system_host.dart#L917)
 
 ### `PocketSystemHostAppBuilder`
 
 **Typedef** `typedef PocketSystemHostAppBuilder = Widget Function(BuildContext context, Widget child);`
 
-Source: [lib/src/pocket_system_host.dart](https://github.com/PocketFlutter/Pocket/blob/235b5b5589faf492f4a9fc3b7c0827bcd1d9de2c/sdk/lib/src/pocket_system_host.dart#L135)
+Source: [lib/src/pocket_system_host.dart](https://github.com/PocketFlutter/Pocket/blob/b06cb43cac4d553cea232ae1cd1f9ed4ee0c4ff4/sdk/lib/src/pocket_system_host.dart#L135)
 
 ### `PocketSystemHostApplication`
 
@@ -7085,25 +7130,25 @@ Members:
 - `final bool nativeEdgeExitEnabled`
 - `State<PocketSystemHostApplication> createState()`
 
-Source: [lib/src/pocket_system_host.dart](https://github.com/PocketFlutter/Pocket/blob/235b5b5589faf492f4a9fc3b7c0827bcd1d9de2c/sdk/lib/src/pocket_system_host.dart#L313)
+Source: [lib/src/pocket_system_host.dart](https://github.com/PocketFlutter/Pocket/blob/b06cb43cac4d553cea232ae1cd1f9ed4ee0c4ff4/sdk/lib/src/pocket_system_host.dart#L313)
 
 ### `PocketSystemHostApplicationApprover`
 
 **Typedef** `typedef PocketSystemHostApplicationApprover = PocketAppConfig Function(String appId, PocketAppConfig config);`
 
-Source: [lib/src/pocket_system_host.dart](https://github.com/PocketFlutter/Pocket/blob/235b5b5589faf492f4a9fc3b7c0827bcd1d9de2c/sdk/lib/src/pocket_system_host.dart#L121)
+Source: [lib/src/pocket_system_host.dart](https://github.com/PocketFlutter/Pocket/blob/b06cb43cac4d553cea232ae1cd1f9ed4ee0c4ff4/sdk/lib/src/pocket_system_host.dart#L121)
 
 ### `PocketSystemHostApplicationCatalogLoader`
 
 **Typedef** `typedef PocketSystemHostApplicationCatalogLoader = Future<PocketBundledApplicationCatalog> Function();`
 
-Source: [lib/src/pocket_system_host.dart](https://github.com/PocketFlutter/Pocket/blob/235b5b5589faf492f4a9fc3b7c0827bcd1d9de2c/sdk/lib/src/pocket_system_host.dart#L124)
+Source: [lib/src/pocket_system_host.dart](https://github.com/PocketFlutter/Pocket/blob/b06cb43cac4d553cea232ae1cd1f9ed4ee0c4ff4/sdk/lib/src/pocket_system_host.dart#L124)
 
 ### `PocketSystemHostApplicationsBuilder`
 
 **Typedef** `typedef PocketSystemHostApplicationsBuilder = Map<String, PocketAppConfig> Function( PocketBundledApplicationCatalog catalog, );`
 
-Source: [lib/src/pocket_system_host.dart](https://github.com/PocketFlutter/Pocket/blob/235b5b5589faf492f4a9fc3b7c0827bcd1d9de2c/sdk/lib/src/pocket_system_host.dart#L130)
+Source: [lib/src/pocket_system_host.dart](https://github.com/PocketFlutter/Pocket/blob/b06cb43cac4d553cea232ae1cd1f9ed4ee0c4ff4/sdk/lib/src/pocket_system_host.dart#L130)
 
 ### `PocketSystemHostCatalog`
 
@@ -7115,13 +7160,13 @@ Members:
 - `final Map<String, PocketAppConfig> applications`
 - `final String? rootPayloadSha256`
 
-Source: [lib/src/pocket_system_host.dart](https://github.com/PocketFlutter/Pocket/blob/235b5b5589faf492f4a9fc3b7c0827bcd1d9de2c/sdk/lib/src/pocket_system_host.dart#L141)
+Source: [lib/src/pocket_system_host.dart](https://github.com/PocketFlutter/Pocket/blob/b06cb43cac4d553cea232ae1cd1f9ed4ee0c4ff4/sdk/lib/src/pocket_system_host.dart#L141)
 
 ### `PocketSystemHostCatalogLoader`
 
 **Typedef** `typedef PocketSystemHostCatalogLoader = Future<PocketSystemHostCatalog?> Function(String? rootPayloadSha256);`
 
-Source: [lib/src/pocket_system_host.dart](https://github.com/PocketFlutter/Pocket/blob/235b5b5589faf492f4a9fc3b7c0827bcd1d9de2c/sdk/lib/src/pocket_system_host.dart#L115)
+Source: [lib/src/pocket_system_host.dart](https://github.com/PocketFlutter/Pocket/blob/b06cb43cac4d553cea232ae1cd1f9ed4ee0c4ff4/sdk/lib/src/pocket_system_host.dart#L115)
 
 ### `PocketSystemHostController`
 
@@ -7133,19 +7178,19 @@ Members:
 - `Future<bool> requestBack()`
 - `bool requestLaunchApp(PocketSystemLaunchRequest request)`
 
-Source: [lib/src/pocket_system_host.dart](https://github.com/PocketFlutter/Pocket/blob/235b5b5589faf492f4a9fc3b7c0827bcd1d9de2c/sdk/lib/src/pocket_system_host.dart#L1108)
+Source: [lib/src/pocket_system_host.dart](https://github.com/PocketFlutter/Pocket/blob/b06cb43cac4d553cea232ae1cd1f9ed4ee0c4ff4/sdk/lib/src/pocket_system_host.dart#L1108)
 
 ### `PocketSystemHostSystemUIApprover`
 
 **Typedef** `typedef PocketSystemHostSystemUIApprover = PocketAppConfig Function(PocketAppConfig config);`
 
-Source: [lib/src/pocket_system_host.dart](https://github.com/PocketFlutter/Pocket/blob/235b5b5589faf492f4a9fc3b7c0827bcd1d9de2c/sdk/lib/src/pocket_system_host.dart#L118)
+Source: [lib/src/pocket_system_host.dart](https://github.com/PocketFlutter/Pocket/blob/b06cb43cac4d553cea232ae1cd1f9ed4ee0c4ff4/sdk/lib/src/pocket_system_host.dart#L118)
 
 ### `PocketSystemHostSystemUIBuilder`
 
 **Typedef** `typedef PocketSystemHostSystemUIBuilder = PocketAppConfig Function(PocketBundledApplicationCatalog catalog);`
 
-Source: [lib/src/pocket_system_host.dart](https://github.com/PocketFlutter/Pocket/blob/235b5b5589faf492f4a9fc3b7c0827bcd1d9de2c/sdk/lib/src/pocket_system_host.dart#L127)
+Source: [lib/src/pocket_system_host.dart](https://github.com/PocketFlutter/Pocket/blob/b06cb43cac4d553cea232ae1cd1f9ed4ee0c4ff4/sdk/lib/src/pocket_system_host.dart#L127)
 
 ### `PocketSystemInstanceSnapshot`
 
@@ -7165,7 +7210,7 @@ Members:
 - `final bool isPresented`
 - `final bool compositorFocused`
 
-Source: [lib/src/pocket_system_host.dart](https://github.com/PocketFlutter/Pocket/blob/235b5b5589faf492f4a9fc3b7c0827bcd1d9de2c/sdk/lib/src/pocket_system_host.dart#L1171)
+Source: [lib/src/pocket_system_host.dart](https://github.com/PocketFlutter/Pocket/blob/b06cb43cac4d553cea232ae1cd1f9ed4ee0c4ff4/sdk/lib/src/pocket_system_host.dart#L1171)
 
 ### `PocketSystemLaunchRequest`
 
@@ -7180,7 +7225,7 @@ Members:
 - `Map<String, dynamic> toEventParams()`
 - `void validate({ String? systemUIAppId, Map<String, PocketAppConfig>? applications, })`
 
-Source: [lib/src/pocket_system_host.dart](https://github.com/PocketFlutter/Pocket/blob/235b5b5589faf492f4a9fc3b7c0827bcd1d9de2c/sdk/lib/src/pocket_system_host.dart#L155)
+Source: [lib/src/pocket_system_host.dart](https://github.com/PocketFlutter/Pocket/blob/b06cb43cac4d553cea232ae1cd1f9ed4ee0c4ff4/sdk/lib/src/pocket_system_host.dart#L155)
 
 ### `PocketSystemLaunchResult`
 
@@ -7193,7 +7238,7 @@ Members:
 - `final Object? value`
 - `final String? reason`
 
-Source: [lib/src/pocket_system_host.dart](https://github.com/PocketFlutter/Pocket/blob/235b5b5589faf492f4a9fc3b7c0827bcd1d9de2c/sdk/lib/src/pocket_system_host.dart#L231)
+Source: [lib/src/pocket_system_host.dart](https://github.com/PocketFlutter/Pocket/blob/b06cb43cac4d553cea232ae1cd1f9ed4ee0c4ff4/sdk/lib/src/pocket_system_host.dart#L231)
 
 ### `PocketUpdateCancellation`
 
@@ -7203,7 +7248,7 @@ Members:
 - `const PocketUpdateCancellation()`
 - `String toString()`
 
-Source: [packages/pocket_services/lib/src/pocket_package.dart](https://github.com/PocketFlutter/Pocket/blob/235b5b5589faf492f4a9fc3b7c0827bcd1d9de2c/sdk/packages/pocket_services/lib/src/pocket_package.dart#L74)
+Source: [packages/pocket_services/lib/src/pocket_package.dart](https://github.com/PocketFlutter/Pocket/blob/b06cb43cac4d553cea232ae1cd1f9ed4ee0c4ff4/sdk/packages/pocket_services/lib/src/pocket_package.dart#L74)
 
 ### `PocketUpdateConfig`
 
@@ -7231,7 +7276,7 @@ Members:
 - `bool operator ==(Object other)`
 - `int get hashCode`
 
-Source: [lib/src/pocket_config.dart](https://github.com/PocketFlutter/Pocket/blob/235b5b5589faf492f4a9fc3b7c0827bcd1d9de2c/sdk/lib/src/pocket_config.dart#L17)
+Source: [lib/src/pocket_config.dart](https://github.com/PocketFlutter/Pocket/blob/b06cb43cac4d553cea232ae1cd1f9ed4ee0c4ff4/sdk/lib/src/pocket_config.dart#L17)
 
 ### `PocketUpdateProgress`
 
@@ -7248,7 +7293,7 @@ Members:
 - `final PocketPackagePreparationProgress? preparationProgress`
 - `double? get fraction`
 
-Source: [packages/pocket_services/lib/src/pocket_update.dart](https://github.com/PocketFlutter/Pocket/blob/235b5b5589faf492f4a9fc3b7c0827bcd1d9de2c/sdk/packages/pocket_services/lib/src/pocket_update.dart#L135)
+Source: [packages/pocket_services/lib/src/pocket_update.dart](https://github.com/PocketFlutter/Pocket/blob/b06cb43cac4d553cea232ae1cd1f9ed4ee0c4ff4/sdk/packages/pocket_services/lib/src/pocket_update.dart#L135)
 
 ### `PocketUpdateStage`
 
@@ -7263,7 +7308,7 @@ Values:
 - `error`
 - `retry`
 
-Source: [packages/pocket_services/lib/src/pocket_update.dart](https://github.com/PocketFlutter/Pocket/blob/235b5b5589faf492f4a9fc3b7c0827bcd1d9de2c/sdk/packages/pocket_services/lib/src/pocket_update.dart#L125)
+Source: [packages/pocket_services/lib/src/pocket_update.dart](https://github.com/PocketFlutter/Pocket/blob/b06cb43cac4d553cea232ae1cd1f9ed4ee0c4ff4/sdk/packages/pocket_services/lib/src/pocket_update.dart#L125)
 
 ### `PocketViewController`
 
@@ -7297,7 +7342,7 @@ Members:
 - `void notifyWork()`
 - `PocketViewController()` _(implicit)_
 
-Source: [packages/pocket_flutter/lib/src/pocket_view.dart](https://github.com/PocketFlutter/Pocket/blob/235b5b5589faf492f4a9fc3b7c0827bcd1d9de2c/sdk/packages/pocket_flutter/lib/src/pocket_view.dart#L88)
+Source: [packages/pocket_flutter/lib/src/pocket_view.dart](https://github.com/PocketFlutter/Pocket/blob/b06cb43cac4d553cea232ae1cd1f9ed4ee0c4ff4/sdk/packages/pocket_flutter/lib/src/pocket_view.dart#L88)
 
 ### `PocketWorkerArtifact`
 
@@ -7310,7 +7355,7 @@ Members:
 - `final PocketWorkerProgram program`
 - `factory PocketWorkerArtifact.verify({ required String appMetadataJson, required Uint8List bytecode, required String actualRuntimeAbi, required int expectedBindingGeneration, required int expectedTickHz, required Iterable<String> admittedCapabilities, Iterable<String> allowedHttpOrigins = const [], PocketWorkerLimits limits = const PocketWorkerLimits(), })`
 
-Source: [lib/src/pocket_worker.dart](https://github.com/PocketFlutter/Pocket/blob/235b5b5589faf492f4a9fc3b7c0827bcd1d9de2c/sdk/lib/src/pocket_worker.dart#L10)
+Source: [lib/src/pocket_worker.dart](https://github.com/PocketFlutter/Pocket/blob/b06cb43cac4d553cea232ae1cd1f9ed4ee0c4ff4/sdk/lib/src/pocket_worker.dart#L10)
 
 ### `PocketWorkerLimits`
 
@@ -7326,7 +7371,7 @@ Members:
 - `void validate()`
 - `Map<String, Object> toJson()`
 
-Source: [packages/pocket_flutter/lib/src/pocket_worker_runtime.dart](https://github.com/PocketFlutter/Pocket/blob/235b5b5589faf492f4a9fc3b7c0827bcd1d9de2c/sdk/packages/pocket_flutter/lib/src/pocket_worker_runtime.dart#L9)
+Source: [packages/pocket_flutter/lib/src/pocket_worker_runtime.dart](https://github.com/PocketFlutter/Pocket/blob/b06cb43cac4d553cea232ae1cd1f9ed4ee0c4ff4/sdk/packages/pocket_flutter/lib/src/pocket_worker_runtime.dart#L9)
 
 ### `PocketWorkerProgram`
 
@@ -7345,7 +7390,7 @@ Members:
 - `Map<String, Object?> get declaration`
 - `String nativeConfigJson({required int nativeGeneration})`
 
-Source: [packages/pocket_flutter/lib/src/pocket_worker_runtime.dart](https://github.com/PocketFlutter/Pocket/blob/235b5b5589faf492f4a9fc3b7c0827bcd1d9de2c/sdk/packages/pocket_flutter/lib/src/pocket_worker_runtime.dart#L56)
+Source: [packages/pocket_flutter/lib/src/pocket_worker_runtime.dart](https://github.com/PocketFlutter/Pocket/blob/b06cb43cac4d553cea232ae1cd1f9ed4ee0c4ff4/sdk/packages/pocket_flutter/lib/src/pocket_worker_runtime.dart#L56)
 
 ### `RecentLogCaptureMode`
 
@@ -7361,7 +7406,7 @@ Members:
 - `const RecentLogCaptureMode(this.value)`
 - `final String value`
 
-Source: [packages/pocket_diagnostics/lib/src/types.dart](https://github.com/PocketFlutter/Pocket/blob/235b5b5589faf492f4a9fc3b7c0827bcd1d9de2c/sdk/packages/pocket_diagnostics/lib/src/types.dart#L57)
+Source: [packages/pocket_diagnostics/lib/src/types.dart](https://github.com/PocketFlutter/Pocket/blob/b06cb43cac4d553cea232ae1cd1f9ed4ee0c4ff4/sdk/packages/pocket_diagnostics/lib/src/types.dart#L57)
 
 ### `ResolvedNormalizationLimits`
 
@@ -7378,7 +7423,7 @@ Members:
 - `final int maxCauseDepth`
 - `final int maxDataBytes`
 
-Source: [packages/pocket_diagnostics/lib/src/normalize.dart](https://github.com/PocketFlutter/Pocket/blob/235b5b5589faf492f4a9fc3b7c0827bcd1d9de2c/sdk/packages/pocket_diagnostics/lib/src/normalize.dart#L10)
+Source: [packages/pocket_diagnostics/lib/src/normalize.dart](https://github.com/PocketFlutter/Pocket/blob/b06cb43cac4d553cea232ae1cd1f9ed4ee0c4ff4/sdk/packages/pocket_diagnostics/lib/src/normalize.dart#L10)
 
 ### `SynchronousDiagnosticsStorage`
 
@@ -7387,7 +7432,7 @@ Source: [packages/pocket_diagnostics/lib/src/normalize.dart](https://github.com/
 Members:
 - `void appendSync( DiagnosticRecord record, { DiagnosticsStorageAppendOptions options = const DiagnosticsStorageAppendOptions(), })`
 
-Source: [packages/pocket_diagnostics/lib/src/types.dart](https://github.com/PocketFlutter/Pocket/blob/235b5b5589faf492f4a9fc3b7c0827bcd1d9de2c/sdk/packages/pocket_diagnostics/lib/src/types.dart#L815)
+Source: [packages/pocket_diagnostics/lib/src/types.dart](https://github.com/PocketFlutter/Pocket/blob/b06cb43cac4d553cea232ae1cd1f9ed4ee0c4ff4/sdk/packages/pocket_diagnostics/lib/src/types.dart#L815)
 
 ### `TruncationTracker`
 
@@ -7397,217 +7442,217 @@ Members:
 - `bool truncated = false`
 - `TruncationTracker()` _(implicit)_
 
-Source: [packages/pocket_diagnostics/lib/src/normalize.dart](https://github.com/PocketFlutter/Pocket/blob/235b5b5589faf492f4a9fc3b7c0827bcd1d9de2c/sdk/packages/pocket_diagnostics/lib/src/normalize.dart#L98)
+Source: [packages/pocket_diagnostics/lib/src/normalize.dart](https://github.com/PocketFlutter/Pocket/blob/b06cb43cac4d553cea232ae1cd1f9ed4ee0c4ff4/sdk/packages/pocket_diagnostics/lib/src/normalize.dart#L98)
 
 ### `attachFlutterErrorCollector`
 
 **function** `FlutterErrorCollectorHandle attachFlutterErrorCollector({ required DiagnosticsCollector collector, DiagnosticContext? context, DiagnosticContext Function()? contextProvider, bool captureFlutterErrors = true, bool capturePlatformDispatcherErrors = true, void Function(DiagnosticCrashRecord record)? onCrashRecorded, PlatformDispatcher? platformDispatcher, })`
 
-Source: [packages/pocket_diagnostics/lib/src/flutter_adapter.dart](https://github.com/PocketFlutter/Pocket/blob/235b5b5589faf492f4a9fc3b7c0827bcd1d9de2c/sdk/packages/pocket_diagnostics/lib/src/flutter_adapter.dart#L174)
+Source: [packages/pocket_diagnostics/lib/src/flutter_adapter.dart](https://github.com/PocketFlutter/Pocket/blob/b06cb43cac4d553cea232ae1cd1f9ed4ee0c4ff4/sdk/packages/pocket_diagnostics/lib/src/flutter_adapter.dart#L174)
 
 ### `createDiagnosticsCollector`
 
 **function** `DiagnosticsCollector createDiagnosticsCollector({ DiagnosticsStorage? storage, DiagnosticContext? context, int maxRecords = defaultMaxRecords, int recentLogLimit = defaultRecentLogLimit, RecentLogCaptureMode recentLogMode = RecentLogCaptureMode.auto, DiagnosticNormalizationLimits? normalization, DateTime Function()? now, String Function()? idGenerator, })`
 
-Source: [packages/pocket_diagnostics/lib/src/collector.dart](https://github.com/PocketFlutter/Pocket/blob/235b5b5589faf492f4a9fc3b7c0827bcd1d9de2c/sdk/packages/pocket_diagnostics/lib/src/collector.dart#L764)
+Source: [packages/pocket_diagnostics/lib/src/collector.dart](https://github.com/PocketFlutter/Pocket/blob/b06cb43cac4d553cea232ae1cd1f9ed4ee0c4ff4/sdk/packages/pocket_diagnostics/lib/src/collector.dart#L764)
 
 ### `createFileDiagnostics`
 
 **function** `FileDiagnosticsCollector createFileDiagnostics({ required Directory directory, String filename = defaultJournalFilename, int maxFileBytes = defaultMaxFileBytes, int maxRotatedFiles = defaultMaxRotatedFiles, int maxRecords = defaultMaxRecords, bool syncOnLog = false, DiagnosticContext? context, int recentLogLimit = defaultRecentLogLimit, RecentLogCaptureMode recentLogMode = RecentLogCaptureMode.auto, DiagnosticNormalizationLimits? normalization, DateTime Function()? now, String Function()? idGenerator, })`
 
-Source: [packages/pocket_diagnostics/lib/src/file_storage.dart](https://github.com/PocketFlutter/Pocket/blob/235b5b5589faf492f4a9fc3b7c0827bcd1d9de2c/sdk/packages/pocket_diagnostics/lib/src/file_storage.dart#L554)
+Source: [packages/pocket_diagnostics/lib/src/file_storage.dart](https://github.com/PocketFlutter/Pocket/blob/b06cb43cac4d553cea232ae1cd1f9ed4ee0c4ff4/sdk/packages/pocket_diagnostics/lib/src/file_storage.dart#L554)
 
 ### `createFileDiagnosticsStorage`
 
 **function** `FileDiagnosticsStorage createFileDiagnosticsStorage({ required Directory directory, String filename = defaultJournalFilename, int maxFileBytes = defaultMaxFileBytes, int maxRotatedFiles = defaultMaxRotatedFiles, int maxRecords = defaultMaxRecords, bool syncOnLog = false, })`
 
-Source: [packages/pocket_diagnostics/lib/src/file_storage.dart](https://github.com/PocketFlutter/Pocket/blob/235b5b5589faf492f4a9fc3b7c0827bcd1d9de2c/sdk/packages/pocket_diagnostics/lib/src/file_storage.dart#L538)
+Source: [packages/pocket_diagnostics/lib/src/file_storage.dart](https://github.com/PocketFlutter/Pocket/blob/b06cb43cac4d553cea232ae1cd1f9ed4ee0c4ff4/sdk/packages/pocket_diagnostics/lib/src/file_storage.dart#L538)
 
 ### `defaultDiagnosticIdGenerator`
 
 **function** `String defaultDiagnosticIdGenerator([math.Random? random])`
 
-Source: [packages/pocket_diagnostics/lib/src/collector.dart](https://github.com/PocketFlutter/Pocket/blob/235b5b5589faf492f4a9fc3b7c0827bcd1d9de2c/sdk/packages/pocket_diagnostics/lib/src/collector.dart#L8)
+Source: [packages/pocket_diagnostics/lib/src/collector.dart](https://github.com/PocketFlutter/Pocket/blob/b06cb43cac4d553cea232ae1cd1f9ed4ee0c4ff4/sdk/packages/pocket_diagnostics/lib/src/collector.dart#L8)
 
 ### `defaultJournalFilename`
 
 **Top-level variable** `const String defaultJournalFilename = 'diagnostics.jsonl'`
 
-Source: [packages/pocket_diagnostics/lib/src/types.dart](https://github.com/PocketFlutter/Pocket/blob/235b5b5589faf492f4a9fc3b7c0827bcd1d9de2c/sdk/packages/pocket_diagnostics/lib/src/types.dart#L16)
+Source: [packages/pocket_diagnostics/lib/src/types.dart](https://github.com/PocketFlutter/Pocket/blob/b06cb43cac4d553cea232ae1cd1f9ed4ee0c4ff4/sdk/packages/pocket_diagnostics/lib/src/types.dart#L16)
 
 ### `defaultMaxArrayLength`
 
 **Top-level variable** `const int defaultMaxArrayLength = 64`
 
-Source: [packages/pocket_diagnostics/lib/src/types.dart](https://github.com/PocketFlutter/Pocket/blob/235b5b5589faf492f4a9fc3b7c0827bcd1d9de2c/sdk/packages/pocket_diagnostics/lib/src/types.dart#L10)
+Source: [packages/pocket_diagnostics/lib/src/types.dart](https://github.com/PocketFlutter/Pocket/blob/b06cb43cac4d553cea232ae1cd1f9ed4ee0c4ff4/sdk/packages/pocket_diagnostics/lib/src/types.dart#L10)
 
 ### `defaultMaxCauseDepth`
 
 **Top-level variable** `const int defaultMaxCauseDepth = 6`
 
-Source: [packages/pocket_diagnostics/lib/src/types.dart](https://github.com/PocketFlutter/Pocket/blob/235b5b5589faf492f4a9fc3b7c0827bcd1d9de2c/sdk/packages/pocket_diagnostics/lib/src/types.dart#L14)
+Source: [packages/pocket_diagnostics/lib/src/types.dart](https://github.com/PocketFlutter/Pocket/blob/b06cb43cac4d553cea232ae1cd1f9ed4ee0c4ff4/sdk/packages/pocket_diagnostics/lib/src/types.dart#L14)
 
 ### `defaultMaxDataBytes`
 
 **Top-level variable** `const int defaultMaxDataBytes = 32 * 1024`
 
-Source: [packages/pocket_diagnostics/lib/src/types.dart](https://github.com/PocketFlutter/Pocket/blob/235b5b5589faf492f4a9fc3b7c0827bcd1d9de2c/sdk/packages/pocket_diagnostics/lib/src/types.dart#L15)
+Source: [packages/pocket_diagnostics/lib/src/types.dart](https://github.com/PocketFlutter/Pocket/blob/b06cb43cac4d553cea232ae1cd1f9ed4ee0c4ff4/sdk/packages/pocket_diagnostics/lib/src/types.dart#L15)
 
 ### `defaultMaxDepth`
 
 **Top-level variable** `const int defaultMaxDepth = 8`
 
-Source: [packages/pocket_diagnostics/lib/src/types.dart](https://github.com/PocketFlutter/Pocket/blob/235b5b5589faf492f4a9fc3b7c0827bcd1d9de2c/sdk/packages/pocket_diagnostics/lib/src/types.dart#L8)
+Source: [packages/pocket_diagnostics/lib/src/types.dart](https://github.com/PocketFlutter/Pocket/blob/b06cb43cac4d553cea232ae1cd1f9ed4ee0c4ff4/sdk/packages/pocket_diagnostics/lib/src/types.dart#L8)
 
 ### `defaultMaxFileBytes`
 
 **Top-level variable** `const int defaultMaxFileBytes = 512 * 1024`
 
-Source: [packages/pocket_diagnostics/lib/src/types.dart](https://github.com/PocketFlutter/Pocket/blob/235b5b5589faf492f4a9fc3b7c0827bcd1d9de2c/sdk/packages/pocket_diagnostics/lib/src/types.dart#L17)
+Source: [packages/pocket_diagnostics/lib/src/types.dart](https://github.com/PocketFlutter/Pocket/blob/b06cb43cac4d553cea232ae1cd1f9ed4ee0c4ff4/sdk/packages/pocket_diagnostics/lib/src/types.dart#L17)
 
 ### `defaultMaxNodes`
 
 **Top-level variable** `const int defaultMaxNodes = 512`
 
-Source: [packages/pocket_diagnostics/lib/src/types.dart](https://github.com/PocketFlutter/Pocket/blob/235b5b5589faf492f4a9fc3b7c0827bcd1d9de2c/sdk/packages/pocket_diagnostics/lib/src/types.dart#L9)
+Source: [packages/pocket_diagnostics/lib/src/types.dart](https://github.com/PocketFlutter/Pocket/blob/b06cb43cac4d553cea232ae1cd1f9ed4ee0c4ff4/sdk/packages/pocket_diagnostics/lib/src/types.dart#L9)
 
 ### `defaultMaxObjectKeys`
 
 **Top-level variable** `const int defaultMaxObjectKeys = 64`
 
-Source: [packages/pocket_diagnostics/lib/src/types.dart](https://github.com/PocketFlutter/Pocket/blob/235b5b5589faf492f4a9fc3b7c0827bcd1d9de2c/sdk/packages/pocket_diagnostics/lib/src/types.dart#L11)
+Source: [packages/pocket_diagnostics/lib/src/types.dart](https://github.com/PocketFlutter/Pocket/blob/b06cb43cac4d553cea232ae1cd1f9ed4ee0c4ff4/sdk/packages/pocket_diagnostics/lib/src/types.dart#L11)
 
 ### `defaultMaxRecords`
 
 **Top-level variable** `const int defaultMaxRecords = 500`
 
-Source: [packages/pocket_diagnostics/lib/src/types.dart](https://github.com/PocketFlutter/Pocket/blob/235b5b5589faf492f4a9fc3b7c0827bcd1d9de2c/sdk/packages/pocket_diagnostics/lib/src/types.dart#L6)
+Source: [packages/pocket_diagnostics/lib/src/types.dart](https://github.com/PocketFlutter/Pocket/blob/b06cb43cac4d553cea232ae1cd1f9ed4ee0c4ff4/sdk/packages/pocket_diagnostics/lib/src/types.dart#L6)
 
 ### `defaultMaxRotatedFiles`
 
 **Top-level variable** `const int defaultMaxRotatedFiles = 3`
 
-Source: [packages/pocket_diagnostics/lib/src/types.dart](https://github.com/PocketFlutter/Pocket/blob/235b5b5589faf492f4a9fc3b7c0827bcd1d9de2c/sdk/packages/pocket_diagnostics/lib/src/types.dart#L18)
+Source: [packages/pocket_diagnostics/lib/src/types.dart](https://github.com/PocketFlutter/Pocket/blob/b06cb43cac4d553cea232ae1cd1f9ed4ee0c4ff4/sdk/packages/pocket_diagnostics/lib/src/types.dart#L18)
 
 ### `defaultMaxStackLength`
 
 **Top-level variable** `const int defaultMaxStackLength = 16 * 1024`
 
-Source: [packages/pocket_diagnostics/lib/src/types.dart](https://github.com/PocketFlutter/Pocket/blob/235b5b5589faf492f4a9fc3b7c0827bcd1d9de2c/sdk/packages/pocket_diagnostics/lib/src/types.dart#L13)
+Source: [packages/pocket_diagnostics/lib/src/types.dart](https://github.com/PocketFlutter/Pocket/blob/b06cb43cac4d553cea232ae1cd1f9ed4ee0c4ff4/sdk/packages/pocket_diagnostics/lib/src/types.dart#L13)
 
 ### `defaultMaxStringLength`
 
 **Top-level variable** `const int defaultMaxStringLength = 4096`
 
-Source: [packages/pocket_diagnostics/lib/src/types.dart](https://github.com/PocketFlutter/Pocket/blob/235b5b5589faf492f4a9fc3b7c0827bcd1d9de2c/sdk/packages/pocket_diagnostics/lib/src/types.dart#L12)
+Source: [packages/pocket_diagnostics/lib/src/types.dart](https://github.com/PocketFlutter/Pocket/blob/b06cb43cac4d553cea232ae1cd1f9ed4ee0c4ff4/sdk/packages/pocket_diagnostics/lib/src/types.dart#L12)
 
 ### `defaultRecentLogLimit`
 
 **Top-level variable** `const int defaultRecentLogLimit = 20`
 
-Source: [packages/pocket_diagnostics/lib/src/types.dart](https://github.com/PocketFlutter/Pocket/blob/235b5b5589faf492f4a9fc3b7c0827bcd1d9de2c/sdk/packages/pocket_diagnostics/lib/src/types.dart#L7)
+Source: [packages/pocket_diagnostics/lib/src/types.dart](https://github.com/PocketFlutter/Pocket/blob/b06cb43cac4d553cea232ae1cd1f9ed4ee0c4ff4/sdk/packages/pocket_diagnostics/lib/src/types.dart#L7)
 
 ### `diagnosticsSchemaVersion`
 
 **Top-level variable** `const int diagnosticsSchemaVersion = 1`
 
-Source: [packages/pocket_diagnostics/lib/src/types.dart](https://github.com/PocketFlutter/Pocket/blob/235b5b5589faf492f4a9fc3b7c0827bcd1d9de2c/sdk/packages/pocket_diagnostics/lib/src/types.dart#L5)
+Source: [packages/pocket_diagnostics/lib/src/types.dart](https://github.com/PocketFlutter/Pocket/blob/b06cb43cac4d553cea232ae1cd1f9ed4ee0c4ff4/sdk/packages/pocket_diagnostics/lib/src/types.dart#L5)
 
 ### `estimateUtf8Bytes`
 
 **function** `int estimateUtf8Bytes(String text)`
 
-Source: [packages/pocket_diagnostics/lib/src/normalize.dart](https://github.com/PocketFlutter/Pocket/blob/235b5b5589faf492f4a9fc3b7c0827bcd1d9de2c/sdk/packages/pocket_diagnostics/lib/src/normalize.dart#L80)
+Source: [packages/pocket_diagnostics/lib/src/normalize.dart](https://github.com/PocketFlutter/Pocket/blob/b06cb43cac4d553cea232ae1cd1f9ed4ee0c4ff4/sdk/packages/pocket_diagnostics/lib/src/normalize.dart#L80)
 
 ### `filterAndSortRecords`
 
 **function** `List<DiagnosticRecord> filterAndSortRecords( List<DiagnosticRecord> records, [ DiagnosticQuery? query, ])`
 
-Source: [packages/pocket_diagnostics/lib/src/collector.dart](https://github.com/PocketFlutter/Pocket/blob/235b5b5589faf492f4a9fc3b7c0827bcd1d9de2c/sdk/packages/pocket_diagnostics/lib/src/collector.dart#L46)
+Source: [packages/pocket_diagnostics/lib/src/collector.dart](https://github.com/PocketFlutter/Pocket/blob/b06cb43cac4d553cea232ae1cd1f9ed4ee0c4ff4/sdk/packages/pocket_diagnostics/lib/src/collector.dart#L46)
 
 ### `matchesClearFilter`
 
 **function** `bool matchesClearFilter( DiagnosticRecord record, [ DiagnosticClearFilter? filter, ])`
 
-Source: [packages/pocket_diagnostics/lib/src/collector.dart](https://github.com/PocketFlutter/Pocket/blob/235b5b5589faf492f4a9fc3b7c0827bcd1d9de2c/sdk/packages/pocket_diagnostics/lib/src/collector.dart#L15)
+Source: [packages/pocket_diagnostics/lib/src/collector.dart](https://github.com/PocketFlutter/Pocket/blob/b06cb43cac4d553cea232ae1cd1f9ed4ee0c4ff4/sdk/packages/pocket_diagnostics/lib/src/collector.dart#L15)
 
 ### `normalizeContextString`
 
 **function** `String? normalizeContextString(Object? value, [int maxLength = 256])`
 
-Source: [packages/pocket_diagnostics/lib/src/normalize.dart](https://github.com/PocketFlutter/Pocket/blob/235b5b5589faf492f4a9fc3b7c0827bcd1d9de2c/sdk/packages/pocket_diagnostics/lib/src/normalize.dart#L601)
+Source: [packages/pocket_diagnostics/lib/src/normalize.dart](https://github.com/PocketFlutter/Pocket/blob/b06cb43cac4d553cea232ae1cd1f9ed4ee0c4ff4/sdk/packages/pocket_diagnostics/lib/src/normalize.dart#L601)
 
 ### `normalizeDiagnosticContext`
 
 **function** `DiagnosticContext normalizeDiagnosticContext(DiagnosticContext? context)`
 
-Source: [packages/pocket_diagnostics/lib/src/normalize.dart](https://github.com/PocketFlutter/Pocket/blob/235b5b5589faf492f4a9fc3b7c0827bcd1d9de2c/sdk/packages/pocket_diagnostics/lib/src/normalize.dart#L624)
+Source: [packages/pocket_diagnostics/lib/src/normalize.dart](https://github.com/PocketFlutter/Pocket/blob/b06cb43cac4d553cea232ae1cd1f9ed4ee0c4ff4/sdk/packages/pocket_diagnostics/lib/src/normalize.dart#L624)
 
 ### `normalizeDiagnosticData`
 
 **function** `Object? normalizeDiagnosticData( Object? value, [ DiagnosticNormalizationLimits? limits, ])`
 
-Source: [packages/pocket_diagnostics/lib/src/normalize.dart](https://github.com/PocketFlutter/Pocket/blob/235b5b5589faf492f4a9fc3b7c0827bcd1d9de2c/sdk/packages/pocket_diagnostics/lib/src/normalize.dart#L270)
+Source: [packages/pocket_diagnostics/lib/src/normalize.dart](https://github.com/PocketFlutter/Pocket/blob/b06cb43cac4d553cea232ae1cd1f9ed4ee0c4ff4/sdk/packages/pocket_diagnostics/lib/src/normalize.dart#L270)
 
 ### `normalizeDiagnosticError`
 
 **function** `NormalizedDiagnosticError normalizeDiagnosticError( Object? error, { StackTrace? stackTrace, DiagnosticNormalizationLimits? limits, })`
 
-Source: [packages/pocket_diagnostics/lib/src/normalize.dart](https://github.com/PocketFlutter/Pocket/blob/235b5b5589faf492f4a9fc3b7c0827bcd1d9de2c/sdk/packages/pocket_diagnostics/lib/src/normalize.dart#L280)
+Source: [packages/pocket_diagnostics/lib/src/normalize.dart](https://github.com/PocketFlutter/Pocket/blob/b06cb43cac4d553cea232ae1cd1f9ed4ee0c4ff4/sdk/packages/pocket_diagnostics/lib/src/normalize.dart#L280)
 
 ### `normalizeRevision`
 
 **function** `Object? normalizeRevision(Object? value)`
 
-Source: [packages/pocket_diagnostics/lib/src/normalize.dart](https://github.com/PocketFlutter/Pocket/blob/235b5b5589faf492f4a9fc3b7c0827bcd1d9de2c/sdk/packages/pocket_diagnostics/lib/src/normalize.dart#L610)
+Source: [packages/pocket_diagnostics/lib/src/normalize.dart](https://github.com/PocketFlutter/Pocket/blob/b06cb43cac4d553cea232ae1cd1f9ed4ee0c4ff4/sdk/packages/pocket_diagnostics/lib/src/normalize.dart#L610)
 
 ### `normalizeTimestamp`
 
 **function** `String normalizeTimestamp(Object? value, DateTime Function() fallbackNow)`
 
-Source: [packages/pocket_diagnostics/lib/src/normalize.dart](https://github.com/PocketFlutter/Pocket/blob/235b5b5589faf492f4a9fc3b7c0827bcd1d9de2c/sdk/packages/pocket_diagnostics/lib/src/normalize.dart#L636)
+Source: [packages/pocket_diagnostics/lib/src/normalize.dart](https://github.com/PocketFlutter/Pocket/blob/b06cb43cac4d553cea232ae1cd1f9ed4ee0c4ff4/sdk/packages/pocket_diagnostics/lib/src/normalize.dart#L636)
 
 ### `pocketAppStoreDistribution`
 
 **Top-level variable** `const bool pocketAppStoreDistribution = bool.fromEnvironment('POCKET_APP_STORE')`
 
-Source: [lib/src/pocket_distribution.dart](https://github.com/PocketFlutter/Pocket/blob/235b5b5589faf492f4a9fc3b7c0827bcd1d9de2c/sdk/lib/src/pocket_distribution.dart#L6)
+Source: [lib/src/pocket_distribution.dart](https://github.com/PocketFlutter/Pocket/blob/b06cb43cac4d553cea232ae1cd1f9ed4ee0c4ff4/sdk/lib/src/pocket_distribution.dart#L6)
 
 ### `pocketRemoteCodeEnabled`
 
 **Top-level variable** `const bool pocketRemoteCodeEnabled = !pocketAppStoreDistribution`
 
-Source: [lib/src/pocket_distribution.dart](https://github.com/PocketFlutter/Pocket/blob/235b5b5589faf492f4a9fc3b7c0827bcd1d9de2c/sdk/lib/src/pocket_distribution.dart#L12)
+Source: [lib/src/pocket_distribution.dart](https://github.com/PocketFlutter/Pocket/blob/b06cb43cac4d553cea232ae1cd1f9ed4ee0c4ff4/sdk/lib/src/pocket_distribution.dart#L12)
 
 ### `pocketSessionRecordingEnabled`
 
 **Top-level variable** `const bool pocketSessionRecordingEnabled = !pocketAppStoreDistribution && !kReleaseMode`
 
-Source: [lib/src/pocket_distribution.dart](https://github.com/PocketFlutter/Pocket/blob/235b5b5589faf492f4a9fc3b7c0827bcd1d9de2c/sdk/lib/src/pocket_distribution.dart#L16)
+Source: [lib/src/pocket_distribution.dart](https://github.com/PocketFlutter/Pocket/blob/b06cb43cac4d553cea232ae1cd1f9ed4ee0c4ff4/sdk/lib/src/pocket_distribution.dart#L16)
 
 ### `replayPocketRecording`
 
 **function** `Future<PocketReplayResult> replayPocketRecording( PocketRecording recording, { required PocketReplayAssets assets, PocketReplayRuntimeFactory? runtimeFactory, })`
 
-Source: [packages/pocket_flutter/lib/src/pocket_runtime.dart](https://github.com/PocketFlutter/Pocket/blob/235b5b5589faf492f4a9fc3b7c0827bcd1d9de2c/sdk/packages/pocket_flutter/lib/src/pocket_runtime.dart#L4156)
+Source: [packages/pocket_flutter/lib/src/pocket_runtime.dart](https://github.com/PocketFlutter/Pocket/blob/b06cb43cac4d553cea232ae1cd1f9ed4ee0c4ff4/sdk/packages/pocket_flutter/lib/src/pocket_runtime.dart#L4156)
 
 ### `resolveNormalizationLimits`
 
 **function** `ResolvedNormalizationLimits resolveNormalizationLimits([ DiagnosticNormalizationLimits? limits, ])`
 
-Source: [packages/pocket_diagnostics/lib/src/normalize.dart](https://github.com/PocketFlutter/Pocket/blob/235b5b5589faf492f4a9fc3b7c0827bcd1d9de2c/sdk/packages/pocket_diagnostics/lib/src/normalize.dart#L37)
+Source: [packages/pocket_diagnostics/lib/src/normalize.dart](https://github.com/PocketFlutter/Pocket/blob/b06cb43cac4d553cea232ae1cd1f9ed4ee0c4ff4/sdk/packages/pocket_diagnostics/lib/src/normalize.dart#L37)
 
 ### `summarizeDiagnosticLog`
 
 **function** `DiagnosticRecentLogSummary summarizeDiagnosticLog(DiagnosticLogRecord log)`
 
-Source: [packages/pocket_diagnostics/lib/src/collector.dart](https://github.com/PocketFlutter/Pocket/blob/235b5b5589faf492f4a9fc3b7c0827bcd1d9de2c/sdk/packages/pocket_diagnostics/lib/src/collector.dart#L132)
+Source: [packages/pocket_diagnostics/lib/src/collector.dart](https://github.com/PocketFlutter/Pocket/blob/b06cb43cac4d553cea232ae1cd1f9ed4ee0c4ff4/sdk/packages/pocket_diagnostics/lib/src/collector.dart#L132)
 
 ### `truncateString`
 
 **function** `String truncateString( String value, int maxLength, [ TruncationTracker? tracker, ])`
 
-Source: [packages/pocket_diagnostics/lib/src/normalize.dart](https://github.com/PocketFlutter/Pocket/blob/235b5b5589faf492f4a9fc3b7c0827bcd1d9de2c/sdk/packages/pocket_diagnostics/lib/src/normalize.dart#L102)
+Source: [packages/pocket_diagnostics/lib/src/normalize.dart](https://github.com/PocketFlutter/Pocket/blob/b06cb43cac4d553cea232ae1cd1f9ed4ee0c4ff4/sdk/packages/pocket_diagnostics/lib/src/normalize.dart#L102)
 
 ## Source digests
 
@@ -7691,8 +7736,9 @@ Every API_SURFACE source file and Dart package manifest is marked, including fil
 <!-- api-source: packages/pocket_permissions/lib/pocket_permissions.dart aa355337467a81b1a9276fba3b97ea493d1984294f6e8b5d604625739ed60bf0 -->
 <!-- api-source: packages/pocket_permissions/lib/src/permissions_plugin.dart 9f0c5ece5d775524b69694ed19d0ab3a706990ba920aefbc041971102afebf23 -->
 <!-- api-source: packages/pocket_permissions/pubspec.yaml cc78fad3a484222faa76cf90fbfc47300d9f1e6dea0582d1224ef83aa7932629 -->
-<!-- api-source: packages/pocket_platform/lib/pocket_platform.dart 12876c7c90f96a8ad04ae927b5407b4989d170b34ddc20cef5d2ee947e24e7d3 -->
+<!-- api-source: packages/pocket_platform/lib/pocket_platform.dart 411c6628bd3b1e1856e99e3ef1f9134ac866f3025675656f7f81efc7dfcfebf9 -->
 <!-- api-source: packages/pocket_platform/lib/src/platform_plugin.dart fe9397498342991ab5ca37c36318b2153e9230dd0e2fad302c1da702c7f21846 -->
+<!-- api-source: packages/pocket_platform/lib/src/surface_bridge_plugin.dart 6566383215bdfe3e598cb77a7ef543c765ec59fe0f60bd5c01ecf87b1f405d06 -->
 <!-- api-source: packages/pocket_platform/pubspec.yaml c653f3c2f6fb7ff89616036a866e863f5b4014a8a351eeffac3486acf08d3aa7 -->
 <!-- api-source: packages/pocket_sensors/lib/pocket_sensors.dart fc829910a7a33310db8594bf9cdaa73acd875cd0a201309b2fe410f364d2d715 -->
 <!-- api-source: packages/pocket_sensors/pubspec.yaml f203ea0e75639b9f376fa24d309b0d2e56b64f761ae91861d5834c50de35b654 -->

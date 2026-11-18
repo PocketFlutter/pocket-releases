@@ -7,12 +7,12 @@ provider returns a bounded snapshot of nearby BLE peripherals, then uses the
 same device's GATT services, characteristics, reads, writes, and notification
 stream.
 
-macOS and Windows use the npm backend already used by dokidoki,
+macOS and Windows use the npm backend
 `@abandonware/noble@1.9.2-26`. The SDK's
 [`noble-bluetooth.mjs`](../editor/native/noble-bluetooth.mjs) is only a thin
 JSONL adapter around Noble. Noble owns the platform bindings (CoreBluetooth on
 macOS and its WinRT binding on supported Windows versions); the adapter does
-not contain TFTC parsing, product selection, a native protocol implementation,
+not contain device protocol parsing, product selection, a native protocol implementation,
 or a second BLE state machine.
 
 ## Using Preview
@@ -24,9 +24,9 @@ or a second BLE state machine.
    action. The device must be advertising and the adapter must be powered on.
 3. Select a device returned by that scope's scan. A connect request for an ID
    that was not returned by the same scope is rejected.
-4. Open the notification stream before issuing TFTC controls. The JS package
-   derives state and field-level `change` events from those real device
-   notifications; a successful write is not an execution acknowledgement.
+4. Open the notification stream before issuing device controls. Application JS
+   derives observed device state from those real device notifications; a
+   successful write is not an execution acknowledgement.
 5. Close the product or stop the Preview to release its streams and native
    connections.
 
@@ -60,20 +60,18 @@ cancels its scan, streams, and connections. Late native replies cannot revive
 a retired scope. Stream cancellation removes only that stream's listener;
 other streams remain active.
 
-The helper reports a physical disconnect as a stream error, so JS can end the
-old TFTC session and clear pending work. Preview currently has no separate
+The helper reports a physical disconnect as a stream error, so JS can clear the
+old GATT session and clear pending work. Preview currently has no separate
 per-device disconnect capability; `client.disconnect()` ends the JS session
 and the provider's scope disposal releases the native connection.
 
 ## Source and validation boundary
 
-The retained parent
-`/Volumes/ORICO/Development/TryJoy.c/TryJoyMono/App/repos/dokidoki` supplied
-the Noble dependency and its platform binding configuration. The retained
-`pocketjs_flutter_demo` was inspected outside `pocket_host/` for the existing
-host transport boundary. No Swift helper or PowerShell BLE implementation is
-maintained in the editor; the native BLE implementation remains in the npm
-backend.
+The retained `pocketjs_flutter_demo` was inspected outside `pocket_host/` for
+the existing host transport boundary. `@abandonware/noble@1.9.2-26` supplies
+the BLE npm dependency and its platform binding configuration. No Swift helper
+or PowerShell BLE implementation is maintained in the editor; the native BLE
+implementation remains in the npm backend.
 
 `editor/test/local_bluetooth.test.ts` checks the Preview routing, structured
 errors, stream lifecycle, and scope isolation with explicit test processes.
@@ -82,10 +80,9 @@ against explicit test IO and checks scan advertisements, GATT inventory,
 read/write response mode, first-notification delivery, ownership, cancellation,
 and disconnect handling. These tests do not prove radio traffic.
 
-Physical acceptance on macOS drove a DK-META2 through the retained CoreBluetooth
-path and then through the final `@abandonware/noble@1.9.2-26` Preview path.
-The Noble run clicked Vibration, Linear, and Rotation 10 for one second and
-observed notify-derived `0 → 10 → 0` levels, `isWorking: false → true → false`,
-and a spontaneous battery update `32 → 31`; Stop all finished at all-zero
-levels. Windows hardware and Flutter Blue Plus hardware are still unverified;
-see [the transport contract](TFTC_TRANSPORT_CONTRACT.md).
+Physical acceptance on macOS validated real BLE peripheral scan, connection,
+GATT write, and three-channel plus battery notification delivery through the
+CoreBluetooth and `@abandonware/noble@1.9.2-26` Preview paths. Physical Windows
+BLE hardware and Flutter Blue Plus hardware remain unverified; see
+[Hardware modules](HARDWARE_MODULES.md) and
+[Web Bluetooth preview](WEB_BLUETOOTH_PREVIEW.md).

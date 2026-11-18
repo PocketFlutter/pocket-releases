@@ -1,10 +1,9 @@
 /**
- * Thin JSONL transport over @abandonware/noble (the dependency used by
- * dokidoki).
+ * Thin JSONL transport over @abandonware/noble.
  *
  * Noble owns platform BLE (including its Windows WinRT binding). This file
  * only maps the editor's existing helper protocol to Noble's scan/GATT API;
- * TFTC decoding, security, and product policy remain in the JS package.
+ * device protocol decoding, security, and product policy remain in JS packages.
  */
 import { createRequire } from "node:module";
 import { dirname, resolve } from "node:path";

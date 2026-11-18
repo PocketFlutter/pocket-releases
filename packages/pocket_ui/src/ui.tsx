@@ -267,7 +267,6 @@ function SafeAreaScaffoldBody(props: SafeAreaScaffoldProps & {
   const resolvedChildren = resolveChildren(() => resolveSlot(props.children));
   const resolvedBottomBar = resolveChildren(() => resolveSlot(props.bottomBar));
   const resolvedBackground = resolveChildren(() => resolveSlot(props.background));
-  const bottomBar = resolvedBottomBar();
   const hasBackground = props.background !== undefined && props.background !== null;
   const backgroundLayer = () => hasBackground ? (
     <View
@@ -276,7 +275,10 @@ function SafeAreaScaffoldBody(props: SafeAreaScaffoldProps & {
     >{resolvedBackground()}</View>
   ) : null;
   const hasAppBar = props.appBar !== undefined && props.appBar !== null;
-  const hasBottomBar = bottomBar !== undefined && bottomBar !== null;
+  const hasBottomBar = () => {
+    const bar = resolvedBottomBar();
+    return bar !== undefined && bar !== null && bar !== false;
+  };
   const intrinsic = props.edges === "none";
   const canvasClass = () => props.class ?? (theme().name === "dark"
     ? (intrinsic ? "flex-col w-full bg-[#09090B]" : "flex-col w-full h-full bg-[#09090B]")
@@ -360,7 +362,7 @@ function SafeAreaScaffoldBody(props: SafeAreaScaffoldProps & {
           {backgroundLayer()}
           {hasAppBar ? resolveSlot(props.appBar) : null}
           {resolvedChildren()}
-          {hasBottomBar ? bottomBar : null}
+          {resolvedBottomBar()}
         </View>
       </View>
     );
@@ -392,12 +394,12 @@ function SafeAreaScaffoldBody(props: SafeAreaScaffoldProps & {
             paddingT: hasAppBar || !consumes("top") ? 0 : insets().top,
             // A bottom tab bar is already safe-area aware. Without one,
             // keep the scroll viewport above the home indicator.
-            paddingB: hasBottomBar || !consumes("bottom") ? 0 : insets().bottom,
+            paddingB: hasBottomBar() || !consumes("bottom") ? 0 : insets().bottom,
           }}
         >
           {resolvedChildren()}
         </View>
-        {bottomBar}
+        {resolvedBottomBar()}
       </View>
     </View>
   );

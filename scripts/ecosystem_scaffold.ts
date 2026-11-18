@@ -18,7 +18,12 @@
 
 import { existsSync, lstatSync, mkdirSync, readFileSync, rmSync, writeFileSync } from "node:fs";
 import { dirname, join, resolve } from "node:path";
+import { resolvePlatformExperience } from "./platform_scaffold.ts";
 import type { EcosystemId } from "../packages/pocket_ui/src/surface-catalog.ts";
+import {
+  detectFlutterRoot,
+  syncNativeEcosystemProject,
+} from "./native_surface_scaffold.ts";
 
 export type EcosystemModuleId =
   | "apple-devices"
@@ -202,6 +207,10 @@ const CANONICAL_ORDER = new Map<EcosystemModuleId, number>(
 const OPTIONAL_SURFACE_CAPABILITIES = [
   "platform.surface.get",
   "platform.widgets.publishSnapshot",
+  "platform.widgets.drainActions",
+  "platform.widgets.actions",
+  "platform.liveActivity.upsert",
+  "platform.liveActivity.end",
   "platform.links.initial",
   "platform.links.latest",
   "platform.links.events",
@@ -695,6 +704,20 @@ export interface ScaffoldEcosystemOptions {
   appTitle?: string;
   /** Whether to auto-wrap `mount(() => <App />)` in `app.tsx` when extensions are present. Default `true`. */
   wireEntry?: boolean;
+  /** Override iOS/Android host bundle/application identifier (e.g. `fun.selfstudio.babylink.set`). */
+  bundleId?: string;
+  /** Apple Developer Team ID (`DEVELOPMENT_TEAM`) written into `ios/project.yml`. */
+  teamId?: string;
+  /** Deep-link scheme forwarded between WidgetKit/AppWidget extensions and host app. */
+  deepLinkScheme?: string;
+  /** Generate & maintain `ios/project.yml` + `ios/generate-xcodeproj.sh` for XcodeGen. */
+  useXcodeGen?: boolean;
+  /** Embed `PocketWidgetsExtension` target & App Group entitlements directly into `ios/project.yml`. */
+  embedIosExtensions?: boolean;
+  /** Execute `xcodegen generate` immediately after writing `ios/project.yml`. */
+  runXcodeGen?: boolean;
+  /** Whether to synchronize native iOS/Android targets & manifests when a Flutter host exists. Default `true`. */
+  syncNative?: boolean;
 }
 
 export interface ScaffoldEcosystemResult {
@@ -703,12 +726,17 @@ export interface ScaffoldEcosystemResult {
   readonly createdFiles: string[];
   readonly updatedFiles: string[];
   readonly entryWired: boolean;
+  readonly flutterRoot?: string;
+  readonly bundleId?: string;
+  readonly appGroupId?: string;
+  readonly xcodegenExecuted?: boolean;
 }
 
 /**
  * Create or update on-demand Apple & Android ecosystem/widget modules inside
- * `projectDir`. Safe to call during `initProject`, `createProject`, or later
- * from Studio / CLI.
+ * `projectDir`, and deterministically synchronize any companion Flutter iOS &
+ * Android host projects (`ios/project.yml`, WidgetKit/ActivityKit Swift targets,
+ * App Group container metadata, Android `AppWidgetProvider`s & `AndroidManifest.xml`).
  */
 export function scaffoldEcosystemModules(
   projectDir: string,
@@ -738,7 +766,52 @@ export function scaffoldEcosystemModules(
     (typeof pocketDoc?.title === "string" && pocketDoc.title.trim()) ||
     "Pocket App";
 
+  const { deepLinkScheme: inferredScheme } = resolvePlatformExperience({
+    deepLinkScheme:
+      options.deepLinkScheme ??
+      (typeof editorDoc?.deepLinkScheme === "string" ? editorDoc.deepLinkScheme : undefined),
+  });
+  const explicitBundleId = options.bundleId?.trim() || undefined;
+
+  const detectedFlutter = detectFlutterRoot(root);
+  let resolvedBundleId = explicitBundleId;
+  let resolvedAppGroupId = explicitBundleId ? `group.${explicitBundleId}` : undefined;
+  let xcodegenExecuted = false;
+
+  const descriptorPath = detectedFlutter ? join(detectedFlutter, "pocket_surfaces.json") : undefined;
+  const relPrefix = detectedFlutter?.startsWith(root + "/")
+    ? `${detectedFlutter.slice(root.length + 1)}/`
+    : "";
+  if (
+    detectedFlutter &&
+    descriptorPath &&
+    options.syncNative !== false &&
+    (modules.length > 0 || options.useXcodeGen === true || existsSync(descriptorPath))
+  ) {
+    const nativeSync = syncNativeEcosystemProject(detectedFlutter, {
+      modules,
+      bundleId: explicitBundleId,
+      teamId: options.teamId,
+      appTitle: inferredTitle,
+      deepLinkScheme: inferredScheme,
+      useXcodeGen: options.useXcodeGen,
+      embedIosExtensions: options.embedIosExtensions,
+      runXcodeGen: options.runXcodeGen,
+    });
+    resolvedBundleId = nativeSync.bundleId;
+    resolvedAppGroupId = nativeSync.appGroupId;
+    xcodegenExecuted = nativeSync.xcodegenExecuted;
+    for (const f of nativeSync.createdFiles) createdFiles.push(`${relPrefix}${f}`);
+    for (const f of nativeSync.updatedFiles) updatedFiles.push(`${relPrefix}${f}`);
+  }
+
   if (editorDoc) {
+    if (explicitBundleId) {
+      editorDoc.bundleId = explicitBundleId;
+    }
+    if (inferredScheme) {
+      editorDoc.deepLinkScheme = inferredScheme;
+    }
     if (modules.length > 0) {
       editorDoc.ecosystemModules = modules;
     } else {
@@ -754,7 +827,12 @@ export function scaffoldEcosystemModules(
         pocketDoc.surfaces && typeof pocketDoc.surfaces === "object" && !Array.isArray(pocketDoc.surfaces)
           ? (pocketDoc.surfaces as Record<string, unknown>)
           : {};
-      pocketDoc.surfaces = { ...prevSurfaces, modules };
+      pocketDoc.surfaces = {
+        ...prevSurfaces,
+        modules,
+        ...(explicitBundleId ? { bundleId: explicitBundleId, appGroupId: `group.${explicitBundleId}` } : {}),
+        ...(inferredScheme ? { deepLinkScheme: inferredScheme } : {}),
+      };
     } else {
       delete pocketDoc.surfaces;
     }
@@ -795,10 +873,18 @@ export function scaffoldEcosystemModules(
       }
     }
     const indexRel = "surfaces/index.tsx";
-    const indexExisted = existsSync(join(root, indexRel));
-    writeFileSync(join(root, indexRel), generateSurfacesIndexSource(modules));
-    if (indexExisted) updatedFiles.push(indexRel);
-    else createdFiles.push(indexRel);
+    const indexAbs = join(root, indexRel);
+    const indexExisted = existsSync(indexAbs);
+    const canWriteIndex =
+      !indexExisted ||
+      readFileSync(indexAbs, "utf8").includes(
+        "Auto-maintained on-demand ecosystem & widget router",
+      );
+    if (canWriteIndex) {
+      writeFileSync(indexAbs, generateSurfacesIndexSource(modules));
+      if (indexExisted) updatedFiles.push(indexRel);
+      else createdFiles.push(indexRel);
+    }
 
     if (options.wireEntry !== false && needsSurfaceFiles) {
       const entryRel =
@@ -813,14 +899,15 @@ export function scaffoldEcosystemModules(
     }
   }
 
-  const flutterDir = join(root, "flutter");
-  if (existsSync(flutterDir) && lstatSync(flutterDir).isDirectory()) {
-    const descriptorPath = join(flutterDir, "pocket_surfaces.json");
+  if (descriptorPath) {
+    const descriptorRel = `${relPrefix}pocket_surfaces.json`;
     if (modules.length > 0) {
       const descriptorExisted = existsSync(descriptorPath);
       const descriptor = {
         schemaVersion: 1,
         engine: "pocket-qjbc-single-engine",
+        ...(resolvedBundleId ? { bundleId: resolvedBundleId, appGroupId: resolvedAppGroupId } : {}),
+        ...(inferredScheme ? { deepLinkScheme: inferredScheme } : {}),
         modules,
         enabledProfiles: enabledProfileIdsForModules(modules),
         appleTargets: modules
@@ -831,11 +918,11 @@ export function scaffoldEcosystemModules(
           .map((id) => ({ module: id, profiles: MODULE_BY_ID.get(id)!.profileIds })),
       };
       writeFileSync(descriptorPath, `${JSON.stringify(descriptor, null, 2)}\n`);
-      if (descriptorExisted) updatedFiles.push("flutter/pocket_surfaces.json");
-      else createdFiles.push("flutter/pocket_surfaces.json");
+      if (descriptorExisted) updatedFiles.push(descriptorRel);
+      else createdFiles.push(descriptorRel);
     } else if (existsSync(descriptorPath)) {
       rmSync(descriptorPath, { force: true });
-      updatedFiles.push("flutter/pocket_surfaces.json");
+      updatedFiles.push(descriptorRel);
     }
   }
 
@@ -845,5 +932,8 @@ export function scaffoldEcosystemModules(
     createdFiles,
     updatedFiles,
     entryWired,
+    ...(detectedFlutter ? { flutterRoot: detectedFlutter } : {}),
+    ...(resolvedBundleId ? { bundleId: resolvedBundleId, appGroupId: resolvedAppGroupId } : {}),
+    ...(options.runXcodeGen || options.useXcodeGen ? { xcodegenExecuted } : {}),
   };
 }

@@ -269,7 +269,7 @@ function copyTree(source: string, target: string): void {
  */
 function publicUiPackageRoot(projectRoot: string, packageName = "@pocket/ui"): string | undefined {
   const slug = packageName.slice("@pocket/".length);
-  if (!["ui", "looseleaf", "arc", "vn", "spine", "live2d", "sync"].includes(slug)) throw new Error(`Unknown SDK guest package: ${packageName}`);
+  if (!["ui", "looseleaf", "arc", "liquid_glass", "vn", "spine", "live2d", "sync"].includes(slug)) throw new Error(`Unknown SDK guest package: ${packageName}`);
   const packageDirectory = `pocket_${slug}`;
   const candidates = [join(projectRoot, "vendor", `pocket-${slug}`)];
   // A file dependency names source, while node_modules can be an older Bun
@@ -971,6 +971,15 @@ async function buildGuestSerialized(options: BuildGuestOptions): Promise<BuildGu
     const arcEntries = preparedArc?.packageRoot
       ? [join(preparedArc.packageRoot, "src/index.ts")].filter(existsSync)
       : [];
+    const usesLiquidGlass = dependencies?.["@pocket/liquid_glass"] !== undefined || devDependencies?.["@pocket/liquid_glass"] !== undefined;
+    const preparedLiquidGlass = usesLiquidGlass ? await prepareUiPackage(projectRoot, entry, options.log, "@pocket/liquid_glass") : undefined;
+    if (preparedLiquidGlass) {
+      const cleanupUi = uiCleanup;
+      uiCleanup = () => { preparedLiquidGlass.cleanup(); cleanupUi(); };
+    }
+    const liquidGlassEntries = preparedLiquidGlass?.packageRoot
+      ? [join(preparedLiquidGlass.packageRoot, "src/index.ts")].filter(existsSync)
+      : [];
     const usesVn = dependencies?.["@pocket/vn"] !== undefined || devDependencies?.["@pocket/vn"] !== undefined;
     const bundledModels = usesVn ? novelModelSources(projectRoot) : {};
     for (const name of ["@pocket/spine", "@pocket/live2d", "@pocket/sync"]) {
@@ -988,7 +997,7 @@ async function buildGuestSerialized(options: BuildGuestOptions): Promise<BuildGu
     const vnEntries = preparedVn?.packageRoot
       ? [join(preparedVn.packageRoot, "src/index.ts"), join(preparedVn.packageRoot, "src/view.tsx")].filter(existsSync)
       : [];
-    const compilerEntry = prepareCompilerEntry(projectRoot, entry, preparedUi.packageRoot, options.log, [...looseleafEntries, ...arcEntries, ...vnEntries], usesVn ? novelImageLiterals(projectRoot) : [], bundledModels);
+    const compilerEntry = prepareCompilerEntry(projectRoot, entry, preparedUi.packageRoot, options.log, [...looseleafEntries, ...arcEntries, ...liquidGlassEntries, ...vnEntries], usesVn ? novelImageLiterals(projectRoot) : [], bundledModels);
     compilerEntryCleanup = compilerEntry.cleanup;
     const skipFontBaking = primaryFontArguments.length === 0 && options.bakeFonts !== true;
     report(`build_guest: compiler=${compiler}`, options.log);

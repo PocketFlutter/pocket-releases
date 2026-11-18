@@ -18,14 +18,12 @@ npm install @abandonware/noble@1.9.2-26
 ```
 
 Run the Editor on macOS or Windows, enable **Noble Bluetooth** in Preview, and
-use the normal JS TFTC/host capability calls. The OS owns Bluetooth permission
+use the normal JS `hardware.bluetooth.*` host capability calls. The OS owns Bluetooth permission
 at the real scan/GATT boundary. A permission request is therefore reported as
 unsupported when Noble has no explicit permission API; the host must not
 fabricate a `granted` result.
 
-For the capability contract, scope lifecycle, notification rules and physical
-acceptance limits, see [Local Bluetooth preview](LOCAL_BLUETOOTH_PREVIEW.md)
-and [TFTC transport contract](TFTC_TRANSPORT_CONTRACT.md).
+For the capability contract, scope lifecycle, notification rules and acceptance limits, see [Local Bluetooth preview](LOCAL_BLUETOOTH_PREVIEW.md) and [Hardware modules](HARDWARE_MODULES.md).
 
 The browser Canvas projection remains a rendering/input surface only. It never
 contains a Bluetooth implementation, and pages without a local Noble host

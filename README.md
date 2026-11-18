@@ -64,8 +64,6 @@ npm run editor
 
 The Editor includes project management, real Guest preview, input/IME inspection, version management, signed packages and LAN test publishing. Device deployment remains an optional host integration and is not required for Web development.
 
-TFTC control and live notify changes are provided by [@pocket/tftc](packages/pocket_tftc/README.md). Its guide covers Preview Bluetooth, Windows prerequisites, event contracts and hardware acceptance limits.
-
 ## UI ownership
 
 Business UI, state, routing and component composition belong in JS. Reuse the existing controls and inherit their focus, press/cancel, disabled, keyboard/gamepad, scrolling, IME, safe-area, accessibility, route and lifecycle behavior before changing skins or adding evidenced behavior. See [AI_APP_DEVELOPMENT.md](docs/AI_APP_DEVELOPMENT.md) and [COMPONENTS.md](docs/COMPONENTS.md).

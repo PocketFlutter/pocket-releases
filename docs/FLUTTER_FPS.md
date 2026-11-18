@@ -98,11 +98,11 @@ The compatibility fields `frames`, `durationMs`, `maxGapMs`, `slowFrames`, `refr
 
 `PocketView._onTick` drives `frameDeltaAt` with the scheduler ticker. Performance ticks are recorded only when Guest output arrives. Idle time is excluded from the active window.
 
-- [`FlutterFrameMonitor` passive collector and HUD](https://github.com/PocketFlutter/Pocket/blob/235b5b5589faf492f4a9fc3b7c0827bcd1d9de2c/sdk/packages/pocket_flutter/lib/src/flutter_frame_monitor.dart)
-- [`PocketView._onTick` and performance window](https://github.com/PocketFlutter/Pocket/blob/235b5b5589faf492f4a9fc3b7c0827bcd1d9de2c/sdk/packages/pocket_flutter/lib/src/pocket_view.dart)
-- [`PocketPerformanceSample` field definitions](https://github.com/PocketFlutter/Pocket/blob/235b5b5589faf492f4a9fc3b7c0827bcd1d9de2c/sdk/packages/pocket_flutter/lib/src/pocket_performance.dart)
-- [`PocketSession.runtime.performance` registration and sample delivery](https://github.com/PocketFlutter/Pocket/blob/235b5b5589faf492f4a9fc3b7c0827bcd1d9de2c/sdk/lib/src/pocket_session.dart)
-- [Demo compatibility aggregation for performance history](https://github.com/PocketFlutter/Pocket/blob/235b5b5589faf492f4a9fc3b7c0827bcd1d9de2c/demo/js/state.ts)
+- [`FlutterFrameMonitor` passive collector and HUD](https://github.com/PocketFlutter/Pocket/blob/b06cb43cac4d553cea232ae1cd1f9ed4ee0c4ff4/sdk/packages/pocket_flutter/lib/src/flutter_frame_monitor.dart)
+- [`PocketView._onTick` and performance window](https://github.com/PocketFlutter/Pocket/blob/b06cb43cac4d553cea232ae1cd1f9ed4ee0c4ff4/sdk/packages/pocket_flutter/lib/src/pocket_view.dart)
+- [`PocketPerformanceSample` field definitions](https://github.com/PocketFlutter/Pocket/blob/b06cb43cac4d553cea232ae1cd1f9ed4ee0c4ff4/sdk/packages/pocket_flutter/lib/src/pocket_performance.dart)
+- [`PocketSession.runtime.performance` registration and sample delivery](https://github.com/PocketFlutter/Pocket/blob/b06cb43cac4d553cea232ae1cd1f9ed4ee0c4ff4/sdk/lib/src/pocket_session.dart)
+- [Demo compatibility aggregation for performance history](https://github.com/PocketFlutter/Pocket/blob/b06cb43cac4d553cea232ae1cd1f9ed4ee0c4ff4/demo/js/state.ts)
 
 ### Flutter Engine Cadence
 
@@ -222,7 +222,7 @@ iPhone Duo simulator, iOS 27.1, 60 Hz display. Debug measurements verified the c
 
 Flutter 3.35.7 `LiveTestWidgetsFlutterBinding.handleDrawFrame` calls `platformDispatcher.scheduleFrame()` outside benchmark policies. `fullyLive` handles the subsequent frames. An idle page in integration tests can therefore receive about 60 engine timings per second. The first idle check failed with 117 new frames in two seconds. The zero-frame assertion stayed in place. Earlier static-page results around 60 Hz under such a binding cannot establish ordinary app cadence or energy use.
 
-The ordinary app verification tool uses `WidgetsFlutterBinding` without importing `flutter_test` and reuses the same real animation workload. [`demo/tool/verify_flutter_fps.dart`](https://github.com/PocketFlutter/Pocket/blob/235b5b5589faf492f4a9fc3b7c0827bcd1d9de2c/demo/tool/verify_flutter_fps.dart)
+The ordinary app verification tool uses `WidgetsFlutterBinding` without importing `flutter_test` and reuses the same real animation workload. [`demo/tool/verify_flutter_fps.dart`](https://github.com/PocketFlutter/Pocket/blob/b06cb43cac4d553cea232ae1cd1f9ed4ee0c4ff4/demo/tool/verify_flutter_fps.dart)
 
 ```sh
 cd demo

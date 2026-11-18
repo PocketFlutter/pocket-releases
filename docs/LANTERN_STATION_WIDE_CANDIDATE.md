@@ -10,13 +10,13 @@ acceptance has been run. The candidate remains for a later visual and memory
 comparison before anyone decides whether to adopt it.
 
 The source master is
-[`station-wide-v1.png`](https://github.com/PocketFlutter/Pocket/blob/235b5b5589faf492f4a9fc3b7c0827bcd1d9de2c/demo/js/apps/lantern/art/masters/station-wide-v1.png),
+[`station-wide-v1.png`](https://github.com/PocketFlutter/Pocket/blob/b06cb43cac4d553cea232ae1cd1f9ed4ee0c4ff4/demo/js/apps/lantern/art/masters/station-wide-v1.png),
 an exact copy of the built-in `image_gen` output at
 `/Users/lincoln.law/.codex/generated_images/01a1b110-c27f-7ca2-8fca-9fda16ae1a72/exec-fe02808a-d898-4740-9901-f3180b239c9a.png`.
 It is 1672×941, 2,598,834 bytes, SHA-256
 `f48344c53c8f14e40a810efc197b8fe26abbe14230ba4ce96a56e97a676fe196`.
 The complete generation prompt and edit-target provenance are preserved in
-[`station-wide-v1.prompt.txt`](https://github.com/PocketFlutter/Pocket/blob/235b5b5589faf492f4a9fc3b7c0827bcd1d9de2c/demo/js/apps/lantern/art/masters/station-wide-v1.prompt.txt).
+[`station-wide-v1.prompt.txt`](https://github.com/PocketFlutter/Pocket/blob/b06cb43cac4d553cea232ae1cd1f9ed4ee0c4ff4/demo/js/apps/lantern/art/masters/station-wide-v1.prompt.txt).
 
 The existing station master remains unchanged at 1024×1536, SHA-256
 `3116e8a40c54f180a406de5dda4c9f3a75bd46f60f0d8c66fe365c5a757d3eaa`; the

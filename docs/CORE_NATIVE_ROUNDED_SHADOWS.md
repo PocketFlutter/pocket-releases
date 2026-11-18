@@ -2,7 +2,7 @@
 
 ## Source and retained behavior
 
-The retained parent renderer in [pocket_ui_components.dart](../../pocketjs_flutter_demo/lib/render/pocket_ui_components.dart#L385) uses Flutter's `BoxShadow` layers around a `ClipRRect` surface and draws rounded primitives with `Canvas.drawRRect`. The SDK host already decodes Core's `ROUNDED_RECT` operation into its `rounded` frame operation; [pocket_view_painter.dart](https://github.com/PocketFlutter/Pocket/blob/235b5b5589faf492f4a9fc3b7c0827bcd1d9de2c/sdk/packages/pocket_flutter/lib/src/pocket_view_painter.dart#L421) paints fills with `drawRRect` and rings with `drawDRRect`.
+The retained parent renderer in [pocket_ui_components.dart](../../pocketjs_flutter_demo/lib/render/pocket_ui_components.dart#L385) uses Flutter's `BoxShadow` layers around a `ClipRRect` surface and draws rounded primitives with `Canvas.drawRRect`. The SDK host already decodes Core's `ROUNDED_RECT` operation into its `rounded` frame operation; [pocket_view_painter.dart](https://github.com/PocketFlutter/Pocket/blob/b06cb43cac4d553cea232ae1cd1f9ed4ee0c4ff4/sdk/packages/pocket_flutter/lib/src/pocket_view_painter.dart#L421) paints fills with `drawRRect` and rings with `drawDRRect`.
 
 Pocket Core's existing shadow style is a compact two or three layer alpha recipe, not a blurred `BoxShadow`. This change retains each layer's offset, spread, alpha, and order. It only replaces the per-layer rectangle or scanline emission with the existing rounded rectangle DrawList op when the native rounded path is enabled and the node has no gradient.
 

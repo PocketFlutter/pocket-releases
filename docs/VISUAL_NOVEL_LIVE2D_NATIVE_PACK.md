@@ -41,7 +41,7 @@ Under **Option B (no engine patch, no new node type)**:
   - Widened 32-bit triangle vertex indices.
 
 ### 3.2 One-Pass C++ Packing (`pocket_live2d_core.cpp`)
-In [`sdk/packages/pocket_live2d/native/src/pocket_live2d_core.cpp`](https://github.com/PocketFlutter/Pocket/blob/235b5b5589faf492f4a9fc3b7c0827bcd1d9de2c/sdk/packages/pocket_live2d/native/src/pocket_live2d_core.cpp):
+In [`sdk/packages/pocket_live2d/native/src/pocket_live2d_core.cpp`](https://github.com/PocketFlutter/Pocket/blob/b06cb43cac4d553cea232ae1cd1f9ed4ee0c4ff4/sdk/packages/pocket_live2d/native/src/pocket_live2d_core.cpp):
 - On topology initialization (`ensure_drawable_topology`), static `uint16_t` Cubism triangle indices are widened once into `std::vector<uint32_t> indices_u32` and copied once via `std::memcpy` into the index tail of each drawable's `pms1_bytes` buffer (`16 + vertex_count * 16`).Both `indices_u32` and `pms1_bytes` are included in `pocket_live2d_model_native_bytes` memory accounting.
 - On `pocket_live2d_model_update_with_placement(model, items, item_count, dx, dy, scale, model_opacity)`:
   - After `csmUpdateModel`, `copy_drawables` writes the 16-byte `PMS1` header and transforms/interleaves `(px, py, u, 1 - v)` directly into the vertex region of `pms1_bytes` in a single pass over `vertex_count`.

@@ -46,7 +46,7 @@ import {
 } from "./mobile.tsx";
 import type { DesignDensity, DisplayGeometry } from "./responsive.ts";
 
-export type UiSkinId = "default" | "looseleaf" | "arc" | (string & {});
+export type UiSkinId = "default" | "looseleaf" | "arc" | "liquid-glass" | (string & {});
 
 export type UiSkinThemeMode = "light" | "dark" | "amber-night";
 
@@ -356,6 +356,7 @@ export interface UiSkinAdapter {
   readonly id: UiSkinId;
   readonly label: string;
   readonly description: string;
+  readonly floatingBottomBar?: boolean;
   resolveTokens: (mode: UiSkinThemeMode, accent: UiSkinAccent) => UiSkinTokens;
   Provider?: (props: UiSkinProviderSlotProps) => JSX.Element;
   readonly kit: UiSkinKit;
@@ -1077,6 +1078,15 @@ export function SkinBackdrop(props: SkinBackdropProps): JSX.Element {
 
 export function SkinScaffold(props: SkinScaffoldProps): JSX.Element {
   const ctx = useUiSkin();
+  const bottomBar = (): JSX.Element => {
+    const bar = props.bottomBar;
+    if (bar == null || bar === false || ctx.adapter().floatingBottomBar !== true) return bar;
+    return (
+      <View class="w-full shrink-0" style={{ posType: 1, insetL: 0, insetR: 0, insetB: 0 }}>
+        {bar}
+      </View>
+    );
+  };
   return (
     <SafeAreaScaffold
       edges={props.edges}
@@ -1088,7 +1098,7 @@ export function SkinScaffold(props: SkinScaffoldProps): JSX.Element {
         ...props.style,
       }}
       appBar={props.appBar}
-      bottomBar={props.bottomBar}
+      bottomBar={bottomBar}
     >
       <View class="relative flex-1 flex-col w-full h-full overflow-hidden" style={{ posType: 0 }}>
         <Show when={props.backdrop !== false}>

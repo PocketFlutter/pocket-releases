@@ -49,3 +49,27 @@ POCKET_SOURCE_BUILD=1 bun test \
   sdk/editor/test/project_identity.test.ts \
   sdk/editor/test/project_identity_preview.test.ts
 ```
+
+## Project-local Preview host adapter
+
+Web Studio can opt a project into a machine-local Preview host adapter. Add `"previewHostConfig": true` to the project's existing `editor.json`. Omit the flag or set it to `false` to disable workspace profile discovery. The machine-only profile lives outside the project source at `<studio-workspace>/preview-hosts/<editor-project-id>.json`.
+
+Workspace profiles are supported on POSIX systems where Studio can check ownership and permissions. For the Editor project ID `my-app`, create the private profile directory with mode 0700 and give `my-app.json` mode 0600. The file must be owned by the Studio process user and must be a regular file without symbolic or hard links. Set `projectRoot` to the canonical absolute path of the source directory. Keep the profile and any sensitive development settings out of version control.
+
+```json
+{
+  "projectId": "my-app",
+  "projectRoot": "/absolute/canonical/path/to/my-app",
+  "hostConfig": { "apiBaseUrl": "http://127.0.0.1:8787/api/v1" },
+  "http": {
+    "allowedOrigins": ["http://127.0.0.1:8787"],
+    "allowedRoutes": [{ "method": "GET", "path": "/api/v1/health" }]
+  }
+}
+```
+
+An opted-in project's Preview and project mutations, such as saving configuration and starting a build, require a loopback connection from the Studio computer. Project mutations also require loopback when a registered source directory is the same as, contains, or sits within the opted-in source directory. Unrelated projects keep their existing access policy. The per-project Preview status exposes `hostConfig` as `disabled`, `ready`, or `invalid`. With a missing or rejected profile, local Preview runs without the adapter and Studio shows a notice. On profile creation, replacement, or removal, the affected Preview session reconnects without rebuilding the project or restarting Studio. Neighboring projects keep their sessions.
+
+An explicit single-project startup adapter supplied through the Editor service's `previewHostConfigPath` option or `POCKET_EDITOR_PREVIEW_HOST_CONFIG_PATH` takes precedence for its selected project. The explicit adapter continues to use its existing schema. Canonical project-root binding applies to workspace profiles.
+
+The retained parent `pocketjs_flutter_demo`, excluding its archived `pocket_host/`, has no project-scoped Preview adapter declaration. Studio extends its existing adapter config parser, host-request allowlist, and startup option with private workspace resolution and project-scoped session refresh. The adapter continues to serve the existing `funhub.host.config` and `dio.request` capabilities only to the trusted SystemUI. See [Tooling API](TOOLING_API.md#current-editor-http-api).

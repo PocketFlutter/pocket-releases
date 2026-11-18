@@ -21,7 +21,7 @@ The implementation reuses working Pocket code instead of adding a new Spine rend
 
 The same test builds the saved isolated project through the Editor's pinned `buildGuest` flow, starts those exact QJBC/PAK artifacts in `NativeSession`, and sends the new-game pointer input. The native draw list contains Mira's actual Spine triangles and Ren's image. Mira's animated triangle coordinates change between frames; scene 0 draws edited Mira after Ren, scene 1 draws Ren after Mira, and the hidden third scene contains no Mira triangles. This is a functional JS→buildGuest→Guest input/render check, not a Flutter or physical-device preview test.
 
-The test also retains [the edited stage capture](../.pocket-build/stage-spine-preview-20261108/edited-stage.png) in the ignored build cache. It shows the official Spine preview, Ren, the station background, and the actor frame at once.
+The test also retains [the edited stage capture](https://github.com/PocketFlutter/Pocket/blob/b06cb43cac4d553cea232ae1cd1f9ed4ee0c4ff4/sdk/.pocket-build/stage-spine-preview-20261108/edited-stage.png) in the ignored build cache. It shows the official Spine preview, Ren, the station background, and the actor frame at once.
 
 The existing resource-page regression `sdk/editor/test/novel_authoring_browser.test.ts` was also run for its `model assets load official Spine data and paint animated PMS1 meshes through the shared TEX_TRI projector` case to check that extraction did not break the original preview.
 

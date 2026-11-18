@@ -16,7 +16,7 @@ whole-game performance acceptance or a claim that the game has no stutter.
 
 ## Source path and measurement
 
-The current implementation is in [`pocket_view.dart`](https://github.com/PocketFlutter/Pocket/blob/235b5b5589faf492f4a9fc3b7c0827bcd1d9de2c/sdk/packages/pocket_flutter/lib/src/pocket_view.dart):
+The current implementation is in [`pocket_view.dart`](https://github.com/PocketFlutter/Pocket/blob/b06cb43cac4d553cea232ae1cd1f9ed4ee0c4ff4/sdk/packages/pocket_flutter/lib/src/pocket_view.dart):
 
 - `_buildSurface` starts at line 7084 and gathers non-video drawing ops into
   `canvasOps`.
@@ -39,7 +39,7 @@ semantics, and glass composition but before the final gesture, listener, and
 method. Partition timing covers the complete non-empty flush.
 
 The existing harness in
-[`novel_model_soak_test.dart`](https://github.com/PocketFlutter/Pocket/blob/235b5b5589faf492f4a9fc3b7c0827bcd1d9de2c/demo/integration_test/novel_model_soak_test.dart)
+[`novel_model_soak_test.dart`](https://github.com/PocketFlutter/Pocket/blob/b06cb43cac4d553cea232ae1cd1f9ed4ee0c4ff4/demo/integration_test/novel_model_soak_test.dart)
 supplied `FrameTiming` and native frame-call observations. The first timed run
 used one 10-second `manual_reading` window and the five 10-second Hiyori model
 windows. It ran in Profile mode on the accepted Lantern Guest and accepted
@@ -55,7 +55,7 @@ The scratch app used bundle identifier
 to a temporary directory. The ordinary app and its store were not opened or
 modified. Scratch source, dependencies, the two required Live2D macOS
 xcframeworks, build output, and logs are under
-[`performance-partition-sample-20261109`](../.pocket-build/performance-partition-sample-20261109/).
+[`performance-partition-sample-20261109`](https://github.com/PocketFlutter/Pocket/tree/b06cb43cac4d553cea232ae1cd1f9ed4ee0c4ff4/sdk/.pocket-build/performance-partition-sample-20261109).
 The scratch lockfile was resolved with Flutter 3.47.9 because the copied root
 lockfile did not satisfy the current SDK; no root package configuration or
 lockfile was changed. Six transitive dependencies were updated only in the
@@ -123,9 +123,9 @@ harness had SHA-256
 first timed run used instrumented hashes `c43cfc57d5d17e64fec2a42b4387a53c9aa26268e51c3e4839771b0e3f17eb1a` and
 `b536544d65a6d9c578cdf28d96b192a8b39875c316490a64323bd8ff41799e3e`,
 respectively. The exact scratch instrumentation is retained in
-[`pocket_view.instrumentation.diff`](../.pocket-build/performance-partition-sample-20261109/logs/pocket_view.instrumentation.diff)
+[`pocket_view.instrumentation.diff`](https://github.com/PocketFlutter/Pocket/blob/b06cb43cac4d553cea232ae1cd1f9ed4ee0c4ff4/sdk/.pocket-build/performance-partition-sample-20261109/logs/pocket_view.instrumentation.diff)
 and
-[`novel_model_soak_test.first-run.diff`](../.pocket-build/performance-partition-sample-20261109/logs/novel_model_soak_test.first-run.diff).
+[`novel_model_soak_test.first-run.diff`](https://github.com/PocketFlutter/Pocket/blob/b06cb43cac4d553cea232ae1cd1f9ed4ee0c4ff4/sdk/.pocket-build/performance-partition-sample-20261109/logs/novel_model_soak_test.first-run.diff).
 
 The root `pocket_view.dart` later received unrelated safe-area and first-frame
 changes. At the 10:00 +08:00 source check its full-file hash was
@@ -134,13 +134,13 @@ extracted `_buildSurface` method was byte-for-byte equal to the captured source
 method. The result is therefore relevant to this partition path, but it is not
 a final build measurement of every current app source change.
 
-Evidence: [machine-readable window summary](../.pocket-build/performance-partition-sample-20261109/sample-summary.json),
-[scratch setup and hashes](../.pocket-build/performance-partition-sample-20261109/setup.json),
-[first-run log](../.pocket-build/performance-partition-sample-20261109/logs/flutter-drive-profile-two-cycle-attempt.log),
-[FrameTiming follow-up log](../.pocket-build/performance-partition-sample-20261109/logs/flutter-drive-zero-cycles-preframe-hang.log),
-the [follow-up diagnosis](../.pocket-build/performance-partition-sample-20261109/logs/zero-cycle-preframe-diagnosis.json),
-the [evidence integrity check](../.pocket-build/performance-partition-sample-20261109/evidence-integrity.json),
-and [key artifact hashes](../.pocket-build/performance-partition-sample-20261109/logs/key-hashes.json).
+Evidence: [machine-readable window summary](https://github.com/PocketFlutter/Pocket/blob/b06cb43cac4d553cea232ae1cd1f9ed4ee0c4ff4/sdk/.pocket-build/performance-partition-sample-20261109/sample-summary.json),
+[scratch setup and hashes](https://github.com/PocketFlutter/Pocket/blob/b06cb43cac4d553cea232ae1cd1f9ed4ee0c4ff4/sdk/.pocket-build/performance-partition-sample-20261109/setup.json),
+[first-run log](https://github.com/PocketFlutter/Pocket/blob/b06cb43cac4d553cea232ae1cd1f9ed4ee0c4ff4/sdk/.pocket-build/performance-partition-sample-20261109/logs/flutter-drive-profile-two-cycle-attempt.log),
+[FrameTiming follow-up log](https://github.com/PocketFlutter/Pocket/blob/b06cb43cac4d553cea232ae1cd1f9ed4ee0c4ff4/sdk/.pocket-build/performance-partition-sample-20261109/logs/flutter-drive-zero-cycles-preframe-hang.log),
+the [follow-up diagnosis](https://github.com/PocketFlutter/Pocket/blob/b06cb43cac4d553cea232ae1cd1f9ed4ee0c4ff4/sdk/.pocket-build/performance-partition-sample-20261109/logs/zero-cycle-preframe-diagnosis.json),
+the [evidence integrity check](https://github.com/PocketFlutter/Pocket/blob/b06cb43cac4d553cea232ae1cd1f9ed4ee0c4ff4/sdk/.pocket-build/performance-partition-sample-20261109/evidence-integrity.json),
+and [key artifact hashes](https://github.com/PocketFlutter/Pocket/blob/b06cb43cac4d553cea232ae1cd1f9ed4ee0c4ff4/sdk/.pocket-build/performance-partition-sample-20261109/logs/key-hashes.json).
 The sample is macOS-only and does not measure GPU completion, memory
 bandwidth, or other shipped platforms. `FrameTiming` remains aggregate
 Flutter timing, while the partition timer provides the direct source-level

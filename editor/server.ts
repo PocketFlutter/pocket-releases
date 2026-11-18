@@ -8,7 +8,7 @@
  * entryFormat=quickjs-bytecode.
  */
 
-import { constants as fsConstants, existsSync, lstatSync, readFileSync, realpathSync, watch as watchFs, type FSWatcher } from "node:fs";
+import { constants as fsConstants, closeSync, existsSync, fstatSync, lstatSync, openSync, readFileSync, readSync, realpathSync, watch as watchFs, type FSWatcher } from "node:fs";
 import { createHash, createPublicKey, randomUUID } from "node:crypto";
 import {
   cp,
@@ -53,6 +53,7 @@ import {
   createPreviewManager,
   parsePreviewHostAdapterConfig,
   type PreviewHostAdapterConfig,
+  type ProjectPreviewHost,
 } from "./preview.ts";
 import { handleNovelRoute, serveNovelLive2dCore } from "./novel.ts";
 import { createNovelBackup } from "./novel-backups.ts";
@@ -139,6 +140,7 @@ export type EditorConfig = {
   reusePublishedPackages?: string[];
   cos?: EditorProjectCosConfig;
   ecosystemModules?: EcosystemModuleId[];
+  previewHostConfig?: boolean;
 };
 
 export type ArtifactInfo = {
@@ -457,6 +459,9 @@ function safeProjectFile(projectDir: string, relativePath: string, options: Safe
   const leaf = segments.at(-1) ?? "";
   if (!normalized || normalized.startsWith("/") || normalized.includes("\0") || segments.some((part) => !part || part === "." || part === "..")) {
     pathFailure("file path must stay inside the project");
+  }
+  if (segments.some((part) => part.toLowerCase() === "preview-hosts")) {
+    pathFailure("local preview host profiles are private", 404);
   }
   const isConfigFile = leaf === "editor.json" || leaf === "pocket.json" || leaf === "pocket.system.json" || leaf === RESOURCE_POLICY_FILE;
   if (!options.allowAssets && !(options.allowConfig && isConfigFile) && segments.some((part) => protectedDirectoryNames.has(part.toLowerCase()))) {
@@ -888,6 +893,79 @@ function loadPreviewHostAdapterConfig(pathValue?: string): PreviewHostAdapterCon
   return parsePreviewHostAdapterConfig(raw);
 }
 
+function projectPreviewHostDeclaration(source: string): "disabled" | "opted-in" | "invalid" {
+  try {
+    const editor = safeProjectFile(source, "editor.json", { allowConfig: true });
+    const configFile = lstatIfExists(editor);
+    if (!configFile?.isFile() || configFile.size > 256 * 1024) return "disabled";
+    let declaration: unknown;
+    try { declaration = JSON.parse(readFileSync(editor, "utf8")); } catch { return "disabled"; }
+    if (!isObject(declaration) || declaration.previewHostConfig === undefined ||
+        declaration.previewHostConfig === false) return "disabled";
+    return declaration.previewHostConfig === true ? "opted-in" : "invalid";
+  } catch {
+    return "invalid";
+  }
+}
+
+function resolveProjectPreviewHost(workspace: Workspace, id: string): ProjectPreviewHost {
+  try {
+    const source = projectDirectory(workspace, id);
+    const declaration = projectPreviewHostDeclaration(source);
+    if (declaration === "disabled") return { status: "disabled" };
+    if (declaration === "invalid" || !process.getuid) return { status: "invalid" };
+
+    const projectRoot = realpathSync(source);
+    const workspaceRoot = realpathSync(workspace.root);
+    const profiles = join(workspaceRoot, "preview-hosts");
+    const workspaceStat = lstatSync(workspace.root);
+    const directory = lstatSync(profiles);
+    if (workspaceStat.isSymbolicLink() || directory.isSymbolicLink() || !directory.isDirectory() ||
+        directory.uid !== process.getuid() || (directory.mode & 0o022) !== 0) return { status: "invalid" };
+    const registeredRoots = new Set([
+      projectRoot,
+      ...(workspace.projectRoot ? [workspace.projectRoot] : []),
+      ...Array.from(workspace.projectSources?.values() ?? [], (source) => source.root),
+    ]);
+    for (const sourceRoot of registeredRoots) {
+      if (existsSync(sourceRoot) && isInside(realpathSync(sourceRoot), profiles)) return { status: "invalid" };
+    }
+
+    const path = join(profiles, `${id}.json`);
+    const expected = lstatSync(path);
+    if (expected.isSymbolicLink() || !expected.isFile()) return { status: "invalid" };
+    const fd = openSync(path, fsConstants.O_RDONLY | fsConstants.O_NOFOLLOW | fsConstants.O_NONBLOCK);
+    let bytes: Buffer;
+    try {
+      const file = fstatSync(fd);
+      const max = 24 * 1024;
+      if (!file.isFile() || file.dev !== expected.dev || file.ino !== expected.ino ||
+          file.uid !== process.getuid() || (file.mode & 0o7777) !== 0o600 || file.nlink !== 1 ||
+          file.size < 1 || file.size > max || realpathSync(profiles) !== profiles) return { status: "invalid" };
+      const buffer = Buffer.alloc(max + 1);
+      let length = 0;
+      while (length < buffer.length) {
+        const count = readSync(fd, buffer, length, buffer.length - length, null);
+        if (count === 0) break;
+        length += count;
+      }
+      if (length > max) return { status: "invalid" };
+      bytes = buffer.subarray(0, length);
+    } finally {
+      closeSync(fd);
+    }
+    const profile: unknown = JSON.parse(bytes.toString("utf8"));
+    if (!isObject(profile) || profile.projectRoot !== projectRoot) return { status: "invalid" };
+    const { projectRoot: _projectRoot, ...adapterInput } = profile;
+    const adapter = parsePreviewHostAdapterConfig(adapterInput);
+    if (adapter.projectId !== id) return { status: "invalid" };
+    return { status: "ready", identity: createHash("sha256").update(projectRoot).update("\0").update(bytes).digest("hex"), adapter };
+  } catch {
+    // The status is safe for project UIs; private strings and parse errors are not.
+    return { status: "invalid" };
+  }
+}
+
 const maxChunkBytes = 131072;
 const maxOpenUploads = 8;
 const maxOpenUploadsPerProject = 4;
@@ -1083,6 +1161,7 @@ function defaultConfig(id: string, input: Record<string, unknown>): EditorConfig
 
 function validateConfig(id: string, input: Record<string, unknown>): EditorConfig {
   const config = defaultConfig(id, input);
+  if (typeof input.previewHostConfig === "boolean") config.previewHostConfig = input.previewHostConfig;
   if (typeof input.appId !== "undefined" && !appIdPattern.test(config.appId)) throw new Error("appId contains unsafe characters");
   if (typeof input.version !== "undefined" && !versionPattern.test(config.version)) throw new Error("version contains unsafe characters");
   if (typeof input.name !== "undefined") config.name = asString(input.name, "name", 160).trim();
@@ -1309,7 +1388,10 @@ async function writeConfig(projectDir: string, config: EditorConfig): Promise<vo
   pocket.version = config.version;
   const app = isObject(pocket.app) ? pocket.app : {};
   pocket.app = { ...app, entry: config.entry, output: config.output, framework: config.framework };
-  const nextEditor: Record<string, unknown> = { ...editor, ...config };
+  // Only a source declaration can opt this project into local host authority.
+  // Preserve the just-read value even if a build loaded an older configuration.
+  const { previewHostConfig: _previewHostConfig, ...writableConfig } = config;
+  const nextEditor: Record<string, unknown> = { ...editor, ...writableConfig };
   if (config.cos === undefined && isObject(editor.cos)) {
     nextEditor.cos = editor.cos;
   }
@@ -1486,6 +1568,24 @@ async function workspaceProjectIds(workspace: Workspace): Promise<string[]> {
   if (workspace.projectRoot && workspace.projectId) ids.push(workspace.projectId);
   for (const id of workspace.projectSources?.keys() ?? []) ids.push(id);
   return [...new Set(ids)].sort((left, right) => left.localeCompare(right));
+}
+
+async function requiresLocalProjectWrite(workspace: Workspace, id: string, explicitProjectId?: string): Promise<boolean> {
+  const source = projectDirectory(workspace, id);
+  if (id === explicitProjectId || projectPreviewHostDeclaration(source) !== "disabled") return true;
+  const ids = await workspaceProjectIds(workspace);
+  // Catalog/locally opened roots can be nested or alias a workspace project.
+  // A write through either ID can affect code loaded with local host authority.
+  const root = realpathSync(source);
+  for (const candidate of ids) {
+    if (candidate === id) continue;
+    let candidateRoot: string;
+    try { candidateRoot = realpathSync(projectDirectory(workspace, candidate)); }
+    catch { continue; }
+    if ((isInside(root, candidateRoot) || isInside(candidateRoot, root)) &&
+        (candidate === explicitProjectId || projectPreviewHostDeclaration(candidateRoot) !== "disabled")) return true;
+  }
+  return false;
 }
 
 async function bindCatalogProjectState(workspace: Workspace, id: string, state: EditorState): Promise<EditorState> {
@@ -2911,6 +3011,7 @@ export async function startEditor(options: StartEditorOptions = {}): Promise<Edi
   const projectWatches = new Map<string, ProjectWatch>();
   let watchClientCount = 0;
   let buildEventClientCount = 0;
+  const activeBuildEventCloses = new Set<() => void>();
   const closeProjectWatch = (id: string): void => {
     const entry = projectWatches.get(id);
     if (!entry) return;
@@ -4640,6 +4741,7 @@ export async function startEditor(options: StartEditorOptions = {}): Promise<Edi
     diagnostics,
     localBluetooth,
     ...(previewHostAdapter ? { previewHostAdapter } : {}),
+    projectPreviewHost: (id) => resolveProjectPreviewHost(workspace, id),
     width: previewDevice.screenWidth,
     height: previewDevice.screenHeight,
     safeArea: previewDevice.safeArea,
@@ -4813,6 +4915,7 @@ export async function startEditor(options: StartEditorOptions = {}): Promise<Edi
     async fetch(request): Promise<Response> {
       const peer = server.requestIP(request);
       if (!peer || !isLocalNetworkAddress(peer.address)) return failure("forbidden: local network access only", 403);
+      const loopback = ["127.0.0.1", "::1", "::ffff:127.0.0.1"].includes(peer.address);
       const url = new URL(request.url);
       const securityError = validateRequestSecurity(request, url, server.port, csrfToken, server.hostname);
       if (securityError) return securityError;
@@ -4924,14 +5027,14 @@ export async function startEditor(options: StartEditorOptions = {}): Promise<Edi
           return new Response(await readFile(archive), { headers: { "content-type": "application/gzip", "content-disposition": `attachment; filename="${match[1]}.tar.gz"` } });
         }
         if (path === "/api/projects/pick-directory" && method === "POST") {
-          if (!["127.0.0.1", "::1", "::ffff:127.0.0.1"].includes(peer.address)) return failure("请在 Studio 所在机器上访问 localhost 后选择目录", 403);
+          if (!loopback) return failure("请在 Studio 所在机器上访问 localhost 后选择目录", 403);
           if (pickingProjectDirectory) return failure("目录选择器已打开，请先完成选择", 409);
           pickingProjectDirectory = true;
           try { return json({ path: await pickProjectDirectory(directoryPickerAbort.signal) }); }
           finally { pickingProjectDirectory = false; }
         }
         if (path === "/api/projects/open" && method === "POST") {
-          if (!["127.0.0.1", "::1", "::ffff:127.0.0.1"].includes(peer.address)) return failure("只能在运行 Studio 的本机打开目录", 403);
+          if (!loopback) return failure("只能在运行 Studio 的本机打开目录", 403);
           if (openingProject) return failure("正在打开项目，请稍后重试", 409);
           openingProject = true;
           try {
@@ -4949,7 +5052,7 @@ export async function startEditor(options: StartEditorOptions = {}): Promise<Edi
           }
           let destination: string | undefined;
           if (body.directory !== undefined && body.directory !== "") {
-            if (!["127.0.0.1", "::1", "::ffff:127.0.0.1"].includes(peer.address)) return failure("只能在本机创建外部项目", 403);
+            if (!loopback) return failure("只能在本机创建外部项目", 403);
             if (typeof body.directory !== "string" || !isAbsolute(body.directory) || body.directory.includes("\0")) return failure("保存目录必须是绝对路径", 400);
             destination = resolve(body.directory);
             if (existsSync(destination)) return failure("保存目录已存在，请选择新的项目目录", 409);
@@ -4993,6 +5096,10 @@ export async function startEditor(options: StartEditorOptions = {}): Promise<Edi
           if (projectWrites.has(id)) return failure("Another project operation is starting; retry when it completes", 409);
           projectWrites.add(id);
           releaseProjectWrite = () => projectWrites.delete(id);
+        }
+        if (!loopback && isWriteMethod && parts[3] !== "preview" &&
+            await requiresLocalProjectWrite(workspace, id, previewHostAdapter?.projectId)) {
+          return failure("configured project changes are available only on the Studio computer", 403);
         }
         const state = await getState(id);
         if (codex.isBusy(id) && isWriteMethod && !["codex", "preview"].includes(parts[3])) return failure("Codex is editing this project; wait or cancel its turn before saving/building", 409);
@@ -5081,7 +5188,7 @@ export async function startEditor(options: StartEditorOptions = {}): Promise<Edi
             // Existing SSE clients retain their loaded runtime during a build.
             // New subscriptions/input must not load a partly copied snapshot.
             if (state.busy && !["status", "snapshot"].includes(parts[4] ?? "")) return failure("Build in progress; retry preview when the build completes", 409);
-            const response = await preview.handle(request, id);
+            const response = await preview.handle(request, id, undefined, loopback);
             // A demand-driven guest can stay silent indefinitely. Keep only
             // successful SSE responses outside the ordinary HTTP idle limit;
             // no polling, synthetic frames or heartbeat timer is necessary.
@@ -5140,7 +5247,7 @@ export async function startEditor(options: StartEditorOptions = {}): Promise<Edi
               if (state.busy) return failure("Build in progress; retry editing when the build completes", 409);
               const current = await loadConfig(projectDir(id), id);
               const body = await parseJsonBody(request);
-              const merged = { ...current, ...body, cos: current.cos };
+              const merged = { ...current, ...body, cos: current.cos, previewHostConfig: current.previewHostConfig };
               if (body.name !== undefined && body.title === undefined) merged.title = body.name;
               const config = validateConfig(id, merged);
               // build is advanced only by a committed artifact. Older clients
@@ -5542,14 +5649,16 @@ export async function startEditor(options: StartEditorOptions = {}): Promise<Edi
           }
           if (parts[3] === "build" && parts[4] === "events" && parts.length === 5 && method === "GET") {
             if (buildEventClientCount >= maxBuildEventClients) return failure("too many build event streams", 429);
-            const response = sseResponse(request, (send) => {
+            const response = sseResponse(request, (send, close) => {
               buildEventClientCount += 1;
+              activeBuildEventCloses.add(close);
               const unsubscribe = subscribeState(state, send);
               send({ type: "status", status: publicStatus(id, state) });
               let released = false;
               return () => {
                 if (released) return;
                 released = true;
+                activeBuildEventCloses.delete(close);
                 buildEventClientCount -= 1;
                 unsubscribe();
               };
@@ -5984,20 +6093,27 @@ export async function startEditor(options: StartEditorOptions = {}): Promise<Edi
   }
   const stop = server.stop.bind(server);
   await diagnostics.recordLog({ message: "Studio started", ...(workspace.projectId ? { projectId: workspace.projectId } : {}) });
-  server.stop = ((closeActiveConnections?: boolean) => {
+  server.stop = (async (closeActiveConnections?: boolean) => {
     directoryPickerAbort.abort();
     backupSchedulerStopped = true;
     for (const uploadId of [...uploads.keys()]) dropUpload(uploadId);
     // Kill in-flight compiler process groups instead of orphaning them.
     for (const controller of [...buildScope.controllers]) controller.abort();
     for (const [watchId, entry] of [...projectWatches]) { for (const client of [...entry.clients]) client.close(); closeProjectWatch(watchId); }
+    for (const close of [...activeBuildEventCloses]) close();
     for (const timer of backupTimers.values()) clearTimeout(timer);
     backupTimers.clear();
     codex.dispose();
     const cleanup = Promise.all([preview.dispose(), devices.dispose()]);
     wechat.dispose();
     deviceUpdates?.stop();
-    return Promise.all([stop(closeActiveConnections), cleanup]).then(() => diagnostics.close());
+    if (closeActiveConnections && server.pendingRequests > 0) {
+      for (let attempt = 0; attempt < 10 && server.pendingRequests > 0; attempt += 1) {
+        await new Promise<void>((resolve) => setTimeout(resolve, 5));
+      }
+    }
+    await Promise.all([stop(closeActiveConnections), cleanup]);
+    await diagnostics.close();
   }) as typeof server.stop;
   return server;
 }

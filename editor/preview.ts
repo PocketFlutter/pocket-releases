@@ -140,6 +140,15 @@ export type PreviewManagerOptions = {
    * exposed only to that project's SystemUI root, and has an exact HTTP route
    * allowlist for dio.request. */
   previewHostAdapter?: PreviewHostAdapterConfig;
+  /** Resolve Editor-owned local authority for a single registered source. */
+  projectPreviewHost?: (projectId: string) => ProjectPreviewHost;
+};
+
+export type ProjectPreviewHost = {
+  status: "disabled" | "ready" | "invalid";
+  /** Internal content identity, never sent to the browser. */
+  identity?: string;
+  adapter?: PreviewHostAdapterConfig;
 };
 
 export type PreviewHostAdapterConfig = {
@@ -181,6 +190,7 @@ export type PreviewFrame = {
 
 export type PreviewStatus = {
   projectId: string;
+  hostConfig?: ProjectPreviewHost["status"];
   state: "starting" | "ready" | "error" | "stopped";
   revision?: number;
   width: number;
@@ -1996,7 +2006,7 @@ class PreviewSession {
   /** Latest font table observed during a recording, committed after its captures stop. */
   private pendingHostFontMetrics?: PreviewHostFontMetrics;
 
-  constructor(manager: PreviewManagerImpl, id: string) {
+  constructor(manager: PreviewManagerImpl, id: string, readonly host: ProjectPreviewHost) {
     this.manager = manager;
     this.id = id;
     this.width = manager.options.width ?? 390;
@@ -2140,10 +2150,12 @@ class PreviewSession {
     this.idleTimer = undefined;
     if (this.disposed) throw new Error("preview session has been disposed");
     const artifacts = await this.resolvedArtifacts();
+    if (this.disposed) throw new Error("preview session has been disposed");
     const signature = this.signature(artifacts);
     if (this.probe && this.artifactSignature === signature && this.state !== "error") return;
     if (this.starting) return this.starting;
     this.starting = this.enqueue(async () => {
+      if (this.disposed) throw new Error("preview session has been disposed");
       const nextHotBuild = await hotIdentity(artifacts).catch(() => undefined);
       if (await this.tryHotReplacement(artifacts, signature, nextHotBuild)) return;
       await this.stopProbe();
@@ -2231,6 +2243,7 @@ class PreviewSession {
         await sendDisplayViewport(probe, this.width, this.height, this.safeArea, this.reservedRegions);
         await this.replaySurfaceEnvironment(runtime);
         await this.replayAccessibilityPreferences(runtime);
+        if (this.disposed) throw new Error("preview session has been disposed");
         this.probe = probe;
         this.rootRuntime = runtime;
         this.childRuntimes.clear();
@@ -3851,7 +3864,7 @@ class PreviewSession {
       if (runtime !== this.rootRuntime || !this.systemCatalog || runtime.appId !== this.systemCatalog.systemUI) {
         throw new Error("preview host config is restricted to the SystemUI root");
       }
-      const configured = this.manager.options.previewHostAdapter;
+      const configured = this.host.adapter;
       if (!configured || configured.projectId !== this.id) return {};
       // Keep the server-side config object immutable and avoid sharing nested
       // references with the guest-facing bridge value.
@@ -3911,8 +3924,8 @@ class PreviewSession {
   }
 
   private async requestPreviewHttp(runtime: PreviewRuntime, params: JsonRecord): Promise<unknown> {
-    const adapter = this.manager.options.previewHostAdapter;
-    if (runtime !== this.rootRuntime || !this.systemCatalog || runtime.appId !== this.systemCatalog.systemUI ||
+    const adapter = this.host.adapter;
+    if (this.disposed || runtime !== this.rootRuntime || !this.systemCatalog || runtime.appId !== this.systemCatalog.systemUI ||
         !adapter || adapter.projectId !== this.id) {
       throw new Error("preview HTTP adapter is unavailable for this runtime");
     }
@@ -5579,6 +5592,7 @@ class PreviewSession {
   status(): PreviewStatus {
     return {
       projectId: this.id,
+      hostConfig: this.host.status,
       state: this.state,
       ...(this.artifactRevision === undefined ? {} : { revision: this.artifactRevision }),
       width: this.width,
@@ -5602,23 +5616,26 @@ class PreviewSession {
     };
   }
 
-  async dispose(): Promise<void> {
+  async dispose(reloadHost = false): Promise<void> {
     this.disposed = true;
     if (this.idleTimer) clearTimeout(this.idleTimer);
     this.idleTimer = undefined;
-    await this.stopProbe();
+    if (reloadHost) this.emit({ type: "project-host-reload" });
+    for (const controller of this.pendingPreviewHttpControllers) controller.abort();
     for (const subscriber of this.subscribers) {
       subscriber.closed = true;
       try { subscriber.controller.close(); } catch { /* client already disconnected */ }
     }
     this.subscribers.clear();
+    await this.stopProbe();
+    await this.starting?.catch(() => undefined);
     this.releaseWebBluetoothOwner();
     this.state = "stopped";
   }
 }
 
 export interface PreviewManager {
-  handle(request: Request, projectId: string, endpoint?: string): Promise<Response>;
+  handle(request: Request, projectId: string, endpoint?: string, loopback?: boolean): Promise<Response>;
   status(projectId: string): Promise<PreviewStatus>;
   dispose(): Promise<void>;
 }
@@ -5627,9 +5644,31 @@ class PreviewManagerImpl implements PreviewManager {
   readonly options: PreviewManagerOptions;
   private readonly sessions = new Map<string, PreviewSession>();
   private probePathPromise?: Promise<string>;
+  private hostRefresh?: ReturnType<typeof setInterval>;
 
   constructor(options: PreviewManagerOptions) {
     this.options = options;
+    if (options.projectPreviewHost) {
+      this.hostRefresh = setInterval(() => {
+        for (const [id, session] of this.sessions) {
+          if (!session.isIdle()) this.refreshProjectHost(id);
+        }
+      }, 400);
+      this.hostRefresh.unref?.();
+    }
+  }
+
+  private refreshProjectHost(id: string): ProjectPreviewHost {
+    const explicit = this.options.previewHostAdapter;
+    const host = explicit?.projectId === id
+      ? { status: "ready" as const, adapter: explicit }
+      : this.options.projectPreviewHost?.(id) ?? { status: "disabled" as const };
+    const previous = this.sessions.get(id);
+    if (previous && (previous.host.status !== host.status || previous.host.identity !== host.identity)) {
+      this.sessions.delete(id);
+      void previous.dispose(true).catch((error) => previous.reportError(error));
+    }
+    return host;
   }
 
   async resolveArtifacts(projectId: string): Promise<PreviewProject | undefined> {
@@ -5654,7 +5693,7 @@ class PreviewManagerImpl implements PreviewManager {
     return this.probePathPromise;
   }
 
-  private session(projectId: string): PreviewSession {
+  private session(projectId: string, host = this.refreshProjectHost(projectId)): PreviewSession {
     const id = String(projectId);
     let value = this.sessions.get(id);
     if (!value) {
@@ -5670,7 +5709,7 @@ class PreviewManagerImpl implements PreviewManager {
           throw new Error(`preview session limit reached (${maxSessions}); close an existing preview first`);
         }
       }
-      value = new PreviewSession(this, id);
+      value = new PreviewSession(this, id, host);
       this.sessions.set(id, value);
     }
     value.touch();
@@ -5713,12 +5752,14 @@ class PreviewManagerImpl implements PreviewManager {
     });
   }
 
-  async handle(request: Request, projectId: string, endpoint?: string): Promise<Response> {
+  async handle(request: Request, projectId: string, endpoint?: string, loopback = true): Promise<Response> {
     if (!/^[a-z][a-z0-9-]{0,47}$/.test(projectId)) return failure("invalid preview project id", 400);
     const route = routeName(request, endpoint);
     let session: PreviewSession | undefined;
     try {
-      session = this.session(projectId);
+      const host = this.refreshProjectHost(projectId);
+      if (!loopback && host.status !== "disabled") return failure("configured project preview is available only on the Studio computer", 403);
+      session = this.session(projectId, host);
       if (route === "resource" && (request.method === "GET" || request.method === "HEAD")) return session.serveResource(request);
       if (route === "media" && (request.method === "GET" || request.method === "HEAD")) {
         // Media is an ordinary loose project asset. It must not start a
@@ -5770,6 +5811,7 @@ class PreviewManagerImpl implements PreviewManager {
   }
 
   async dispose(): Promise<void> {
+    if (this.hostRefresh) clearInterval(this.hostRefresh);
     await Promise.all([...this.sessions.values()].map((session) => session.dispose()));
     this.sessions.clear();
     await this.options.localBluetooth?.dispose();

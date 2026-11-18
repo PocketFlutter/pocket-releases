@@ -1,6 +1,6 @@
 {
   "name": "@pocket/web-sdk-tools",
-  "version": "0.1.23",
+  "version": "0.1.24",
   "description": "Standalone PocketJS Web SDK and Editor; no Flutter environment required",
   "private": false,
   "type": "module",
@@ -12,7 +12,7 @@
     "packages/pocket_ui",
     "packages/pocket_looseleaf",
     "packages/pocket_arc",
-    "packages/pocket_tftc",
+    "packages/pocket_liquid_glass",
     "packages/pocket_spine",
     "packages/pocket_live2d",
     "packages/pocket_diagnostics",
@@ -32,8 +32,8 @@
   },
   "optionalDependencies": {
     "@abandonware/noble": "1.9.2-26",
-    "@pocket/tools-win32-x64": "file:prebuilt/pocket-tools-win32-x64-0.1.23.tgz",
-    "@pocket/tools-darwin-arm64": "file:prebuilt/pocket-tools-darwin-arm64-0.1.23.tgz"
+    "@pocket/tools-win32-x64": "file:prebuilt/pocket-tools-win32-x64-0.1.24.tgz",
+    "@pocket/tools-darwin-arm64": "file:prebuilt/pocket-tools-darwin-arm64-0.1.24.tgz"
   },
   "scripts": {
     "setup": "node scripts/toolchain.mjs setup",

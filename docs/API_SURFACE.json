@@ -835,7 +835,7 @@
             {
               "file": "packages/pocket_platform/lib/pocket_platform.dart",
               "declarations": [],
-              "sourceSha256": "12876c7c90f96a8ad04ae927b5407b4989d170b34ddc20cef5d2ee947e24e7d3"
+              "sourceSha256": "411c6628bd3b1e1856e99e3ef1f9134ac866f3025675656f7f81efc7dfcfebf9"
             },
             {
               "from": "packages/pocket_platform/lib/pocket_platform.dart",
@@ -858,6 +858,19 @@
                 "StopwatchPocketPlatformClock"
               ],
               "sourceSha256": "fe9397498342991ab5ca37c36318b2153e9230dd0e2fad302c1da702c7f21846"
+            },
+            {
+              "from": "packages/pocket_platform/lib/pocket_platform.dart",
+              "export": "src/surface_bridge_plugin.dart",
+              "filter": ""
+            },
+            {
+              "file": "packages/pocket_platform/lib/src/surface_bridge_plugin.dart",
+              "declarations": [
+                "PocketSurfaceBridgePlugin",
+                "PocketSurfaceCapabilities"
+              ],
+              "sourceSha256": "6566383215bdfe3e598cb77a7ef543c765ec59fe0f60bd5c01ecf87b1f405d06"
             }
           ]
         }
@@ -1826,6 +1839,197 @@
       ]
     },
     {
+      "name": "@pocket/liquid_glass",
+      "manifest": "packages/pocket_liquid_glass/package.json",
+      "scripts": {
+        "test": "node test/liquid_glass.test.ts"
+      },
+      "bin": {},
+      "exports": {
+        ".": "./src/index.ts",
+        "./tokens": "./src/tokens.ts",
+        "./motion": "./src/motion.ts",
+        "./governor": "./src/governor.ts",
+        "./surfaces": "./src/surfaces.tsx",
+        "./controls": "./src/controls.tsx",
+        "./navigation": "./src/navigation.tsx",
+        "./overlays": "./src/overlays.tsx",
+        "./menus": "./src/menus.tsx",
+        "./kit": "./src/kit.tsx"
+      },
+      "sourceDeclarations": [
+        {
+          "file": "packages/pocket_liquid_glass/src/controls.tsx",
+          "declarations": [
+            "LiquidGlassActivityIndicator",
+            "LiquidGlassBadge",
+            "LiquidGlassButton",
+            "LiquidGlassButtonVariant",
+            "LiquidGlassCheckbox",
+            "LiquidGlassFlexSurface",
+            "LiquidGlassIconButton",
+            "LiquidGlassInput",
+            "LiquidGlassPageControl",
+            "LiquidGlassProgress",
+            "LiquidGlassRadioGroup",
+            "LiquidGlassSegmentedControl",
+            "LiquidGlassSlider",
+            "LiquidGlassStepper",
+            "LiquidGlassSwitch",
+            "LiquidGlassTone"
+          ],
+          "sourceSha256": "ac938defb32e15ecd661e3cd35eb1bece0fe0c6263d22509c12726ff9c6fc5ba",
+          "reexports": []
+        },
+        {
+          "file": "packages/pocket_liquid_glass/src/governor.ts",
+          "declarations": [
+            "GlassFrameProfileSnapshot",
+            "GlassFrameProfiler",
+            "LiquidGlassGovernor",
+            "LiquidGlassGovernorOptions",
+            "LiquidGlassLease",
+            "LiquidGlassQualityTier",
+            "LiquidGlassSurfacePriority",
+            "TIER_GPU_BUDGET",
+            "createGlassFrameProfiler",
+            "createLiquidGlassGovernor"
+          ],
+          "sourceSha256": "d73f2db2242ab9ff1c192974a5522a0450a5db1d97f0efd13738df20207db5e9",
+          "reexports": []
+        },
+        {
+          "file": "packages/pocket_liquid_glass/src/index.ts",
+          "declarations": [],
+          "sourceSha256": "c247c04f3c7626b401c618f244b61d3f767850571fe6ac5d9c3d3e9675fcb6d3",
+          "reexports": [
+            "export * from \"./tokens.ts\";",
+            "export * from \"./motion.ts\";",
+            "export * from \"./governor.ts\";",
+            "export * from \"./surfaces.tsx\";",
+            "export * from \"./controls.tsx\";",
+            "export * from \"./navigation.tsx\";",
+            "export * from \"./overlays.tsx\";",
+            "export * from \"./menus.tsx\";",
+            "export * from \"./kit.tsx\";"
+          ]
+        },
+        {
+          "file": "packages/pocket_liquid_glass/src/kit.tsx",
+          "declarations": [
+            "liquidGlassSkinAdapter",
+            "registerLiquidGlassSkin",
+            "resolveLiquidGlassSkinTokens"
+          ],
+          "sourceSha256": "85ebfdd64068419d41ce7d94fa42aad9472adfe1ae7104649b6e26c20c1c97d1",
+          "reexports": []
+        },
+        {
+          "file": "packages/pocket_liquid_glass/src/menus.tsx",
+          "declarations": [
+            "LiquidGlassAlertAction",
+            "LiquidGlassAlertModal",
+            "LiquidGlassAnchorRect",
+            "LiquidGlassContextMenu",
+            "LiquidGlassMenu",
+            "LiquidGlassMenuButton",
+            "LiquidGlassMenuEntry",
+            "LiquidGlassMenuItem",
+            "LiquidGlassMenuSection",
+            "LiquidGlassPopover",
+            "measureViewportRect",
+            "normalizeMenuSections"
+          ],
+          "sourceSha256": "0d0bb1938d129d62c7add1298c13564e59aae79aba8c71e7486a8a9541ca1f1a",
+          "reexports": []
+        },
+        {
+          "file": "packages/pocket_liquid_glass/src/motion.ts",
+          "declarations": [
+            "GLASS_SPRINGS",
+            "GlassSpringConfig",
+            "GlassSpringPreset",
+            "GlassSpringState",
+            "ImperativeSpringHandle",
+            "createGlassSpring",
+            "createImperativeSpring",
+            "quantizeOptical",
+            "stepGlassSpring"
+          ],
+          "sourceSha256": "2f83606c0c3fd7c72de5400b8e2bd788c146db002fb9177b4843a629ee339d0a",
+          "reexports": []
+        },
+        {
+          "file": "packages/pocket_liquid_glass/src/navigation.tsx",
+          "declarations": [
+            "LiquidGlassAccordion",
+            "LiquidGlassAppBar",
+            "LiquidGlassCard",
+            "LiquidGlassCardVariant",
+            "LiquidGlassEmpty",
+            "LiquidGlassFpsHud",
+            "LiquidGlassListTile",
+            "LiquidGlassMetric",
+            "LiquidGlassNavigationBar",
+            "LiquidGlassToolbar",
+            "LiquidGlassVirtualList"
+          ],
+          "sourceSha256": "8b42844d38a34ee4472b98c4e4a99b25e8714d8c6ec21ad74c5a8cce3b502125",
+          "reexports": []
+        },
+        {
+          "file": "packages/pocket_liquid_glass/src/overlays.tsx",
+          "declarations": [
+            "LiquidGlassAlert",
+            "LiquidGlassDialog",
+            "LiquidGlassSheet",
+            "LiquidGlassSheetAction",
+            "LiquidGlassToast"
+          ],
+          "sourceSha256": "5312c463fa4cf124079f1ee3d6ff4b51b33626cad20067605d6567e4e221ad6a",
+          "reexports": []
+        },
+        {
+          "file": "packages/pocket_liquid_glass/src/surfaces.tsx",
+          "declarations": [
+            "LiquidGlassBackdrop",
+            "LiquidGlassContext",
+            "LiquidGlassContextValue",
+            "LiquidGlassGroup",
+            "LiquidGlassProvider",
+            "LiquidGlassSurface",
+            "LiquidGlassSurfaceProps",
+            "useInLiquidGlassGroup",
+            "useLiquidGlass"
+          ],
+          "sourceSha256": "b1cbe0142c73618855160d7c8dc4a4d61b4cbf6bdd07dc209309d876f5247de4",
+          "reexports": [
+            "export type { NodeMirror };"
+          ]
+        },
+        {
+          "file": "packages/pocket_liquid_glass/src/tokens.ts",
+          "declarations": [
+            "LIQUID_GLASS_ACCENTS",
+            "LiquidGlassAccent",
+            "LiquidGlassDensity",
+            "LiquidGlassMaterial",
+            "LiquidGlassNamedAccent",
+            "LiquidGlassOpticalRecipe",
+            "LiquidGlassPalette",
+            "LiquidGlassStatusTriplet",
+            "LiquidGlassThemeMode",
+            "concentricGlassRadius",
+            "hexToArgb",
+            "resolveLiquidGlassPalette",
+            "resolveOpticalRecipe"
+          ],
+          "sourceSha256": "f5c9d9391a56e14712c09a0d7ccc795c3819c1ab5d3aa42d17fc719ed0caead2",
+          "reexports": []
+        }
+      ]
+    },
+    {
       "name": "@pocket/live2d",
       "manifest": "packages/pocket_live2d/package.json",
       "scripts": {
@@ -2400,190 +2604,6 @@
             "createSyncMeshStore"
           ],
           "sourceSha256": "4cee9fdeeee2877ec3fb0723c031df0c9a8c9904e872c2072de21d070d543f80",
-          "reexports": []
-        }
-      ]
-    },
-    {
-      "name": "@pocket/tftc",
-      "manifest": "packages/pocket_tftc/package.json",
-      "scripts": {
-        "test": "bun test test"
-      },
-      "bin": {},
-      "exports": {
-        ".": "./src/index.js",
-        "./protocol": "./src/protocol.js",
-        "./security": "./src/security.js",
-        "./pocket": "./src/pocket-bluetooth.ts"
-      },
-      "sourceDeclarations": [
-        {
-          "file": "packages/pocket_tftc/src/changes.js",
-          "declarations": [
-            "describeAttributeChanges"
-          ],
-          "sourceSha256": "d9324e58d3a4335fd3afba478b5306841ba94c516524511a1001168dab8f7baa",
-          "reexports": []
-        },
-        {
-          "file": "packages/pocket_tftc/src/client.js",
-          "declarations": [
-            "TftcClient"
-          ],
-          "sourceSha256": "f12764d878632eb98d5985e9a5ef834a24dce1aa433c629e5e97c389463922b2",
-          "reexports": []
-        },
-        {
-          "file": "packages/pocket_tftc/src/data.js",
-          "declarations": [
-            "DATA_KEY",
-            "attributeSnapshot",
-            "decodeAttributes",
-            "resolveDataKey"
-          ],
-          "sourceSha256": "8263ef6c0f91b83c45b72770db90bf8c2df6d3024b40e683b48e7dd876e46f99",
-          "reexports": []
-        },
-        {
-          "file": "packages/pocket_tftc/src/index.js",
-          "declarations": [],
-          "sourceSha256": "3fecb70f38364c6d2478d1c8c5ae326d31823160084f305e8194f0fabb8dc39a",
-          "reexports": [
-            "export { TftcClient } from \"./client.js\";",
-            "export * from \"./protocol.js\";",
-            "export * from \"./security.js\";",
-            "export { DATA_KEY, resolveDataKey, decodeAttributes, attributeSnapshot } from \"./data.js\";",
-            "export { PRODUCT_IDS, PRODUCT_PROFILES, getProductProfile, resolveProductCommands, resolveProductOperation } from \"./products.js\";",
-            "export { describeAttributeChanges } from \"./changes.js\";"
-          ]
-        },
-        {
-          "file": "packages/pocket_tftc/src/pocket-bluetooth.ts",
-          "declarations": [
-            "BluetoothRequestDeviceOptions",
-            "BluetoothRequestFilter",
-            "POCKET_BLUETOOTH_NOTIFICATIONS",
-            "PocketBluetooth",
-            "PocketBluetoothCharacteristicValueEvent",
-            "PocketBluetoothDevice",
-            "PocketBluetoothDisconnectedEvent",
-            "PocketBluetoothRemoteGATTCharacteristic",
-            "PocketBluetoothRemoteGATTServer",
-            "PocketBluetoothRemoteGATTService",
-            "PocketBluetoothRequestOptions",
-            "createPocketBluetooth"
-          ],
-          "sourceSha256": "d45ffe7bebf164411e26343a0b8fb178b7faf82f80673c11fd58934af798070d",
-          "reexports": []
-        },
-        {
-          "file": "packages/pocket_tftc/src/products.js",
-          "declarations": [
-            "DATA_KEYS",
-            "PRODUCT_IDS",
-            "PRODUCT_PROFILES",
-            "SUPPORTED_PRODUCT_BEHAVIORS",
-            "UNSUPPORTED_PRODUCT_BEHAVIORS",
-            "getProductProfile",
-            "productSupports",
-            "resolveProductCommands",
-            "resolveProductOperation",
-            "resolveProductProfile"
-          ],
-          "sourceSha256": "c61738f77471e1341288eb0333468a955f06e8809681c19209599957bd612d89",
-          "reexports": []
-        },
-        {
-          "file": "packages/pocket_tftc/src/protocol.js",
-          "declarations": [
-            "ACTIONS_TO_ZERO",
-            "CHAR_NOTIFY",
-            "CHAR_READ",
-            "CHAR_WRITE_NO_RESPONSE",
-            "CHAR_WRITE_RESPONSE",
-            "CMD_APP_REQUEST",
-            "CMD_HEARTBEAT",
-            "CMD_HEAT",
-            "CMD_LINEAR",
-            "CMD_MANUFACTURER_QUERY",
-            "CMD_MANUFACTURER_REPLY",
-            "CMD_MCU_REPLY",
-            "CMD_PROTOCOL_ERROR",
-            "CMD_ROTARY",
-            "CMD_SECURITY_CHALLENGE",
-            "CMD_SECURITY_DATA",
-            "CMD_STOP",
-            "CMD_VIBRATION",
-            "DEFAULT_DEVICE_NAME",
-            "DEFAULT_MOTION_OPTIONS",
-            "DEVICE_PREFIXES",
-            "DEVICE_PROFILES",
-            "DEVICE_PROFILE_BY_NAME",
-            "GATT_CONNECT_ATTEMPTS",
-            "GATT_SERVICE_ATTEMPTS",
-            "MANUFACTURER_QUERY_TIMEOUT_MS",
-            "SECURITY_CHALLENGE_TIMEOUT_MS",
-            "SERVICE_SHORT_UUID",
-            "SERVICE_UUID",
-            "STANDARD_RESPONSE_TIMEOUT_MS",
-            "YXL_ONE_ACK_TIMEOUT_MS",
-            "YXL_ONE_CHAR_NOTIFY",
-            "YXL_ONE_CHAR_WRITE",
-            "YXL_ONE_CMD_ROTATING",
-            "YXL_ONE_CMD_TELESCOPIC",
-            "YXL_ONE_CMD_WORK_CONTROL",
-            "YXL_ONE_NOTIFY_SERVICE_UUID",
-            "YXL_ONE_STOP_ATTEMPTS",
-            "YXL_ONE_STOP_COMMAND_DELAY_MS",
-            "YXL_ONE_WRITE_SERVICE_UUID",
-            "buildCommandFrame",
-            "buildFrame",
-            "buildMultiCommandFrame",
-            "buildProtocolFrame",
-            "buildYxlOneFrame",
-            "byteArray",
-            "calculateChecksum",
-            "clampPercent",
-            "createMessageIdAllocator",
-            "getDeviceProfile",
-            "getErrorDetail",
-            "hasValidChecksum",
-            "isBluetoothUuid",
-            "isByte",
-            "isGattDisconnectedError",
-            "normalizeProfileName",
-            "parseManufacturerAdvertisement",
-            "parseManufacturerDataPayload",
-            "parseProtocolFrame",
-            "reverseUint32Bytes",
-            "rockVibrationSequence",
-            "rotaryToBLE",
-            "springVibrationSequence",
-            "validateByteArray",
-            "writeCharacteristicValue"
-          ],
-          "sourceSha256": "0ede500fab9a4a6a411f450f638543457ce285548a1240f5eb8ead2b5c66a885",
-          "reexports": []
-        },
-        {
-          "file": "packages/pocket_tftc/src/security.js",
-          "declarations": [
-            "APP_AUTH_PURPOSE",
-            "BleSecurityError",
-            "DEVICE_PROOF_PURPOSE",
-            "KEY_DERIVATIONS",
-            "MAX_SESSIONS",
-            "RESERVED_FLAGS",
-            "SECURITY_AUTH_PHASE",
-            "SECURITY_INIT_PHASE",
-            "SECURITY_VERSION",
-            "SHIFT_PURPOSE",
-            "aes128Ecb",
-            "createBleSecurityProvider",
-            "deriveV1Material"
-          ],
-          "sourceSha256": "98c6f531d698d10fe4eef81269392793a77a302574db1b376918a61eece1ce47",
           "reexports": []
         }
       ]
@@ -3764,7 +3784,7 @@
             "resolveDefaultSkinTokens",
             "useUiSkin"
           ],
-          "sourceSha256": "d73d6ca3432e3977def83d563c4249887f0de5bba74a9e1edc0feb78ba7b3b37",
+          "sourceSha256": "6907ece347f2d917db855bbcdb2451c6a5f10d8607e8992ac9c03994983b4fcb",
           "reexports": [
             "export { toMobileColor };"
           ]
@@ -3854,9 +3874,12 @@
             "EcosystemAdaptiveShellProps",
             "LiveActivityBanner",
             "LiveActivityBannerProps",
+            "LiveActivityUpsertPayload",
             "LockAccessoryWidget",
             "LockAccessoryWidgetProps",
+            "QueuedWidgetActionEvent",
             "ResolvedSurfacePalette",
+            "RichWidgetSnapshotPayload",
             "SurfaceEnvironmentOptions",
             "SurfaceEnvironmentProvider",
             "SurfaceEnvironmentProviderProps",
@@ -3881,12 +3904,15 @@
             "WidgetSurfaceProps",
             "createSurfaceEnvironment",
             "createWidgetSnapshotStore",
+            "drainPendingWidgetActions",
+            "endLiveActivity",
             "publishWidgetSnapshot",
             "resolveSurfacePalette",
+            "upsertLiveActivity",
             "useSurfaceEnvironment",
             "useWidgetSnapshots"
           ],
-          "sourceSha256": "da089c313150e9004c8e64127a94c3079d5da7915292870d1f546b1465deba90",
+          "sourceSha256": "46dc966b0fbaffdbb83f29dd3592bc6555afea444ff1d4fb695ce959001ac202",
           "reexports": [
             "export * from \"./surface-catalog.ts\";"
           ]
@@ -4054,7 +4080,7 @@
             "registerDesktopScrollPage",
             "useScrollContourReserve"
           ],
-          "sourceSha256": "ed0ef8f92d507676023a717dd791d0d3fe06253040b7251d4e7c8e78b3d3abab",
+          "sourceSha256": "562bc9a9b4f41aa64815961eb38329cced95d06f2b0dbc2590957684f87e4bea",
           "reexports": [
             "export * from \"./mobile.tsx\";"
           ]
@@ -4929,7 +4955,7 @@
         },
         {
           "file": "editor/server.ts",
-          "sourceSha256": "c077c1e3640eab5a7b7d0f90d9df14fdc90e491634e5b335cf1cc68fa3c1e9d9"
+          "sourceSha256": "993b79896228a88291655db05dc5a0e9b501f5aac2c7729b714a778650d7b3ce"
         },
         {
           "file": "editor/test/editor_live_probe.ts",
@@ -4941,11 +4967,11 @@
         },
         {
           "file": "pocket.ts",
-          "sourceSha256": "fd881528328365d627d784f26c0dbf6e8eb3177b9551c1b99dcb945ce78aef0a"
+          "sourceSha256": "4af0c3b149b731656a9b8060614dc9211ed7af98f13b0c4471c8e7f6dc603f74"
         },
         {
           "file": "scripts/build_guest.ts",
-          "sourceSha256": "d618cc955b51e4b6b6a2ea79911781d1fbd22f89fa33aa6aedd2849caf17b319"
+          "sourceSha256": "bb142f4fa5ace8d29f526481d430020ddcc49fa40479a7a6af5e3a310ea67710"
         },
         {
           "file": "scripts/build_web.ts",
@@ -4961,7 +4987,7 @@
         },
         {
           "file": "scripts/export_web_sdk.ts",
-          "sourceSha256": "9c226cade230d93811306f639df34e2119dce51ebed7a6db991295a444933b49"
+          "sourceSha256": "fe6b823a7c58879114255535ef76ae47ce1f8252d5011e2be1d40305e1e30d07"
         },
         {
           "file": "scripts/install_studio.mjs",

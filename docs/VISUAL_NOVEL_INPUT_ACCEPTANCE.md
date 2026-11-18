@@ -6,7 +6,7 @@
 
 The passage asks for a recipient name (1–16 Unicode code points), a return mailbox number (integer from 0 to 999), and permission to publish the player's name in the station history. A successful submission writes only that field to the engine's typed variable map. Text and number drafts stay strings until submit; invalid submissions remain at that field with a structured error. Cancel returns to the investigation hub without committing the current draft. Values committed in earlier fields remain committed. Boolean consent defaults to No and requires the player to select and submit it.
 
-The script is authored in [story.json](https://github.com/PocketFlutter/Pocket/blob/235b5b5589faf492f4a9fc3b7c0827bcd1d9de2c/demo/js/apps/lantern/story.json). Stable line/input IDs, the conditional hub option and all three variable commits live in that source document. English prompt and placeholder translations, the new lines and option, and the input UI strings live in [novel.locales.json](https://github.com/PocketFlutter/Pocket/blob/235b5b5589faf492f4a9fc3b7c0827bcd1d9de2c/demo/js/apps/lantern/novel.locales.json). The game still has one state owner: `NovelEngine`; the Flutter integration test contains no story state or input policy.
+The script is authored in [story.json](https://github.com/PocketFlutter/Pocket/blob/b06cb43cac4d553cea232ae1cd1f9ed4ee0c4ff4/demo/js/apps/lantern/story.json). Stable line/input IDs, the conditional hub option and all three variable commits live in that source document. English prompt and placeholder translations, the new lines and option, and the input UI strings live in [novel.locales.json](https://github.com/PocketFlutter/Pocket/blob/b06cb43cac4d553cea232ae1cd1f9ed4ee0c4ff4/demo/js/apps/lantern/novel.locales.json). The game still has one state owner: `NovelEngine`; the Flutter integration test contains no story state or input policy.
 
 ## Source-first reuse
 
@@ -27,7 +27,7 @@ bun test apps/lantern/story.test.ts apps/lantern/localization.test.ts
 
 Result: **10 tests passed, 0 failed** (478 assertions).
 
-The compiled-guest acceptance is [novel_input_native.test.ts](https://github.com/PocketFlutter/Pocket/blob/235b5b5589faf492f4a9fc3b7c0827bcd1d9de2c/demo/js/tests/novel_input_native.test.ts). It launches the Lantern QJBC with `NativeSession`, reaches the optional passage through rendered pointer targets, taps the actual `InputField`, captures that `textInput.open` event's `id`, `editingSession`, `revision` and `jsRevision`, then sends `textInput.edit` and `textInput.submit` with those facts. It checks that native Done closes the editor without silently submitting the story field; the player's JS Submit button owns story confirmation. It also checks invalid numeric validation, cancel/no-commit, visible/interpolated CJK+emoji, input-draft manual save/load, rollback from a draft, and explicit Boolean confirmation.
+The compiled-guest acceptance is [novel_input_native.test.ts](https://github.com/PocketFlutter/Pocket/blob/b06cb43cac4d553cea232ae1cd1f9ed4ee0c4ff4/demo/js/tests/novel_input_native.test.ts). It launches the Lantern QJBC with `NativeSession`, reaches the optional passage through rendered pointer targets, taps the actual `InputField`, captures that `textInput.open` event's `id`, `editingSession`, `revision` and `jsRevision`, then sends `textInput.edit` and `textInput.submit` with those facts. It checks that native Done closes the editor without silently submitting the story field; the player's JS Submit button owns story confirmation. It also checks invalid numeric validation, cancel/no-commit, visible/interpolated CJK+emoji, input-draft manual save/load, rollback from a draft, and explicit Boolean confirmation.
 
 Run after rebuilding Lantern bytecode and assets with the pinned `buildGuest` pipeline:
 
@@ -36,7 +36,7 @@ cd demo/js
 bun test tests/novel_input_native.test.ts
 ```
 
-The Flutter end-to-end case is [novel_input_test.dart](https://github.com/PocketFlutter/Pocket/blob/235b5b5589faf492f4a9fc3b7c0827bcd1d9de2c/demo/integration_test/novel_input_test.dart). It runs the real bundled guest through `PocketView`, registers `tester.testTextInput`, activates the Flutter text client by tapping the drawn field, edits `林岚🙂`, sends a composing range covering the emoji's UTF-16 surrogate pair, and submits via `TextInputAction.done` before pressing the JS story Submit control. It also rejects `1000` in the number field and accepts `1e2` as `100`.
+The Flutter end-to-end case is [novel_input_test.dart](https://github.com/PocketFlutter/Pocket/blob/b06cb43cac4d553cea232ae1cd1f9ed4ee0c4ff4/demo/integration_test/novel_input_test.dart). It runs the real bundled guest through `PocketView`, registers `tester.testTextInput`, activates the Flutter text client by tapping the drawn field, edits `林岚🙂`, sends a composing range covering the emoji's UTF-16 surrogate pair, and submits via `TextInputAction.done` before pressing the JS story Submit control. It also rejects `1000` in the number field and accepts `1e2` as `100`.
 
 ```sh
 cd demo

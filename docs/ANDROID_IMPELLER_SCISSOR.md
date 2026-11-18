@@ -4,7 +4,7 @@ This report traces rendering stalls on a physical Android device running Flutter
 
 ## Result
 
-The current [`PocketCanvasPainter`](https://github.com/PocketFlutter/Pocket/blob/235b5b5589faf492f4a9fc3b7c0827bcd1d9de2c/sdk/packages/pocket_flutter/lib/src/pocket_view_painter.dart#L330-L341) applies the DrawOp's rectangular `op.clip` as follows.
+The current [`PocketCanvasPainter`](https://github.com/PocketFlutter/Pocket/blob/b06cb43cac4d553cea232ae1cd1f9ed4ee0c4ff4/sdk/packages/pocket_flutter/lib/src/pocket_view_painter.dart#L330-L341) applies the DrawOp's rectangular `op.clip` as follows.
 
 ```dart
 canvas.clipRect(
@@ -19,7 +19,7 @@ With the same MAA_AN00 (SM7550), Flutter 3.35.7, Impeller Vulkan, and Showcase s
 
 ## DrawList Contract and Sources
 
-The pinned upstream [`spec.ts`](../.cache/pocketjs/contracts/spec/spec.ts#L1447-L1453) defines the following behavior.
+The pinned upstream [`spec.ts`](https://github.com/PocketFlutter/Pocket/blob/b06cb43cac4d553cea232ae1cd1f9ed4ee0c4ff4/sdk/.cache/pocketjs/contracts/spec/spec.ts#L1447-L1453) defines the following behavior.
 
 - `SCISSOR` is a three-word operation `op, xy, wh` that pushes a rectangular clip.
 - The core intersects the rectangle with all enclosing scissors. The backend only applies the received rectangle.

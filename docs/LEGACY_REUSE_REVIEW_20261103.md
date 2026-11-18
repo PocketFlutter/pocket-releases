@@ -29,7 +29,7 @@ P1 denotes SDK entry points recommended for near-term work, P2 depends on actual
 **A1 — Deep links**
 
 - Old cold and warm entry points, caching, and push dispatch. [SceneDelegate.swift:14](/Volumes/ORICO/Development/Github/pocketjs_flutter_demo/ios/Runner/SceneDelegate.swift:14), [SceneDelegate.swift:19](/Volumes/ORICO/Development/Github/pocketjs_flutter_demo/ios/Runner/SceneDelegate.swift:19), [AppDelegate.swift:186](/Volumes/ORICO/Development/Github/pocketjs_flutter_demo/ios/Runner/AppDelegate.swift:186)
-- Current app entry points and hardware capabilities have no general links integration. [AppDelegate.swift](https://github.com/PocketFlutter/Pocket/blob/235b5b5589faf492f4a9fc3b7c0827bcd1d9de2c/demo/ios/Runner/AppDelegate.swift), [AndroidManifest.xml:36](../../demo/android/app/src/main/AndroidManifest.xml:36), [hardware_plugin.dart:36](../packages/pocket_hardware/lib/src/hardware_plugin.dart:36)
+- Current app entry points and hardware capabilities have no general links integration. [AppDelegate.swift](https://github.com/PocketFlutter/Pocket/blob/b06cb43cac4d553cea232ae1cd1f9ed4ee0c4ff4/demo/ios/Runner/AppDelegate.swift), [AndroidManifest.xml:36](../../demo/android/app/src/main/AndroidManifest.xml:36), [hardware_plugin.dart:36](../packages/pocket_hardware/lib/src/hardware_plugin.dart:36)
 - Verify cold and warm processes, buffering before JS readiness, duplicate URIs, invalid destinations, missing target apps, back navigation, and unsubscribe after disposal. Android needs a new platform entry point.
 
 **A2 — Plugin type generation**

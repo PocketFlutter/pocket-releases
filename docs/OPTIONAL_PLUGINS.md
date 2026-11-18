@@ -10,6 +10,7 @@ A trusted Flutter host compiles and registers plugins. JS manifests can request 
 | `pocket_camera`, `pocket_bluetooth`, `pocket_sensors`, `pocket_location`, `pocket_biometrics`, `pocket_weather` | Register the corresponding plugin, such as `PocketCameraPlugin` | Only the matching domain. Each native package is independent of the other hardware packages. |
 | `pocket_platform` / `flutter.platform` | Add the dependency and register `PocketPlatformPlugin`, or use CLI `--platform-experience` | `platform.systemUi.set`, `platform.haptics.perform` |
 | `pocket_platform` / `flutter.links` | Register `PocketDeepLinkPlugin` with a scheme and configure the native scheme, or use CLI `--deep-link-scheme=...` | `platform.links.initial/latest/events` |
+| `pocket_platform` / `flutter.surfaces` | Register `PocketSurfaceBridgePlugin` and grant the selected guest capabilities. | Widget snapshot transport, native action events and draining, and activity upsert/end. [Native surface bridge](#native-surface-bridge) |
 | `pocket_dio` / `dart.dio` | Add the dependency and register `PocketDioPlugin`, or use CLI `--dio` | `dio.request`, bounded HTTP requests on a dedicated I/O Worker isolate |
 | `pocket_clipboard` / `flutter.clipboard` | Add the dependency and register `PocketClipboardPlugin`, or use CLI `--clipboard`. The host grants `clipboard.read` and `clipboard.write` as needed. | `clipboard.readText/hasText/writeText`, plain text only, 192 KiB cap. See [CLIPBOARD_PLUGIN.md](CLIPBOARD_PLUGIN.md). |
 | `pocket_file_picker` / `flutter.files` | Add the dependency and register `PocketFilePickerPlugin` (uses Flutter `file_selector`). The host grants `files.open`. | `files.pickOpen/readChunk/release` opens the system file picker and returns a path-free opaque handle, name, size, and MIME. Reads use chunks of at most 128 KiB. See [FILE_PICKER_PLUGIN.md](FILE_PICKER_PLUGIN.md). |
@@ -17,6 +18,40 @@ A trusted Flutter host compiles and registers plugins. JS manifests can request 
 System runtime, platform proxy, and debug recording use internal plugins. OTA downloads use `http` in `pocket_services`. Worker `net.http` uses its existing Worker I/O channel. Both paths operate independently of Dio.
 
 See [HARDWARE_MODULES.md](HARDWARE_MODULES.md) for hardware packages, permission boundaries, and examples.
+
+## Native surface bridge
+
+Add the `pocket_platform` dependency and register the bridge in the trusted Flutter host. Give guests only the capabilities they use through the host policy and guest manifest.
+
+```dart
+import 'package:pocket_platform/pocket_platform.dart';
+import 'package:pocket_sdk/pocket_sdk.dart';
+
+final config = PocketAppConfig(
+  appId: 'dev.example.app',
+  pluginFactories: [
+    (_) => PocketSurfaceBridgePlugin(
+      appGroupId: 'group.dev.example.app',
+      deepLinkScheme: 'example',
+    ),
+  ],
+);
+```
+
+`PocketSurfaceBridgePlugin({appGroupId, deepLinkScheme, transport, maxSnapshotBytes = 64 * 1024})` uses the method channel `pocketSurfaceMethodChannelName` by default. `appGroupId` and `deepLinkScheme` are optional. An App Group ID must start with `group.`, use only letters, digits, dots, underscores, and hyphens, and fit within 128 characters. Snapshot limits must be between 1 KiB and 256 KiB. Invalid constructor values throw `ArgumentError`. The plugin ID is `pocketSurfaceBridgePluginId` (`flutter.surfaces`). `PocketSurfaceCapabilities.all` contains the names below.
+
+| Capability | Request and result |
+| --- | --- |
+| `platform.surface.get` | Send `{}`. The result reports `available`, `supportsWidgets`, `supportsLiveActivities`, `watchPaired`, `pendingActionCount`, and may include `ecosystem` and `appGroupId`. Availability describes the bridge. Extension installation and delivery require additional checks. |
+| `platform.widgets.publishSnapshot` | Accepts optional snapshot metadata, text, progress, metrics, actions, and hotspots. Returns `published`, with optional `reloadedWidgets`, `pushedWatchContext`, and `reason`. An oversized UTF-8 JSON payload throws `snapshot_too_large`. |
+| `platform.widgets.drainActions` | Send `{}`. Returns `{actions: [...]}` for the queued actions returned by the host. |
+| `platform.widgets.actions` | Stream with empty parameters. Normalized events contain `id` and `href`, with `source` defaulting to `"widget"` and `timestampMs` defaulting to the current host time. The active stream acknowledges valid events. Use the drain request for actions that remain in the native queue. |
+| `platform.liveActivity.upsert` | Requires a nonempty `title` after trimming, otherwise throws `invalid_argument`. Optional fields include `activityId`, display text, progress (defaults to zero and is clamped to 0–1), and action labels and URLs. Returns `active` and may include `activityId` and `reason`. |
+| `platform.liveActivity.end` | Send `{}` or an `activityId`. Returns `active: false` and may include `activityId` and `reason`. |
+
+iOS reports widget support when the configured App Group container is accessible. Configure matching App Group entitlements for signed host and extension targets. Publication can fail with `app_group_unavailable` or `snapshot_write_failed`. iOS uses ActivityKit on iOS 16.2 and later where available. Watch context forwarding depends on WatchConnectivity availability and pairing. Android uses shared preferences and AppWidget update broadcasts. Its activity path posts an ordinary ongoing notification on Android 8.0 and later, subject to app notification permission and channel settings. A failure reports `ongoing_notifications_unavailable`, `notifications_disabled`, or `notification_channel_disabled` as applicable. Watch companion, App Clip, and Wear OS tile targets require consumer integration. Signed extension and device delivery require separate acceptance. Desktop, Web, and WeChat lack these native channels.
+
+An unavailable native channel reports `available: false`, an empty action queue, and unsuccessful publish/upsert results with `native_surface_channel_unavailable`. A malformed native publish response reports `empty_response`. The bridge also uses the standard plugin permission and lifecycle checks. See [JS API](JS_API.md#system-widget-and-activity-requests) for guest helpers and [Tooling API](TOOLING_API.md#native-surface-scaffold-options) for native project generation.
 
 ## Dio Integration
 

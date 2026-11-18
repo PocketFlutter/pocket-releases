@@ -34,7 +34,7 @@ PAK; the scaled candidate QJBC includes the canonical mesh artScale adaptation.
 ## Actual v4 viewport and density matrix
 
 The tested artifacts are listed in
-[release-artifacts.json](../.pocket-build/lantern-v4-scaled-20261108/release-artifacts.json):
+[release-artifacts.json](https://github.com/PocketFlutter/Pocket/blob/b06cb43cac4d553cea232ae1cd1f9ed4ee0c4ff4/sdk/.pocket-build/lantern-v4-scaled-20261108/release-artifacts.json):
 
 - Guest QJBC SHA-256: e03750c154c8fcaa4ef8b05f37f314a09e2e754ed628a249360c9c406b3bc176.
 - Guest PAK SHA-256: 8126d148c8f71d573dbae11927647150d8d96922f88bab48074d018299369c08
@@ -55,7 +55,7 @@ bright-skin component method as the earlier density report:
 
 All four measurements exceed the 70 px phone and 100 px desktop targets. The
 source captures and measurement JSON are retained under
-[lantern-v4-scaled-20261108](../.pocket-build/lantern-v4-scaled-20261108/).
+[lantern-v4-scaled-20261108](https://github.com/PocketFlutter/Pocket/tree/b06cb43cac4d553cea232ae1cd1f9ed4ee0c4ff4/sdk/.pocket-build/lantern-v4-scaled-20261108).
 captures.json records PNG hashes and dimensions; face-*.json records the
 measured region and component bounds. The actual opened model, mask,
 animation, pause/resume, and handle-release behavior were checked by the same

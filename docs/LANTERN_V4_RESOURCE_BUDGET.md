@@ -8,7 +8,7 @@ The v4 high-resolution Lantern Guest PAK is 69,193,344 bytes
 Its QJBC is 1,073,341 bytes, SHA-256
 e03750c154c8fcaa4ef8b05f37f314a09e2e754ed628a249360c9c406b3bc176.
 The source and artifact metadata are retained in
-[release-artifacts.json](../.pocket-build/lantern-v4-scaled-20261108/release-artifacts.json).
+[release-artifacts.json](https://github.com/PocketFlutter/Pocket/blob/b06cb43cac4d553cea232ae1cd1f9ed4ee0c4ff4/sdk/.pocket-build/lantern-v4-scaled-20261108/release-artifacts.json).
 
 The PAK contains the complete Lantern resource set, including original
 2048×2048 Live2D texture pages and the prepared transparent parallax image.
@@ -45,7 +45,7 @@ QJBC SHA-256 9eb55672c651b76ad9f95fb57c32f7eb82995cd25aa696bba898c2d1a307cbff
 and PAK SHA-256
 5955143ed323987400f8db937ccf96f9206be94e5259479c8688b0710c7a4fba.
 Its artifact record is
-[release-artifacts.json](../.pocket-build/lantern-v4-systemui-budget72-20261108/release-artifacts.json).
+[release-artifacts.json](https://github.com/PocketFlutter/Pocket/blob/b06cb43cac4d553cea232ae1cd1f9ed4ee0c4ff4/sdk/.pocket-build/lantern-v4-systemui-budget72-20261108/release-artifacts.json).
 The real macOS model showcase then opened with the high-resolution Guest.
 This verifies package admission and model startup for that host build; it does
 not establish a memory or cold-start budget.

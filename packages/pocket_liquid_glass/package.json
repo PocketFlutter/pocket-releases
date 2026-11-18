@@ -1,0 +1,29 @@
+{
+  "name": "@pocket/liquid_glass",
+  "version": "0.1.0",
+  "type": "module",
+  "sideEffects": false,
+  "description": "Liquid Glass surfaces, controls, morphing menus and UI skin adapter for PocketJS.",
+  "exports": {
+    ".": "./src/index.ts",
+    "./tokens": "./src/tokens.ts",
+    "./motion": "./src/motion.ts",
+    "./governor": "./src/governor.ts",
+    "./surfaces": "./src/surfaces.tsx",
+    "./controls": "./src/controls.tsx",
+    "./navigation": "./src/navigation.tsx",
+    "./overlays": "./src/overlays.tsx",
+    "./menus": "./src/menus.tsx",
+    "./kit": "./src/kit.tsx"
+  },
+  "scripts": {
+    "test": "node test/liquid_glass.test.ts"
+  },
+  "files": [
+    "src"
+  ],
+  "dependencies": {
+    "@pocket/ui": "0.1.0"
+  },
+  "license": "MIT"
+}

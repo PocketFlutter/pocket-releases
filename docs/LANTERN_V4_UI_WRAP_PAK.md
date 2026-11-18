@@ -22,7 +22,7 @@ Live2D texture pages and the 16 non-UI story/atmosphere image entries—are
 byte-identical. The four `art/ui/` skin image entries are identical as well.
 The complete per-entry comparison and PAK validation facts are preserved in
 the ignored report
-[`pak-comparison.json`](../.pocket-build/lantern-v4-ui-wrap-20261108/pak-comparison.json).
+[`pak-comparison.json`](https://github.com/PocketFlutter/Pocket/blob/b06cb43cac4d553cea232ae1cd1f9ed4ee0c4ff4/sdk/.pocket-build/lantern-v4-ui-wrap-20261108/pak-comparison.json).
 
 This confirms the PAK is structurally valid and that the 16-byte container
 growth comes from UI style data and its alignment. It does not establish

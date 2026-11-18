@@ -89,7 +89,7 @@ bytecode metadata SHA
 `af7290ac184b7a0baf1fb1e0961269f31e27c1ebeef1edc1ec4d4217702ea707`. The
 exact launch command, source snapshots, guest, Flutter log, JSON response, and
 observer notes are archived under
-[`sdk/.pocket-build/novel-stable-rss-passive-20261108/`](../.pocket-build/novel-stable-rss-passive-20261108/)
+[`sdk/.pocket-build/novel-stable-rss-passive-20261108/`](https://github.com/PocketFlutter/Pocket/tree/b06cb43cac4d553cea232ae1cd1f9ed4ee0c4ff4/sdk/.pocket-build/novel-stable-rss-passive-20261108)
 with hashes in `run-manifest.json`.
 
 The run completed all seven 10-second whole-game windows, five 10-second model

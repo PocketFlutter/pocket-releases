@@ -1,6 +1,6 @@
 {
   "sourceRepository": "PocketFlutter/Pocket",
-  "sourceCommit": "235b5b5589faf492f4a9fc3b7c0827bcd1d9de2c",
+  "sourceCommit": "b06cb43cac4d553cea232ae1cd1f9ed4ee0c4ff4",
   "pinnedPocketJsRevision": "99924de47c62fa36f526a8791055d91cbbdb3836",
   "runtime": "QuickJS QJBC + PAK + PocketJS WebAssembly + Canvas2D"
 }

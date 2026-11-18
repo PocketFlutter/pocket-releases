@@ -638,23 +638,104 @@ export function createWidgetSnapshotStore(
   };
 }
 
+export interface RichWidgetSnapshotPayload {
+  readonly generation?: number;
+  readonly profileId?: string;
+  readonly renderMode?: SurfaceRenderMode;
+  readonly eyebrow?: string;
+  readonly title?: string;
+  readonly primaryValue?: string;
+  readonly subtitle?: string;
+  readonly badge?: string;
+  readonly primaryHref?: string;
+  readonly progress?: number;
+  readonly metrics?: readonly TodayWidgetMetric[];
+  readonly actions?: readonly TodayWidgetAction[];
+  readonly hotspots?: readonly WidgetHotspot[];
+}
+
+export interface LiveActivityUpsertPayload {
+  readonly activityId?: string;
+  readonly leadingBadge?: string;
+  readonly trailingMetric?: string;
+  readonly title: string;
+  readonly subtitle?: string;
+  readonly progress?: number;
+  readonly primaryActionLabel?: string;
+  readonly primaryHref?: string;
+  readonly secondaryActionLabel?: string;
+  readonly secondaryHref?: string;
+}
+
+export interface QueuedWidgetActionEvent {
+  readonly id: string;
+  readonly href: string;
+  readonly source?: string;
+  readonly timestampMs?: number;
+}
+
 export async function publishWidgetSnapshot(
   host: Pick<HostBridge, "request">,
-  manifest: WidgetSnapshotManifest,
+  manifest: RichWidgetSnapshotPayload,
 ): Promise<BridgeObject> {
   return host.request<BridgeObject>("platform.widgets.publishSnapshot", {
-    generation: manifest.generation,
-    profileId: manifest.profileId,
-    renderMode: manifest.renderMode,
-    hotspots: manifest.hotspots.map((spot) => ({
-      id: spot.id,
-      nativeId: spot.nativeId,
-      label: spot.label,
-      href: spot.href,
-      role: spot.role,
-      rect: { ...spot.rect },
-    })),
+    ...(manifest.generation !== undefined ? { generation: manifest.generation } : {}),
+    ...(manifest.profileId !== undefined ? { profileId: manifest.profileId } : {}),
+    ...(manifest.renderMode !== undefined ? { renderMode: manifest.renderMode } : {}),
+    ...(manifest.eyebrow !== undefined ? { eyebrow: manifest.eyebrow } : {}),
+    ...(manifest.title !== undefined ? { title: manifest.title } : {}),
+    ...(manifest.primaryValue !== undefined ? { primaryValue: manifest.primaryValue } : {}),
+    ...(manifest.subtitle !== undefined ? { subtitle: manifest.subtitle } : {}),
+    ...(manifest.badge !== undefined ? { badge: manifest.badge } : {}),
+    ...(manifest.primaryHref !== undefined ? { primaryHref: manifest.primaryHref } : {}),
+    ...(manifest.progress !== undefined ? { progress: manifest.progress } : {}),
+    ...(manifest.metrics ? { metrics: manifest.metrics.map((m) => ({ ...m })) } : {}),
+    ...(manifest.actions ? { actions: manifest.actions.map((a) => ({ ...a })) } : {}),
+    ...(manifest.hotspots
+      ? {
+          hotspots: manifest.hotspots.map((spot) => ({
+            id: spot.id,
+            nativeId: spot.nativeId,
+            label: spot.label,
+            href: spot.href,
+            role: spot.role,
+            rect: { ...spot.rect },
+          })),
+        }
+      : {}),
   } as unknown as BridgeObject);
+}
+
+export async function upsertLiveActivity(
+  host: Pick<HostBridge, "request">,
+  payload: LiveActivityUpsertPayload,
+): Promise<BridgeObject> {
+  return host.request<BridgeObject>(
+    "platform.liveActivity.upsert",
+    { ...payload } as unknown as BridgeObject,
+  );
+}
+
+export async function endLiveActivity(
+  host: Pick<HostBridge, "request">,
+  activityId?: string,
+): Promise<BridgeObject> {
+  return host.request<BridgeObject>(
+    "platform.liveActivity.end",
+    (activityId ? { activityId } : {}) as unknown as BridgeObject,
+  );
+}
+
+export async function drainPendingWidgetActions(
+  host: Pick<HostBridge, "request">,
+): Promise<readonly QueuedWidgetActionEvent[]> {
+  const res = await host.request<BridgeObject>("platform.widgets.drainActions", {});
+  const raw = (res as Record<string, unknown> | null)?.actions;
+  if (!Array.isArray(raw)) return [];
+  return raw.filter(
+    (item): item is QueuedWidgetActionEvent =>
+      Boolean(item && typeof item === "object" && typeof (item as any).href === "string"),
+  );
 }
 
 const WidgetSnapshotContext = createContext<WidgetSnapshotStore | undefined>(undefined);

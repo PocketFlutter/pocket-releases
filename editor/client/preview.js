@@ -3281,11 +3281,16 @@ void main() {
               return;
             }
             installFrame(decodedFrame);
+          } else if (packet.type === "project-host-reload") {
+            current.close();
+            global.location.reload();
           } else if (packet.type === "status") {
             const state = packet.status?.state;
             if (state === "error") cancelPointerContacts();
             else if (state === "starting" || state === "stopped") resetPointerContacts();
-            status.textContent = `PocketJS preview · ${packet.status.state}`;
+            status.textContent = packet.status.hostConfig === "invalid"
+              ? "PocketJS preview · local host profile unavailable"
+              : `PocketJS preview · ${packet.status.state}`;
             announce("preview.status", { status: packet.status });
           } else if (packet.type === "error") {
             cancelPointerContacts();

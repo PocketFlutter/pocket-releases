@@ -44,7 +44,7 @@ The retained parent was reviewed outside `pocket_host/`:
   adaptation; the old painter is not a feature-equivalent replacement.
 
 The current SDK ownership point is
-[`pocket_view.dart`](https://github.com/PocketFlutter/Pocket/blob/235b5b5589faf492f4a9fc3b7c0827bcd1d9de2c/sdk/packages/pocket_flutter/lib/src/pocket_view.dart):
+[`pocket_view.dart`](https://github.com/PocketFlutter/Pocket/blob/b06cb43cac4d553cea232ae1cd1f9ed4ee0c4ff4/sdk/packages/pocket_flutter/lib/src/pocket_view.dart):
 
 - `_buildSurface` creates `canvasOps` at line 7076. `addCanvasBlock` passes
   `canvasOps.sublist(start, end)` to each painter at lines 7110–7121.
@@ -68,7 +68,7 @@ old painter ranges.
 ## Existing evidence and its limits
 
 The frozen baseline report is
-[`profile-evidence.json`](../.pocket-build/performance-next-20261109/profile-evidence.json).
+[`profile-evidence.json`](https://github.com/PocketFlutter/Pocket/blob/b06cb43cac4d553cea232ae1cd1f9ed4ee0c4ff4/sdk/.pocket-build/performance-next-20261109/profile-evidence.json).
 The underlying run used the pinned Flutter 3.47.9 Profile build, macOS at a
 reported 60 Hz, and `POCKET_MESH_SUPERSAMPLE=2`. The `pocket_view.dart` and
 `pocket_view_painter.dart` hashes match the inspected SDK sources. The run

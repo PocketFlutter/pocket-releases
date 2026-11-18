@@ -5,7 +5,7 @@
 The current Lantern v4 package is 69,193,344 bytes (`app.pak`, SHA-256
 `8126d148c8f71d573dbae11927647150d8d96922f88bab48074d018299369c08`), as
 recorded in
-[`lantern-v4-scaled-20261108/release-artifacts.json`](../.pocket-build/lantern-v4-scaled-20261108/release-artifacts.json).
+[`lantern-v4-scaled-20261108/release-artifacts.json`](https://github.com/PocketFlutter/Pocket/blob/b06cb43cac4d553cea232ae1cd1f9ed4ee0c4ff4/sdk/.pocket-build/lantern-v4-scaled-20261108/release-artifacts.json).
 The requested four 1024×1536 backgrounds are not all turned into Flutter
 `ui.Image`s at startup. The current native loader does, however, upload every
 `ui:img.*` PAK entry into the Core texture table during package installation,

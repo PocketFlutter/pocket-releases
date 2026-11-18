@@ -114,13 +114,13 @@ these captures, not a general guarantee for other poses or viewports.
 
 | Test view | Idle 1 | Idle 0 | TapBody | Approximate bright-body vertical bounds and clearance |
 | --- | --- | --- | --- | --- |
-| 390×844 logical, DPR 2 (780×1688 PNG) | [`full`](../.pocket-build/lantern-v4-fullbody-20261108/captures/model-Hiyori-full-390x844-dpr2.png) | [`Idle 0`](../.pocket-build/lantern-v4-fullbody-20261108/captures/model-Hiyori-full-idle0-390x844-dpr2.png) | [`TapBody`](../.pocket-build/lantern-v4-fullbody-20261108/captures/model-Hiyori-full-tapbody-390x844-dpr2.png) | y≈462–1350 px (≈231–675 logical); head-to-header ≈179 logical px, feet-to-toolbar ≈123 logical px |
-| 1920×1080 logical, DPR 1 (1920×1080 PNG) | [`full`](../.pocket-build/lantern-v4-fullbody-20261108/captures/model-Hiyori-full-1920x1080-dpr1.png) | [`Idle 0`](../.pocket-build/lantern-v4-fullbody-20261108/captures/model-Hiyori-full-idle0-1920x1080-dpr1.png) | [`TapBody`](../.pocket-build/lantern-v4-fullbody-20261108/captures/model-Hiyori-full-tapbody-1920x1080-dpr1.png) | y≈288–841 px; head-to-header ≈236 logical px, feet-to-toolbar ≈191 logical px |
+| 390×844 logical, DPR 2 (780×1688 PNG) | [`full`](https://github.com/PocketFlutter/Pocket/blob/b06cb43cac4d553cea232ae1cd1f9ed4ee0c4ff4/sdk/.pocket-build/lantern-v4-fullbody-20261108/captures/model-Hiyori-full-390x844-dpr2.png) | [`Idle 0`](https://github.com/PocketFlutter/Pocket/blob/b06cb43cac4d553cea232ae1cd1f9ed4ee0c4ff4/sdk/.pocket-build/lantern-v4-fullbody-20261108/captures/model-Hiyori-full-idle0-390x844-dpr2.png) | [`TapBody`](https://github.com/PocketFlutter/Pocket/blob/b06cb43cac4d553cea232ae1cd1f9ed4ee0c4ff4/sdk/.pocket-build/lantern-v4-fullbody-20261108/captures/model-Hiyori-full-tapbody-390x844-dpr2.png) | y≈462–1350 px (≈231–675 logical); head-to-header ≈179 logical px, feet-to-toolbar ≈123 logical px |
+| 1920×1080 logical, DPR 1 (1920×1080 PNG) | [`full`](https://github.com/PocketFlutter/Pocket/blob/b06cb43cac4d553cea232ae1cd1f9ed4ee0c4ff4/sdk/.pocket-build/lantern-v4-fullbody-20261108/captures/model-Hiyori-full-1920x1080-dpr1.png) | [`Idle 0`](https://github.com/PocketFlutter/Pocket/blob/b06cb43cac4d553cea232ae1cd1f9ed4ee0c4ff4/sdk/.pocket-build/lantern-v4-fullbody-20261108/captures/model-Hiyori-full-idle0-1920x1080-dpr1.png) | [`TapBody`](https://github.com/PocketFlutter/Pocket/blob/b06cb43cac4d553cea232ae1cd1f9ed4ee0c4ff4/sdk/.pocket-build/lantern-v4-fullbody-20261108/captures/model-Hiyori-full-tapbody-1920x1080-dpr1.png) | y≈288–841 px; head-to-header ≈236 logical px, feet-to-toolbar ≈191 logical px |
 
 The matching capture metadata, PNG hashes and test-view flags are in
-[`captures-390-dpr2-diagnostic.json`](../.pocket-build/lantern-v4-fullbody-20261108/captures-390-dpr2-diagnostic.json)
+[`captures-390-dpr2-diagnostic.json`](https://github.com/PocketFlutter/Pocket/blob/b06cb43cac4d553cea232ae1cd1f9ed4ee0c4ff4/sdk/.pocket-build/lantern-v4-fullbody-20261108/captures-390-dpr2-diagnostic.json)
 and
-[`captures-1920-dpr1.json`](../.pocket-build/lantern-v4-fullbody-20261108/captures-1920-dpr1.json).
+[`captures-1920-dpr1.json`](https://github.com/PocketFlutter/Pocket/blob/b06cb43cac4d553cea232ae1cd1f9ed4ee0c4ff4/sdk/.pocket-build/lantern-v4-fullbody-20261108/captures-1920-dpr1.json).
 The vertical bounds are approximate bright-body measurements; dark hair and
 fine silhouette edges are not included in that threshold. The no-clipping
 conclusion comes from visual review of all six PNGs, not from treating those

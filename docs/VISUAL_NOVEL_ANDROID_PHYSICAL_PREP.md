@@ -57,7 +57,7 @@ the Gradle-stripped form of this same library, verified below.
 `pocket_live2d`'s Android CMake target is arm64-v8a only and links the official
 Cubism Core static library plus Android `log`. It consumes the proprietary
 Native SDK R5 archive through
-[`bootstrap_cubism_core.sh`](https://github.com/PocketFlutter/Pocket/blob/235b5b5589faf492f4a9fc3b7c0827bcd1d9de2c/sdk/packages/pocket_live2d/scripts/bootstrap_cubism_core.sh).
+[`bootstrap_cubism_core.sh`](https://github.com/PocketFlutter/Pocket/blob/b06cb43cac4d553cea232ae1cd1f9ed4ee0c4ff4/sdk/packages/pocket_live2d/scripts/bootstrap_cubism_core.sh).
 The script pins archive SHA-256
 `7ff3a4bbc19c0a8728965aa522ab77eb11b252916453e68a8a78d3b71188bb12` and
 requires the user to accept Live2D's development terms before downloading.
@@ -87,7 +87,7 @@ at `sdk/.pocket-build/lantern-v4-android-profile-20261108/app-profile.apk`.
 It is 67,749,729 bytes with SHA-256
 `b2e4b679763727f86a23dc80b897e65251661457ce48016f5dca73c0421e3692`.
 Its APK verification record is
-[`apk-verification.json`](../.pocket-build/lantern-v4-android-profile-20261108/apk-verification.json).
+[`apk-verification.json`](https://github.com/PocketFlutter/Pocket/blob/b06cb43cac4d553cea232ae1cd1f9ed4ee0c4ff4/sdk/.pocket-build/lantern-v4-android-profile-20261108/apk-verification.json).
 
 The APK contains `lib/arm64-v8a/libpocket_flutter.so` (5,043,944 bytes,
 SHA-256 `d4093c2aff0813f16f91a48617943f8617c02d286b741c5d986152b2072ac412`)
@@ -103,7 +103,7 @@ the APK both hash to `d4093c2aff0813f16f91a48617943f8617c02d286b741c5d986152b207
 This proves the APK entry is the stripped result of the new native input; its
 hash is expected to differ from the unstripped JNI source. The independent
 path/hash evidence is
-[`android-native-provenance.json`](../.pocket-build/lantern-v4-android-profile-20261108/android-native-provenance.json).
+[`android-native-provenance.json`](https://github.com/PocketFlutter/Pocket/blob/b06cb43cac4d553cea232ae1cd1f9ed4ee0c4ff4/sdk/.pocket-build/lantern-v4-android-profile-20261108/android-native-provenance.json).
 
 If rebuilding the integration APK after a source or asset change, use this
 command from `demo/`:

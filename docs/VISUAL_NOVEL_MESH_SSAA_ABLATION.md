@@ -47,7 +47,7 @@ handle; they do not measure GPU in-flight references or peak process memory.
 
 ## Same-frame captures
 
-The frozen [source manifest](../.pocket-build/mesh-span-ssaa-ab-20261108/ready-before-profile/manifest.json)
+The frozen [source manifest](https://github.com/PocketFlutter/Pocket/blob/b06cb43cac4d553cea232ae1cd1f9ed4ee0c4ff4/sdk/.pocket-build/mesh-span-ssaa-ab-20261108/ready-before-profile/manifest.json)
 records the Demo harness, Guest tuple and SDK source hashes used for these
 captures. The A/B helper reads actual `PocketMeshSpanPainter` instances from
 the live widget tree and expands their original partitions for baseline
@@ -72,9 +72,9 @@ These are direct difference counts between the captured source-painter
 sequence and active 2× group replay. The diagnostic replay created and disposed
 one snapshot per pose, with zero budget, eligibility or failure bypasses. The
 ordinary window capture and source/mip image facts are in
-[`actual-desktop-dpr1`](../.pocket-build/mesh-span-ssaa-ab-20261108/actual-desktop-dpr1/manifest.json)
+[`actual-desktop-dpr1`](https://github.com/PocketFlutter/Pocket/blob/b06cb43cac4d553cea232ae1cd1f9ed4ee0c4ff4/sdk/.pocket-build/mesh-span-ssaa-ab-20261108/actual-desktop-dpr1/manifest.json)
 and
-[`actual-mobile-dpr2`](../.pocket-build/mesh-span-ssaa-ab-20261108/actual-mobile-dpr2/manifest.json).
+[`actual-mobile-dpr2`](https://github.com/PocketFlutter/Pocket/blob/b06cb43cac4d553cea232ae1cd1f9ed4ee0c4ff4/sdk/.pocket-build/mesh-span-ssaa-ab-20261108/actual-mobile-dpr2/manifest.json).
 
 ## Profile cost comparison
 
@@ -113,10 +113,10 @@ cycle run does not measure stable RSS, peak GPU memory or memory bandwidth.
 No cost result establishes a performance win; the experiment remains opt-in.
 
 Raw timing logs and per-window JSON are under
-[`cost-baseline`](../.pocket-build/mesh-span-ssaa-ab-20261108/cost-baseline/manifest.json),
-[`cost-group1`](../.pocket-build/mesh-span-ssaa-ab-20261108/cost-group1/manifest.json)
+[`cost-baseline`](https://github.com/PocketFlutter/Pocket/blob/b06cb43cac4d553cea232ae1cd1f9ed4ee0c4ff4/sdk/.pocket-build/mesh-span-ssaa-ab-20261108/cost-baseline/manifest.json),
+[`cost-group1`](https://github.com/PocketFlutter/Pocket/blob/b06cb43cac4d553cea232ae1cd1f9ed4ee0c4ff4/sdk/.pocket-build/mesh-span-ssaa-ab-20261108/cost-group1/manifest.json)
 and
-[`cost-ssaa2`](../.pocket-build/mesh-span-ssaa-ab-20261108/cost-ssaa2/manifest.json).
+[`cost-ssaa2`](https://github.com/PocketFlutter/Pocket/blob/b06cb43cac4d553cea232ae1cd1f9ed4ee0c4ff4/sdk/.pocket-build/mesh-span-ssaa-ab-20261108/cost-ssaa2/manifest.json).
 These measurements refer to painter SHA
 `713e80a58de77dc0f7f4e2d8bdcb04b111c1688fe772bb328ce66f879fad8abe` and view
 SHA `ce4c4ff9a0b92983475684184baa4ad44b50946744a0d272e3fcf59cdee891fa` in the
@@ -129,9 +129,9 @@ A separate five-window Profile run added the opt-in
 vsync ticker active when a positive guest wake delay fit within one display
 interval. The painter and four Demo harness files were unchanged; this run has
 a separate
-[source snapshot](../.pocket-build/mesh-span-ssaa-ab-20261108/near-deadline-ready/manifest.json)
+[source snapshot](https://github.com/PocketFlutter/Pocket/blob/b06cb43cac4d553cea232ae1cd1f9ed4ee0c4ff4/sdk/.pocket-build/mesh-span-ssaa-ab-20261108/near-deadline-ready/manifest.json)
 and
-[cost archive](../.pocket-build/mesh-span-ssaa-ab-20261108/cost-near-deadline/manifest.json).
+[cost archive](https://github.com/PocketFlutter/Pocket/blob/b06cb43cac4d553cea232ae1cd1f9ed4ee0c4ff4/sdk/.pocket-build/mesh-span-ssaa-ab-20261108/cost-near-deadline/manifest.json).
 
 | Scene | `nativeCalls`, prior SSAA2 → ticker flag | Build P95 ms, prior → ticker flag | Total-span P95 ms, prior → ticker flag |
 | --- | ---: | ---: | ---: |
@@ -155,9 +155,9 @@ near-deadline policy should be retained based on these observations.
 The final production-source run used `POCKET_MESH_SUPERSAMPLE=2` without the
 rejected ticker flag. It captured 12 timed windows and completed 20 real model
 re-entry/release cycles. The source and Demo harness are frozen in
-[`final-production-ready`](../.pocket-build/mesh-span-ssaa-ab-20261108/final-production-ready/manifest.json);
+[`final-production-ready`](https://github.com/PocketFlutter/Pocket/blob/b06cb43cac4d553cea232ae1cd1f9ed4ee0c4ff4/sdk/.pocket-build/mesh-span-ssaa-ab-20261108/final-production-ready/manifest.json);
 the complete log, report, 12 windows and 20 cycle records are in
-[`final-full20`](../.pocket-build/mesh-span-ssaa-ab-20261108/final-full20/manifest.json).
+[`final-full20`](https://github.com/PocketFlutter/Pocket/blob/b06cb43cac4d553cea232ae1cd1f9ed4ee0c4ff4/sdk/.pocket-build/mesh-span-ssaa-ab-20261108/final-full20/manifest.json).
 
 The per-cycle SSAA allocation check passed: every cycle produced snapshots at
 entry, created and disposed counts matched at entry and return, all 20 cycles
