@@ -1,0 +1,20 @@
+{
+  "name": "@pocket/live2d",
+  "version": "0.1.0",
+  "license": "SEE LICENSE IN LICENSE",
+  "type": "module",
+  "sideEffects": false,
+  "exports": {
+    ".": "./src/index.ts",
+    "./manifest": "./src/manifest.ts",
+    "./motion": "./src/motion.ts",
+    "./interaction": "./src/interaction.ts",
+    "./physics": "./src/physics.ts",
+    "./pose": "./src/pose.ts",
+    "./transport": "./src/transport.ts"
+  },
+  "files": [
+    "src",
+    "LICENSE"
+  ]
+}

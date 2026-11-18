@@ -1,0 +1,146 @@
+import { createRequire } from 'node:module';
+import { createHash } from 'node:crypto';
+import { existsSync, readFileSync, statSync } from 'node:fs';
+import { delimiter, dirname, isAbsolute, join, relative, resolve } from 'node:path';
+
+export const SDK_VERSION = '0.1.22';
+export const UPSTREAM_REVISION = '99924de47c62fa36f526a8791055d91cbbdb3836';
+export const BYTECODE_ABI = 'quickjs-bytecode-v1:5ab2246bcbd64b9d66e396043be05c2f77e7a6ab78e3125c56f8a1f62019a021';
+export const platformPackageName = (platform = process.platform, arch = process.arch) => `@pocket/tools-${platform}-${arch}`;
+
+export function validateToolsPackage(directory, platform = process.platform, arch = process.arch, expectedSdkVersion = SDK_VERSION, options = {}) {
+  const root = resolve(directory);
+  const manifest = JSON.parse(readFileSync(join(root, 'manifest.json'), 'utf8'));
+  const expectedUpstreamRevision = options.expectedUpstreamRevision ?? UPSTREAM_REVISION;
+  const expectedBytecodeAbi = options.expectedBytecodeAbi ?? BYTECODE_ABI;
+  const revisionOk = expectedUpstreamRevision === null
+    ? (typeof manifest.upstreamRevision === 'string' && manifest.upstreamRevision.trim().length > 0)
+    : manifest.upstreamRevision === expectedUpstreamRevision;
+  const abiOk = expectedBytecodeAbi === null
+    ? (typeof manifest.bytecodeAbi === 'string' && /^quickjs-bytecode-v\d+:[0-9a-f]{16,}$/i.test(manifest.bytecodeAbi.trim()))
+    : manifest.bytecodeAbi === expectedBytecodeAbi;
+  if (manifest.schemaVersion !== 1 || manifest.sdkVersion !== expectedSdkVersion || !revisionOk || !abiOk) {
+    throw new Error(`Pocket 预编译工具版本/ABI 不匹配：${root}`);
+  }
+  if (manifest.platform !== platform || manifest.arch !== arch) throw new Error(`Pocket 工具平台不匹配：需要 ${platform}/${arch}，实际 ${manifest.platform}/${manifest.arch}`);
+  const suffix = platform === 'win32' ? '.exe' : '';
+  const required = [
+    `bin/pocketjs_bytecode${suffix}`,
+    `bin/pocket_probe${suffix}`,
+    'compiler/tools/build.ts',
+    'compiler/framework/compiler/jsx-plugin.ts',
+    'compiler/framework/compiler/subpaths.ts',
+    'compiler/framework/src/inline-fonts.ts',
+    'compiler/tools/inline-text-slots.ts',
+  ];
+  for (const name of required) if (!manifest.files?.[name]) throw new Error(`Pocket 工具清单缺少 ${name}`);
+  for (const [name, expected] of Object.entries(manifest.files)) {
+    const path = resolve(root, name);
+    const rel = relative(root, path);
+    if (!name || isAbsolute(name) || rel.startsWith('..') || isAbsolute(rel)) throw new Error(`Pocket 工具清单含非法路径：${name}`);
+    if (!statSync(path).isFile()) throw new Error(`Pocket 工具文件无效：${name}`);
+    const bytes = readFileSync(path);
+    if (bytes.length !== expected.size || createHash('sha256').update(bytes).digest('hex') !== expected.sha256) {
+      throw new Error(`Pocket 工具完整性校验失败：${name}`);
+    }
+  }
+  return { root, manifest, compiler: join(root, 'compiler'), bytecode: join(root, `bin/pocketjs_bytecode${suffix}`), probe: join(root, `bin/pocket_probe${suffix}`) };
+}
+
+export function readPrebuiltToolsSourceConstants(prebuiltToolsMjsPath) {
+  if (!existsSync(prebuiltToolsMjsPath) || !statSync(prebuiltToolsMjsPath).isFile()) return {};
+  const source = readFileSync(prebuiltToolsMjsPath, 'utf8');
+  const readConst = (name) => {
+    const match = source.match(new RegExp(`export\\s+const\\s+${name}\\s*=\\s*['"]([^'"]+)['"]`));
+    return match ? match[1] : undefined;
+  };
+  return {
+    sdkVersion: readConst('SDK_VERSION'),
+    upstreamRevision: readConst('UPSTREAM_REVISION'),
+    bytecodeAbi: readConst('BYTECODE_ABI'),
+  };
+}
+
+export function resolvePrebuiltTools(sdkRoot, env = process.env, expectedSdkVersion = SDK_VERSION) {
+  const resolvedSdkRoot = resolve(sdkRoot);
+  let directory = env.POCKET_TOOLS_PACKAGE?.trim();
+  const name = platformPackageName();
+  let pkgVersion = expectedSdkVersion;
+  try {
+    const pkg = JSON.parse(readFileSync(join(resolvedSdkRoot, 'package.json'), 'utf8'));
+    if (typeof pkg.version === 'string' && pkg.version.trim()) pkgVersion = pkg.version.trim();
+  } catch {}
+  const onDiskConstants = readPrebuiltToolsSourceConstants(join(resolvedSdkRoot, 'scripts', 'prebuilt_tools.mjs'));
+  if (!directory) {
+    try { directory = dirname(createRequire(join(resolvedSdkRoot, 'package.json')).resolve(`${name}/package.json`)); }
+    catch { throw Object.assign(new Error(`尚未安装 ${name}@${pkgVersion}。请运行 npm run setup，或安装当前系统对应的 Pocket 预编译平台包。不会自动安装 Rust 或回退到源码编译。`), { code: 'POCKET_TOOLS_MISSING' }); }
+  }
+  return validateToolsPackage(directory, process.platform, process.arch, pkgVersion, {
+    expectedUpstreamRevision: onDiskConstants.upstreamRevision ?? UPSTREAM_REVISION,
+    expectedBytecodeAbi: onDiskConstants.bytecodeAbi ?? BYTECODE_ABI,
+  });
+}
+
+export function resolveManagedBun(sdkRoot, env = process.env) {
+  const configured = env.POCKET_BUN || env.POCKET_EDITOR_BUN;
+  if (configured) {
+    if (!existsSync(configured)) throw new Error(`Bun 路径无效：${configured}`);
+    return resolve(configured);
+  }
+  const rootRequire = createRequire(join(resolve(sdkRoot), 'package.json'));
+  const resolvers = [rootRequire];
+  let bunPkgRoot;
+  try {
+    const bunPkgPath = rootRequire.resolve('bun/package.json');
+    bunPkgRoot = dirname(bunPkgPath);
+    resolvers.push(createRequire(bunPkgPath));
+  } catch {}
+  // Prefer the payload directly: this also works with --ignore-scripts and isolated .bun stores.
+  const os = process.platform === 'win32' ? 'windows' : process.platform;
+  const cpu = process.arch === 'arm64' ? 'aarch64' : process.arch;
+  const names = [`@oven/bun-${os}-${cpu}`, `@oven/bun-${os}-${cpu}-baseline`];
+  for (const req of resolvers) {
+    for (const name of names) {
+      try {
+        const root = dirname(req.resolve(`${name}/package.json`));
+        for (const file of ['bin/bun', 'bin/bun.exe']) if (existsSync(join(root, file))) return join(root, file);
+      } catch {}
+    }
+  }
+  if (bunPkgRoot) {
+    for (const file of ['bin/bun', 'bin/bun.exe']) {
+      if (existsSync(join(bunPkgRoot, file))) return join(bunPkgRoot, file);
+    }
+  }
+  try {
+    const bunPackage = require.resolve('bun/package.json');
+    const root = dirname(bunPackage);
+    // Package managers with isolated installs (bun/pnpm) keep the platform
+    // payload next to the `bun` package, not hoisted to the SDK root. The
+    // `bin/bun.exe` shim is only a placeholder until its postinstall runs.
+    const fromBunPackage = createRequire(bunPackage);
+    for (const name of names) {
+      try {
+        const payload = dirname(fromBunPackage.resolve(`${name}/package.json`));
+        for (const file of ['bin/bun', 'bin/bun.exe']) if (existsSync(join(payload, file))) return join(payload, file);
+      } catch {}
+    }
+    if (existsSync(join(root, 'bin/bun.exe'))) return join(root, 'bin/bun.exe');
+  } catch {}
+  throw new Error('缺少 npm 管理的 Bun 运行时；请执行 npm run setup。无需全局安装 Bun。');
+}
+
+export function nativeBindingEnvironment(tools) {
+  const result = {};
+  if (tools.manifest.noble?.included) result['@ABANDONWARE/NOBLE_PREBUILD'] = join(tools.root, 'noble');
+  return result;
+}
+
+export function prebuiltEnvironment(sdkRoot, env = process.env) {
+  const tools = resolvePrebuiltTools(sdkRoot, env);
+  const bun = resolveManagedBun(sdkRoot, env);
+  return { ...env, ...nativeBindingEnvironment(tools), POCKET_TOOLS_PACKAGE: tools.root, POCKET_UPSTREAM_ROOT: tools.compiler,
+    POCKET_COMPILER_PATH: join(tools.compiler, 'tools/build.ts'), POCKET_BYTECODE_BIN: tools.bytecode,
+    POCKET_NATIVE_PROBE: env.POCKET_NATIVE_PROBE || tools.probe, POCKET_BUN: bun, POCKET_EDITOR_BUN: bun,
+    PATH: `${dirname(bun)}${delimiter}${env.PATH || ''}` };
+}

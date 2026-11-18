@@ -1,0 +1,54 @@
+{
+  "name": "@pocket/web-sdk-tools",
+  "version": "0.1.22",
+  "description": "Standalone PocketJS Web SDK and Editor; no Flutter environment required",
+  "private": false,
+  "type": "module",
+  "license": "MIT",
+  "engines": {
+    "node": ">=22.22.2"
+  },
+  "workspaces": [
+    "packages/pocket_ui",
+    "packages/pocket_looseleaf",
+    "packages/pocket_arc",
+    "packages/pocket_tftc",
+    "packages/pocket_spine",
+    "packages/pocket_live2d",
+    "packages/pocket_diagnostics",
+    "packages/pocket_cos",
+    "packages/pocket_sync"
+  ],
+  "dependencies": {
+    "@pocket/spine": "0.1.0",
+    "@pocket/live2d": "0.1.0",
+    "bun": "1.3.9",
+    "find-process": "2.1.1",
+    "tree-kill": "1.2.2"
+  },
+  "devDependencies": {
+    "@open-wxa/wxa-runner-core": "0.12.3",
+    "node-gyp": "12.3.0"
+  },
+  "optionalDependencies": {
+    "@abandonware/noble": "1.9.2-26"
+  },
+  "scripts": {
+    "setup": "node scripts/toolchain.mjs setup",
+    "setup:source": "node scripts/toolchain.mjs setup:source",
+    "bootstrap:source": "node scripts/toolchain.mjs bootstrap:source",
+    "build:probe:source": "node scripts/toolchain.mjs build:probe:source",
+    "bootstrap": "node scripts/toolchain.mjs bootstrap",
+    "doctor": "node scripts/toolchain.mjs doctor",
+    "build:guest": "node scripts/toolchain.mjs build:guest",
+    "build:probe": "node scripts/toolchain.mjs build:probe",
+    "build:web": "node scripts/toolchain.mjs run scripts/build_web.ts",
+    "build:wechat": "node scripts/toolchain.mjs run scripts/build_wechat.ts",
+    "cos": "node scripts/toolchain.mjs run packages/pocket_cos/src/cli.ts",
+    "start": "node scripts/editor_service.mjs start",
+    "stop": "node scripts/editor_service.mjs stop",
+    "status": "node scripts/editor_service.mjs status",
+    "editor": "node scripts/editor_service.mjs start",
+    "editor:lan": "bun run editor"
+  }
+}

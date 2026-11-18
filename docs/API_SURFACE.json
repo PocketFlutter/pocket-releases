@@ -1,0 +1,4993 @@
+{
+  "schemaVersion": 3,
+  "scope": "Package export graphs, top-level declarations, npm scripts and command entry sources with digests. JS follows re-exports only; Dart filters are recorded, not applied. Source files can contain non-public helpers; package exports and show/hide determine visibility. Digests guard member/signature changes and can also flag implementation-only edits. Consult API references for defaults and runtime semantics.",
+  "dart": [
+    {
+      "name": "pocket_archive",
+      "manifest": "packages/pocket_archive/pubspec.yaml",
+      "libraries": [
+        {
+          "entry": "packages/pocket_archive/lib/pocket_archive.dart",
+          "exports": [
+            {
+              "file": "packages/pocket_archive/lib/pocket_archive.dart",
+              "declarations": [
+                "PocketNativeArchive"
+              ],
+              "sourceSha256": "3ae77c255d6b4d4fb82a990e129552a9c23260efe9cefcc7ced6463b977b9299"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "pocket_audio",
+      "manifest": "packages/pocket_audio/pubspec.yaml",
+      "libraries": [
+        {
+          "entry": "packages/pocket_audio/lib/pocket_audio.dart",
+          "exports": [
+            {
+              "file": "packages/pocket_audio/lib/pocket_audio.dart",
+              "declarations": [],
+              "sourceSha256": "276a3162863c658bd8ab6f329fcaa77cea14b97e010434c9c2443d2203daf2d3"
+            },
+            {
+              "from": "packages/pocket_audio/lib/pocket_audio.dart",
+              "export": "src/pocket_audio_plugin.dart",
+              "filter": ""
+            },
+            {
+              "file": "packages/pocket_audio/lib/src/pocket_audio_plugin.dart",
+              "declarations": [
+                "PocketAudioActiveChanged",
+                "PocketAudioPlaybackChanged",
+                "PocketAudioPlayer",
+                "PocketAudioPlayerFactory",
+                "PocketAudioPlayerState",
+                "PocketAudioPlugin"
+              ],
+              "sourceSha256": "ceefa56dbc5b4df7d0d42d62ac198565bd874a75bb10f3753e9c779c86387edc"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "pocket_biometrics",
+      "manifest": "packages/pocket_biometrics/pubspec.yaml",
+      "libraries": [
+        {
+          "entry": "packages/pocket_biometrics/lib/pocket_biometrics.dart",
+          "exports": [
+            {
+              "file": "packages/pocket_biometrics/lib/pocket_biometrics.dart",
+              "declarations": [
+                "PocketBiometricsPlugin"
+              ],
+              "sourceSha256": "ffb16d1449e27240917252fee9dc931934a3d97f34c00aba9d7de7bb323c7ddc"
+            },
+            {
+              "from": "packages/pocket_biometrics/lib/pocket_biometrics.dart",
+              "export": "package:pocket_hardware_core/pocket_hardware_core.dart",
+              "filter": "show HardwarePlatform, HardwareStreamingPlatform, HardwarePlatformException, HardwareCapabilities, HardwarePermissions, HardwareTextureCallback, HardwareWeatherFetcher"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "pocket_bluetooth",
+      "manifest": "packages/pocket_bluetooth/pubspec.yaml",
+      "libraries": [
+        {
+          "entry": "packages/pocket_bluetooth/lib/pocket_bluetooth.dart",
+          "exports": [
+            {
+              "file": "packages/pocket_bluetooth/lib/pocket_bluetooth.dart",
+              "declarations": [
+                "PocketBluetoothPlugin"
+              ],
+              "sourceSha256": "00eb6bbf6c2b19c6096ae8c2af277dbbdc7a36a6ef5260aa623656b02744e60e"
+            },
+            {
+              "from": "packages/pocket_bluetooth/lib/pocket_bluetooth.dart",
+              "export": "package:pocket_hardware_core/pocket_hardware_core.dart",
+              "filter": "show HardwarePlatform, HardwareStreamingPlatform, HardwarePlatformException, HardwareCapabilities, HardwarePermissions, HardwareTextureCallback, HardwareWeatherFetcher"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "pocket_camera",
+      "manifest": "packages/pocket_camera/pubspec.yaml",
+      "libraries": [
+        {
+          "entry": "packages/pocket_camera/lib/pocket_camera.dart",
+          "exports": [
+            {
+              "file": "packages/pocket_camera/lib/pocket_camera.dart",
+              "declarations": [
+                "PocketCameraPlugin"
+              ],
+              "sourceSha256": "c43fc6971f3233c71271ce0da2aa587329d880cce8c246bbe0ecb7234fda9bd9"
+            },
+            {
+              "from": "packages/pocket_camera/lib/pocket_camera.dart",
+              "export": "package:pocket_hardware_core/pocket_hardware_core.dart",
+              "filter": "show HardwarePlatform, HardwareStreamingPlatform, HardwarePlatformException, HardwareCapabilities, HardwarePermissions, HardwareTextureCallback, HardwareWeatherFetcher"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "pocket_clipboard",
+      "manifest": "packages/pocket_clipboard/pubspec.yaml",
+      "libraries": [
+        {
+          "entry": "packages/pocket_clipboard/lib/pocket_clipboard.dart",
+          "exports": [
+            {
+              "file": "packages/pocket_clipboard/lib/pocket_clipboard.dart",
+              "declarations": [],
+              "sourceSha256": "2787bfe2c65f08be072ff932e9e3480c363604f2b8b4eed0e8758abd23733598"
+            },
+            {
+              "from": "packages/pocket_clipboard/lib/pocket_clipboard.dart",
+              "export": "src/clipboard_plugin.dart",
+              "filter": ""
+            },
+            {
+              "file": "packages/pocket_clipboard/lib/src/clipboard_plugin.dart",
+              "declarations": [
+                "PocketClipboardCapabilities",
+                "PocketClipboardPermissions",
+                "PocketClipboardPlugin"
+              ],
+              "sourceSha256": "b66619ad85dc694bbc8517768599b14b5a2727c2189270f0aaf20e0d3899e040"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "pocket_diagnostics",
+      "manifest": "packages/pocket_diagnostics/pubspec.yaml",
+      "libraries": [
+        {
+          "entry": "packages/pocket_diagnostics/lib/pocket_diagnostics.dart",
+          "exports": [
+            {
+              "file": "packages/pocket_diagnostics/lib/pocket_diagnostics.dart",
+              "declarations": [],
+              "sourceSha256": "b1ddb819e6291f2d5a3b4c561cdc429008967638b84b1ce914a456009dcc7de9"
+            },
+            {
+              "from": "packages/pocket_diagnostics/lib/pocket_diagnostics.dart",
+              "export": "src/collector.dart",
+              "filter": ""
+            },
+            {
+              "file": "packages/pocket_diagnostics/lib/src/collector.dart",
+              "declarations": [
+                "DiagnosticsCollector",
+                "MemoryDiagnosticsStorage"
+              ],
+              "sourceSha256": "5c8b348749a377b40350640a826a1ac0442b8d471a00d727c4d2408060f8ccc2"
+            },
+            {
+              "from": "packages/pocket_diagnostics/lib/pocket_diagnostics.dart",
+              "export": "src/file_storage.dart",
+              "filter": ""
+            },
+            {
+              "file": "packages/pocket_diagnostics/lib/src/file_storage.dart",
+              "declarations": [
+                "FileDiagnosticsCollector",
+                "FileDiagnosticsStorage"
+              ],
+              "sourceSha256": "be1dc1701205f2a167212ca8982d4334d329b549e58b62981d7266277063182a"
+            },
+            {
+              "from": "packages/pocket_diagnostics/lib/pocket_diagnostics.dart",
+              "export": "src/flutter_adapter.dart",
+              "filter": ""
+            },
+            {
+              "file": "packages/pocket_diagnostics/lib/src/flutter_adapter.dart",
+              "declarations": [
+                "FlutterErrorCollector",
+                "FlutterErrorCollectorHandle"
+              ],
+              "sourceSha256": "d41aad33f18304aab1fed2042facc6f92d41977e28bff2ee40e562d1d0ae10d0"
+            },
+            {
+              "from": "packages/pocket_diagnostics/lib/pocket_diagnostics.dart",
+              "export": "src/normalize.dart",
+              "filter": ""
+            },
+            {
+              "file": "packages/pocket_diagnostics/lib/src/normalize.dart",
+              "declarations": [
+                "ResolvedNormalizationLimits",
+                "TruncationTracker"
+              ],
+              "sourceSha256": "33d58e721a5c3168ab889775413af4a07371579d55c6c21a4c7b1dbb2a38e9b0"
+            },
+            {
+              "from": "packages/pocket_diagnostics/lib/pocket_diagnostics.dart",
+              "export": "src/types.dart",
+              "filter": ""
+            },
+            {
+              "file": "packages/pocket_diagnostics/lib/src/types.dart",
+              "declarations": [
+                "DiagnosticClearFilter",
+                "DiagnosticContext",
+                "DiagnosticCrashInput",
+                "DiagnosticCrashRecord",
+                "DiagnosticExportBundle",
+                "DiagnosticLogInput",
+                "DiagnosticLogRecord",
+                "DiagnosticNormalizationLimits",
+                "DiagnosticQuery",
+                "DiagnosticRecentLogSummary",
+                "DiagnosticRecord",
+                "DiagnosticRecordKind",
+                "DiagnosticSeverity",
+                "DiagnosticsStorage",
+                "DiagnosticsStorageAppendOptions",
+                "NormalizedDiagnosticError",
+                "RecentLogCaptureMode",
+                "SynchronousDiagnosticsStorage"
+              ],
+              "sourceSha256": "eea289725c15f2b35bb0c3816dbd68ffd3c1986ad94664841f45aef8cdc1343c"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "pocket_dio",
+      "manifest": "packages/pocket_dio/pubspec.yaml",
+      "libraries": [
+        {
+          "entry": "packages/pocket_dio/lib/pocket_dio.dart",
+          "exports": [
+            {
+              "file": "packages/pocket_dio/lib/pocket_dio.dart",
+              "declarations": [],
+              "sourceSha256": "418083fb4cc231780829c98bd86e12e61fd433f4bf17bdc5d8ef930d4baf2947"
+            },
+            {
+              "from": "packages/pocket_dio/lib/pocket_dio.dart",
+              "export": "src/dio_plugin.dart",
+              "filter": ""
+            },
+            {
+              "file": "packages/pocket_dio/lib/src/dio_plugin.dart",
+              "declarations": [
+                "PocketDioPlugin"
+              ],
+              "sourceSha256": "d640a090c4be348475a5a3f90b2411c07845ebd884b3e42d9c8fd5ec59f3b715"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "pocket_file_picker",
+      "manifest": "packages/pocket_file_picker/pubspec.yaml",
+      "libraries": [
+        {
+          "entry": "packages/pocket_file_picker/lib/pocket_file_picker.dart",
+          "exports": [
+            {
+              "file": "packages/pocket_file_picker/lib/pocket_file_picker.dart",
+              "declarations": [],
+              "sourceSha256": "7711c8a7d6d79244607e165dee96c07e2780683d0fe0116f33982541a9863754"
+            },
+            {
+              "from": "packages/pocket_file_picker/lib/pocket_file_picker.dart",
+              "export": "src/file_picker_plugin.dart",
+              "filter": ""
+            },
+            {
+              "file": "packages/pocket_file_picker/lib/src/file_picker_plugin.dart",
+              "declarations": [
+                "PocketFilePickerCapabilities",
+                "PocketFilePickerPermissions",
+                "PocketFilePickerPlugin"
+              ],
+              "sourceSha256": "0c6698d1aead0e33448dd2fa7f2f39fb10fa780fdc2d9e945c20491c7e0e52fa"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "pocket_flutter",
+      "manifest": "packages/pocket_flutter/pubspec.yaml",
+      "libraries": [
+        {
+          "entry": "packages/pocket_flutter/lib/pocket_flutter.dart",
+          "exports": [
+            {
+              "file": "packages/pocket_flutter/lib/pocket_flutter.dart",
+              "declarations": [],
+              "sourceSha256": "446f998fcdc2c80e8e2a7132eaeceef836b798fbdb7318c4e78820507d481af9"
+            },
+            {
+              "from": "packages/pocket_flutter/lib/pocket_flutter.dart",
+              "export": "src/pocket_assets.dart",
+              "filter": ""
+            },
+            {
+              "file": "packages/pocket_flutter/lib/src/pocket_assets.dart",
+              "declarations": [
+                "PocketPakImage",
+                "PocketPakImages"
+              ],
+              "sourceSha256": "41597ebae97867674b980136bdfa317dadc447a09050314303f70ba3a175e9ed"
+            },
+            {
+              "from": "packages/pocket_flutter/lib/pocket_flutter.dart",
+              "export": "src/pocket_binary_codec.dart",
+              "filter": ""
+            },
+            {
+              "file": "packages/pocket_flutter/lib/src/pocket_binary_codec.dart",
+              "declarations": [
+                "PocketBinaryCodec",
+                "PocketBinaryOffloadRecord"
+              ],
+              "sourceSha256": "8803b58e9c08a8ab66ae4e8f775e8822a4e6830465089fa1bb791ffa4402b903"
+            },
+            {
+              "from": "packages/pocket_flutter/lib/pocket_flutter.dart",
+              "export": "src/pocket_display.dart",
+              "filter": ""
+            },
+            {
+              "file": "packages/pocket_flutter/lib/src/pocket_display.dart",
+              "declarations": [],
+              "sourceSha256": "7b4a0c327abca2191a9b949e4cd571ac71a808bf8aa24d3ffbc61b3d29fb8144"
+            },
+            {
+              "from": "packages/pocket_flutter/lib/pocket_flutter.dart",
+              "export": "src/pocket_display_geometry.dart",
+              "filter": ""
+            },
+            {
+              "file": "packages/pocket_flutter/lib/src/pocket_display_geometry.dart",
+              "declarations": [
+                "PocketDisplayGeometryChannel",
+                "PocketDisplayGeometrySnapshot",
+                "PocketDisplayGeometrySource",
+                "PocketDisplayGeometryUpdate",
+                "PocketDisplayRegion"
+              ],
+              "sourceSha256": "5497df4c23fa34a36754cdc63d75ad649a3c9f9c8e0aba49fec36c9dc426a5a3"
+            },
+            {
+              "from": "packages/pocket_flutter/lib/pocket_flutter.dart",
+              "export": "src/pocket_duplex.dart",
+              "filter": ""
+            },
+            {
+              "file": "packages/pocket_flutter/lib/src/pocket_duplex.dart",
+              "declarations": [
+                "PocketBinaryDuplexRuntime",
+                "PocketDuplexChannel",
+                "PocketDuplexEndpoint",
+                "PocketDuplexEvent",
+                "PocketDuplexMessage"
+              ],
+              "sourceSha256": "99e1fc0a6941d175ced6d64858991aa7548f42f309dbce498806b11490d306bc"
+            },
+            {
+              "from": "packages/pocket_flutter/lib/pocket_flutter.dart",
+              "export": "src/flutter_frame_monitor.dart",
+              "filter": ""
+            },
+            {
+              "file": "packages/pocket_flutter/lib/src/flutter_frame_monitor.dart",
+              "declarations": [
+                "FlutterFrameMonitor",
+                "FlutterFrameMonitorController",
+                "FlutterFrameTimingSample",
+                "FlutterFrameWindow"
+              ],
+              "sourceSha256": "626c6efbb13485e152951394e52006dd3504161eeece65a7194ee307a5ac5abf"
+            },
+            {
+              "from": "packages/pocket_flutter/lib/pocket_flutter.dart",
+              "export": "src/pocket_model.dart",
+              "filter": ""
+            },
+            {
+              "file": "packages/pocket_flutter/lib/src/pocket_model.dart",
+              "declarations": [
+                "PocketArcOp",
+                "PocketClip",
+                "PocketEvent",
+                "PocketFrame",
+                "PocketGradientOp",
+                "PocketHostSurfaceOp",
+                "PocketImageOp",
+                "PocketImageResource",
+                "PocketMeshLayerBeginOp",
+                "PocketMeshLayerRestoreOp",
+                "PocketMeshMaskBeginOp",
+                "PocketOp",
+                "PocketPoint",
+                "PocketRectOp",
+                "PocketRoundedGradientOp",
+                "PocketRoundedOp",
+                "PocketSurfaceFrame",
+                "PocketTextOp",
+                "PocketTextureTriangleOp",
+                "PocketTriangleOp",
+                "PocketVideoOp"
+              ],
+              "sourceSha256": "e48da72e3cafc6991be14829f405eae5d0520e303249f3651bd0220cc60434bf"
+            },
+            {
+              "from": "packages/pocket_flutter/lib/pocket_flutter.dart",
+              "export": "src/pocket_memory_limits.dart",
+              "filter": ""
+            },
+            {
+              "file": "packages/pocket_flutter/lib/src/pocket_memory_limits.dart",
+              "declarations": [
+                "PocketMemoryLimits"
+              ],
+              "sourceSha256": "849d887299567ad0067b3c95747121346ddcc6a58445c3c457db2f3445d6359e"
+            },
+            {
+              "from": "packages/pocket_flutter/lib/pocket_flutter.dart",
+              "export": "src/pocket_guest_security.dart",
+              "filter": ""
+            },
+            {
+              "file": "packages/pocket_flutter/lib/src/pocket_guest_security.dart",
+              "declarations": [
+                "PocketGuestSecurityPolicy"
+              ],
+              "sourceSha256": "98bbb1e5865840d721c3cc6d926da2418847437c204a7a1534419e2e6019492c"
+            },
+            {
+              "from": "packages/pocket_flutter/lib/pocket_flutter.dart",
+              "export": "src/pocket_host_fonts.dart",
+              "filter": ""
+            },
+            {
+              "file": "packages/pocket_flutter/lib/src/pocket_host_fonts.dart",
+              "declarations": [
+                "PocketHostFontMetrics"
+              ],
+              "sourceSha256": "f5fc4657bb5b4828faff5c6eddf382c7a3a9cc8fba48737d85ad1a0ef10fc562"
+            },
+            {
+              "from": "packages/pocket_flutter/lib/pocket_flutter.dart",
+              "export": "src/pocket_package.dart",
+              "filter": ""
+            },
+            {
+              "file": "packages/pocket_flutter/lib/src/pocket_package.dart",
+              "declarations": [
+                "PocketPackageManifest",
+                "PocketPackageSource"
+              ],
+              "sourceSha256": "f1f0ca15f4306e2ab994c201b639a8167d9c5de5f55b1428400d64970e75bda5"
+            },
+            {
+              "from": "packages/pocket_flutter/lib/pocket_flutter.dart",
+              "export": "src/pocket_performance.dart",
+              "filter": ""
+            },
+            {
+              "file": "packages/pocket_flutter/lib/src/pocket_performance.dart",
+              "declarations": [
+                "PocketLongFrameEvent",
+                "PocketPerformanceSample",
+                "PocketPerformanceSampleCallback"
+              ],
+              "sourceSha256": "af2c67b69ff7af25ccf8743b3250f79a94cf9c3ab3dec1c6f2f41f7ec48d33ce"
+            },
+            {
+              "from": "packages/pocket_flutter/lib/pocket_flutter.dart",
+              "export": "src/pocket_startup_progress.dart",
+              "filter": ""
+            },
+            {
+              "file": "packages/pocket_flutter/lib/src/pocket_startup_progress.dart",
+              "declarations": [
+                "PocketLoadingBuilder",
+                "PocketStartupProgress",
+                "PocketStartupStage"
+              ],
+              "sourceSha256": "9bad727136e9aa06cb4b093b874df4a156df9476821df36867a6a330ec68e906"
+            },
+            {
+              "from": "packages/pocket_flutter/lib/pocket_flutter.dart",
+              "export": "src/pocket_runtime.dart",
+              "filter": ""
+            },
+            {
+              "file": "packages/pocket_flutter/lib/src/pocket_runtime.dart",
+              "declarations": [
+                "FfiPocketRuntime",
+                "PocketBytecodeMetadata",
+                "PocketBytecodeRuntime",
+                "PocketCompositorRuntime",
+                "PocketNativeStageTimings",
+                "PocketRecordingReplay",
+                "PocketReplayRunner",
+                "PocketReplayRuntimeFactory",
+                "PocketRuntime",
+                "PocketRuntimeBytecode",
+                "PocketRuntimeException",
+                "PocketRuntimeScheduling"
+              ],
+              "sourceSha256": "88530d945856f0d57063b2c19730b1c38c9880511b61760d34e72a629c2dc1cd"
+            },
+            {
+              "from": "packages/pocket_flutter/lib/pocket_flutter.dart",
+              "export": "src/pocket_recording.dart",
+              "filter": ""
+            },
+            {
+              "file": "packages/pocket_flutter/lib/src/pocket_recording.dart",
+              "declarations": [
+                "PocketHostFontMetricsSnapshot",
+                "PocketRecording",
+                "PocketRecordingController",
+                "PocketRecordingEntry",
+                "PocketRecordingFormatException",
+                "PocketRecordingMetadata",
+                "PocketReplayAssets",
+                "PocketReplayMismatch",
+                "PocketReplayResult"
+              ],
+              "sourceSha256": "a47e61017790e68a116b75ffc3807a77cd4b49389c33640e51f21c3aac23d920"
+            },
+            {
+              "from": "packages/pocket_flutter/lib/pocket_flutter.dart",
+              "export": "src/pocket_raw_text_input.dart",
+              "filter": ""
+            },
+            {
+              "file": "packages/pocket_flutter/lib/src/pocket_raw_text_input.dart",
+              "declarations": [
+                "PocketRawTextClient",
+                "PocketRawTextOutput"
+              ],
+              "sourceSha256": "2a9707448d23d8b298b169c6c358f535688d591bb4cdb43d136d099f55e3f56a"
+            },
+            {
+              "from": "packages/pocket_flutter/lib/pocket_flutter.dart",
+              "export": "src/pocket_text_cache.dart",
+              "filter": ""
+            },
+            {
+              "file": "packages/pocket_flutter/lib/src/pocket_text_cache.dart",
+              "declarations": [
+                "PocketTextLayoutCache",
+                "PocketTextLayoutCacheStats"
+              ],
+              "sourceSha256": "dd2d6c89527fe86a19153873a5eed89e653c8d689a883b46e6d0ba453905d6d6"
+            },
+            {
+              "from": "packages/pocket_flutter/lib/pocket_flutter.dart",
+              "export": "src/pocket_view.dart",
+              "filter": ""
+            },
+            {
+              "file": "packages/pocket_flutter/lib/src/pocket_view.dart",
+              "declarations": [
+                "PocketDuplexEventCallback",
+                "PocketEventCallback",
+                "PocketImageResourceDecoder",
+                "PocketView",
+                "PocketViewCapture",
+                "PocketViewController"
+              ],
+              "sourceSha256": "4b5f1ac9e0548bab45f9c8602177ee2cca644796ea6e0ad76d88dd570ae45227"
+            },
+            {
+              "from": "packages/pocket_flutter/lib/pocket_flutter.dart",
+              "export": "src/pocket_compositor.dart",
+              "filter": ""
+            },
+            {
+              "file": "packages/pocket_flutter/lib/src/pocket_compositor.dart",
+              "declarations": [
+                "PocketCompositorSlot",
+                "PocketHostSurfaceBuilder"
+              ],
+              "sourceSha256": "1c72621386b2a9d7c49f78d138c425b66520cc97358ca194f48977b36f87ca85"
+            },
+            {
+              "from": "packages/pocket_flutter/lib/pocket_flutter.dart",
+              "export": "src/pocket_worker_runtime.dart",
+              "filter": ""
+            },
+            {
+              "file": "packages/pocket_flutter/lib/src/pocket_worker_runtime.dart",
+              "declarations": [
+                "PocketWorkerLimits",
+                "PocketWorkerProgram",
+                "PocketWorkerRuntime"
+              ],
+              "sourceSha256": "f2d67e2cab0c35fd3b6f52bb2a3227beac7c9077a7933378206e20f120780ae7"
+            },
+            {
+              "from": "packages/pocket_flutter/lib/pocket_flutter.dart",
+              "export": "src/pocket_offload_runtime.dart",
+              "filter": ""
+            },
+            {
+              "file": "packages/pocket_flutter/lib/src/pocket_offload_runtime.dart",
+              "declarations": [
+                "PocketBoundedOffloadProvider",
+                "PocketOffloadCancellationToken",
+                "PocketOffloadCancelled",
+                "PocketOffloadCompletion",
+                "PocketOffloadKey",
+                "PocketOffloadProvider",
+                "PocketOffloadRequest",
+                "PocketOffloadRuntime"
+              ],
+              "sourceSha256": "829fb4be487c8b9510b95bdb939e0dd7fe4a7b9ae8e0e28116b76cb7c75f742a"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "pocket_hardware",
+      "manifest": "packages/pocket_hardware/pubspec.yaml",
+      "libraries": [
+        {
+          "entry": "packages/pocket_hardware/lib/pocket_hardware.dart",
+          "exports": [
+            {
+              "file": "packages/pocket_hardware/lib/pocket_hardware.dart",
+              "declarations": [],
+              "sourceSha256": "67b30d7afa3ec5397822d64f62229370e2229b68ae9e632d25f2f975e776e8f4"
+            },
+            {
+              "from": "packages/pocket_hardware/lib/pocket_hardware.dart",
+              "export": "src/hardware_plugin.dart",
+              "filter": ""
+            },
+            {
+              "file": "packages/pocket_hardware/lib/src/hardware_plugin.dart",
+              "declarations": [
+                "HardwarePlugin"
+              ],
+              "sourceSha256": "1dde06ce9e90f9941610a436e44a5531592009d8bd5b5669e940471b94aeb4ce"
+            },
+            {
+              "from": "packages/pocket_hardware/lib/src/hardware_plugin.dart",
+              "export": "package:pocket_hardware_core/pocket_hardware_core.dart",
+              "filter": ""
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "pocket_hardware_core",
+      "manifest": "packages/pocket_hardware_core/pubspec.yaml",
+      "libraries": [
+        {
+          "entry": "packages/pocket_hardware_core/lib/pocket_hardware_core.dart",
+          "exports": [
+            {
+              "file": "packages/pocket_hardware_core/lib/pocket_hardware_core.dart",
+              "declarations": [],
+              "sourceSha256": "1e0bc31875e671037faf32b3cf1a0bfac4ae2c3161e0ac68279e28e7e924aac9"
+            },
+            {
+              "from": "packages/pocket_hardware_core/lib/pocket_hardware_core.dart",
+              "export": "src/hardware_plugin.dart",
+              "filter": ""
+            },
+            {
+              "file": "packages/pocket_hardware_core/lib/src/hardware_plugin.dart",
+              "declarations": [
+                "HardwareCapabilities",
+                "HardwareCapabilityPlugin",
+                "HardwareFeature",
+                "HardwareFeatures",
+                "HardwarePermissionHandler",
+                "HardwarePermissions",
+                "HardwarePlatform",
+                "HardwarePlatformException",
+                "HardwareStreamingPlatform",
+                "HardwareTextureCallback",
+                "HardwareWeatherFetcher",
+                "MethodChannelHardwarePlatform"
+              ],
+              "sourceSha256": "a3ca3210f2403741352652486628455d4b4c8935a1d627de692d91d505c2eca8"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "pocket_live2d",
+      "manifest": "packages/pocket_live2d/pubspec.yaml",
+      "libraries": [
+        {
+          "entry": "packages/pocket_live2d/lib/pocket_live2d.dart",
+          "exports": [
+            {
+              "file": "packages/pocket_live2d/lib/pocket_live2d.dart",
+              "declarations": [],
+              "sourceSha256": "7d4c47b545d993a5d8caebd1f788f8d7b59f7c654278fe12a8b771b2cd70d627"
+            },
+            {
+              "from": "packages/pocket_live2d/lib/pocket_live2d.dart",
+              "export": "src/pocket_live2d_plugin.dart",
+              "filter": ""
+            },
+            {
+              "file": "packages/pocket_live2d/lib/src/pocket_live2d_plugin.dart",
+              "declarations": [
+                "PocketLive2dPlugin"
+              ],
+              "sourceSha256": "48909d936d594d850978fd0372fceb47c2e2fbbe2cccf0dc1a1d5d6d0fabd310"
+            },
+            {
+              "from": "packages/pocket_live2d/lib/pocket_live2d.dart",
+              "export": "src/pocket_live2d_types.dart",
+              "filter": ""
+            },
+            {
+              "file": "packages/pocket_live2d/lib/src/pocket_live2d_types.dart",
+              "declarations": [
+                "PocketLive2dCanvas",
+                "PocketLive2dCoreFactory",
+                "PocketLive2dCoreMetadata",
+                "PocketLive2dCoreModel",
+                "PocketLive2dCorePlacementUpdater",
+                "PocketLive2dCoreTopologyReader",
+                "PocketLive2dDrawable",
+                "PocketLive2dParameterDefault",
+                "PocketLive2dParameterMetadata",
+                "PocketLive2dPartMetadata",
+                "PocketLive2dPlacement"
+              ],
+              "sourceSha256": "d1fdf039417e4c3d0fb799c9e013a14badec7019996f339dafd5332e9c14b957"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "pocket_location",
+      "manifest": "packages/pocket_location/pubspec.yaml",
+      "libraries": [
+        {
+          "entry": "packages/pocket_location/lib/pocket_location.dart",
+          "exports": [
+            {
+              "file": "packages/pocket_location/lib/pocket_location.dart",
+              "declarations": [
+                "PocketLocationPlugin"
+              ],
+              "sourceSha256": "fce1d8fcecb926614dc8141ddd15a67134671a423551ce6f282c9ef47a72d229"
+            },
+            {
+              "from": "packages/pocket_location/lib/pocket_location.dart",
+              "export": "package:pocket_hardware_core/pocket_hardware_core.dart",
+              "filter": "show HardwarePlatform, HardwareStreamingPlatform, HardwarePlatformException, HardwareCapabilities, HardwarePermissions, HardwareTextureCallback, HardwareWeatherFetcher"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "pocket_permissions",
+      "manifest": "packages/pocket_permissions/pubspec.yaml",
+      "libraries": [
+        {
+          "entry": "packages/pocket_permissions/lib/pocket_permissions.dart",
+          "exports": [
+            {
+              "file": "packages/pocket_permissions/lib/pocket_permissions.dart",
+              "declarations": [],
+              "sourceSha256": "aa355337467a81b1a9276fba3b97ea493d1984294f6e8b5d604625739ed60bf0"
+            },
+            {
+              "from": "packages/pocket_permissions/lib/pocket_permissions.dart",
+              "export": "src/permissions_plugin.dart",
+              "filter": ""
+            },
+            {
+              "file": "packages/pocket_permissions/lib/src/permissions_plugin.dart",
+              "declarations": [
+                "DeviceInfoPlusPocketDeviceInfo",
+                "PocketDeviceInfo",
+                "PocketPermissionNames",
+                "PocketPermissionsCapabilities",
+                "PocketPermissionsPlugin",
+                "PocketSystemPermissions"
+              ],
+              "sourceSha256": "9f0c5ece5d775524b69694ed19d0ab3a706990ba920aefbc041971102afebf23"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "pocket_platform",
+      "manifest": "packages/pocket_platform/pubspec.yaml",
+      "libraries": [
+        {
+          "entry": "packages/pocket_platform/lib/pocket_platform.dart",
+          "exports": [
+            {
+              "file": "packages/pocket_platform/lib/pocket_platform.dart",
+              "declarations": [],
+              "sourceSha256": "12876c7c90f96a8ad04ae927b5407b4989d170b34ddc20cef5d2ee947e24e7d3"
+            },
+            {
+              "from": "packages/pocket_platform/lib/pocket_platform.dart",
+              "export": "src/platform_plugin.dart",
+              "filter": ""
+            },
+            {
+              "file": "packages/pocket_platform/lib/src/platform_plugin.dart",
+              "declarations": [
+                "FlutterPocketPlatformUi",
+                "MethodChannelPocketPlatformTransport",
+                "PocketDeepLinkPlugin",
+                "PocketPlatformCapabilities",
+                "PocketPlatformClock",
+                "PocketPlatformHaptics",
+                "PocketPlatformMethodCallHandler",
+                "PocketPlatformPlugin",
+                "PocketPlatformTransport",
+                "PocketPlatformUi",
+                "StopwatchPocketPlatformClock"
+              ],
+              "sourceSha256": "fe9397498342991ab5ca37c36318b2153e9230dd0e2fad302c1da702c7f21846"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "pocket_sensors",
+      "manifest": "packages/pocket_sensors/pubspec.yaml",
+      "libraries": [
+        {
+          "entry": "packages/pocket_sensors/lib/pocket_sensors.dart",
+          "exports": [
+            {
+              "file": "packages/pocket_sensors/lib/pocket_sensors.dart",
+              "declarations": [
+                "PocketSensorsPlugin"
+              ],
+              "sourceSha256": "fc829910a7a33310db8594bf9cdaa73acd875cd0a201309b2fe410f364d2d715"
+            },
+            {
+              "from": "packages/pocket_sensors/lib/pocket_sensors.dart",
+              "export": "package:pocket_hardware_core/pocket_hardware_core.dart",
+              "filter": "show HardwarePlatform, HardwareStreamingPlatform, HardwarePlatformException, HardwareCapabilities, HardwarePermissions, HardwareTextureCallback, HardwareWeatherFetcher"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "pocket_services",
+      "manifest": "packages/pocket_services/pubspec.yaml",
+      "libraries": [
+        {
+          "entry": "packages/pocket_services/lib/pocket_services.dart",
+          "exports": [
+            {
+              "file": "packages/pocket_services/lib/pocket_services.dart",
+              "declarations": [],
+              "sourceSha256": "b11b0ad0cc2ec538e4e527598dae28e0f5fb30e8fb816a597a79dc496212c42b"
+            },
+            {
+              "from": "packages/pocket_services/lib/pocket_services.dart",
+              "export": "src/pocket_guest_manifest.dart",
+              "filter": ""
+            },
+            {
+              "file": "packages/pocket_services/lib/src/pocket_guest_manifest.dart",
+              "declarations": [
+                "GuestManifest",
+                "PocketCapabilityName",
+                "PocketGuestManifest",
+                "PocketPermissionName"
+              ],
+              "sourceSha256": "89a17d4d424d718514770262f4f2aefa82693ac0c9c108677f823e520371aec2"
+            },
+            {
+              "from": "packages/pocket_services/lib/pocket_services.dart",
+              "export": "src/pocket_package.dart",
+              "filter": ""
+            },
+            {
+              "file": "packages/pocket_services/lib/src/pocket_package.dart",
+              "declarations": [
+                "PocketArchiveExtractor",
+                "PocketCancellationToken",
+                "PocketManifestAsset",
+                "PocketManifestBundle",
+                "PocketManifestEntry",
+                "PocketManifestFile",
+                "PocketManifestVerifier",
+                "PocketPackage",
+                "PocketPackageArtifact",
+                "PocketPackageException",
+                "PocketPackageFormatException",
+                "PocketPackageManifest",
+                "PocketPackagePreparationProgress",
+                "PocketPackagePreparationStage",
+                "PocketPackageStore",
+                "PocketPakBlobEntry",
+                "PocketPakManifest",
+                "PocketPakPart",
+                "PocketSignedManifest",
+                "PocketUpdateCancellation",
+                "PocketVersionInfo"
+              ],
+              "sourceSha256": "be983909fadf919ffc36ad0ea10ecc21e9384731f27580858d8b5a0ec0e5ddbb"
+            },
+            {
+              "from": "packages/pocket_services/lib/pocket_services.dart",
+              "export": "src/pocket_trust.dart",
+              "filter": ""
+            },
+            {
+              "file": "packages/pocket_services/lib/src/pocket_trust.dart",
+              "declarations": [
+                "PocketReleaseKey",
+                "PocketSignedTrustPolicy",
+                "PocketTrustException",
+                "PocketTrustPolicy",
+                "PocketTrustStore"
+              ],
+              "sourceSha256": "f374fd9b466ad4176ff4309382224a51739ab77140e0327521d6b347fb67203e"
+            },
+            {
+              "from": "packages/pocket_services/lib/pocket_services.dart",
+              "export": "src/pocket_stream.dart",
+              "filter": ""
+            },
+            {
+              "file": "packages/pocket_services/lib/src/pocket_stream.dart",
+              "declarations": [
+                "PocketDuplexStream",
+                "PocketStreamBridge",
+                "PocketStreamBufferOverflowException",
+                "PocketStreamProtocolException",
+                "PocketStreamRemoteException",
+                "PocketStreamSend"
+              ],
+              "sourceSha256": "82b370c0b92327a0418239140cf83d8964d367dae015eae82b62d9968b0300eb"
+            },
+            {
+              "from": "packages/pocket_services/lib/pocket_services.dart",
+              "export": "src/pocket_host.dart",
+              "filter": ""
+            },
+            {
+              "file": "packages/pocket_services/lib/src/pocket_host.dart",
+              "declarations": [
+                "PocketCapabilityAvailability",
+                "PocketCapabilityDescriptor",
+                "PocketCapabilityException",
+                "PocketCapabilityKind",
+                "PocketCapabilityRequest",
+                "PocketCapabilityStream",
+                "PocketHost",
+                "PocketHostRawSend",
+                "PocketHostRegistry",
+                "PocketHostSend",
+                "PocketHostStreamContext"
+              ],
+              "sourceSha256": "4cfd7fe04bd456a59ecf4a0abdfc12159f492f1913e884411881df915f1caf1e"
+            },
+            {
+              "from": "packages/pocket_services/lib/pocket_services.dart",
+              "export": "src/pocket_plugin.dart",
+              "filter": ""
+            },
+            {
+              "file": "packages/pocket_services/lib/src/pocket_plugin.dart",
+              "declarations": [
+                "PocketPermissionRequest",
+                "PocketPermissionRequestHandler",
+                "PocketPlugin",
+                "PocketPluginBudget",
+                "PocketPluginCapability",
+                "PocketPluginCapabilitySchema",
+                "PocketPluginContext",
+                "PocketPluginDescriptor",
+                "PocketPluginLimits",
+                "PocketPluginManager",
+                "PocketPluginMethod",
+                "PocketPluginRegistry",
+                "PocketPluginSchema",
+                "PocketPluginSchemaType",
+                "PocketPluginSession"
+              ],
+              "sourceSha256": "ffcae2a2d3e0da8c1e0a7fccdfb4c27796d9fac541f23c203b69bf520c9c0e7c"
+            },
+            {
+              "from": "packages/pocket_services/lib/pocket_services.dart",
+              "export": "src/pocket_update.dart",
+              "filter": ""
+            },
+            {
+              "file": "packages/pocket_services/lib/src/pocket_update.dart",
+              "declarations": [
+                "HttpPocketUpdateTransport",
+                "PocketDownloadResponse",
+                "PocketPreparedPackage",
+                "PocketUpdateCoordinator",
+                "PocketUpdateInspection",
+                "PocketUpdateMode",
+                "PocketUpdateProgress",
+                "PocketUpdateProgressCallback",
+                "PocketUpdateScope",
+                "PocketUpdateStage",
+                "PocketUpdateTarget",
+                "PocketUpdateTransport"
+              ],
+              "sourceSha256": "7beceef94a9ba7f08e225fb100afce3e5729340a7cb50a95daf7bb9e6b10bf6b"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "pocket_studio",
+      "manifest": "packages/pocket_studio/pubspec.yaml",
+      "libraries": [
+        {
+          "entry": "packages/pocket_studio/lib/pocket_studio.dart",
+          "exports": [
+            {
+              "file": "packages/pocket_studio/lib/pocket_studio.dart",
+              "declarations": [],
+              "sourceSha256": "dfda90c68559614b746ac7fef4faba3aaef8d56037b05090346b2f5d7739d047"
+            },
+            {
+              "from": "packages/pocket_studio/lib/pocket_studio.dart",
+              "export": "src/studio_config.dart",
+              "filter": ""
+            },
+            {
+              "file": "packages/pocket_studio/lib/src/studio_config.dart",
+              "declarations": [
+                "PocketStudioConfig"
+              ],
+              "sourceSha256": "c9fe710a1af51a6bcdbf47b2d0aab32e07648a84ba440918e50bc04cb7633363"
+            },
+            {
+              "from": "packages/pocket_studio/lib/pocket_studio.dart",
+              "export": "src/studio_image.dart",
+              "filter": ""
+            },
+            {
+              "file": "packages/pocket_studio/lib/src/studio_image.dart",
+              "declarations": [
+                "StudioImagePreview"
+              ],
+              "sourceSha256": "b91c50bf532cc7c1073992ce8e359eefe4ff4381e105ca40487788d7410adce9"
+            },
+            {
+              "from": "packages/pocket_studio/lib/pocket_studio.dart",
+              "export": "src/studio_paths.dart",
+              "filter": ""
+            },
+            {
+              "file": "packages/pocket_studio/lib/src/studio_paths.dart",
+              "declarations": [],
+              "sourceSha256": "754800e0f69371a282c98aa746e0314f50651a3e9f4c58650d30b289a78d1fd5"
+            },
+            {
+              "from": "packages/pocket_studio/lib/pocket_studio.dart",
+              "export": "src/studio_plugin.dart",
+              "filter": ""
+            },
+            {
+              "file": "packages/pocket_studio/lib/src/studio_plugin.dart",
+              "declarations": [
+                "PocketStudioPlugin"
+              ],
+              "sourceSha256": "4cbc9c5d23eee621b150f68594d0afcdd2a752141aff3ba7510a52aa4e9f4094"
+            },
+            {
+              "from": "packages/pocket_studio/lib/src/studio_plugin.dart",
+              "export": "studio_routes.dart",
+              "filter": "show PocketStudioPermissions, pocketStudioCapabilityNames, pocketStudioChunkBytes, pocketStudioMaxAssetBytes, pocketStudioMaxResultBytes"
+            },
+            {
+              "file": "packages/pocket_studio/lib/src/studio_routes.dart",
+              "declarations": [
+                "PocketStudioPermissions",
+                "StudioCall",
+                "StudioRequest",
+                "StudioRequestBuilder"
+              ],
+              "sourceSha256": "1565be7ac226d1d91926d0b3ce27ca9908e2bfdb41bb853812d703bb213c2c29"
+            },
+            {
+              "from": "packages/pocket_studio/lib/pocket_studio.dart",
+              "export": "src/studio_scrub.dart",
+              "filter": ""
+            },
+            {
+              "file": "packages/pocket_studio/lib/src/studio_scrub.dart",
+              "declarations": [
+                "StudioPathScrubber"
+              ],
+              "sourceSha256": "3f1af522e0103e7f6a1a1f3de1c545d60461d970ed7ad197f33ea47ae4f38060"
+            },
+            {
+              "from": "packages/pocket_studio/lib/pocket_studio.dart",
+              "export": "src/studio_service.dart",
+              "filter": ""
+            },
+            {
+              "file": "packages/pocket_studio/lib/src/studio_service.dart",
+              "declarations": [
+                "PocketStudioService",
+                "PocketStudioServiceException"
+              ],
+              "sourceSha256": "fd6ebeceaa3d76eed8f34892207c607eeada80cb55b8b918dbf33b10b749e046"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "pocket_sync",
+      "manifest": "packages/pocket_sync/pubspec.yaml",
+      "libraries": [
+        {
+          "entry": "packages/pocket_sync/lib/pocket_sync.dart",
+          "exports": [
+            {
+              "file": "packages/pocket_sync/lib/pocket_sync.dart",
+              "declarations": [],
+              "sourceSha256": "86ca2abbcdd20ea681a3256863a0f7a4cf967277ac0b6b335533dde1976ee255"
+            },
+            {
+              "from": "packages/pocket_sync/lib/pocket_sync.dart",
+              "export": "src/sync_plugin.dart",
+              "filter": ""
+            },
+            {
+              "file": "packages/pocket_sync/lib/src/sync_plugin.dart",
+              "declarations": [
+                "PocketSyncPlugin"
+              ],
+              "sourceSha256": "c99da4c347db1643a89fe0f911a8e669db4fc28c3507f415aa81f7162d65d29b"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "pocket_weather",
+      "manifest": "packages/pocket_weather/pubspec.yaml",
+      "libraries": [
+        {
+          "entry": "packages/pocket_weather/lib/pocket_weather.dart",
+          "exports": [
+            {
+              "file": "packages/pocket_weather/lib/pocket_weather.dart",
+              "declarations": [
+                "PocketWeatherPlugin"
+              ],
+              "sourceSha256": "02dd3bbde770334047f17afb4446e0d638e22206ac9d82574a87771da712bd2e"
+            },
+            {
+              "from": "packages/pocket_weather/lib/pocket_weather.dart",
+              "export": "package:pocket_hardware_core/pocket_hardware_core.dart",
+              "filter": "show HardwarePlatform, HardwareStreamingPlatform, HardwarePlatformException, HardwareCapabilities, HardwarePermissions, HardwareTextureCallback, HardwareWeatherFetcher"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "pocket_sdk",
+      "manifest": "pubspec.yaml",
+      "libraries": [
+        {
+          "entry": "lib/pocket_sdk.dart",
+          "exports": [
+            {
+              "file": "lib/pocket_sdk.dart",
+              "declarations": [],
+              "sourceSha256": "c203f0b7ccd36ff4ac9988c223ab211b3c1f643d296f30e892ba7ce7ab3b011b"
+            },
+            {
+              "from": "lib/pocket_sdk.dart",
+              "export": "package:pocket_flutter/pocket_flutter.dart",
+              "filter": "show PocketViewController, PocketLoadingBuilder, PocketStartupProgress, PocketStartupStage, PocketCompositorSlot, PocketHostSurfaceBuilder, PocketWorkerProgram, PocketWorkerLimits, PocketMemoryLimits, PocketOffloadProvider, PocketBoundedOffloadProvider, PocketOffloadKey, PocketOffloadRequest, PocketOffloadCompletion, PocketOffloadCancellationToken, PocketEvent, PocketLongFrameEvent, PocketPerformanceSample, PocketDuplexMessage, PocketDuplexEvent, PocketDuplexChannel, PocketDuplexEventCallback, PocketDuplexEndpoint, PocketRecordingController, PocketRecording, PocketRecordingEntry, PocketRecordingMetadata, PocketReplayAssets, PocketReplayResult, PocketReplayMismatch, PocketReplayRunner, PocketRecordingReplay, PocketRecordingFormatException, replayPocketRecording"
+            },
+            {
+              "from": "lib/pocket_sdk.dart",
+              "export": "package:pocket_services/pocket_services.dart",
+              "filter": "show PocketPlugin, PocketPluginContext, PocketPluginDescriptor, PocketPluginCapability, PocketPluginMethod, PocketPluginLimits, PocketPermissionRequest, PocketPermissionRequestHandler, PocketUpdateProgress, PocketUpdateStage, PocketPackagePreparationStage, PocketPackagePreparationProgress, PocketCancellationToken, PocketUpdateCancellation, PocketCapabilityKind, PocketCapabilityException, PocketHostStreamContext"
+            },
+            {
+              "from": "lib/pocket_sdk.dart",
+              "export": "package:pocket_diagnostics/pocket_diagnostics.dart",
+              "filter": ""
+            },
+            {
+              "from": "lib/pocket_sdk.dart",
+              "export": "src/pocket_app.dart",
+              "filter": "show PocketApp, PocketGuest"
+            },
+            {
+              "file": "lib/src/pocket_app.dart",
+              "declarations": [
+                "PocketApp",
+                "PocketGuest",
+                "PocketGuestSession",
+                "PocketGuestSessionState"
+              ],
+              "sourceSha256": "def228fcbc3d241079831445cf1e2fe8a550b362c8d174ab0d3ca56dd2a3b98b"
+            },
+            {
+              "from": "lib/pocket_sdk.dart",
+              "export": "src/pocket_config.dart",
+              "filter": ""
+            },
+            {
+              "file": "lib/src/pocket_config.dart",
+              "declarations": [
+                "PocketAppConfig",
+                "PocketOffloadProviderFactory",
+                "PocketPluginFactory",
+                "PocketUpdateConfig"
+              ],
+              "sourceSha256": "ec24fb4afed296175e8f7b36620d3be8c83f12a495c801f9de7c3a66eee44a69"
+            },
+            {
+              "from": "lib/pocket_sdk.dart",
+              "export": "src/pocket_distribution.dart",
+              "filter": "show pocketAppStoreDistribution, pocketRemoteCodeEnabled, pocketSessionRecordingEnabled"
+            },
+            {
+              "file": "lib/src/pocket_distribution.dart",
+              "declarations": [],
+              "sourceSha256": "8580d9a4e3392a10506c9ca202a9d9f602a358ef1952f06c165320c83a6404d0"
+            },
+            {
+              "from": "lib/pocket_sdk.dart",
+              "export": "src/pocket_diagnostics.dart",
+              "filter": "show PocketHostDiagnostics"
+            },
+            {
+              "file": "lib/src/pocket_diagnostics.dart",
+              "declarations": [
+                "PocketHostDiagnostics"
+              ],
+              "sourceSha256": "09d9344ecb870d45200bf562e9339888547c76abfb297002402a6705187bfb17"
+            },
+            {
+              "from": "lib/pocket_sdk.dart",
+              "export": "src/pocket_bundled_application_catalog.dart",
+              "filter": ""
+            },
+            {
+              "file": "lib/src/pocket_bundled_application_catalog.dart",
+              "declarations": [
+                "PocketBundledApplicationCatalog",
+                "PocketBundledApplicationEntry"
+              ],
+              "sourceSha256": "6435fe06ef162cd0af60c68f574dd44926e27576f45638637fa2c5d0d41a7ec4"
+            },
+            {
+              "from": "lib/pocket_sdk.dart",
+              "export": "src/pocket_host_config.dart",
+              "filter": ""
+            },
+            {
+              "file": "lib/src/pocket_host_config.dart",
+              "declarations": [
+                "PocketHostCatalogEntry",
+                "PocketHostConfig",
+                "PocketHostLoadProgress",
+                "PocketHostLoadProgressCallback"
+              ],
+              "sourceSha256": "eabb17c27a7913f4c1867ca9d7ad723050d0de18e7567ccdebba6a61695cd22b"
+            },
+            {
+              "from": "lib/pocket_sdk.dart",
+              "export": "src/pocket_session.dart",
+              "filter": "show PocketSession, PocketSessionGenerationMountHook"
+            },
+            {
+              "file": "lib/src/pocket_session.dart",
+              "declarations": [
+                "PocketSession",
+                "PocketSessionEventListener",
+                "PocketSessionGenerationMountHook"
+              ],
+              "sourceSha256": "4ad8b0e5bf1e6180bb98550d973bcf3aed48e49050b50dc7585c55639e1c00a9"
+            },
+            {
+              "from": "lib/pocket_sdk.dart",
+              "export": "src/performance_history.dart",
+              "filter": "show PerformanceHistory"
+            },
+            {
+              "file": "lib/src/performance_history.dart",
+              "declarations": [
+                "PerformanceHistory"
+              ],
+              "sourceSha256": "bdedd031d7d357cd0f5fe886f474eb12beda6485911b5fb5d86b9be17b1e849e"
+            },
+            {
+              "from": "lib/pocket_sdk.dart",
+              "export": "src/pocket_recordings.dart",
+              "filter": "show PocketRecordingLibrary"
+            },
+            {
+              "file": "lib/src/pocket_recordings.dart",
+              "declarations": [
+                "PocketRecordingLibrary"
+              ],
+              "sourceSha256": "f1752b58909af49504a9f4aa160a0f3f41dd0a9b8f10dc19dfa966ffd1e6e522"
+            },
+            {
+              "from": "lib/pocket_sdk.dart",
+              "export": "src/package_info_plugin.dart",
+              "filter": "show PackageInfoPlugin"
+            },
+            {
+              "file": "lib/src/package_info_plugin.dart",
+              "declarations": [
+                "PackageInfoPlugin"
+              ],
+              "sourceSha256": "dd2b8837f117d798568fb575f8c3d640a2dac5b6934644d546cedc4d6eb43b66"
+            },
+            {
+              "from": "lib/pocket_sdk.dart",
+              "export": "src/pocket_system_host.dart",
+              "filter": "show PocketSystemHost, PocketSystemHostApplication, PocketSystemHostApplicationCatalogLoader, PocketSystemHostApplicationsBuilder, PocketSystemHostAppBuilder, PocketSystemHostSystemUIBuilder, PocketSystemHostApplicationApprover, PocketSystemHostCatalog, PocketSystemHostCatalogLoader, PocketSystemHostSystemUIApprover, PocketSystemHostController, PocketSystemInstanceSnapshot, PocketSystemLaunchRequest, PocketSystemLaunchResult"
+            },
+            {
+              "file": "lib/src/pocket_system_host.dart",
+              "declarations": [
+                "PocketSystemHost",
+                "PocketSystemHostAppBuilder",
+                "PocketSystemHostApplication",
+                "PocketSystemHostApplicationApprover",
+                "PocketSystemHostApplicationCatalogLoader",
+                "PocketSystemHostApplicationsBuilder",
+                "PocketSystemHostCatalog",
+                "PocketSystemHostCatalogLoader",
+                "PocketSystemHostController",
+                "PocketSystemHostSystemUIApprover",
+                "PocketSystemHostSystemUIBuilder",
+                "PocketSystemInstanceSnapshot",
+                "PocketSystemLaunchRequest",
+                "PocketSystemLaunchResult"
+              ],
+              "sourceSha256": "e9096936292c2021961b07e82a2f3561ac719e0a591b2e07deb21737b228ddab"
+            },
+            {
+              "from": "lib/pocket_sdk.dart",
+              "export": "src/pocket_worker.dart",
+              "filter": ""
+            },
+            {
+              "file": "lib/src/pocket_worker.dart",
+              "declarations": [
+                "PocketWorkerArtifact"
+              ],
+              "sourceSha256": "7b8fe3cbf435f21882a8ef7939e421297b938bc8c07131495d118ff621e93f0e"
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "javascript": [
+    {
+      "name": "@pocket/arc",
+      "manifest": "packages/pocket_arc/package.json",
+      "scripts": {
+        "test": "node --experimental-transform-types test/arc.check.ts"
+      },
+      "bin": {},
+      "exports": {
+        ".": "./src/index.ts",
+        "./tokens": "./src/tokens.ts",
+        "./motion": "./src/motion.ts",
+        "./surfaces": "./src/surfaces.tsx",
+        "./controls": "./src/controls.tsx",
+        "./navigation": "./src/navigation.tsx",
+        "./data": "./src/data.tsx",
+        "./overlays": "./src/overlays.tsx",
+        "./skins": "./src/skins.tsx",
+        "./kit": "./src/kit.tsx"
+      },
+      "sourceDeclarations": [
+        {
+          "file": "packages/pocket_arc/src/controls.tsx",
+          "declarations": [],
+          "sourceSha256": "d3479aae283f112db90d80801b76e20054d65d337e5b6b46840f7dccf9f0999b",
+          "reexports": [
+            "export { ArcActionButton, ArcActionButton as Button, ArcActionButton as ActionButton, ArcCircleIconButton, ArcSwitchPill, ArcSwitchPill as Switch, ArcBadge, ArcBadge as Badge, } from \"./skins.tsx\";"
+          ]
+        },
+        {
+          "file": "packages/pocket_arc/src/data.tsx",
+          "declarations": [],
+          "sourceSha256": "d920dcd3790963d61611c8c97ae8307c393eaff4950687b1bc1af28b91400bc9",
+          "reexports": [
+            "export { ArcProgressMeter, ArcProgressMeter as Progress, ArcProgressMeter as UsageMeter, ArcTimelineRow, ArcTimelineRow as Timeline, ArcStepDots, } from \"./skins.tsx\";"
+          ]
+        },
+        {
+          "file": "packages/pocket_arc/src/index.ts",
+          "declarations": [],
+          "sourceSha256": "2867e584cea84c12e0dd0cb509db45a01f30207ebd056f9acfbde2850127bc87",
+          "reexports": [
+            "export * from \"./tokens.ts\";",
+            "export * from \"./motion.ts\";",
+            "export * from \"./skins.tsx\";",
+            "export * from \"./surfaces.tsx\";",
+            "export * from \"./controls.tsx\";",
+            "export * from \"./navigation.tsx\";",
+            "export * from \"./data.tsx\";",
+            "export * from \"./overlays.tsx\";",
+            "export * from \"./kit.tsx\";"
+          ]
+        },
+        {
+          "file": "packages/pocket_arc/src/kit.tsx",
+          "declarations": [
+            "ArcAccordion",
+            "ArcAlert",
+            "ArcAppBar",
+            "ArcCheckbox",
+            "ArcEmpty",
+            "ArcInput",
+            "ArcListTile",
+            "ArcMetric",
+            "ArcNavigationBar",
+            "ArcRadioGroup",
+            "ArcStepper",
+            "arcSkinAdapter",
+            "registerArcSkin",
+            "resolveArcSkinTokens"
+          ],
+          "sourceSha256": "d8d4e5938ebc561329ebe3a7626aecaf4e7b9c17cc0dbb052585d115b2328657",
+          "reexports": []
+        },
+        {
+          "file": "packages/pocket_arc/src/motion.ts",
+          "declarations": [
+            "ARC_DURATIONS_MS",
+            "ARC_SPRINGS",
+            "ArcSpringConfig",
+            "ArcSpringPresetName",
+            "ArcSpringState",
+            "createArcSpring",
+            "stepArcSpring"
+          ],
+          "sourceSha256": "40fcd5ad326d0c91fcdbebf6e59c377a63a8b937ce962f7d03704cb306080340",
+          "reexports": []
+        },
+        {
+          "file": "packages/pocket_arc/src/navigation.tsx",
+          "declarations": [],
+          "sourceSha256": "fe76bf528c8ad063d74dc3ca8a4bf47cea9c828d359f0ed263c989d20091dc0d",
+          "reexports": [
+            "export { ArcSegmentedControl, ArcSegmentedControl as SegmentedControl, ArcSegmentedControl as Tabs, ArcDockCapsule, ArcDockCapsule as Dock, } from \"./skins.tsx\";"
+          ]
+        },
+        {
+          "file": "packages/pocket_arc/src/overlays.tsx",
+          "declarations": [
+            "ArcBottomSheet",
+            "ArcDialog",
+            "ArcToast"
+          ],
+          "sourceSha256": "2cd42f526adc98c8c56a5e5c114b365c1e44c52f485a4e9c5991f3f9ba0d18f7",
+          "reexports": [
+            "export { ArcDialog as Dialog, ArcBottomSheet as BottomSheet, ArcSurface as Alert };"
+          ]
+        },
+        {
+          "file": "packages/pocket_arc/src/skins.tsx",
+          "declarations": [
+            "ArcActionButton",
+            "ArcActionVariant",
+            "ArcBackdrop",
+            "ArcBadge",
+            "ArcBadgeTone",
+            "ArcCircleIconButton",
+            "ArcDockCapsule",
+            "ArcProgressMeter",
+            "ArcRemotePad",
+            "ArcRingGauge",
+            "ArcSegmentedControl",
+            "ArcStepDots",
+            "ArcSurface",
+            "ArcSurfaceVariant",
+            "ArcSwitchPill",
+            "ArcTimelineRow"
+          ],
+          "sourceSha256": "dcb7f37ec717b25c7d3bac9f4aabdc1a185210c63e728b21f5787c9b80c104c9",
+          "reexports": []
+        },
+        {
+          "file": "packages/pocket_arc/src/surfaces.tsx",
+          "declarations": [],
+          "sourceSha256": "419b5b0267a6c3987ec08aad9a0163aeb755d1e2aa62944e0295fc2d5fc9c946",
+          "reexports": [
+            "export { ArcBackdrop, ArcSurface, ArcSurface as Card, ArcSurface as MetricCard } from \"./skins.tsx\";"
+          ]
+        },
+        {
+          "file": "packages/pocket_arc/src/tokens.ts",
+          "declarations": [
+            "ARC_ALL_ACCENTS",
+            "ARC_AMBER_NIGHT_BASE",
+            "ArcAccent",
+            "ArcAccentTokens",
+            "ArcDensity",
+            "ArcSemanticPalette",
+            "ArcStatusTriplet",
+            "ArcThemeContext",
+            "ArcThemeContextValue",
+            "ArcThemeMode",
+            "ArcThemeProvider",
+            "concentricInnerRadius",
+            "resolveArcPalette",
+            "useArcTheme"
+          ],
+          "sourceSha256": "df4a0c572acb96148209c1fd8373e3ef16e6baac03e86ac51ab065f0648699e1",
+          "reexports": []
+        }
+      ]
+    },
+    {
+      "name": "@pocket/cos",
+      "manifest": "packages/pocket_cos/package.json",
+      "scripts": {
+        "test": "bun test test"
+      },
+      "bin": {},
+      "exports": {
+        ".": "./src/index.ts",
+        "./types": "./src/types.ts",
+        "./sign": "./src/sign.ts",
+        "./local-config": "./src/local_config.ts",
+        "./client": "./src/client.ts",
+        "./publisher": "./src/publisher.ts",
+        "./cli": "./src/cli.ts"
+      },
+      "sourceDeclarations": [
+        {
+          "file": "packages/pocket_cos/src/cli.ts",
+          "declarations": [
+            "runCosCli"
+          ],
+          "sourceSha256": "5491f099bc627434ad5cd9a9498a4374b821ed2835c1a3c22df2521070016a28",
+          "reexports": []
+        },
+        {
+          "file": "packages/pocket_cos/src/client.ts",
+          "declarations": [
+            "CosClient",
+            "CosClientOptions",
+            "CosError",
+            "CosHeadObjectResult",
+            "CosPutObjectOptions",
+            "CosUploadFileOptions",
+            "createCosClient"
+          ],
+          "sourceSha256": "d561d4f84c49065a3447e33d0f634bffca6ec8f38d2577532e60f13e8b0cc429",
+          "reexports": []
+        },
+        {
+          "file": "packages/pocket_cos/src/index.ts",
+          "declarations": [],
+          "sourceSha256": "734f646b5682312317f6e98c7b6a35c6c0f45c00db791df34e3dc40fa737ad84",
+          "reexports": [
+            "export * from \"./types.ts\";",
+            "export * from \"./sign.ts\";",
+            "export * from \"./local_config.ts\";",
+            "export * from \"./client.ts\";",
+            "export * from \"./publisher.ts\";",
+            "export * from \"./cli.ts\";"
+          ]
+        },
+        {
+          "file": "packages/pocket_cos/src/local_config.ts",
+          "declarations": [
+            "LocalCosOptions",
+            "ParsedCosConfig",
+            "WORKSPACE_COS_CREDENTIALS_FILENAME",
+            "WorkspaceCosCredentialsInput",
+            "clearWorkspaceCosCredentials",
+            "inspectLocalCosEnvironment",
+            "maskSecretId",
+            "parseCoscliYaml",
+            "parseCoscmdIni",
+            "resolveLocalCosCredentials",
+            "writeWorkspaceCosCredentials"
+          ],
+          "sourceSha256": "6e2c50c01232ff6042b18bd946c29cde8938883858fbe2604a23d6c4e74dc054",
+          "reexports": []
+        },
+        {
+          "file": "packages/pocket_cos/src/publisher.ts",
+          "declarations": [
+            "IMMUTABLE_CACHE_CONTROL",
+            "MUTABLE_CACHE_CONTROL",
+            "PublishReleaseDirectoryOptions",
+            "PublishStudioVersionOptions",
+            "VerifiedLocalPackage",
+            "publishReleaseDirectoryToCos",
+            "publishStudioVersionToCos",
+            "rebaseStudioHostDescriptorForCos",
+            "verifyLocalPackageDirectory"
+          ],
+          "sourceSha256": "0e26f0deb7b6b73a442b99bfdb701ef7567ad462bed93dddad920d0343f30ac0",
+          "reexports": []
+        },
+        {
+          "file": "packages/pocket_cos/src/sign.ts",
+          "declarations": [
+            "CreateCosPresignedUrlInput",
+            "SignCosRequestInput",
+            "SignCosRequestResult",
+            "camSafeUrlEncode",
+            "createCosPresignedUrl",
+            "encodeCosObjectPath",
+            "hmacSha1Hex",
+            "sha1Bytes",
+            "sha1Hex",
+            "signCosRequest"
+          ],
+          "sourceSha256": "493fa6ba8b2d519e65cd5ba7ad2f0d07faa40d7f52d932215572c6dc9db2431c",
+          "reexports": []
+        },
+        {
+          "file": "packages/pocket_cos/src/types.ts",
+          "declarations": [
+            "COS_BUCKET_PATTERN",
+            "COS_REGION_PATTERN",
+            "CosBucketProfile",
+            "CosCredentialProvider",
+            "CosCredentials",
+            "CosPublishFileRecord",
+            "CosPublishResult",
+            "CosPublishSummary",
+            "CosTargetConfig",
+            "CosUploadProgress",
+            "EditorProjectCosConfig",
+            "LocalCosInspection",
+            "ResolvedCosTarget",
+            "normalizeCosKeyPrefix",
+            "resolveCosTarget",
+            "validateCosBucket",
+            "validateCosRegion"
+          ],
+          "sourceSha256": "6e03d30594b121c82777758771e99531ed134ec3533cc7c625777c7e73554b15",
+          "reexports": []
+        }
+      ]
+    },
+    {
+      "name": "@pocket/diagnostics",
+      "manifest": "packages/pocket_diagnostics/package.json",
+      "scripts": {
+        "test": "bun test test/*.test.ts"
+      },
+      "bin": {},
+      "exports": {
+        ".": "./src/index.ts",
+        "./types": "./src/types.ts",
+        "./normalize": "./src/normalize.ts",
+        "./browser": "./src/browser.ts",
+        "./node": "./src/node.ts",
+        "./file": "./src/node.ts"
+      },
+      "sourceDeclarations": [
+        {
+          "file": "packages/pocket_diagnostics/src/browser.ts",
+          "declarations": [
+            "BrowserErrorCollectorHandle",
+            "BrowserErrorCollectorOptions",
+            "BrowserEventTargetLike",
+            "attachBrowserErrorCollector"
+          ],
+          "sourceSha256": "e29ecafbcadffc40565fd832eb1125e6dff4c81a6beea01dc6dabc28fc0513dd",
+          "reexports": []
+        },
+        {
+          "file": "packages/pocket_diagnostics/src/collector.ts",
+          "declarations": [
+            "KeyValueDiagnosticsStorageOptions",
+            "MemoryDiagnosticsStorageOptions",
+            "WebStorageLike",
+            "createDiagnosticsCollector",
+            "createKeyValueDiagnosticsStorage",
+            "createMemoryDiagnosticsStorage",
+            "filterAndSortRecords",
+            "matchesClearFilter"
+          ],
+          "sourceSha256": "8f511dcc0ad606658fb24b328a11baaacab23adcd297fe9241a22b968064ecec",
+          "reexports": [
+            "export type { DiagnosticRecordKind, DiagnosticsStorageAppendOptions, };"
+          ]
+        },
+        {
+          "file": "packages/pocket_diagnostics/src/index.ts",
+          "declarations": [],
+          "sourceSha256": "b82f7f9b147e85b891b4199caf32f8e662b674d9f876f5d26d7e79467d4aa521",
+          "reexports": [
+            "export * from \"./types.ts\";",
+            "export * from \"./normalize.ts\";",
+            "export * from \"./collector.ts\";",
+            "export * from \"./browser.ts\";"
+          ]
+        },
+        {
+          "file": "packages/pocket_diagnostics/src/node.ts",
+          "declarations": [
+            "DEFAULT_JOURNAL_FILENAME",
+            "DEFAULT_MAX_FILE_BYTES",
+            "DEFAULT_MAX_ROTATED_FILES",
+            "FileDiagnosticsCollector",
+            "FileDiagnosticsOptions",
+            "FileDiagnosticsStorage",
+            "FileDiagnosticsStorageOptions",
+            "createFileDiagnostics",
+            "createFileDiagnosticsStorage"
+          ],
+          "sourceSha256": "614dd5b4292dc030770c1825c9cb8774b2b4ccc7a5a0e0f20f640b138d4e21bf",
+          "reexports": []
+        },
+        {
+          "file": "packages/pocket_diagnostics/src/normalize.ts",
+          "declarations": [
+            "estimateUtf8Bytes",
+            "normalizeContextString",
+            "normalizeDiagnosticContext",
+            "normalizeDiagnosticData",
+            "normalizeDiagnosticError",
+            "normalizeRevision",
+            "normalizeTimestamp",
+            "resolveNormalizationLimits",
+            "truncateString"
+          ],
+          "sourceSha256": "414f83facbd203757721fc22d62820960e9e30c50bb76a31539b6c10000ded68",
+          "reexports": []
+        },
+        {
+          "file": "packages/pocket_diagnostics/src/types.ts",
+          "declarations": [
+            "DEFAULT_MAX_ARRAY_LENGTH",
+            "DEFAULT_MAX_CAUSE_DEPTH",
+            "DEFAULT_MAX_DATA_BYTES",
+            "DEFAULT_MAX_DEPTH",
+            "DEFAULT_MAX_NODES",
+            "DEFAULT_MAX_OBJECT_KEYS",
+            "DEFAULT_MAX_RECORDS",
+            "DEFAULT_MAX_STACK_LENGTH",
+            "DEFAULT_MAX_STRING_LENGTH",
+            "DEFAULT_RECENT_LOG_LIMIT",
+            "DIAGNOSTICS_SCHEMA_VERSION",
+            "DiagnosticClearFilter",
+            "DiagnosticContext",
+            "DiagnosticCrashInput",
+            "DiagnosticCrashRecord",
+            "DiagnosticDataValue",
+            "DiagnosticExportBundle",
+            "DiagnosticLogInput",
+            "DiagnosticLogRecord",
+            "DiagnosticNormalizationLimits",
+            "DiagnosticPrimitive",
+            "DiagnosticQuery",
+            "DiagnosticRecentLogSummary",
+            "DiagnosticRecord",
+            "DiagnosticRecordBase",
+            "DiagnosticRecordKind",
+            "DiagnosticSeverity",
+            "DiagnosticsCollector",
+            "DiagnosticsCollectorOptions",
+            "DiagnosticsStorage",
+            "DiagnosticsStorageAppendOptions",
+            "NormalizedDiagnosticError",
+            "RecentLogCaptureMode"
+          ],
+          "sourceSha256": "217d69664534ff232b0727f33d9d699e629f5136a1e173c49bc8dcd719160be6",
+          "reexports": []
+        }
+      ]
+    },
+    {
+      "name": "@pocket/live2d",
+      "manifest": "packages/pocket_live2d/package.json",
+      "scripts": {
+        "test": "bun test test",
+        "probe:macos": "sh scripts/run_macos_core_probe.sh"
+      },
+      "bin": {},
+      "exports": {
+        ".": "./src/index.ts",
+        "./manifest": "./src/manifest.ts",
+        "./motion": "./src/motion.ts",
+        "./interaction": "./src/interaction.ts",
+        "./physics": "./src/physics.ts",
+        "./pose": "./src/pose.ts",
+        "./transport": "./src/transport.ts"
+      },
+      "sourceDeclarations": [
+        {
+          "file": "packages/pocket_live2d/src/index.ts",
+          "declarations": [],
+          "sourceSha256": "fa89eff37dd17348431d7f89f238707938f0d90e85b026f183754bf6eb0fe3c6",
+          "reexports": [
+            "export * from \"./manifest.ts\";",
+            "export * from \"./motion.ts\";",
+            "export * from \"./physics.ts\";",
+            "export * from \"./pose.ts\";",
+            "export * from \"./interaction.ts\";",
+            "export * from \"./transport.ts\";"
+          ]
+        },
+        {
+          "file": "packages/pocket_live2d/src/interaction.ts",
+          "declarations": [
+            "CubismInteractionCanvas",
+            "CubismInteractionControllerOptions",
+            "CubismPoint",
+            "createCubismInteractionController"
+          ],
+          "sourceSha256": "83fcf8f6d018bf854f73c030a6ca44d0047989602a0bd79675d41eaadb0a6bf2",
+          "reexports": []
+        },
+        {
+          "file": "packages/pocket_live2d/src/manifest.ts",
+          "declarations": [
+            "CubismExpressionReference",
+            "CubismHitArea",
+            "CubismManifestError",
+            "CubismModel3Manifest",
+            "CubismMotionReference",
+            "parseCubismModel3",
+            "validateCubismAssetReference"
+          ],
+          "sourceSha256": "b01a6a42b8f734eb602d13385439e8b7e6a5d6726f14125c350cca855a790747",
+          "reexports": []
+        },
+        {
+          "file": "packages/pocket_live2d/src/motion.ts",
+          "declarations": [
+            "CubismExpression3",
+            "CubismExpressionBlend",
+            "CubismExpressionParameter",
+            "CubismMotion3",
+            "CubismMotionCurve",
+            "CubismMotionFrame",
+            "CubismMotionModelProperty",
+            "CubismMotionTarget",
+            "applyCubismExpression3",
+            "evaluateCubismMotion3",
+            "parseCubismExpression3",
+            "parseCubismMotion3"
+          ],
+          "sourceSha256": "047975cc5d9dd056ef0f17b92999c0600c212e9f86934a0da82a2375afe3ce5d",
+          "reexports": []
+        },
+        {
+          "file": "packages/pocket_live2d/src/physics.ts",
+          "declarations": [
+            "CubismPhysicsSimulation",
+            "createCubismPhysics3Simulation"
+          ],
+          "sourceSha256": "4a519f8a4827c6eb6f7e3100ceb5f5196230353e1ef3979eb13e6c5aca13f06e",
+          "reexports": []
+        },
+        {
+          "file": "packages/pocket_live2d/src/pose.ts",
+          "declarations": [
+            "CubismPose3Frame",
+            "CubismPose3Simulation"
+          ],
+          "sourceSha256": "f5912463951f290a0bf98c740c5d4d10842403e48f5f4d58efa724c0927d21bc",
+          "reexports": []
+        },
+        {
+          "file": "packages/pocket_live2d/src/transport.ts",
+          "declarations": [
+            "Live2dLoadRequest",
+            "Live2dParameterMetadata",
+            "Live2dParameterValue",
+            "Live2dPartDefault",
+            "PocketLive2dClient",
+            "PocketLive2dClientOptions",
+            "PocketLive2dDrawableFrame",
+            "PocketLive2dFrame",
+            "PocketLive2dHost",
+            "PocketLive2dModelInfo",
+            "PocketLive2dPlacement",
+            "createPocketLive2dClient",
+            "pocketLive2dLoadCapability",
+            "pocketLive2dMaxNativeBytes",
+            "pocketLive2dMaxTextures",
+            "pocketLive2dPluginId",
+            "pocketLive2dReleaseCapability",
+            "pocketLive2dUpdateCapability"
+          ],
+          "sourceSha256": "19c22b58ba89c7050972772162edf0126d34ea303823eeba6ccb1bca6ff5a829",
+          "reexports": []
+        }
+      ]
+    },
+    {
+      "name": "@pocket/looseleaf",
+      "manifest": "packages/pocket_looseleaf/package.json",
+      "scripts": {
+        "test": "bun test test"
+      },
+      "bin": {},
+      "exports": {
+        ".": "./src/index.ts",
+        "./tokens": "./src/tokens.ts",
+        "./surfaces": "./src/surfaces.tsx",
+        "./marks": "./src/marks.tsx",
+        "./controls": "./src/controls.tsx",
+        "./navigation": "./src/navigation.tsx",
+        "./data": "./src/data.tsx",
+        "./overlays": "./src/overlays.tsx",
+        "./skins": "./src/skins.tsx",
+        "./kit": "./src/kit.tsx"
+      },
+      "sourceDeclarations": [
+        {
+          "file": "packages/pocket_looseleaf/src/controls.tsx",
+          "declarations": [
+            "Button",
+            "ButtonGroup",
+            "ButtonProps",
+            "ButtonSize",
+            "ButtonVariant",
+            "Checkbox",
+            "Combobox",
+            "Dropzone",
+            "Field",
+            "Form",
+            "Input",
+            "InputGroup",
+            "InputOTP",
+            "Label",
+            "LabelTag",
+            "NativeSelect",
+            "PromptInput",
+            "RadioGroup",
+            "Rating",
+            "Select",
+            "SignaturePad",
+            "Sketchpad",
+            "Slider",
+            "StampButton",
+            "Stepper",
+            "Switch",
+            "Textarea",
+            "Toggle",
+            "ToggleGroup"
+          ],
+          "sourceSha256": "ac2cfe0eb3256144f0ff5dcbe6b890b917677aadf2aeab51be610ce6972d2318",
+          "reexports": []
+        },
+        {
+          "file": "packages/pocket_looseleaf/src/data.tsx",
+          "declarations": [
+            "Attachment",
+            "Avatar",
+            "AvatarFallback",
+            "Badge",
+            "BadgeVariant",
+            "BarChart",
+            "BarChartDatum",
+            "Bubble",
+            "Calendar",
+            "ChartContainer",
+            "CodeBlock",
+            "DataTable",
+            "DatePicker",
+            "Empty",
+            "Item",
+            "Kbd",
+            "LineChart",
+            "LooseleafTimelineItem",
+            "Message",
+            "MessageGroup",
+            "MessageScroller",
+            "Progress",
+            "Reveal",
+            "Skeleton",
+            "Spinner",
+            "StickerBoard",
+            "StickerPicker",
+            "StickerSheet",
+            "Table",
+            "TableColumn",
+            "Typewriter",
+            "TypingIndicator",
+            "Typography"
+          ],
+          "sourceSha256": "79c61e8551b51f1a79420de9d184f397490faffc272de522ff322792514bdd41",
+          "reexports": []
+        },
+        {
+          "file": "packages/pocket_looseleaf/src/index.ts",
+          "declarations": [],
+          "sourceSha256": "25b0ba28bad46715fcad732f026ac453d016460efab9504ecc72867c00ebe354",
+          "reexports": [
+            "export * from \"./tokens.ts\";",
+            "export * from \"./marks.tsx\";",
+            "export * from \"./surfaces.tsx\";",
+            "export * from \"./controls.tsx\";",
+            "export * from \"./navigation.tsx\";",
+            "export * from \"./data.tsx\";",
+            "export * from \"./overlays.tsx\";",
+            "export * from \"./skins.tsx\";",
+            "export * from \"./kit.tsx\";",
+            "export { Desk as LooseleafDesk, Paper as LooseleafPaper, Tape as LooseleafTape, Fastener as LooseleafFastener, Card as LooseleafCard, CardHeader as LooseleafCardHeader, CardTitle as LooseleafCardTitle, CardDescription as LooseleafCardDescription, CardAction as LooseleafCardAction, CardContent as LooseleafCardContent, CardFooter as LooseleafCardFooter, IndexCard as LooseleafIndexCard, StickyNote as LooseleafStickyNote, Polaroid as LooseleafPolaroid, Notebook as LooseleafNotebook, Page as LooseleafPageShell, Receipt as LooseleafReceipt, Ticket as LooseleafTicket, Envelope as LooseleafEnvelope, Folder as LooseleafFolder, Corkboard as LooseleafCorkboard, Clipboard as LooseleafClipboard, Napkin as LooseleafNapkin, FlipCard as LooseleafFlipCard, PeelCorner as LooseleafPeelCorner, TearOff as LooseleafTearOff, Ribbon as LooseleafRibbon, Bookmark as LooseleafBookmark, Icon as LooseleafIcon, Highlight as LooseleafHighlight, Underline as LooseleafUnderline, Circled as LooseleafCircled, Strike as LooseleafStrike, Squiggle as LooseleafSquiggle, Scribble as LooseleafScribble, Bracket as LooseleafBracket, Arrow as LooseleafArrow, Asterisk as LooseleafAsterisk, Callout as LooseleafCallout, Annotate as LooseleafAnnotate, Lettering as LooseleafLettering, Marker as LooseleafMarker, Handwritten as LooseleafHandwritten, Quote as LooseleafQuote, Signature as LooseleafSignature, Tally as LooseleafTally, Stamp as LooseleafStamp, Seal as LooseleafSeal, Sticker as LooseleafSticker, Doodle as LooseleafDoodle, Mascot as LooseleafMascot, Confetti as LooseleafConfetti, Boil as LooseleafBoil, Button as LooseleafButton, ButtonGroup as LooseleafButtonGroup, StampButton as LooseleafStampButton, Label as LooseleafLabel, LabelTag as LooseleafLabelTag, Input as LooseleafInput, InputGroup as LooseleafInputGroup, InputOTP as LooseleafInputOTP, Textarea as LooseleafTextarea, PromptInput as LooseleafPromptInput, Checkbox as LooseleafCheckbox, Switch as LooseleafSwitch, RadioGroup as LooseleafRadioGroup, Slider as LooseleafSlider, Stepper as LooseleafStepper, Rating as LooseleafRating, Toggle as LooseleafToggle, ToggleGroup as LooseleafToggleGroup, Select as LooseleafSelect, Combobox as LooseleafCombobox, Field as LooseleafField, Form as LooseleafForm, Dropzone as LooseleafDropzone, SignaturePad as LooseleafSignaturePad, Sketchpad as LooseleafSketchpad, Separator as LooseleafSeparator, Tabs as LooseleafTabs, Breadcrumb as LooseleafBreadcrumb, Pagination as LooseleafPagination, NavigationMenu as LooseleafNavigationMenu, Menubar as LooseleafMenubar, DropdownMenu as LooseleafDropdownMenu, ContextMenu as LooseleafContextMenu, Command as LooseleafCommand, Sidebar as LooseleafSidebar, ScrollArea as LooseleafScrollArea, Resizable as LooseleafResizable, AspectRatio as LooseleafAspectRatio, Carousel as LooseleafCarousel, Marquee as LooseleafMarquee, Badge as LooseleafBadge, Avatar as LooseleafAvatar, Progress as LooseleafProgress, BarChart as LooseleafBarChart, Calendar as LooseleafCalendar, DatePicker as LooseleafDatePicker, Table as LooseleafTable, DataTable as LooseleafDataTable, Kbd as LooseleafKbd, CodeBlock as LooseleafCodeBlock, Item as LooseleafItem, Empty as LooseleafEmpty, Skeleton as LooseleafSkeleton, Spinner as LooseleafSpinner, Typewriter as LooseleafTypewriter, Reveal as LooseleafReveal, Typography as LooseleafTypography, Bubble as LooseleafBubble, Message as LooseleafMessage, MessageGroup as LooseleafMessageGroup, TypingIndicator as LooseleafTypingIndicator, Attachment as LooseleafAttachment, StickerSheet as LooseleafStickerSheet, Alert as LooseleafAlert, Toast as LooseleafToast, Dialog as LooseleafDialog, Drawer as LooseleafDrawer, Sheet as LooseleafBottomSheet, Popover as LooseleafPopover, HoverCard as LooseleafHoverCard, Tooltip as LooseleafTooltip, Accordion as LooseleafAccordion, Collapsible as LooseleafCollapsible, };"
+          ]
+        },
+        {
+          "file": "packages/pocket_looseleaf/src/kit.tsx",
+          "declarations": [
+            "looseleafSkinAdapter",
+            "registerLooseleafSkin",
+            "resolveLooseleafSkinTokens"
+          ],
+          "sourceSha256": "01bdb61c0a68459d02386c7b90a0541a974faf7d4aa01f59fccf014e1efef492",
+          "reexports": []
+        },
+        {
+          "file": "packages/pocket_looseleaf/src/marks.tsx",
+          "declarations": [
+            "Annotate",
+            "Arrow",
+            "ArrowDirection",
+            "Asterisk",
+            "Boil",
+            "Bracket",
+            "Callout",
+            "Circled",
+            "Confetti",
+            "Doodle",
+            "Handwritten",
+            "Highlight",
+            "Icon",
+            "Lettering",
+            "LooseleafIconName",
+            "Marker",
+            "Mascot",
+            "MascotPose",
+            "Quote",
+            "Scribble",
+            "Seal",
+            "Signature",
+            "Squiggle",
+            "Stamp",
+            "Sticker",
+            "Strike",
+            "Tally",
+            "Underline"
+          ],
+          "sourceSha256": "8d56348adee2ad1353cc4636c272e31cdf63bf27d197dc2282a8bf83d4d08b38",
+          "reexports": []
+        },
+        {
+          "file": "packages/pocket_looseleaf/src/navigation.tsx",
+          "declarations": [
+            "AspectRatio",
+            "Breadcrumb",
+            "Carousel",
+            "Command",
+            "ContextMenu",
+            "DropdownMenu",
+            "LooseleafAppBar",
+            "LooseleafNavigationBar",
+            "LooseleafToolbar",
+            "Marquee",
+            "Menubar",
+            "NavigationMenu",
+            "Pagination",
+            "Resizable",
+            "ScrollArea",
+            "Separator",
+            "Sidebar",
+            "Tabs"
+          ],
+          "sourceSha256": "776c90d451cd7f914a9ba9dfcd80f8044ac2e67ad6fd7ca509d7d2cc3e7cfb6d",
+          "reexports": []
+        },
+        {
+          "file": "packages/pocket_looseleaf/src/overlays.tsx",
+          "declarations": [
+            "Accordion",
+            "AccordionItemData",
+            "Alert",
+            "AlertDialog",
+            "AlertTone",
+            "Collapsible",
+            "Dialog",
+            "Drawer",
+            "HoverCard",
+            "Popover",
+            "Sheet",
+            "Sonner",
+            "Toast",
+            "Tooltip"
+          ],
+          "sourceSha256": "68c54353c9b4e805f68c5e40326d3ca5d3b40eb9119c9cae1aa56db4bf44cbbc",
+          "reexports": []
+        },
+        {
+          "file": "packages/pocket_looseleaf/src/skins.tsx",
+          "declarations": [
+            "LooseleafActionVariant",
+            "LooseleafBadgeTone",
+            "LooseleafCircleIconButton",
+            "LooseleafDeskBackdrop",
+            "LooseleafDockCapsule",
+            "LooseleafPillActionButton",
+            "LooseleafPillBadge",
+            "LooseleafProgressStroke",
+            "LooseleafSegmentedBar",
+            "LooseleafSheet",
+            "LooseleafSheetVariant",
+            "LooseleafSwitchPill",
+            "LooseleafTimelineRow",
+            "LooseleafWashiTape"
+          ],
+          "sourceSha256": "00ab379a4250b08277eef52d238f7f4cc86fce65457744419767bba1402c4a35",
+          "reexports": []
+        },
+        {
+          "file": "packages/pocket_looseleaf/src/surfaces.tsx",
+          "declarations": [
+            "Bookmark",
+            "Card",
+            "CardAction",
+            "CardContent",
+            "CardDescription",
+            "CardFooter",
+            "CardHeader",
+            "CardTitle",
+            "Clipboard",
+            "Corkboard",
+            "Desk",
+            "Envelope",
+            "Fastener",
+            "FastenerKind",
+            "FlipCard",
+            "Folder",
+            "IndexCard",
+            "IndexCardContent",
+            "IndexCardFooter",
+            "IndexCardHeader",
+            "IndexCardTitle",
+            "Napkin",
+            "Notebook",
+            "Page",
+            "Paper",
+            "PaperProps",
+            "PeelCorner",
+            "Polaroid",
+            "Receipt",
+            "Ribbon",
+            "StickyNote",
+            "Tape",
+            "TapeKind",
+            "TapePlacement",
+            "TearOff",
+            "Ticket"
+          ],
+          "sourceSha256": "a8d68aa2a7c2b6a108c1b8b42acc2a04cf5c9666760bedc0455fc6052c404350",
+          "reexports": []
+        },
+        {
+          "file": "packages/pocket_looseleaf/src/tokens.ts",
+          "declarations": [
+            "DirectionProvider",
+            "LOOSELEAF_AMBER_NIGHT_PALETTE",
+            "LOOSELEAF_DARK_PALETTE",
+            "LOOSELEAF_NOTEBOOK_PALETTE",
+            "LooseleafAccent",
+            "LooseleafDensity",
+            "LooseleafDirection",
+            "LooseleafPalette",
+            "LooseleafPenTone",
+            "LooseleafRule",
+            "LooseleafStock",
+            "LooseleafThemeMode",
+            "LooseleafThemeProvider",
+            "LooseleafThemeState",
+            "accentColorOf",
+            "densityHitHeight",
+            "hashSeed",
+            "penColor",
+            "resolveLooseleafPalette",
+            "seedOffset",
+            "seedSigned",
+            "seedTilt",
+            "stockBackground",
+            "useLooseleafTheme"
+          ],
+          "sourceSha256": "e3a5f01af557dde5c335226f6837f99af49c5030e57d909442fbbdf2051d5fe5",
+          "reexports": []
+        }
+      ]
+    },
+    {
+      "name": "@pocket/spine",
+      "manifest": "packages/pocket_spine/package.json",
+      "scripts": {
+        "test": "bun test test/*.test.ts"
+      },
+      "bin": {},
+      "exports": {
+        ".": "./src/index.ts"
+      },
+      "sourceDeclarations": [
+        {
+          "file": "packages/pocket_spine/src/index.ts",
+          "declarations": [
+            "SpineAtlasPageInfo",
+            "SpineFrameItem",
+            "SpineMeshFrame",
+            "SpineRig",
+            "SpineRigInput",
+            "SpineSkeletonInput",
+            "SpineUnsupportedFrame",
+            "createSpineRig",
+            "getSpineAtlasInfo",
+            "getSpineAtlasPages"
+          ],
+          "sourceSha256": "e96dbe974a80ef1d5313239a7698ceeba3ca9409646f98b514dd902c2286d1f6",
+          "reexports": []
+        }
+      ]
+    },
+    {
+      "name": "@pocket/sync",
+      "manifest": "packages/pocket_sync/package.json",
+      "scripts": {
+        "test": "bun test test/*.test.ts"
+      },
+      "bin": {},
+      "exports": {
+        ".": "./src/index.ts",
+        "./protocol": "./src/protocol.ts",
+        "./client": "./src/client.ts",
+        "./server": "./src/server.ts",
+        "./solid": "./src/solid.ts"
+      },
+      "sourceDeclarations": [
+        {
+          "file": "packages/pocket_sync/src/client.ts",
+          "declarations": [
+            "BlobUploadMeshResult",
+            "EndpointSyncSummary",
+            "MeshSyncRoundResult",
+            "MultiEndpointSyncClient",
+            "MultiEndpointSyncClientOptions",
+            "SyncEndpointEntry",
+            "SyncEndpointHealth",
+            "SyncTransportAdapter",
+            "SyncTransportResponse",
+            "createCompositeSyncTransport",
+            "createFetchSyncTransport",
+            "createHostBridgeSyncTransport",
+            "createLoopbackSyncTransport",
+            "createMultiEndpointSyncClient"
+          ],
+          "sourceSha256": "a026bbc1beed66bd7e7c83d8aab466f308ac605197635c96dce0028991a4028f",
+          "reexports": []
+        },
+        {
+          "file": "packages/pocket_sync/src/index.ts",
+          "declarations": [],
+          "sourceSha256": "23eaacc5269067d719fe1915d1102ad777dfe3d7aaa37a9ca019fcc53a965d63",
+          "reexports": [
+            "export * from \"./protocol.ts\";",
+            "export * from \"./server.ts\";",
+            "export * from \"./client.ts\";",
+            "export * from \"./solid.ts\";"
+          ]
+        },
+        {
+          "file": "packages/pocket_sync/src/protocol.ts",
+          "declarations": [
+            "EndpointWatermark",
+            "MaterializedSyncEntity",
+            "POCKET_SYNC_AUTH_HEADER",
+            "POCKET_SYNC_DEFAULT_PORT",
+            "POCKET_SYNC_MDNS_SERVICE",
+            "POCKET_SYNC_PROTOCOL_VERSION",
+            "ParsedSyncEndpoint",
+            "PocketSyncLedger",
+            "PocketSyncLedgerOptions",
+            "SequencedSyncOp",
+            "ServerPowerPolicy",
+            "StorageDurability",
+            "SyncArchiveReceipt",
+            "SyncAuthHeaderInput",
+            "SyncDeviceKind",
+            "SyncExchangeRequest",
+            "SyncExchangeResponse",
+            "SyncHlcClock",
+            "SyncHlcTimestamp",
+            "SyncNetworkKind",
+            "SyncNodeInfo",
+            "SyncOpKind",
+            "SyncOpRecord",
+            "SyncReplayGuard",
+            "bytesToHex",
+            "canIssuePermanentArchiveReceipt",
+            "classifySyncHost",
+            "compareSyncHlc",
+            "createSyncAuthHeader",
+            "defaultPowerPolicyForDevice",
+            "defaultStorageDurabilityForDevice",
+            "deriveRoomAuthKeyHex",
+            "formatSyncHlc",
+            "hmacSha256Bytes",
+            "hmacSha256Hex",
+            "parseSyncEndpointUrl",
+            "parseSyncHlc",
+            "sha256Bytes",
+            "sha256Hex",
+            "signBlobArchiveReceipt",
+            "timingSafeEqualHex",
+            "utf8Decode",
+            "utf8Encode",
+            "verifyBlobArchiveReceipt"
+          ],
+          "sourceSha256": "5f728eee12eec191b308c15c8f438f79b323d38da81f0b034f5e0f42bcae45dc",
+          "reexports": []
+        },
+        {
+          "file": "packages/pocket_sync/src/server.ts",
+          "declarations": [
+            "EmbeddedServerConfig",
+            "EmbeddedServerController",
+            "EmbeddedServerStatus",
+            "InMemorySyncMeshRegistry",
+            "InMemorySyncServerNode",
+            "POCKET_SYNC_BLOB_CHUNK_BYTES",
+            "POCKET_SYNC_OP_BATCH_LIMIT",
+            "SyncHttpEnvelopeRequest",
+            "SyncHttpEnvelopeResponse",
+            "SyncLiveHeadPush",
+            "createEmbeddedServerController"
+          ],
+          "sourceSha256": "c3fb7828f9043f1744ab006b8693de0978c4b8a14137b241ed0c33ebc4735cb9",
+          "reexports": []
+        },
+        {
+          "file": "packages/pocket_sync/src/solid.ts",
+          "declarations": [
+            "SyncMeshStore",
+            "SyncMeshStoreOptions",
+            "createSyncMeshStore"
+          ],
+          "sourceSha256": "4cee9fdeeee2877ec3fb0723c031df0c9a8c9904e872c2072de21d070d543f80",
+          "reexports": []
+        }
+      ]
+    },
+    {
+      "name": "@pocket/tftc",
+      "manifest": "packages/pocket_tftc/package.json",
+      "scripts": {
+        "test": "bun test test"
+      },
+      "bin": {},
+      "exports": {
+        ".": "./src/index.js",
+        "./protocol": "./src/protocol.js",
+        "./security": "./src/security.js",
+        "./pocket": "./src/pocket-bluetooth.ts"
+      },
+      "sourceDeclarations": [
+        {
+          "file": "packages/pocket_tftc/src/changes.js",
+          "declarations": [
+            "describeAttributeChanges"
+          ],
+          "sourceSha256": "d9324e58d3a4335fd3afba478b5306841ba94c516524511a1001168dab8f7baa",
+          "reexports": []
+        },
+        {
+          "file": "packages/pocket_tftc/src/client.js",
+          "declarations": [
+            "TftcClient"
+          ],
+          "sourceSha256": "f12764d878632eb98d5985e9a5ef834a24dce1aa433c629e5e97c389463922b2",
+          "reexports": []
+        },
+        {
+          "file": "packages/pocket_tftc/src/data.js",
+          "declarations": [
+            "DATA_KEY",
+            "attributeSnapshot",
+            "decodeAttributes",
+            "resolveDataKey"
+          ],
+          "sourceSha256": "8263ef6c0f91b83c45b72770db90bf8c2df6d3024b40e683b48e7dd876e46f99",
+          "reexports": []
+        },
+        {
+          "file": "packages/pocket_tftc/src/index.js",
+          "declarations": [],
+          "sourceSha256": "3fecb70f38364c6d2478d1c8c5ae326d31823160084f305e8194f0fabb8dc39a",
+          "reexports": [
+            "export { TftcClient } from \"./client.js\";",
+            "export * from \"./protocol.js\";",
+            "export * from \"./security.js\";",
+            "export { DATA_KEY, resolveDataKey, decodeAttributes, attributeSnapshot } from \"./data.js\";",
+            "export { PRODUCT_IDS, PRODUCT_PROFILES, getProductProfile, resolveProductCommands, resolveProductOperation } from \"./products.js\";",
+            "export { describeAttributeChanges } from \"./changes.js\";"
+          ]
+        },
+        {
+          "file": "packages/pocket_tftc/src/pocket-bluetooth.ts",
+          "declarations": [
+            "BluetoothRequestDeviceOptions",
+            "BluetoothRequestFilter",
+            "POCKET_BLUETOOTH_NOTIFICATIONS",
+            "PocketBluetooth",
+            "PocketBluetoothCharacteristicValueEvent",
+            "PocketBluetoothDevice",
+            "PocketBluetoothDisconnectedEvent",
+            "PocketBluetoothRemoteGATTCharacteristic",
+            "PocketBluetoothRemoteGATTServer",
+            "PocketBluetoothRemoteGATTService",
+            "PocketBluetoothRequestOptions",
+            "createPocketBluetooth"
+          ],
+          "sourceSha256": "d45ffe7bebf164411e26343a0b8fb178b7faf82f80673c11fd58934af798070d",
+          "reexports": []
+        },
+        {
+          "file": "packages/pocket_tftc/src/products.js",
+          "declarations": [
+            "DATA_KEYS",
+            "PRODUCT_IDS",
+            "PRODUCT_PROFILES",
+            "SUPPORTED_PRODUCT_BEHAVIORS",
+            "UNSUPPORTED_PRODUCT_BEHAVIORS",
+            "getProductProfile",
+            "productSupports",
+            "resolveProductCommands",
+            "resolveProductOperation",
+            "resolveProductProfile"
+          ],
+          "sourceSha256": "c61738f77471e1341288eb0333468a955f06e8809681c19209599957bd612d89",
+          "reexports": []
+        },
+        {
+          "file": "packages/pocket_tftc/src/protocol.js",
+          "declarations": [
+            "ACTIONS_TO_ZERO",
+            "CHAR_NOTIFY",
+            "CHAR_READ",
+            "CHAR_WRITE_NO_RESPONSE",
+            "CHAR_WRITE_RESPONSE",
+            "CMD_APP_REQUEST",
+            "CMD_HEARTBEAT",
+            "CMD_HEAT",
+            "CMD_LINEAR",
+            "CMD_MANUFACTURER_QUERY",
+            "CMD_MANUFACTURER_REPLY",
+            "CMD_MCU_REPLY",
+            "CMD_PROTOCOL_ERROR",
+            "CMD_ROTARY",
+            "CMD_SECURITY_CHALLENGE",
+            "CMD_SECURITY_DATA",
+            "CMD_STOP",
+            "CMD_VIBRATION",
+            "DEFAULT_DEVICE_NAME",
+            "DEFAULT_MOTION_OPTIONS",
+            "DEVICE_PREFIXES",
+            "DEVICE_PROFILES",
+            "DEVICE_PROFILE_BY_NAME",
+            "GATT_CONNECT_ATTEMPTS",
+            "GATT_SERVICE_ATTEMPTS",
+            "MANUFACTURER_QUERY_TIMEOUT_MS",
+            "SECURITY_CHALLENGE_TIMEOUT_MS",
+            "SERVICE_SHORT_UUID",
+            "SERVICE_UUID",
+            "STANDARD_RESPONSE_TIMEOUT_MS",
+            "YXL_ONE_ACK_TIMEOUT_MS",
+            "YXL_ONE_CHAR_NOTIFY",
+            "YXL_ONE_CHAR_WRITE",
+            "YXL_ONE_CMD_ROTATING",
+            "YXL_ONE_CMD_TELESCOPIC",
+            "YXL_ONE_CMD_WORK_CONTROL",
+            "YXL_ONE_NOTIFY_SERVICE_UUID",
+            "YXL_ONE_STOP_ATTEMPTS",
+            "YXL_ONE_STOP_COMMAND_DELAY_MS",
+            "YXL_ONE_WRITE_SERVICE_UUID",
+            "buildCommandFrame",
+            "buildFrame",
+            "buildMultiCommandFrame",
+            "buildProtocolFrame",
+            "buildYxlOneFrame",
+            "byteArray",
+            "calculateChecksum",
+            "clampPercent",
+            "createMessageIdAllocator",
+            "getDeviceProfile",
+            "getErrorDetail",
+            "hasValidChecksum",
+            "isBluetoothUuid",
+            "isByte",
+            "isGattDisconnectedError",
+            "normalizeProfileName",
+            "parseManufacturerAdvertisement",
+            "parseManufacturerDataPayload",
+            "parseProtocolFrame",
+            "reverseUint32Bytes",
+            "rockVibrationSequence",
+            "rotaryToBLE",
+            "springVibrationSequence",
+            "validateByteArray",
+            "writeCharacteristicValue"
+          ],
+          "sourceSha256": "0ede500fab9a4a6a411f450f638543457ce285548a1240f5eb8ead2b5c66a885",
+          "reexports": []
+        },
+        {
+          "file": "packages/pocket_tftc/src/security.js",
+          "declarations": [
+            "APP_AUTH_PURPOSE",
+            "BleSecurityError",
+            "DEVICE_PROOF_PURPOSE",
+            "KEY_DERIVATIONS",
+            "MAX_SESSIONS",
+            "RESERVED_FLAGS",
+            "SECURITY_AUTH_PHASE",
+            "SECURITY_INIT_PHASE",
+            "SECURITY_VERSION",
+            "SHIFT_PURPOSE",
+            "aes128Ecb",
+            "createBleSecurityProvider",
+            "deriveV1Material"
+          ],
+          "sourceSha256": "98c6f531d698d10fe4eef81269392793a77a302574db1b376918a61eece1ce47",
+          "reexports": []
+        }
+      ]
+    },
+    {
+      "name": "@pocket/ui",
+      "manifest": "packages/pocket_ui/package.json",
+      "scripts": {},
+      "bin": {},
+      "exports": {
+        ".": "./src/index.ts",
+        "./ui": "./src/ui.tsx",
+        "./apple": "./src/apple.tsx",
+        "./mobile": "./src/mobile.tsx",
+        "./legacy": "./src/legacy.ts",
+        "./responsive": "./src/responsive.ts",
+        "./display": "./src/display.ts",
+        "./graphics": "./src/graphics.ts",
+        "./host": "./src/host.ts",
+        "./back-navigation": "./src/back-navigation.ts",
+        "./dio": "./src/dio.ts",
+        "./clipboard": "./src/clipboard.ts",
+        "./files": "./src/files.ts",
+        "./permissions": "./src/permissions.ts",
+        "./streams": "./src/streams.ts",
+        "./platform-experience": "./src/platform-experience.ts",
+        "./media": "./src/media.ts",
+        "./images": "./src/images.tsx",
+        "./video": "./src/video.tsx",
+        "./platform": "./src/platform.ts",
+        "./system": "./src/system.ts",
+        "./updates": "./src/updates.ts",
+        "./recording": "./src/recording.ts",
+        "./system-surfaces": "./src/system-surfaces.tsx",
+        "./inline-text": "./src/inline-text.tsx",
+        "./bytes": "./src/bytes.ts",
+        "./skins": "./src/skins.tsx",
+        "./router": "./src/router.tsx",
+        "./fast": "./src/fast.tsx",
+        "./surface-catalog": "./src/surface-catalog.ts",
+        "./surfaces": "./src/surfaces.tsx",
+        "./code": "./src/code/index.ts",
+        "./code-view": "./src/code/view.tsx",
+        "./dev": "./src/dev.ts",
+        "./tree": "./src/tree.tsx",
+        "./tree-model": "./src/tree-model.ts",
+        "./split-pane": "./src/split-pane.tsx",
+        "./split-pane-model": "./src/split-pane-model.ts",
+        "./tabs": "./src/tabs.tsx",
+        "./toast-host": "./src/toast-host.tsx",
+        "./tabs-model": "./src/tabs-model.ts"
+      },
+      "sourceDeclarations": [
+        {
+          "file": "packages/pocket_ui/src/accessibility.ts",
+          "declarations": [
+            "ACCESSIBILITY_PREFERENCES_EVENT",
+            "AccessibilityPreferences",
+            "AccessibilityPreferencesAccessor",
+            "AccessibilityPreferencesBridge",
+            "AccessibilityPreferencesContext",
+            "AccessibilityPreferencesOptions",
+            "AccessibilityPreferencesProvider",
+            "DEFAULT_ACCESSIBILITY_PREFERENCES",
+            "accessibilityPreferencesPayload",
+            "createAccessibilityPreferences",
+            "parseAccessibilityPreferences",
+            "useAccessibilityPreferences"
+          ],
+          "sourceSha256": "d5eba12c8ad5d9a27301df10acf98880b61439d451d8059899974bf89aa5a4ab",
+          "reexports": []
+        },
+        {
+          "file": "packages/pocket_ui/src/apple.tsx",
+          "declarations": [
+            "AppleDraggableGlass",
+            "AppleDraggableGlassProps",
+            "AppleGlassButton",
+            "AppleGlassButtonProps",
+            "AppleGlassNavigationBar",
+            "AppleGlassNavigationBarProps",
+            "AppleGlassToolbar",
+            "AppleGlassToolbarProps"
+          ],
+          "sourceSha256": "1f1b3215011ffe67a4cbe548c031052f0dd892df147a562d19bf6c76757f176f",
+          "reexports": []
+        },
+        {
+          "file": "packages/pocket_ui/src/back-navigation.ts",
+          "declarations": [
+            "POCKET_BACK_GESTURE_EVENT",
+            "POCKET_BACK_GESTURE_READY_EVENT",
+            "POCKET_BACK_GESTURE_RESPONSE_EVENT",
+            "POCKET_BACK_REQUEST_EVENT",
+            "POCKET_BACK_RESPONSE_EVENT",
+            "PocketBackGestureEvent",
+            "PocketBackGestureHandler",
+            "PocketBackGesturePhase",
+            "PocketBackRequestHandler",
+            "createPocketBackNavigation",
+            "shouldCommitPocketBackGesture"
+          ],
+          "sourceSha256": "49474b6b4753a979363a5fee79e825cfe2cb0860a1f959812983a4960f58e562",
+          "reexports": []
+        },
+        {
+          "file": "packages/pocket_ui/src/bytes.ts",
+          "declarations": [
+            "base64ToBytes",
+            "bytesToBase64",
+            "bytesToUtf8",
+            "utf8ToBytes"
+          ],
+          "sourceSha256": "aa5d8a438f7cf8a2d4c9013402854a82ee628e609f08c6d963540f0168786736",
+          "reexports": []
+        },
+        {
+          "file": "packages/pocket_ui/src/clipboard.ts",
+          "declarations": [
+            "POCKET_CLIPBOARD_MAX_TEXT_BYTES",
+            "createPocketClipboardClient",
+            "readClipboardText",
+            "writeClipboardText"
+          ],
+          "sourceSha256": "3499ce8e964352bc83673ca8de9af20aeb888e5e08c033ce6926789def1b5917",
+          "reexports": []
+        },
+        {
+          "file": "packages/pocket_ui/src/code/buffer.ts",
+          "declarations": [
+            "BufferChange",
+            "BufferListener",
+            "Position",
+            "TextBuffer",
+            "isCjk",
+            "isCombining",
+            "nextBoundary",
+            "prevBoundary",
+            "snapBoundary",
+            "wordClass",
+            "wordLeft",
+            "wordRight"
+          ],
+          "sourceSha256": "efed84c0834d8edcca7e3645189210c442e513b01e32bce8615580204f883fcf",
+          "reexports": []
+        },
+        {
+          "file": "packages/pocket_ui/src/code/commands.ts",
+          "declarations": [
+            "Command",
+            "CommandContext",
+            "CommandOptions",
+            "DeleteUnit",
+            "Transaction",
+            "TxKind",
+            "addCursorVertical",
+            "applyTransaction",
+            "commandTable",
+            "copyText",
+            "cutTransaction",
+            "defaultCommandOptions",
+            "deleteBackward",
+            "deleteForward",
+            "duplicateLine",
+            "escapeSelection",
+            "indentSelection",
+            "insertText",
+            "moveDocument",
+            "moveHorizontal",
+            "moveLineBoundary",
+            "moveLines",
+            "moveVertical",
+            "newline",
+            "outdentSelection",
+            "selectAll",
+            "toggleLineComment",
+            "typeChar"
+          ],
+          "sourceSha256": "8c68469009277913a94e09bb35d0b3c4876bebd412921c94daa6fb474dbc7bdb",
+          "reexports": []
+        },
+        {
+          "file": "packages/pocket_ui/src/code/editor.ts",
+          "declarations": [
+            "CodeEditor",
+            "EditorIntent",
+            "EditorOptions",
+            "InputOutcome",
+            "RawTextEvent"
+          ],
+          "sourceSha256": "072219d8dc588106aaa52304737ca6d48e20938d3b9502d917d96120d2df81ea",
+          "reexports": []
+        },
+        {
+          "file": "packages/pocket_ui/src/code/find.ts",
+          "declarations": [
+            "FindModel"
+          ],
+          "sourceSha256": "5d70317ff8043e84d67cdacf5eb1c1c81403a1073facc03c3b32cc08ccba5f9d",
+          "reexports": []
+        },
+        {
+          "file": "packages/pocket_ui/src/code/history.ts",
+          "declarations": [
+            "History",
+            "HistoryChange",
+            "HistoryOptions",
+            "HistoryStep"
+          ],
+          "sourceSha256": "0bfe0386f92b02f011fe90f4f71a29a9a7bdce39c394e44613e89e4ea41a52d5",
+          "reexports": []
+        },
+        {
+          "file": "packages/pocket_ui/src/code/ime.ts",
+          "declarations": [
+            "ImeEvent",
+            "ImeOrigin",
+            "ImeResult",
+            "ImeState",
+            "cancelComposition",
+            "initialImeState",
+            "reduceIme"
+          ],
+          "sourceSha256": "3b4b4bf519bebec727f642ce200c3ccb4d82cb22078b804da1b8d04236605cfb",
+          "reexports": []
+        },
+        {
+          "file": "packages/pocket_ui/src/code/index.ts",
+          "declarations": [],
+          "sourceSha256": "bcf5cdf4da11379b61e0ab859803e69594522c4c122c33886d0ed129938a0663",
+          "reexports": [
+            "export * from \"./buffer.ts\";",
+            "export * from \"./selection.ts\";",
+            "export * from \"./commands.ts\";",
+            "export * from \"./keymap.ts\";",
+            "export * from \"./history.ts\";",
+            "export * from \"./ime.ts\";",
+            "export * from \"./tokenizer.ts\";",
+            "export * from \"./theme.ts\";",
+            "export * from \"./search.ts\";",
+            "export * from \"./viewport.ts\";",
+            "export * from \"./editor.ts\";",
+            "export * from \"./raw-text.ts\";",
+            "export * from \"./view-model.ts\";",
+            "export * from \"./find.ts\";"
+          ]
+        },
+        {
+          "file": "packages/pocket_ui/src/code/keymap.ts",
+          "declarations": [
+            "EditorCommandId",
+            "ParsedKey",
+            "Platform",
+            "lookupKey",
+            "parseKey"
+          ],
+          "sourceSha256": "49c61f7d1a59b62f81dd27dc78ca1a0fdc373d14874ec98b8495646b763753ec",
+          "reexports": []
+        },
+        {
+          "file": "packages/pocket_ui/src/code/raw-text.ts",
+          "declarations": [
+            "FrameworkTextEvent",
+            "RawHostEvent",
+            "RawRect",
+            "RawTextSession",
+            "RawTextSessionOptions",
+            "normalizeTextEvent"
+          ],
+          "sourceSha256": "fb0b6e3d28cc863a3400f09a7e6cf380dd971501a029e75b55b1ab4cf614ba46",
+          "reexports": []
+        },
+        {
+          "file": "packages/pocket_ui/src/code/search.ts",
+          "declarations": [
+            "FindResult",
+            "Match",
+            "SearchOptions",
+            "compileQuery",
+            "countMatches",
+            "findAll",
+            "findNext",
+            "findPrev",
+            "replaceAllEdits",
+            "replaceAllTransaction",
+            "replaceOneTransaction"
+          ],
+          "sourceSha256": "ccdc9cd26a275eb3d898b73210079e4db863892ff1e2579e49ac654db8ef5a67",
+          "reexports": []
+        },
+        {
+          "file": "packages/pocket_ui/src/code/selection.ts",
+          "declarations": [
+            "ChangeMap",
+            "Edit",
+            "Range",
+            "SelectionSet",
+            "clampSelection",
+            "cursor",
+            "isEmptyRange",
+            "mapSelection",
+            "normalize",
+            "primaryRange",
+            "range",
+            "rangeFrom",
+            "rangeTo",
+            "selectionsEqual",
+            "simplify",
+            "single"
+          ],
+          "sourceSha256": "500f11d39e9ee3d65730d115ccc109c3383d3b217f20e53876c25807f7712e37",
+          "reexports": []
+        },
+        {
+          "file": "packages/pocket_ui/src/code/theme.ts",
+          "declarations": [
+            "TokenTheme",
+            "colorFor",
+            "darkTheme",
+            "lightTheme",
+            "themeFor"
+          ],
+          "sourceSha256": "a3bc8197f094bb6726abdfefb93d154c03f16a52441f19f20ca64c155c0e8038",
+          "reexports": []
+        },
+        {
+          "file": "packages/pocket_ui/src/code/tokenizer.ts",
+          "declarations": [
+            "INITIAL_STATE",
+            "KIND_NAMES",
+            "Kind",
+            "Language",
+            "LineChange",
+            "TokenCache",
+            "TokenKind",
+            "initialState",
+            "languageForPath",
+            "tokenizeCodeLine",
+            "tokenizeLine"
+          ],
+          "sourceSha256": "873c84dffa2d7ebecf0825932e0750d4d6deb388d9d48d92d4cad6e89de3ad7f",
+          "reexports": []
+        },
+        {
+          "file": "packages/pocket_ui/src/code/view-model.ts",
+          "declarations": [
+            "CalibratedMetrics",
+            "CalibrationSample",
+            "ClickTracker",
+            "CodeDiagnostic",
+            "DiagnosticSeverity",
+            "LineModel",
+            "LineSpan",
+            "OffsetRange",
+            "Run",
+            "SEVERITY_COLORS",
+            "buildLineModel",
+            "calibrate",
+            "cpIndex",
+            "diagnosticsByLine",
+            "displayToSourceCol",
+            "hexToAbgr",
+            "makeMetrics",
+            "matchesInRange",
+            "slotLine",
+            "sourceColX",
+            "spansForLines"
+          ],
+          "sourceSha256": "ff5e31da9702780001ec6f34bb28bb1c6aa50c304cef434e4a3642f5470c9493",
+          "reexports": []
+        },
+        {
+          "file": "packages/pocket_ui/src/code/view.tsx",
+          "declarations": [
+            "CodeClipboard",
+            "CodeView",
+            "CodeViewDebug",
+            "CodeViewHandle",
+            "CodeViewProps"
+          ],
+          "sourceSha256": "838b8ba8eaef2c931f6678304425b6edc01337711f2a81eb9081bddc5d9d2d66",
+          "reexports": [
+            "export type { CodeDiagnostic } from \"./view-model.ts\";"
+          ]
+        },
+        {
+          "file": "packages/pocket_ui/src/code/viewport.ts",
+          "declarations": [
+            "CaretPosition",
+            "ViewMetrics",
+            "VisibleRange",
+            "caretPosition",
+            "columnToX",
+            "defaultCellWidth",
+            "gutterDigits",
+            "gutterWidth",
+            "hitTest",
+            "scrollToReveal",
+            "visibleRange",
+            "xToColumn"
+          ],
+          "sourceSha256": "b921da941a67323653a76af279c0c6eb0aab82053a89d36c21bbba6a5ffc1e13",
+          "reexports": []
+        },
+        {
+          "file": "packages/pocket_ui/src/dev.ts",
+          "declarations": [
+            "HotContext",
+            "HotTransition",
+            "HotValue",
+            "mountHotRoot",
+            "registerHotState"
+          ],
+          "sourceSha256": "b03a2468ae7ae07acb0f588eb6f8bcc582a666584ec417b17cb08a241b7def26",
+          "reexports": []
+        },
+        {
+          "file": "packages/pocket_ui/src/dio.ts",
+          "declarations": [
+            "PocketDioRequest",
+            "PocketDioResponse",
+            "createPocketDioClient"
+          ],
+          "sourceSha256": "b0262be576b4427fe15e69206d347ce3772e15ef4999195e5e9db350be04c43b",
+          "reexports": []
+        },
+        {
+          "file": "packages/pocket_ui/src/display.ts",
+          "declarations": [
+            "DisplayEventHandler",
+            "DisplayGeometryBridge",
+            "DisplayGeometryOptions",
+            "SystemPresetsOptions",
+            "createDisplayGeometry",
+            "createSystemPresets",
+            "getSystemPresetsSnapshot",
+            "subscribeHostEvents",
+            "subscribeSystemPresets",
+            "useSystemPresets"
+          ],
+          "sourceSha256": "5cf7aafb7c06eb7d39bb5815896b69be2588cef05d2c6cdfd31b83d395f85018",
+          "reexports": [
+            "export { DEFAULT_SYSTEM_PRESETS, isSystemPresetsEvent, normalizePresentationStyle, parseSystemPresets, SYSTEM_PRESETS_EVENT, systemPresetsBridgeObject, type HostSystemPresetsSnapshot, type MiniAppPresentationStyle, type MiniAppPresentationStyleInput, type PocketSystemDensity, type PocketSystemPresets, };"
+          ]
+        },
+        {
+          "file": "packages/pocket_ui/src/fast.tsx",
+          "declarations": [
+            "FastTextSlot",
+            "FrameProfileSnapshot",
+            "FrameProfiler",
+            "JumpPool",
+            "JumpPoolProp",
+            "NodeLocalPoint",
+            "PocketVirtualList",
+            "PocketVirtualListProps",
+            "SkinVirtualList",
+            "createFastText",
+            "createFrameProfiler",
+            "createJumpPool",
+            "formatThousands",
+            "resolveNodeLocalPoint",
+            "syncFastStyle",
+            "writeFastText"
+          ],
+          "sourceSha256": "bc298ea55940380b996d112a70170b8192bdc6d44538545ab18afa006897e521",
+          "reexports": [
+            "export type { VirtualListHandle, VirtualListProps };"
+          ]
+        },
+        {
+          "file": "packages/pocket_ui/src/files.ts",
+          "declarations": [
+            "POCKET_FILES_CHUNK_BYTES",
+            "PocketFileChunk",
+            "PocketFilesClient",
+            "PocketFilesError",
+            "PocketFilesPickOptions",
+            "PocketPickedFile",
+            "createPocketFilesClient",
+            "pickOpenFiles"
+          ],
+          "sourceSha256": "f736a0faa2530f2b8e1039c61e316dc95bf4cabf5fe15e0354ca1029ed443f34",
+          "reexports": []
+        },
+        {
+          "file": "packages/pocket_ui/src/flutter-widgets.tsx",
+          "declarations": [
+            "Chip",
+            "Divider",
+            "FloatingActionButton",
+            "FlutterChip",
+            "FlutterDivider",
+            "FlutterFloatingActionButton",
+            "FlutterIconButton",
+            "FlutterLinearProgressIndicator",
+            "FlutterNavigationDestination",
+            "IconButton",
+            "LinearProgressIndicator",
+            "NavigationDestination"
+          ],
+          "sourceSha256": "7b7a51717d425cae6c4536d629231f8c23185290696d79c7ca205c08b5e08328",
+          "reexports": []
+        },
+        {
+          "file": "packages/pocket_ui/src/graphics.ts",
+          "declarations": [
+            "POCKET_GRAPHICS_VERSION",
+            "POCKET_SVG_ICON_SPECS",
+            "SvgIconSpec"
+          ],
+          "sourceSha256": "5bf5836bbe669d81edcf9cea3ef19095c9a8d26c61df57bbd16cc50a424eb956",
+          "reexports": []
+        },
+        {
+          "file": "packages/pocket_ui/src/host.ts",
+          "declarations": [
+            "BridgeObject",
+            "BridgeValue",
+            "DEFAULT_SYSTEM_PRESETS",
+            "HOST_BRIDGE_MAX_DIAGNOSTICS",
+            "HostBridge",
+            "HostBridgeAbiError",
+            "HostBridgeDiagnostic",
+            "HostBridgeDiagnosticKind",
+            "HostBridgeOptions",
+            "HostDisplayViewportSnapshot",
+            "HostErrorShape",
+            "HostEvent",
+            "HostEventListener",
+            "HostPacketHandler",
+            "HostRequestOptions",
+            "HostResponse",
+            "HostSend",
+            "HostSystemPresetsSnapshot",
+            "JsonObject",
+            "JsonPrimitive",
+            "JsonValue",
+            "MiniAppPresentationStyle",
+            "MiniAppPresentationStyleInput",
+            "PocketSystemDensity",
+            "PocketSystemPresets",
+            "SYSTEM_PRESETS_EVENT",
+            "createHostBridge",
+            "forwardHostPacket",
+            "hostError",
+            "isSystemPresetsEvent",
+            "normalizePresentationStyle",
+            "parseSystemPresets",
+            "systemPresetsBridgeObject"
+          ],
+          "sourceSha256": "7a983ea69369cf6e66913efe7e88181c032d7b33877cf4e7ff54b0595ac5b30a",
+          "reexports": []
+        },
+        {
+          "file": "packages/pocket_ui/src/images.ts",
+          "declarations": [
+            "POCKET_IMAGE_MAX_HEIGHT",
+            "POCKET_IMAGE_MAX_IMG_BYTES",
+            "POCKET_IMAGE_MAX_PIXELS",
+            "POCKET_IMAGE_MAX_TEXTURE_HEIGHT",
+            "POCKET_IMAGE_MAX_TEXTURE_WIDTH",
+            "POCKET_IMAGE_MAX_WIDTH",
+            "PocketImageCaptureOptions",
+            "PocketImageReference",
+            "PocketImagesClient",
+            "PocketImagesError",
+            "PocketStoredImageData",
+            "createPocketImagesClient"
+          ],
+          "sourceSha256": "92385328c39c0b9f875c2c6fcb155eac85f6092248960a6e2a036c26b90b01c2",
+          "reexports": []
+        },
+        {
+          "file": "packages/pocket_ui/src/images.tsx",
+          "declarations": [
+            "PocketStoredImage",
+            "PocketStoredImageProps"
+          ],
+          "sourceSha256": "b47a28471f1a885f8a47a224c66f7012c80042f88da7d34c15324045385ec0d7",
+          "reexports": [
+            "export { createPocketImagesClient, PocketImagesError, POCKET_IMAGE_MAX_HEIGHT, POCKET_IMAGE_MAX_IMG_BYTES, POCKET_IMAGE_MAX_PIXELS, POCKET_IMAGE_MAX_TEXTURE_HEIGHT, POCKET_IMAGE_MAX_TEXTURE_WIDTH, POCKET_IMAGE_MAX_WIDTH, type PocketImageCaptureOptions, type PocketImageReference, type PocketImagesClient, type PocketStoredImageData, } from \"./images.ts\";"
+          ]
+        },
+        {
+          "file": "packages/pocket_ui/src/index.ts",
+          "declarations": [],
+          "sourceSha256": "aa1e45f4e6f36e40b23c97d8bb2c56b72587884831f9a397a1a3c765d9a03cd1",
+          "reexports": [
+            "export * from \"./ui.tsx\";",
+            "export * from \"./route.tsx\";",
+            "export * from \"./mobile.tsx\";",
+            "export * from \"./navigation.tsx\";",
+            "export * from \"./legacy.ts\";",
+            "export * from \"./responsive.ts\";",
+            "export * from \"./display.ts\";",
+            "export * from \"./accessibility.ts\";",
+            "export * from \"./semantics.ts\";",
+            "export * from \"./graphics.ts\";",
+            "export * from \"./media.ts\";",
+            "export * from \"./video.tsx\";",
+            "export * from \"./updates.ts\";",
+            "export * from \"./flutter-widgets.tsx\";",
+            "export * from \"./inline-text.tsx\";",
+            "export * from \"./apple.tsx\";",
+            "export * from \"./bytes.ts\";",
+            "export * from \"./skins.tsx\";",
+            "export * from \"./router.tsx\";",
+            "export * from \"./fast.tsx\";",
+            "export * from \"./system-surfaces.tsx\";",
+            "export * from \"./tree.tsx\";",
+            "export * from \"./split-pane.tsx\";",
+            "export * from \"./tabs.tsx\";",
+            "export * from \"./toast-host.tsx\";"
+          ]
+        },
+        {
+          "file": "packages/pocket_ui/src/inline-text.tsx",
+          "declarations": [
+            "InlineText",
+            "InlineTextHandle",
+            "InlineTextLayout",
+            "InlineTextLinkLayout",
+            "InlineTextProps",
+            "InlineTextRect",
+            "InlineTextRef",
+            "InlineTextRuby",
+            "InlineTextRun"
+          ],
+          "sourceSha256": "ed9c064214e46e5786989776438af026fbccc4c2111aa19df2c3a9a9ea5526b2",
+          "reexports": [
+            "export { inlineFontSlot, type InlineFontRole };"
+          ]
+        },
+        {
+          "file": "packages/pocket_ui/src/legacy.ts",
+          "declarations": [
+            "GlassShape",
+            "LiquidGlassRecipe",
+            "TRANSITION_MODES",
+            "TransitionDescriptor",
+            "TransitionMode",
+            "buildLiquidGlassRecipe",
+            "computeTransitionDescriptor"
+          ],
+          "sourceSha256": "2b7ce7d2c9e7f062c5c7ceeb7f2177155030126e3aeb81dda54e5c42331bd2db",
+          "reexports": []
+        },
+        {
+          "file": "packages/pocket_ui/src/media.ts",
+          "declarations": [
+            "MediaController",
+            "MediaControllerOptions",
+            "MediaEntryConfiguration",
+            "MediaEntryOptions",
+            "MediaLifecycleEvent",
+            "MediaLifecycleState",
+            "MediaRegistration",
+            "VideoConfigureMethod",
+            "VideoMediaMethod",
+            "VideoMediaRequestError",
+            "VideoPlaybackMethod",
+            "VideoRequestMethod",
+            "VideoSnapshot",
+            "createMediaController"
+          ],
+          "sourceSha256": "9155ae8ee9c137a96189de91465f09c1db31b6e37e4b3175693c1ab5110333ce",
+          "reexports": []
+        },
+        {
+          "file": "packages/pocket_ui/src/mobile.tsx",
+          "declarations": [
+            "Accordion",
+            "ActionSheet",
+            "Alert",
+            "AlertDialog",
+            "AppBar",
+            "AspectRatio",
+            "Avatar",
+            "Badge",
+            "Breadcrumb",
+            "ButtonGroup",
+            "Calendar",
+            "CardContent",
+            "CardDescription",
+            "CardFooter",
+            "CardHeader",
+            "CardTitle",
+            "Carousel",
+            "Chart",
+            "Checkbox",
+            "Collapsible",
+            "Combobox",
+            "Command",
+            "ContextMenu",
+            "DataTable",
+            "DatePicker",
+            "DesignDensityProvider",
+            "Dialog",
+            "Drawer",
+            "DropdownMenu",
+            "ElevatedButton",
+            "Empty",
+            "FilledButton",
+            "FormField",
+            "GlassSurface",
+            "HoverCard",
+            "InputGroup",
+            "InputOTP",
+            "Item",
+            "Kbd",
+            "Label",
+            "ListTile",
+            "MOBILE_THEME_DARK",
+            "MOBILE_THEME_LIGHT",
+            "Menubar",
+            "MobileAccent",
+            "MobileAccordion",
+            "MobileActionSheet",
+            "MobileAlert",
+            "MobileAppBar",
+            "MobileAvatar",
+            "MobileBadge",
+            "MobileButton",
+            "MobileButtonProps",
+            "MobileCard",
+            "MobileCardProps",
+            "MobileCheckbox",
+            "MobileColor",
+            "MobileDangerButton",
+            "MobileDialog",
+            "MobileFilledButton",
+            "MobileListTile",
+            "MobileOutlinedButton",
+            "MobileParagraph",
+            "MobileParagraphProps",
+            "MobilePopup",
+            "MobilePopupAction",
+            "MobilePresenceTransition",
+            "MobileProgress",
+            "MobileRadioGroup",
+            "MobileScaffold",
+            "MobileSegmentedControl",
+            "MobileSkeleton",
+            "MobileStepper",
+            "MobileSwitch",
+            "MobileSwitchProps",
+            "MobileTag",
+            "MobileTextButton",
+            "MobileTheme",
+            "MobileThemeProvider",
+            "MobileToast",
+            "MobileTonalButton",
+            "NavigationMenu",
+            "OutlinedButton",
+            "Pagination",
+            "PlatformTextureSurface",
+            "Popover",
+            "Popup",
+            "ProgressBar",
+            "RadioGroup",
+            "Resizable",
+            "Scaffold",
+            "ScrollArea",
+            "ScrollFade",
+            "SegmentedControl",
+            "Select",
+            "SemanticTone",
+            "Separator",
+            "ShadcnAspectRatio",
+            "ShadcnBreadcrumb",
+            "ShadcnButtonGroup",
+            "ShadcnCalendar",
+            "ShadcnCardContent",
+            "ShadcnCardDescription",
+            "ShadcnCardFooter",
+            "ShadcnCardHeader",
+            "ShadcnCardTitle",
+            "ShadcnCarousel",
+            "ShadcnChart",
+            "ShadcnCollapsible",
+            "ShadcnCombobox",
+            "ShadcnCommand",
+            "ShadcnCommandItem",
+            "ShadcnContextMenu",
+            "ShadcnDataTable",
+            "ShadcnDatePicker",
+            "ShadcnDrawer",
+            "ShadcnDropdownMenu",
+            "ShadcnEmpty",
+            "ShadcnFormField",
+            "ShadcnHoverCard",
+            "ShadcnInputGroup",
+            "ShadcnInputOTP",
+            "ShadcnInvoiceRow",
+            "ShadcnItem",
+            "ShadcnKbd",
+            "ShadcnLabel",
+            "ShadcnMenubar",
+            "ShadcnNavigationMenu",
+            "ShadcnPagination",
+            "ShadcnPopover",
+            "ShadcnResizable",
+            "ShadcnScrollArea",
+            "ShadcnScrollFade",
+            "ShadcnSelect",
+            "ShadcnSeparator",
+            "ShadcnSheet",
+            "ShadcnSidebar",
+            "ShadcnSpinner",
+            "ShadcnTable",
+            "ShadcnTextarea",
+            "ShadcnToggleGroup",
+            "ShadcnTooltip",
+            "ShadcnTypography",
+            "Sheet",
+            "Sidebar",
+            "Skeleton",
+            "Slider",
+            "Sonner",
+            "Spinner",
+            "Stepper",
+            "Switch",
+            "Table",
+            "Tabs",
+            "Tag",
+            "TextButton",
+            "Textarea",
+            "Toast",
+            "ToggleGroup",
+            "TonalButton",
+            "Tooltip",
+            "Typography",
+            "createMobileTheme",
+            "inferFontSlotFromClass",
+            "toMobileColor",
+            "useAnimatedNumber",
+            "useDesignDensity",
+            "useMobileTheme",
+            "usePresenceTransition",
+            "useStateTransition",
+            "useWindowSizeClass",
+            "wrapTextLines"
+          ],
+          "sourceSha256": "9bb35893f17b4044abce111762424326c6de2ec92a9c3dbe4ecb69882ed60388",
+          "reexports": [
+            "export { MOBILE_MOTION, motionEaseInOut, motionEaseOut } from \"./motion.ts\";"
+          ]
+        },
+        {
+          "file": "packages/pocket_ui/src/motion.ts",
+          "declarations": [
+            "MOBILE_MOTION",
+            "motionEaseInOut",
+            "motionEaseOut",
+            "stepMotionSpring"
+          ],
+          "sourceSha256": "66fea7214c38b3dc53dde3d2c01ac2a33e22795c207d46e66b07e5c3f93d02e9",
+          "reexports": []
+        },
+        {
+          "file": "packages/pocket_ui/src/navigation.tsx",
+          "declarations": [
+            "MobileBackButton",
+            "MobileBackButtonProps"
+          ],
+          "sourceSha256": "f8116e55407e242f11c5b530a1f0139bc1ea95289188a97453630c3fb04fc4a5",
+          "reexports": []
+        },
+        {
+          "file": "packages/pocket_ui/src/permissions.ts",
+          "declarations": [
+            "PocketPermissionResult",
+            "PocketPermissionStatus",
+            "createPocketPermissionsClient"
+          ],
+          "sourceSha256": "f0b6e7e2f94cb4cab9eaaacfeb2217246fa6c4cb4066a7a985bfa8dda5c7b837",
+          "reexports": []
+        },
+        {
+          "file": "packages/pocket_ui/src/platform-experience.ts",
+          "declarations": [
+            "PlatformExperience",
+            "PlatformExperienceOptions",
+            "PlatformHaptics",
+            "PlatformLinkSubscription",
+            "PlatformLinkSubscriptionOptions",
+            "PlatformLinks",
+            "PlatformStreamError",
+            "PlatformSystemUi",
+            "createPlatformExperience",
+            "createPocketPlatformExperience",
+            "isUnsupportedPlatformError"
+          ],
+          "sourceSha256": "ba3ee8bad4fa0c8f09b0fcf246ff5a37220d80af7c13344a8d740221c5d3cf75",
+          "reexports": []
+        },
+        {
+          "file": "packages/pocket_ui/src/platform.ts",
+          "declarations": [
+            "AppLaunch",
+            "AppLaunchOptions",
+            "AppMessage",
+            "AppResult",
+            "MiniAppUpdateStatus",
+            "MiniAppUpdateStatusOptions",
+            "PlatformStorageOperation",
+            "PocketPlatformClientOptions",
+            "createPocketPlatformClient"
+          ],
+          "sourceSha256": "72ebfe2593c265636a23d991a3acea27667633ac68f0b88f1f877bf2423b145f",
+          "reexports": [
+            "export { createSystemPresets, DEFAULT_SYSTEM_PRESETS, getSystemPresetsSnapshot, isSystemPresetsEvent, normalizePresentationStyle, parseSystemPresets, subscribeSystemPresets, SYSTEM_PRESETS_EVENT, systemPresetsBridgeObject, useSystemPresets, type MiniAppPresentationStyle, type MiniAppPresentationStyleInput, type PocketSystemDensity, type PocketSystemPresets, type SystemPresetsOptions, };"
+          ]
+        },
+        {
+          "file": "packages/pocket_ui/src/recording.ts",
+          "declarations": [
+            "DEFAULT_EFFECT_MAX_BYTES",
+            "DEFAULT_EFFECT_MAX_ENTRIES",
+            "DEFAULT_EFFECT_MAX_MISMATCH_BYTES",
+            "DEFAULT_EFFECT_MAX_MISMATCH_ENTRIES",
+            "EffectRecord",
+            "EffectRecordStatus",
+            "EffectRecorder",
+            "EffectRecorderOptions",
+            "EffectReplay",
+            "EffectReplayOptions",
+            "EffectTape",
+            "ExportRecordingOptions",
+            "InputTape",
+            "PocketBuildMetadata",
+            "PocketJsonPrimitive",
+            "PocketJsonValue",
+            "PocketRecording",
+            "RECORDING_VERSION",
+            "RecordedError",
+            "RecordingLimits",
+            "RecordingMismatch",
+            "RecordingMismatchError",
+            "RecordingMismatchKind",
+            "RecordingValidationError",
+            "ReplayRecordingOptions",
+            "captureRecording",
+            "captureUpstreamTape",
+            "checkInputTape",
+            "createEffectRecorder",
+            "createEffectReplayDriver",
+            "currentBuildMetadata",
+            "dumpCurrentInputTape",
+            "dumpInputTape",
+            "dumpRecording",
+            "exportRecording",
+            "getInputTape",
+            "installEffectRecordingDriver",
+            "installEffectReplayDriver",
+            "replayInputTape",
+            "replayRecording",
+            "replayTape",
+            "setBuildMetadata",
+            "validateEffectTape",
+            "validateInputTape",
+            "validateRecording",
+            "validateTape"
+          ],
+          "sourceSha256": "0ec3d1ab42853bc3e890a9377152b102f2762f88c0d02485b56a5484138cf60e",
+          "reexports": []
+        },
+        {
+          "file": "packages/pocket_ui/src/responsive.ts",
+          "declarations": [
+            "DISPLAY_CONTOUR_BOTTOM_TRIM_PX",
+            "DISPLAY_CONTOUR_CLEARANCE_PX",
+            "DISPLAY_CONTOUR_RAMP_PX",
+            "DISPLAY_UI_SAFETY_GAP",
+            "DesignDensity",
+            "DisplayContourBandOptions",
+            "DisplayGeometry",
+            "DisplayInsets",
+            "DisplayOcclusionAvoidance",
+            "DisplayOcclusionAvoidanceOptions",
+            "DisplayPane",
+            "DisplayRegion",
+            "DisplayRegionFrame",
+            "DisplayRegionKind",
+            "DisplaySideContourReserves",
+            "EMPTY_DISPLAY_GEOMETRY",
+            "ResponsiveLayout",
+            "WindowSizeClass",
+            "availableDisplayPanes",
+            "availableDisplayRect",
+            "avoidDisplayOcclusions",
+            "bottomBarInsets",
+            "deriveDesignDensity",
+            "deriveResponsiveLayout",
+            "deriveWindowSizeClass",
+            "displayPane",
+            "hasActiveSideOcclusions",
+            "hasLocalLeftOcclusionInset",
+            "hasLocalRightOcclusionInset",
+            "hasLocalTopRightOcclusionInset",
+            "leftOcclusionFrames",
+            "pageInsets",
+            "parseDisplayGeometry",
+            "reservedInsets",
+            "rightOcclusionFrames",
+            "sideContourReservesForBand",
+            "topRightContourReserveForBand",
+            "topRightOcclusionFrame",
+            "topRightOcclusionFrames"
+          ],
+          "sourceSha256": "9e6a3c1a29c6e1e99d58a86a0af494fad831d1100fbb7f8b715d25bdf2a4c9be",
+          "reexports": []
+        },
+        {
+          "file": "packages/pocket_ui/src/route.tsx",
+          "declarations": [
+            "RouteActiveSource",
+            "RouteActivityContext",
+            "RouteView",
+            "RouteViewProps",
+            "useRouteActive"
+          ],
+          "sourceSha256": "344911a783f04977d5da31c86798b3a4c911f43df1ad29e850c0e0970c7d5d43",
+          "reexports": []
+        },
+        {
+          "file": "packages/pocket_ui/src/router.tsx",
+          "declarations": [
+            "BindPlatformLinksOptions",
+            "BuildUriOptions",
+            "CompiledRoutePattern",
+            "InferCodecType",
+            "InferRouteParams",
+            "InferSchemaState",
+            "MatchedRoute",
+            "MiniAppDeepLinkPayload",
+            "NavigationHistoryAction",
+            "ParsedPocketUri",
+            "PocketHistoryEntry",
+            "PocketNavigateOptions",
+            "PocketRadixMatcher",
+            "PocketRouteDefinition",
+            "PocketRouteScope",
+            "PocketRouter",
+            "PocketRouterOptions",
+            "PocketRouterProvider",
+            "QueryRecord",
+            "QueryValue",
+            "STACK_QUERY_PARAM",
+            "SearchHistoryMode",
+            "SearchSyncOptions",
+            "StateCodec",
+            "UriNormalizeOptions",
+            "UseSearchStateOptions",
+            "compileRoutePattern",
+            "createPocketRouter",
+            "createRouteMatcher",
+            "createStateCodec",
+            "decodeUriPart",
+            "deepEqualState",
+            "encodeUriPart",
+            "extractLinkUri",
+            "fillRoutePattern",
+            "normalizePathname",
+            "parsePocketUri",
+            "parseSearchString",
+            "parseSearchWithSchema",
+            "routeParam",
+            "serializeSearchWithSchema",
+            "stateParam",
+            "stringifySearchRecord",
+            "useLocation",
+            "useOptionalPocketRouter",
+            "usePocketRouter",
+            "useRouteParams",
+            "useSearchState",
+            "useSearchStates"
+          ],
+          "sourceSha256": "555d63a14346efb696249f5944f6f7baeecd1b7743c9eadc934ce7914ea396f5",
+          "reexports": []
+        },
+        {
+          "file": "packages/pocket_ui/src/semantics.ts",
+          "declarations": [
+            "ACCESSIBILITY_ACTION_EVENT",
+            "ACCESSIBILITY_SNAPSHOT_EVENT",
+            "AppleSemanticControl",
+            "AppleSemanticNodeRef",
+            "AppleSemanticRect",
+            "AppleSemanticRole",
+            "AppleSemanticsBridge",
+            "AppleSemanticsContext",
+            "AppleSemanticsOptions",
+            "AppleSemanticsProvider",
+            "AppleSemanticsProviderProps",
+            "AppleSemanticsStore",
+            "MAX_APPLE_SEMANTIC_CONTROLS",
+            "SemanticValue",
+            "createAppleSemanticsStore",
+            "useAppleSemantics"
+          ],
+          "sourceSha256": "78f8f3c730d20ff683baa1a07c0f9d40236ddfcfc1d7246124101a015e050f7e",
+          "reexports": []
+        },
+        {
+          "file": "packages/pocket_ui/src/skins.tsx",
+          "declarations": [
+            "NamedUiSkinAccent",
+            "SkinAccordion",
+            "SkinAccordionProps",
+            "SkinAlert",
+            "SkinAlertProps",
+            "SkinAppBar",
+            "SkinAppBarProps",
+            "SkinBackdrop",
+            "SkinBackdropProps",
+            "SkinBadge",
+            "SkinBadgeProps",
+            "SkinButton",
+            "SkinButtonProps",
+            "SkinCard",
+            "SkinCardProps",
+            "SkinCheckbox",
+            "SkinCheckboxProps",
+            "SkinDialog",
+            "SkinDialogProps",
+            "SkinEmptyState",
+            "SkinEmptyStateProps",
+            "SkinInput",
+            "SkinInputProps",
+            "SkinListTile",
+            "SkinListTileProps",
+            "SkinMetric",
+            "SkinMetricProps",
+            "SkinNavigationBar",
+            "SkinNavigationBarProps",
+            "SkinParagraph",
+            "SkinParagraphProps",
+            "SkinProgress",
+            "SkinProgressProps",
+            "SkinRadioGroup",
+            "SkinRadioGroupProps",
+            "SkinRadioItem",
+            "SkinScaffold",
+            "SkinScaffoldProps",
+            "SkinSegmentedControl",
+            "SkinSegmentedControlProps",
+            "SkinSegmentedItem",
+            "SkinSheet",
+            "SkinSheetAction",
+            "SkinSheetProps",
+            "SkinSlot",
+            "SkinStepper",
+            "SkinStepperProps",
+            "SkinSwitch",
+            "SkinSwitchProps",
+            "SkinSwitcherBar",
+            "SkinTabs",
+            "SkinToast",
+            "SkinToastProps",
+            "UiSkinAccent",
+            "UiSkinAdapter",
+            "UiSkinButtonVariant",
+            "UiSkinContextValue",
+            "UiSkinId",
+            "UiSkinKit",
+            "UiSkinProvider",
+            "UiSkinProviderSlotProps",
+            "UiSkinSurfaceVariant",
+            "UiSkinThemeMode",
+            "UiSkinTokens",
+            "UiSkinTone",
+            "defaultSkinAdapter",
+            "getUiSkin",
+            "listUiSkins",
+            "registerUiSkin",
+            "resolveDefaultSkinTokens",
+            "useUiSkin"
+          ],
+          "sourceSha256": "d73d6ca3432e3977def83d563c4249887f0de5bba74a9e1edc0feb78ba7b3b37",
+          "reexports": [
+            "export { toMobileColor };"
+          ]
+        },
+        {
+          "file": "packages/pocket_ui/src/split-pane-model.ts",
+          "declarations": [
+            "SplitFixed",
+            "SplitLimits",
+            "clampSplit",
+            "dragSplit"
+          ],
+          "sourceSha256": "cd821b8f35ae9af382a5f9883f3eee828279b365ccd3f6b2df8bfe12dbffd789",
+          "reexports": []
+        },
+        {
+          "file": "packages/pocket_ui/src/split-pane.tsx",
+          "declarations": [
+            "SplitPane",
+            "SplitPaneProps"
+          ],
+          "sourceSha256": "1c4915ef616b682a33e7fa12e36b0a737a57b2314abb36b8c373b9276c25baed",
+          "reexports": [
+            "export * from \"./split-pane-model.ts\";"
+          ]
+        },
+        {
+          "file": "packages/pocket_ui/src/streams.ts",
+          "declarations": [
+            "POCKET_STREAM_MAX_BATCH_BYTES",
+            "POCKET_STREAM_MAX_BATCH_EVENTS",
+            "PocketIncomingStreamListener",
+            "PocketStream",
+            "PocketStreamAdapter",
+            "PocketStreamAdapterOptions",
+            "PocketStreamClose",
+            "PocketStreamDataListener",
+            "PocketStreamEndListener",
+            "PocketStreamError",
+            "PocketStreamErrorListener",
+            "PocketStreamOpenOptions",
+            "PocketStreamState",
+            "createHostStreamAdapter",
+            "createPocketStreamAdapter",
+            "createPocketStreams"
+          ],
+          "sourceSha256": "1fabc56709ed255e4bcc0e7af937ca747b5fe4a96d07a1934416c25e588b398e",
+          "reexports": []
+        },
+        {
+          "file": "packages/pocket_ui/src/surface-catalog.ts",
+          "declarations": [
+            "DEFAULT_SURFACE_ENVIRONMENT",
+            "ECOSYSTEM_SURFACE_PROFILES",
+            "EcosystemFormFactor",
+            "EcosystemId",
+            "EcosystemSurfaceProfile",
+            "MAX_WIDGET_HOTSPOTS",
+            "SURFACE_CONTEXT_EVENT",
+            "SurfaceCatalogGroup",
+            "SurfaceEnvironment",
+            "SurfaceFamily",
+            "SurfaceInputModality",
+            "SurfaceKind",
+            "SurfaceRenderMode",
+            "SurfaceScreenShape",
+            "SurfaceShellSpec",
+            "SurfaceShellVariant",
+            "SurfaceWallpaperBackdrop",
+            "WIDGET_ACTION_EVENT",
+            "WIDGET_SNAPSHOT_EVENT",
+            "deriveSurfaceFormFactor",
+            "getSurfaceProfile",
+            "inscribedRoundInset",
+            "listSurfaceProfiles",
+            "parseSurfaceEnvironment",
+            "surfaceEnvironmentFromProfile",
+            "surfaceGeometryForProfile"
+          ],
+          "sourceSha256": "aac7f762c8178c9d61c650ec9d1b62499110b0c1fbf0a1ce9bebe119c181912a",
+          "reexports": []
+        },
+        {
+          "file": "packages/pocket_ui/src/surfaces.tsx",
+          "declarations": [
+            "EcosystemAdaptiveShell",
+            "EcosystemAdaptiveShellProps",
+            "LiveActivityBanner",
+            "LiveActivityBannerProps",
+            "LockAccessoryWidget",
+            "LockAccessoryWidgetProps",
+            "ResolvedSurfacePalette",
+            "SurfaceEnvironmentOptions",
+            "SurfaceEnvironmentProvider",
+            "SurfaceEnvironmentProviderProps",
+            "TodayWidgetAction",
+            "TodayWidgetCard",
+            "TodayWidgetCardProps",
+            "TodayWidgetMetric",
+            "WearTileSurface",
+            "WearTileSurfaceProps",
+            "WidgetActionLink",
+            "WidgetActionLinkProps",
+            "WidgetHotspot",
+            "WidgetHotspotRect",
+            "WidgetHotspotRegistration",
+            "WidgetSnapshotBridge",
+            "WidgetSnapshotManifest",
+            "WidgetSnapshotProvider",
+            "WidgetSnapshotProviderProps",
+            "WidgetSnapshotStore",
+            "WidgetSnapshotStoreOptions",
+            "WidgetSurface",
+            "WidgetSurfaceProps",
+            "createSurfaceEnvironment",
+            "createWidgetSnapshotStore",
+            "publishWidgetSnapshot",
+            "resolveSurfacePalette",
+            "useSurfaceEnvironment",
+            "useWidgetSnapshots"
+          ],
+          "sourceSha256": "da089c313150e9004c8e64127a94c3079d5da7915292870d1f546b1465deba90",
+          "reexports": [
+            "export * from \"./surface-catalog.ts\";"
+          ]
+        },
+        {
+          "file": "packages/pocket_ui/src/system-memory.ts",
+          "declarations": [
+            "POCKET_MEMORY_POLICIES",
+            "POCKET_MEMORY_POLICY_BUDGETS",
+            "PocketMemoryBudget",
+            "PocketMemoryPolicy"
+          ],
+          "sourceSha256": "6caaf6d3e4f4209d0dc9c7551dbd435cdbb1c4a17dc41d9e3e6d66940a1dbcfe",
+          "reexports": []
+        },
+        {
+          "file": "packages/pocket_ui/src/system-surfaces.tsx",
+          "declarations": [
+            "PocketMiniAppBackGesturePreview",
+            "SystemAppSurfaces"
+          ],
+          "sourceSha256": "fa0d6348dcf6cbc1743af3e3cd360a11b5754657797d53b4df2b9aaf259c5dc8",
+          "reexports": []
+        },
+        {
+          "file": "packages/pocket_ui/src/system.ts",
+          "declarations": [
+            "InstallPocketSystemOptions",
+            "PocketAppPolicy",
+            "PocketSystemBeforeDismissHandler",
+            "PocketSystemCatalogEntry",
+            "PocketSystemDirectLaunchError",
+            "PocketSystemExternalOpenHandler",
+            "PocketSystemExternalOpenRequest",
+            "PocketSystemKernel",
+            "PocketSystemOpenMode",
+            "PocketSystemOpeningApp",
+            "PocketSystemPendingCallSnapshot",
+            "PocketSystemPolicies",
+            "PocketSystemPresetUpdate",
+            "PocketSystemRuntimeSnapshot",
+            "PocketSystemRuntimeState",
+            "PocketSystemSnapshot",
+            "PocketSystemStackSnapshot",
+            "PocketSystemSurfaceBinding",
+            "PocketSystemV1",
+            "installPocketSystem"
+          ],
+          "sourceSha256": "3f00bd5e5fc1dfec0241514f1d56b363643cef906b26dcc332377d986c575c53",
+          "reexports": [
+            "export { DEFAULT_SYSTEM_PRESETS, normalizePresentationStyle, parseSystemPresets, SYSTEM_PRESETS_EVENT, systemPresetsBridgeObject, type MiniAppPresentationStyle, type MiniAppPresentationStyleInput, type PocketSystemDensity, type PocketSystemPresets, };",
+            "export { POCKET_MEMORY_POLICIES, POCKET_MEMORY_POLICY_BUDGETS } from \"./system-memory.ts\";",
+            "export type { PocketMemoryPolicy, PocketMemoryBudget } from \"./system-memory.ts\";"
+          ]
+        },
+        {
+          "file": "packages/pocket_ui/src/tabs-model.ts",
+          "declarations": [
+            "TabsBarItem",
+            "stepTab"
+          ],
+          "sourceSha256": "0a4edcafa2d0a813b93aa1159c6bdcef9f45ed30f42dad70117f65f5d4f51102",
+          "reexports": []
+        },
+        {
+          "file": "packages/pocket_ui/src/tabs.tsx",
+          "declarations": [
+            "TabsBar",
+            "TabsBarProps"
+          ],
+          "sourceSha256": "891d9d58c1333c00894e8d7d1989cbbda05951356be64f282fcdb8c8f1b7532e",
+          "reexports": [
+            "export * from \"./tabs-model.ts\";"
+          ]
+        },
+        {
+          "file": "packages/pocket_ui/src/toast-host.tsx",
+          "declarations": [
+            "ToastHost",
+            "ToastItem",
+            "ToastTone"
+          ],
+          "sourceSha256": "b0a60b99968ba50a295815720d1f7a1834e9cde2b7e80c704693df58b45078ee",
+          "reexports": []
+        },
+        {
+          "file": "packages/pocket_ui/src/tree-model.ts",
+          "declarations": [
+            "FlatFile",
+            "TreeNode",
+            "TreeRow",
+            "buildTree",
+            "toggled",
+            "visibleRows"
+          ],
+          "sourceSha256": "b29e79f56d8b6e48bba4306595fc65b9b480712788098fcfadcae740e2fc0a63",
+          "reexports": []
+        },
+        {
+          "file": "packages/pocket_ui/src/tree.tsx",
+          "declarations": [
+            "Tree",
+            "TreeProps"
+          ],
+          "sourceSha256": "b907cffc933b4187f99a10bcaa04ff2ab7704034ee8e0ccd42ec63e4e37445a3",
+          "reexports": [
+            "export * from \"./tree-model.ts\";"
+          ]
+        },
+        {
+          "file": "packages/pocket_ui/src/ui.tsx",
+          "declarations": [
+            "ActionButton",
+            "ActionButtonProps",
+            "Badge",
+            "BottomNavigationBar",
+            "Button",
+            "Card",
+            "CommittedNodeRect",
+            "ContourConsumedContext",
+            "DesktopScrollPage",
+            "DetailModal",
+            "EmptyState",
+            "Header",
+            "HeaderProps",
+            "InputField",
+            "InputFieldAppearance",
+            "InputFieldColor",
+            "List",
+            "ListItem",
+            "MINI_APP_HOST_ACTION_RESERVE",
+            "MetricCard",
+            "MiniBarChart",
+            "NavigationBar",
+            "NavigationBarProps",
+            "NavigationItem",
+            "NavigationRoute",
+            "PageIntro",
+            "Row",
+            "SafeAreaEdge",
+            "SafeAreaEdges",
+            "SafeAreaReservedActions",
+            "SafeAreaScaffold",
+            "SafeAreaScaffoldContext",
+            "SafeAreaScaffoldContextValue",
+            "SafeAreaScaffoldProps",
+            "SafeAreaSlot",
+            "ScrollContourItem",
+            "ScrollContourOptions",
+            "ScrollablePage",
+            "ScrollablePageContext",
+            "ScrollablePageContextValue",
+            "SectionHeading",
+            "StatusBar",
+            "TabBar",
+            "TabItem",
+            "Tabs",
+            "TextInputParams",
+            "TileGrid",
+            "ViewText",
+            "deliverTextInputEvent",
+            "getActiveTextInputSession",
+            "parseTextInputParams",
+            "readCommittedNodeRect",
+            "registerDesktopScrollPage",
+            "useScrollContourReserve"
+          ],
+          "sourceSha256": "ed0ef8f92d507676023a717dd791d0d3fe06253040b7251d4e7c8e78b3d3abab",
+          "reexports": [
+            "export * from \"./mobile.tsx\";"
+          ]
+        },
+        {
+          "file": "packages/pocket_ui/src/update_state.ts",
+          "declarations": [
+            "POCKET_UPDATE_STATE_MAX_BYTES",
+            "POCKET_UPDATE_STATE_MAX_DEPTH",
+            "POCKET_UPDATE_STATE_MAX_NODES",
+            "POCKET_UPDATE_STATE_PROTOCOL",
+            "PocketUpdateState",
+            "PocketUpdateStateCurrent",
+            "PocketUpdateStateError",
+            "PocketUpdateStateOptions",
+            "PocketUpdateStateStorage",
+            "PocketUpdateStateTarget",
+            "createPocketUpdateState"
+          ],
+          "sourceSha256": "a2e92a7a238615752ce82b00cc882b50384fd0f04ccd9c88b5923bae103b4e7d",
+          "reexports": []
+        },
+        {
+          "file": "packages/pocket_ui/src/updates.ts",
+          "declarations": [
+            "PlanPackageUpdateOptions",
+            "PocketManifestAssetShape",
+            "PocketManifestBundleShape",
+            "PocketManifestFileShape",
+            "PocketManifestPakPartShape",
+            "PocketPreparedUpdateSummary",
+            "PocketUpdateCheckRequest",
+            "PocketUpdateClient",
+            "PocketUpdateClientOptions",
+            "PocketUpdateDeliveryMode",
+            "PocketUpdateDiff",
+            "PocketUpdateManifestShape",
+            "PocketUpdatePlan",
+            "PocketUpdatePlanError",
+            "PocketUpdateRefreshResult",
+            "PocketUpdateResolvedMode",
+            "PocketUpdateScope",
+            "PocketUpdateStatusSnapshot",
+            "PocketUpdateTarget",
+            "createPocketUpdateClient",
+            "diffUpdateManifests",
+            "planPackageUpdate"
+          ],
+          "sourceSha256": "2fa515161383ab5227f02a3022b2813ec3db84119e0234022256c16ebd2ef3a8",
+          "reexports": [
+            "export type { PocketUpdateStateOptions } from \"./update_state.ts\";"
+          ]
+        },
+        {
+          "file": "packages/pocket_ui/src/video.tsx",
+          "declarations": [
+            "Video",
+            "VideoFit",
+            "VideoProps"
+          ],
+          "sourceSha256": "823d26a75a45e0ebaca063544a2d32e614c1ffe782d712b18d5d63c17e4fbdb9",
+          "reexports": []
+        }
+      ]
+    },
+    {
+      "name": "@pocket/vn",
+      "manifest": "packages/pocket_vn/package.json",
+      "scripts": {
+        "test": "bun test test"
+      },
+      "bin": {},
+      "exports": {
+        ".": "./src/index.ts",
+        "./types": "./src/types.ts",
+        "./video": "./src/video.ts",
+        "./authoring": "./src/authoring.ts",
+        "./view": "./src/view.tsx",
+        "./clock": "./src/clock.ts",
+        "./audio": "./src/audio.ts",
+        "./localization": "./src/localization.ts",
+        "./collections": "./src/collections.ts",
+        "./inventory": "./src/inventory.ts",
+        "./mesh": "./src/mesh.ts",
+        "./mesh-view": "./src/mesh-view.tsx",
+        "./skin": "./src/skin.ts",
+        "./skin-view": "./src/skin-view.tsx",
+        "./spine": "./src/spine.ts",
+        "./live2d": "./src/live2d.ts",
+        "./atmosphere": "./src/atmosphere.ts",
+        "./atmosphere-view": "./src/atmosphere-view.tsx",
+        "./choice-surface": "./src/choice-surface.ts",
+        "./choice-surface-view": "./src/choice-surface-view.tsx"
+      },
+      "sourceDeclarations": [
+        {
+          "file": "packages/pocket_vn/src/asset-references.ts",
+          "declarations": [
+            "NovelAssetReferenceDiagnostic",
+            "validateNovelAssetReferences"
+          ],
+          "sourceSha256": "122781008be20288d8c5004e8964ac461715e75099b9d7c4f7b47397faa0eed1",
+          "reexports": []
+        },
+        {
+          "file": "packages/pocket_vn/src/atmosphere-view.tsx",
+          "declarations": [
+            "NovelAtmosphereView"
+          ],
+          "sourceSha256": "83b3779eb6dc73f38cc97bc1a60d4da875054c01ca3b1dca618e355fb1624da8",
+          "reexports": []
+        },
+        {
+          "file": "packages/pocket_vn/src/atmosphere.ts",
+          "declarations": [
+            "NovelAtmosphere",
+            "createNovelRainMesh",
+            "novelAtmosphereIssue"
+          ],
+          "sourceSha256": "f573796fba9eaf257068a3f427ac4ec741914d7ca47fdbc2a517b0d9b7e16992",
+          "reexports": []
+        },
+        {
+          "file": "packages/pocket_vn/src/audio.ts",
+          "declarations": [
+            "DEFAULT_NOVEL_AUDIO_MIX",
+            "NovelAudioGroup",
+            "NovelAudioHost",
+            "NovelAudioMix",
+            "NovelAudioOptions",
+            "NovelAudioSource",
+            "createNovelAudioAdapter"
+          ],
+          "sourceSha256": "496cb2e18247ea4f0b02b54aef206a9d3292e4e8dac81f297091c0a2f7bc5769",
+          "reexports": [
+            "export { parseNovelTextSounds, resolveNovelTextSoundCue, validateNovelTextSounds, } from \"./text-sounds.ts\";",
+            "export type { NovelTextSoundsConfig, NovelTextSoundsIssue } from \"./text-sounds.ts\";"
+          ]
+        },
+        {
+          "file": "packages/pocket_vn/src/authoring.ts",
+          "declarations": [
+            "StoryTextDiagnostic",
+            "StoryTextError",
+            "StoryTextLocation",
+            "StoryTextParseResult",
+            "StoryTextSourceMap",
+            "formatStoryText",
+            "parseStoryText"
+          ],
+          "sourceSha256": "7f1780b3b795aa8581b3387adb0ad6b642b908f53713d1c839351ef71c628a4b",
+          "reexports": []
+        },
+        {
+          "file": "packages/pocket_vn/src/background-layers.ts",
+          "declarations": [
+            "NOVEL_BACKGROUND_LAYER_LIMITS",
+            "novelBackgroundLayersInstructionIssue",
+            "novelBackgroundLayersIssue",
+            "resolveNovelBackgroundLayerPose"
+          ],
+          "sourceSha256": "c773e2d1a34752d1759616711860d2631367ec96294b169f2f5c25a9b58f534d",
+          "reexports": []
+        },
+        {
+          "file": "packages/pocket_vn/src/blueprint.ts",
+          "declarations": [
+            "NovelBlueprintNodeSpec",
+            "addNovelBlueprintNode",
+            "novelBlueprintMetadataIssue",
+            "novelBlueprintMetadataIssueField"
+          ],
+          "sourceSha256": "0f5670bc1114ef417dda8b8121e01b161e0f89ad5017f5eeb9009c9bf7bc246f",
+          "reexports": []
+        },
+        {
+          "file": "packages/pocket_vn/src/camera.ts",
+          "declarations": [
+            "DEFAULT_NOVEL_CAMERA",
+            "NOVEL_CAMERA_LIMITS",
+            "createNovelCameraMotionState",
+            "novelCameraInstructionIssue",
+            "novelCameraStateIssue",
+            "novelCameraTransformIssue",
+            "resolveNovelCameraPose"
+          ],
+          "sourceSha256": "efa255dde19f49de89dc5ef6d12e05d618470e6c7e5f6f4d52544c66e0afdc91",
+          "reexports": []
+        },
+        {
+          "file": "packages/pocket_vn/src/choice-surface-view.tsx",
+          "declarations": [
+            "NovelChoiceSurfaceView",
+            "NovelChoiceSurfaceViewProps"
+          ],
+          "sourceSha256": "5e5e2cf9e1827abea269cc0fe5023625db2d3639be05ecbdc85b8e2636517fff",
+          "reexports": []
+        },
+        {
+          "file": "packages/pocket_vn/src/choice-surface.ts",
+          "declarations": [
+            "NovelChoiceSurface",
+            "NovelChoiceSurfaceLayout",
+            "NovelChoiceSurfaceOption",
+            "NovelChoiceSurfacePixelRect",
+            "NovelChoiceSurfaceRect",
+            "NovelChoiceSurfaceTarget",
+            "createNovelChoiceSurfaceLayout",
+            "isNovelChoiceSurface",
+            "novelChoiceSurfaceIssue"
+          ],
+          "sourceSha256": "3eaf583fa33ed566e8e7edd51c8ee35a79bcd99158b997bc4b7a94979c60d0c9",
+          "reexports": []
+        },
+        {
+          "file": "packages/pocket_vn/src/clock.ts",
+          "declarations": [
+            "attachNovelClock",
+            "novelNeedsClock"
+          ],
+          "sourceSha256": "27ab40cce5fb3a20f1f1982c7e025ff59eb7a90b5264b267bce850bc27fa46d2",
+          "reexports": []
+        },
+        {
+          "file": "packages/pocket_vn/src/collections.ts",
+          "declarations": [
+            "NovelCollection",
+            "NovelCollectionEntry",
+            "NovelCollectionPortrait",
+            "NovelCollections",
+            "NovelCollectionsValidationContext",
+            "NovelCollectionsValidationIssue",
+            "isNovelCollectionEntryUnlocked",
+            "resolveNovelCollectionPortrait",
+            "validateNovelCollections"
+          ],
+          "sourceSha256": "9433f30b17b59294f00eadaa83a242ebd72ea7a226f90c5cbde6adb1125b9eb1",
+          "reexports": []
+        },
+        {
+          "file": "packages/pocket_vn/src/conditions.ts",
+          "declarations": [
+            "evaluateNovelCondition",
+            "novelConditionIssue"
+          ],
+          "sourceSha256": "410a9d23620a2d56d7509bbd4a326478f1c5a52d7e5a2732598157db982170d5",
+          "reexports": []
+        },
+        {
+          "file": "packages/pocket_vn/src/engine.ts",
+          "declarations": [
+            "NovelEngineError",
+            "SaveDataError",
+            "StepBudgetExceededError",
+            "StoryValidationError",
+            "conditions",
+            "createNovelEngine",
+            "value"
+          ],
+          "sourceSha256": "3d61f5c9dc0b3b10019644c5b06c5d59d1ec63130d139d24289d40df8a6acff6",
+          "reexports": []
+        },
+        {
+          "file": "packages/pocket_vn/src/index.ts",
+          "declarations": [],
+          "sourceSha256": "ff71f0cb909e1e572075a8f12f585e3b9ec8873fabeed2997c93ab76bcefdd13",
+          "reexports": [
+            "export { conditions, createNovelEngine, NovelEngineError, SaveDataError, StepBudgetExceededError, StoryValidationError, value, } from \"./engine.ts\";",
+            "export * from \"./scene.ts\";",
+            "export * from \"./scene-objects.ts\";",
+            "export * from \"./conditions.ts\";",
+            "export * from \"./background-layers.ts\";",
+            "export * from \"./camera.ts\";",
+            "export * from \"./timeline.ts\";",
+            "export * from \"./authoring.ts\";",
+            "export * from \"./blueprint.ts\";",
+            "export * from \"./interchange.ts\";",
+            "export * from \"./manuscript.ts\";",
+            "export * from \"./replay.ts\";",
+            "export * from \"./preview-context.ts\";",
+            "export * from \"./slots.ts\";",
+            "export * from \"./save-codec.ts\";",
+            "export * from \"./save-revision.ts\";",
+            "export * from \"./input.ts\";",
+            "export * from \"./variables.ts\";",
+            "export * from \"./collections.ts\";",
+            "export * from \"./inventory.ts\";",
+            "export * from \"./asset-references.ts\";",
+            "export * from \"./say-presentation.ts\";",
+            "export * from \"./rich-text.ts\";",
+            "export { novelVideoInstructionIssue, novelVideoOverlayStateIssue, novelVideoPlaybackFactIssue, novelVideoSeekIssue } from \"./video-schema.ts\";",
+            "export { novelAtmosphereIssue } from \"./atmosphere.ts\";",
+            "export type { NovelAtmosphere } from \"./atmosphere.ts\";",
+            "export type * from \"./types.ts\";",
+            "export * from \"./voice.ts\";",
+            "export * from \"./localization.ts\";",
+            "export * from \"./mesh.ts\";",
+            "export * from \"./skin.ts\";",
+            "export * from \"./mesh-effect.ts\";",
+            "export * from \"./models.ts\";",
+            "export type { NovelVideoAdapter, NovelVideoAdapterHost, NovelVideoAdapterOptions } from \"./video.ts\";"
+          ]
+        },
+        {
+          "file": "packages/pocket_vn/src/input.ts",
+          "declarations": [
+            "NOVEL_INPUT_NUMBER_RAW_LIMIT",
+            "NOVEL_INPUT_TEXT_RAW_LIMIT",
+            "NovelInputDraftValidation",
+            "novelInputDefaultDraft",
+            "novelInputInstructionIssue",
+            "validateNovelInputDraft"
+          ],
+          "sourceSha256": "4c3ca56f286e8418b3f0a25e8cec7b986b5b69ba7322e201375ca184c0edd1cd",
+          "reexports": []
+        },
+        {
+          "file": "packages/pocket_vn/src/interchange.ts",
+          "declarations": [
+            "StoryInterchangeDiagnostic",
+            "StoryInterchangeDiagnosticCode",
+            "StoryInterchangeParseResult",
+            "formatStoryCsv",
+            "formatStoryMarkdown",
+            "formatStoryTableCsv",
+            "parseStoryCsv",
+            "parseStoryMarkdown",
+            "parseStoryTableCsv"
+          ],
+          "sourceSha256": "ca9e33e00ec9bc83c856e9955848ac0a69b0bebd57d3d9cb6b04a767ec73268b",
+          "reexports": []
+        },
+        {
+          "file": "packages/pocket_vn/src/inventory.ts",
+          "declarations": [
+            "NovelInventory",
+            "NovelInventoryCurrency",
+            "NovelInventoryItem",
+            "NovelInventoryTradeFailureReason",
+            "NovelInventoryTradePlan",
+            "NovelInventoryValidationContext",
+            "NovelInventoryValidationIssue",
+            "NovelTradeInstruction",
+            "planNovelInventoryTrade",
+            "validateNovelInventory"
+          ],
+          "sourceSha256": "1dabcab2b153c8df95e2b3cce067e3c72c4428695072b0fe7d00c50dfc4e4f61",
+          "reexports": []
+        },
+        {
+          "file": "packages/pocket_vn/src/live2d.ts",
+          "declarations": [
+            "NovelLive2dOptions",
+            "NovelLive2dSource",
+            "createBundledNovelLive2dFactory",
+            "createNovelLive2dFactory"
+          ],
+          "sourceSha256": "a12aa716cf3ea0b5bdb6e66dc67fa37390c277cb279d660ed03f064df1b1fdae",
+          "reexports": []
+        },
+        {
+          "file": "packages/pocket_vn/src/localization.ts",
+          "declarations": [
+            "DiagnoseStoryLocaleOptions",
+            "LocalizeStoryOptions",
+            "LocalizedStory",
+            "NOVEL_UI_DEFAULT_MESSAGES",
+            "NOVEL_UI_EN_MESSAGES",
+            "StoryAssetRegistry",
+            "StoryLocaleAssetOverrides",
+            "StoryLocaleCatalog",
+            "StoryLocaleCatalogCollection",
+            "StoryLocaleCatalogCollectionDocument",
+            "StoryLocaleCatalogError",
+            "StoryLocaleChoice",
+            "StoryLocaleDiagnostic",
+            "StoryLocaleDiagnosticCode",
+            "StoryLocaleInput",
+            "applyStoryAssetOverrides",
+            "diagnoseStoryLocale",
+            "localizeStory",
+            "novelCollectionTextKey",
+            "novelInventoryTextKey",
+            "novelSceneObjectTextKey",
+            "novelSourceUiMessages",
+            "parseStoryLocaleCatalog",
+            "parseStoryLocaleCatalogCollection",
+            "rebaseNovelSaveDataForLocale",
+            "serializeStoryLocaleCatalog",
+            "serializeStoryLocaleCatalogCollection"
+          ],
+          "sourceSha256": "3fdfac27b2789f06600cb9ca42d3b1a94c9f2d29ada89e9938668bb20f9161a4",
+          "reexports": []
+        },
+        {
+          "file": "packages/pocket_vn/src/manuscript.ts",
+          "declarations": [
+            "MANUSCRIPT_MAX_CHARACTERS",
+            "MANUSCRIPT_MAX_LINES",
+            "ManuscriptDiagnostic",
+            "ManuscriptImportOptions",
+            "ManuscriptImportResult",
+            "parseNovelManuscript"
+          ],
+          "sourceSha256": "a585edf1c71397471de3008cece92b4ba9f4f160e2b4dfc6847a79efab4c058d",
+          "reexports": []
+        },
+        {
+          "file": "packages/pocket_vn/src/mesh-effect.ts",
+          "declarations": [
+            "encodeNovelMeshEffect"
+          ],
+          "sourceSha256": "d4e40cb9fd1cf1680ae1e8e854de7af1c424a09567c0b701ce028b1524e935f5",
+          "reexports": []
+        },
+        {
+          "file": "packages/pocket_vn/src/mesh-view.tsx",
+          "declarations": [
+            "NovelMeshView",
+            "NovelMeshViewProps"
+          ],
+          "sourceSha256": "5bdb45af24d0b1b0ea6f7fbe2b95cc29025b0628b64967aeec054382294acfd1",
+          "reexports": []
+        },
+        {
+          "file": "packages/pocket_vn/src/mesh.ts",
+          "declarations": [
+            "NovelMeshGeometry",
+            "encodeNovelMesh"
+          ],
+          "sourceSha256": "0fbe42bb296f9b325acdf253e48b4db65aba439e98086c676c9d95638a33c38f",
+          "reexports": []
+        },
+        {
+          "file": "packages/pocket_vn/src/models.ts",
+          "declarations": [
+            "NovelAnimationDriver",
+            "NovelModelDefinition",
+            "NovelModelEffect",
+            "NovelModelFactory",
+            "NovelModelInstance",
+            "NovelModelMesh",
+            "NovelModelPoint",
+            "createNovelAnimationDriver"
+          ],
+          "sourceSha256": "6b2c48f5078a273f6d917476e6ddbbc5c8a29f1f4853b84252d3e5c926414926",
+          "reexports": []
+        },
+        {
+          "file": "packages/pocket_vn/src/preview-context.ts",
+          "declarations": [
+            "NOVEL_CONTEXT_PREVIEW_MAX_TRANSITIONS",
+            "NovelContextPreviewBlocker",
+            "NovelContextPreviewContinueOptions",
+            "NovelContextPreviewOptions",
+            "NovelContextPreviewResult",
+            "NovelContextPreviewRoot",
+            "NovelContextPreviewRootIdentity",
+            "NovelContextPreviewRootOption",
+            "NovelContextPreviewStatus",
+            "continueNovelContextPreview",
+            "createNovelContextPreview",
+            "listNovelContextPreviewRoots"
+          ],
+          "sourceSha256": "0cc15e25cea0be33c823c2fa33fa96818628dd47fa401a4ba5cbd20b50c227ef",
+          "reexports": []
+        },
+        {
+          "file": "packages/pocket_vn/src/replay-schema.ts",
+          "declarations": [
+            "novelReplayEntriesIssue"
+          ],
+          "sourceSha256": "b41eb8349d18a50104843a2b3d47baaa7e8dabf0e5152465758e422044b8e28d",
+          "reexports": []
+        },
+        {
+          "file": "packages/pocket_vn/src/replay.ts",
+          "declarations": [
+            "NovelReplaySource",
+            "createNovelReplayEngine"
+          ],
+          "sourceSha256": "55b7f293e8f037ac802840126cabc0b00606a9748ed05b2d767ca5146fd6229f",
+          "reexports": [
+            "export { novelReplayEntriesIssue } from \"./replay-schema.ts\";"
+          ]
+        },
+        {
+          "file": "packages/pocket_vn/src/rich-text.ts",
+          "declarations": [
+            "NOVEL_SAY_RICH_MAX_ANNOTATION_TEXT_CHARACTERS",
+            "NOVEL_SAY_RICH_MAX_NOTE_TEXT_CHARACTERS",
+            "NOVEL_SAY_RICH_MAX_NOTE_TITLE_CHARACTERS",
+            "NOVEL_SAY_RICH_MAX_PAUSES",
+            "NOVEL_SAY_RICH_MAX_RUBY_CHARACTERS",
+            "NOVEL_SAY_RICH_MAX_SPANS",
+            "interpolateNovelText",
+            "novelSayRichIssue",
+            "novelSayRichTemplateIssue",
+            "resolveNovelSayRich"
+          ],
+          "sourceSha256": "7e5d103199d75a4361de86954ea38de1e95b87bfbb210807ec693219f49d65e3",
+          "reexports": []
+        },
+        {
+          "file": "packages/pocket_vn/src/save-codec.ts",
+          "declarations": [
+            "NovelSaveCodecError",
+            "decodeNovelSaveData",
+            "encodeNovelSaveData"
+          ],
+          "sourceSha256": "15aeafa5adb92538b2c92a942d9f4a3ca5348edc4c0b700218f9982a9a452f87",
+          "reexports": []
+        },
+        {
+          "file": "packages/pocket_vn/src/save-revision.ts",
+          "declarations": [
+            "NovelSaveRevisionError",
+            "NovelStoryRevisionMap",
+            "migrateNovelSaveRevision"
+          ],
+          "sourceSha256": "a6b0436ccd782b2d3c5411196c086ed9b8088e105ab613c2e04c36b690aeb7db",
+          "reexports": []
+        },
+        {
+          "file": "packages/pocket_vn/src/say-presentation.ts",
+          "declarations": [
+            "NOVEL_SAY_PRESENTATIONS",
+            "novelSayPresentationInstructionIssue"
+          ],
+          "sourceSha256": "aeda41b556222b05170546f485c150a115083da0a0c6e85508eebecc6300ae19",
+          "reexports": []
+        },
+        {
+          "file": "packages/pocket_vn/src/scene-objects.ts",
+          "declarations": [
+            "NOVEL_SCENE_OBJECT_LIMITS",
+            "NovelSceneObjectGeometry",
+            "NovelSceneObjectPixelRect",
+            "NovelStageItemReference",
+            "isNovelSceneObjectInteractive",
+            "novelSceneObjectIssue",
+            "novelSceneObjectsIssue",
+            "orderedNovelStageItems",
+            "resolveNovelSceneObjectGeometry"
+          ],
+          "sourceSha256": "a946fced1f24e4b00eb371178d5322bf30a7fe03f63e490324223cbf18269a97",
+          "reexports": []
+        },
+        {
+          "file": "packages/pocket_vn/src/scene.ts",
+          "declarations": [
+            "NOVEL_CHARACTER_TRANSFORM_LIMITS",
+            "novelCharacterTransformIssue",
+            "orderedNovelCharacterIds",
+            "resolveNovelCharacterPlacement",
+            "screenPointToNovelModelPoint"
+          ],
+          "sourceSha256": "a251db8e19a787731e6bbfbc2cdffdb8e169ba063d96ddfd12368527c4918469",
+          "reexports": []
+        },
+        {
+          "file": "packages/pocket_vn/src/skin-view.tsx",
+          "declarations": [
+            "NovelSkinFrame",
+            "NovelSkinFrameProps",
+            "NovelSkinIcon",
+            "NovelSkinIconProps"
+          ],
+          "sourceSha256": "bc714da7873f27964442fab50a7026eba8801241927404aac6b7d4a818dc54b3",
+          "reexports": []
+        },
+        {
+          "file": "packages/pocket_vn/src/skin.ts",
+          "declarations": [
+            "NovelAssetSkin",
+            "NovelAssetSkinFrame",
+            "NovelAssetSkinIcons",
+            "createNovelSkinFrameGeometry",
+            "createNovelSkinIconGeometry",
+            "isNovelAssetSkin"
+          ],
+          "sourceSha256": "c249178a0b59e0906905dba05448c7d57b26d4fa5fa74ba1676f214a2e942785",
+          "reexports": []
+        },
+        {
+          "file": "packages/pocket_vn/src/slots.ts",
+          "declarations": [
+            "NovelSlotError",
+            "NovelSlotErrorCode",
+            "NovelSlotManager",
+            "NovelSlotOperationOptions",
+            "NovelSlotRawStorage",
+            "NovelSlotStorageOperation",
+            "NovelSlotThumbnailOperations",
+            "NovelSlotWriteOptions",
+            "createNovelSlotManager",
+            "readNovelSlotThumbnail"
+          ],
+          "sourceSha256": "2b7050e81b459aa72870c8405a6ae6a3f7dbd0971e9a6522a6d6b9f40e9c2614",
+          "reexports": []
+        },
+        {
+          "file": "packages/pocket_vn/src/spine.ts",
+          "declarations": [
+            "NovelSpineSource",
+            "createBundledNovelSpineFactory",
+            "createNovelSpineFactory"
+          ],
+          "sourceSha256": "09ec4ffc3b703b79c745bc61e374be55230e8a956d563fe1fe762095d88d05c5",
+          "reexports": []
+        },
+        {
+          "file": "packages/pocket_vn/src/text-sounds.ts",
+          "declarations": [
+            "DEFAULT_NOVEL_TEXT_SOUND_INTERVAL_MS",
+            "MAX_NOVEL_TEXT_SOUND_INTERVAL_MS",
+            "MIN_NOVEL_TEXT_SOUND_INTERVAL_MS",
+            "NovelTextSoundsConfig",
+            "NovelTextSoundsIssue",
+            "parseNovelTextSounds",
+            "resolveNovelTextSoundCue",
+            "validateNovelTextSounds"
+          ],
+          "sourceSha256": "38761e1993f69c39da70e9ba51a7445a919fb965d6e111f55a9933512cdd9205",
+          "reexports": []
+        },
+        {
+          "file": "packages/pocket_vn/src/timeline.ts",
+          "declarations": [
+            "novelAuthoredAudioGroupIssue",
+            "novelTimelineDefinitionIssue",
+            "novelTimelineDefinitionsIssue",
+            "novelTimelineEasedProgress",
+            "novelTimelineInstructionIssue",
+            "novelTimelineSegment",
+            "novelTimelineStoryIssue",
+            "sampleNovelTimelineAudioGain"
+          ],
+          "sourceSha256": "d42d9188b77003d42b4bd2503010a5a87c759712f65e656f09efd76d6ef15d5b",
+          "reexports": [
+            "export type { NovelTimelineDefinition };"
+          ]
+        },
+        {
+          "file": "packages/pocket_vn/src/types.ts",
+          "declarations": [
+            "ActiveNovelState",
+            "BacklogEntry",
+            "CallStackFrame",
+            "CharacterModelIntent",
+            "CharacterPosition",
+            "ChoiceOptionDefinition",
+            "ChoiceOptionState",
+            "ChoiceState",
+            "Condition",
+            "EndingState",
+            "EngineEvent",
+            "EngineListener",
+            "EngineSnapshot",
+            "EngineSubscribeOptions",
+            "EngineUpdate",
+            "InputState",
+            "JsonValue",
+            "NovelAudioIntent",
+            "NovelAuthoredAudioGroup",
+            "NovelBackgroundLayer",
+            "NovelBlueprintNodeKind",
+            "NovelBlueprintNodeMetadata",
+            "NovelCameraEasing",
+            "NovelCameraMotion",
+            "NovelCameraMotionState",
+            "NovelCameraShake",
+            "NovelCameraTransform",
+            "NovelCompressedActiveStateV4",
+            "NovelCompressedBacklogEntry",
+            "NovelCompressedBacklogEntryV4",
+            "NovelCompressedRollbackActive",
+            "NovelCompressedRollbackActiveV4",
+            "NovelCompressedRollbackCheckpoint",
+            "NovelCompressedRollbackHistory",
+            "NovelCompressedRollbackHistoryV3",
+            "NovelCompressedRollbackHistoryV4",
+            "NovelCompressedSayRichV4",
+            "NovelCompressedSayStateV4",
+            "NovelDebugAPI",
+            "NovelEngine",
+            "NovelEngineOptions",
+            "NovelExecutionTraceEntry",
+            "NovelExecutionTraceListener",
+            "NovelInputInstruction",
+            "NovelInputValidationCode",
+            "NovelInputValidationError",
+            "NovelMetaState",
+            "NovelMode",
+            "NovelPreferences",
+            "NovelReplayEntry",
+            "NovelSaveData",
+            "NovelSaveDataV2",
+            "NovelSaveDataV3",
+            "NovelSaveDataV4",
+            "NovelSayColorToken",
+            "NovelSayPause",
+            "NovelSayPauseState",
+            "NovelSayPresentation",
+            "NovelSayRich",
+            "NovelSayRichStyle",
+            "NovelSaySpan",
+            "NovelSceneObject",
+            "NovelSceneObjectEffect",
+            "NovelSceneObjectInteraction",
+            "NovelSceneObjectRect",
+            "NovelSlotThumbnail",
+            "NovelStoryBlueprintMetadata",
+            "NovelStoryEditorMetadata",
+            "NovelTimelineActorKeyframe",
+            "NovelTimelineActorTrack",
+            "NovelTimelineActorTransform",
+            "NovelTimelineAudioCue",
+            "NovelTimelineAudioGainKeyframe",
+            "NovelTimelineAudioGainTrack",
+            "NovelTimelineCameraKeyframe",
+            "NovelTimelineDefinition",
+            "NovelTimelineEasing",
+            "NovelTimelineKeyframe",
+            "NovelTimelineState",
+            "NovelVariableDefinition",
+            "NovelVariableInstruction",
+            "NovelVariableLifetime",
+            "RevealTransitionDirection",
+            "RollbackCheckpoint",
+            "SayState",
+            "SceneCharacterUpdate",
+            "SceneTransition",
+            "ScriptPosition",
+            "StageCameraState",
+            "StageCharacter",
+            "StageComposition",
+            "StageState",
+            "StageTransitionState",
+            "StoryDefinition",
+            "StoryInstruction",
+            "ValueExpression",
+            "WaitState"
+          ],
+          "sourceSha256": "def6cdce33de770e5a9023c92ac89725f90f207aec18b48d8d638f7994e55589",
+          "reexports": [
+            "export type { NovelVoicePlaybackFact, NovelVoicePlaybackState, NovelVoiceStatus } from \"./voice.ts\";",
+            "export type { NovelVideoInstruction, NovelVideoOverlayState, NovelVideoPlaybackFact } from \"./video-schema.ts\";"
+          ]
+        },
+        {
+          "file": "packages/pocket_vn/src/variables.ts",
+          "declarations": [
+            "NOVEL_VARIABLE_NAME",
+            "isNovelVariableName",
+            "novelJsonValueIssue",
+            "novelVariableDefinitionsIssue"
+          ],
+          "sourceSha256": "fac7b7bfcb6a40dbf33c668ce83bae1a8047782c65ad11e7b67b06571b1a62d4",
+          "reexports": []
+        },
+        {
+          "file": "packages/pocket_vn/src/video-schema.ts",
+          "declarations": [
+            "NovelVideoInstruction",
+            "NovelVideoOverlayState",
+            "NovelVideoPlaybackFact",
+            "novelVideoInstructionIssue",
+            "novelVideoOverlayStateIssue",
+            "novelVideoPlaybackFactIssue",
+            "novelVideoSeekIssue"
+          ],
+          "sourceSha256": "63bb89bab3f0d182da964f762217639aaefc790653bd923ef3e5aa3d3491a0c5",
+          "reexports": []
+        },
+        {
+          "file": "packages/pocket_vn/src/video.ts",
+          "declarations": [
+            "NovelVideoAdapter",
+            "NovelVideoAdapterHost",
+            "NovelVideoAdapterOptions",
+            "createNovelVideoAdapter"
+          ],
+          "sourceSha256": "812cb1968e1ff8b95317d929b054733c9f6653c329ade502f1f476c8172ea213",
+          "reexports": []
+        },
+        {
+          "file": "packages/pocket_vn/src/view.tsx",
+          "declarations": [
+            "NovelAssets",
+            "NovelStorage",
+            "NovelView",
+            "NovelViewProps"
+          ],
+          "sourceSha256": "38d0f2a51a1e8f1461cbbf484f082fc21754e10f41863ca22c8f78f813491f81",
+          "reexports": []
+        },
+        {
+          "file": "packages/pocket_vn/src/voice.ts",
+          "declarations": [
+            "NOVEL_VOICE_CHANNEL",
+            "NovelVoicePlaybackFact",
+            "NovelVoicePlaybackState",
+            "NovelVoiceStatus",
+            "voiceBlocksAutoAdvance"
+          ],
+          "sourceSha256": "345996b70b51f5aa4bdd4d211007cd3d179e3385ce991715c9eea7114b4704a5",
+          "reexports": []
+        }
+      ]
+    }
+  ],
+  "tooling": [
+    {
+      "manifest": "../package.json",
+      "scripts": {
+        "setup": "npm --prefix sdk run setup",
+        "start": "npm --prefix sdk run editor:start -- --project-root=../demo/js --flutter-root=../demo",
+        "restart": "npm start",
+        "stop": "npm --prefix sdk run editor:stop",
+        "status": "npm --prefix sdk run editor:status",
+        "bootstrap": "npm --prefix sdk run bootstrap --",
+        "doctor": "npm --prefix sdk run doctor --",
+        "build:guest": "npm --prefix sdk run build:guest --",
+        "build:probe": "npm --prefix sdk run build:probe --",
+        "build:web": "npm --prefix sdk run build:web --",
+        "setup:source": "npm --prefix sdk run setup:source --",
+        "bootstrap:source": "npm --prefix sdk run bootstrap:source --",
+        "package:tools": "npm --prefix sdk run package:tools --"
+      },
+      "bin": {}
+    },
+    {
+      "manifest": "package.json",
+      "scripts": {
+        "check:architecture": "python3 scripts/check_architecture.py",
+        "test": "bun test --timeout 60000",
+        "test:demand": "bun test tests/demand_scheduler.test.ts && bun tests/demand_scheduler_native_probe.ts",
+        "test:packages": "bun test scripts/tests/package_update.test.ts",
+        "test:editor": "npm exec --yes --package=bun@1.4.4 -- bun test --max-concurrency=1 editor/test/*.test.ts",
+        "test:editor:live": "bun editor/test/editor_live_probe.ts",
+        "editor": "node scripts/editor_service.mjs start",
+        "init": "node scripts/toolchain.mjs run pocket.ts init",
+        "build": "node scripts/toolchain.mjs run pocket.ts build",
+        "build:web": "node scripts/toolchain.mjs run scripts/build_web.ts",
+        "export:web-sdk": "node scripts/toolchain.mjs run scripts/export_web_sdk.ts",
+        "cos": "node scripts/toolchain.mjs run packages/pocket_cos/src/cli.ts",
+        "preview:wechat": "node scripts/toolchain.mjs run scripts/preview_wechat.ts",
+        "editor:start": "node scripts/editor_service.mjs start",
+        "editor:restart": "node scripts/editor_service.mjs restart",
+        "editor:stop": "node scripts/editor_service.mjs stop",
+        "editor:status": "node scripts/editor_service.mjs status",
+        "setup": "node scripts/toolchain.mjs setup",
+        "bootstrap": "node scripts/toolchain.mjs bootstrap",
+        "build:guest": "node scripts/toolchain.mjs build:guest",
+        "build:probe": "node scripts/toolchain.mjs build:probe",
+        "doctor": "node scripts/toolchain.mjs doctor",
+        "setup:source": "node scripts/toolchain.mjs setup:source",
+        "bootstrap:source": "node scripts/toolchain.mjs bootstrap:source",
+        "build:probe:source": "node scripts/toolchain.mjs build:probe:source",
+        "package:tools": "bun scripts/package_toolchain.ts",
+        "build:engine:source": "bun scripts/build_web_engine.ts",
+        "official-demos": "node -e \"import('./scripts/prebuilt_tools.mjs').then(({resolveManagedBun}) => { const {spawnSync} = require('node:child_process'); const result = spawnSync(resolveManagedBun(process.cwd()), ['scripts/official_demos.ts', ...process.argv.slice(1)], {stdio: 'inherit'}); process.exit(result.status ?? 1); }).catch(error => { console.error(error); process.exit(1); })\""
+      },
+      "bin": {}
+    },
+    {
+      "commandSources": [
+        {
+          "file": "editor/directory_picker.ts",
+          "sourceSha256": "d4474c437307f75737a6836b3512d4f94d9cacf99822cfebd509fbfce0aae2cd"
+        },
+        {
+          "file": "editor/server.ts",
+          "sourceSha256": "c077c1e3640eab5a7b7d0f90d9df14fdc90e491634e5b335cf1cc68fa3c1e9d9"
+        },
+        {
+          "file": "editor/test/editor_live_probe.ts",
+          "sourceSha256": "13768ca7a9722bc9cd3b4e543950e21ce4f0f7872bd0423e6c4afe04439a92ae"
+        },
+        {
+          "file": "packages/pocket_cos/src/cli.ts",
+          "sourceSha256": "5491f099bc627434ad5cd9a9498a4374b821ed2835c1a3c22df2521070016a28"
+        },
+        {
+          "file": "pocket.ts",
+          "sourceSha256": "fd881528328365d627d784f26c0dbf6e8eb3177b9551c1b99dcb945ce78aef0a"
+        },
+        {
+          "file": "scripts/build_guest.ts",
+          "sourceSha256": "d618cc955b51e4b6b6a2ea79911781d1fbd22f89fa33aa6aedd2849caf17b319"
+        },
+        {
+          "file": "scripts/build_web.ts",
+          "sourceSha256": "6ff20dab3539c710a36e88dbda7294fb4f6cfb2fae1ba066512cceeeeda04cc9"
+        },
+        {
+          "file": "scripts/build_web_engine.ts",
+          "sourceSha256": "714a5a73fd33ad2e67f231696d83e15002c824147ecde81a10e2af76a6954675"
+        },
+        {
+          "file": "scripts/editor_service.mjs",
+          "sourceSha256": "d7d92f22337bc6df68a2a8ce6147fbbae323f0efee8b1b3bfa6940b8f8c74689"
+        },
+        {
+          "file": "scripts/export_web_sdk.ts",
+          "sourceSha256": "9c226cade230d93811306f639df34e2119dce51ebed7a6db991295a444933b49"
+        },
+        {
+          "file": "scripts/install_studio.mjs",
+          "sourceSha256": "d877ee60fd6d37b94d3374c12028d076b628f6ed4f49c0afd08c01c95471b6e2"
+        },
+        {
+          "file": "scripts/official_demos.ts",
+          "sourceSha256": "837b67a0475c5ef85cbef3071c6d3f3bf2f0ce6d63f5c6d04ff8890b4e416b3c"
+        },
+        {
+          "file": "scripts/package_toolchain.ts",
+          "sourceSha256": "33c39bb1b1b2c7bc368071c465400b03f0f12791fd157f27147ba4d7a279d8dd"
+        },
+        {
+          "file": "scripts/preview_wechat.ts",
+          "sourceSha256": "67f956037b33d3b58fd9a3860ac956caf2d6b4405049c411b7fddb5241c7fc63"
+        },
+        {
+          "file": "scripts/tests/package_update.test.ts",
+          "sourceSha256": "dae492011c938070b6268cf82d743f37ea7af2dbc6ba8384ec1706b680301da9"
+        },
+        {
+          "file": "scripts/toolchain.mjs",
+          "sourceSha256": "9c2a7f6ae69b1bef04a15746f1ab359ba1ca2aed00485d6da53b365043940484"
+        }
+      ]
+    }
+  ]
+}

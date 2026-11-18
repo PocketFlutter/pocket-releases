@@ -1,0 +1,21 @@
+{
+  "name": "@pocket/sync",
+  "version": "0.1.0",
+  "license": "MIT",
+  "private": true,
+  "type": "module",
+  "sideEffects": false,
+  "exports": {
+    ".": "./src/index.ts",
+    "./protocol": "./src/protocol.ts",
+    "./client": "./src/client.ts",
+    "./server": "./src/server.ts",
+    "./solid": "./src/solid.ts"
+  },
+  "files": [
+    "src"
+  ],
+  "scripts": {
+    "test": "bun test test/*.test.ts"
+  }
+}

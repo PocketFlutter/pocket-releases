@@ -1,0 +1,240 @@
+# Mobile UI reuse
+
+The current SDK implementation is in `../packages/pocket_ui` and the Showcase pages are in `../demo/js`. References to `guest/` below identify historical paths in the source project.
+
+This guest keeps the mobile layer deliberately thin. The app still renders
+through the pinned PocketJS Solid primitives; Flutter only receives the normal
+retained frame and host capability messages.
+
+## Sources and adaptations
+
+- `../../mini_apps/syslib/pocket_syslib_flutter_ui.js` was inspected for the
+  `Scaffold`, `AppBar`, `Card`, `ListTile`, `FilledButton`,
+  `ElevatedButton`, and `OutlinedButton` vocabulary. The old file also emits
+  the previous VDOM/Dart integration shape, so it is not imported at runtime.
+  `packages/pocket_ui/src/mobile.tsx` keeps the useful slots and callback
+  semantics while composing `View`, `Text`, `Focusable`, `Modal`, and
+  `CompositorSurface`. The `demo/js/ui/mobile.tsx` path was a compatibility
+  re-export; pages import the public `@pocket/ui` package directly.
+- The retained renderer's `Screen`/`Scaffold` contract and the Flutter
+  host's `MediaQuery.paddingOf(context).top` boundary were used as the
+  source for `packages/pocket_ui/src/ui.tsx:SafeAreaScaffold`. It consumes
+  the existing `display.viewport.safeArea` facts in JS, keeps the canvas
+  background edge-to-edge, and exposes explicit `edges` so a root shell can
+  consume only `top` while an independent guest consumes `all`.
+- `../../mini_apps/syslib/pocket_syslib_router.js` supplied
+  `TRANSITION_MODES` and `computeTransitionDescriptor`. The local pure adapter
+  is `packages/pocket_ui/src/legacy.ts`; the reducer owns the route stack and
+  selected mode. `demo/js/legacy.ts` was a compatibility re-export only.
+- `../../mini_apps/pocketjs_uikit.js` supplied the SDF, smooth-step, gradient,
+  rim, and refraction parameter math. `buildLiquidGlassRecipe` preserves that
+  math as a local, testable recipe.
+- The actual shader source is the old demo's
+  `../../shaders/liquid_glass.frag`; the guest does not duplicate a renderer
+  shader. The host-side generic surface implementation is the place where
+  that shader can be selected.
+- The pinned upstream examples under `.cache/pocketjs/apps/` supplied the
+  Solid context/official component composition pattern. No old Dart widget
+  tree, VDOM host, game config, or sibling project import is a runtime
+  dependency.
+
+## What is mounted
+
+`demo/js/mobile-pages.tsx` (or `demo/js/app.tsx`) adds real JS-owned pages for Mobile UI, Transitions,
+and Hardware. The Demo's former Liquid Glass page and entry are temporarily
+removed; `GlassSurface` and the shared glass surface bridge remain SDK
+capabilities covered by standalone tests. The Mobile UI page exercises themed
+AppBar/Card/ListTile/buttons, segmented controls, a switch, a stepper, and an
+official Modal. Transitions samples the three Demo-available descriptors and
+pushes/pops the guest route stack; the shared Liquid Glass descriptor remains
+available in the SDK but is not a selectable Demo option. App route changes
+drive an on-frame 220ms incoming transition for these showcase routes. Existing
+Home, Gallery, Runtime, Updates, Plugins, Stress, FPS, and system-input paths
+remain intact.
+
+Hardware uses the registered host plugin contract. The page sends actual
+requests for permissions, camera preview/capture, photos, BLE, sensors,
+biometrics, location, and weather; an unavailable provider renders the
+returned error. Camera preview registers the returned texture through
+`platformTexture` and releases it when leaving the page. Photo deletion always
+requires an explicit confirmation.
+
+The runtime page also displays the host's `runtime.info.glassRenderer`
+(`refractive` or `frosted`) and `hostSurfaces` result; these values are not
+hard-coded in the guest.
+
+## Display geometry integration
+
+`@pocket/ui/display` exports `createDisplayGeometry()`. It subscribes to the
+existing `display.viewport` event lane, chains any prior `globalThis.__pocketEvent`
+callback, and restores that callback on cleanup. The signal exposes the live
+viewport, safe area, keyboard inset, and ReservedRegion frames to an external
+app or the showcase. `deriveResponsiveLayout()` then maps the data to bottom
+navigation or a rail while treating a central division as a layout landmark.
+The modern HostBridge captures only the latest merged `display.viewport` fact
+at event ingress, so a geometry signal mounted after an asynchronous startup
+gate starts from the host's current safe area. This does not replay other host
+events to late subscribers. Older/custom bridges keep their existing adapter
+behavior.
+`SafeAreaScaffold` is the canonical safe-area shell. It subscribes to the
+same event lane and consumes each selected edge once. Independent guests such
+as `demo/js/apps/profile/app.tsx` and `demo/js/apps/lobby/app.tsx` use the
+default `edges="all"`; the Showcase root uses `edges={["top"]}` so its
+full-screen compositor/modal siblings remain outside the padded content.
+When a parent already owns `createDisplayGeometry()`, pass its signal through
+`geometry` to avoid a second signal; independent guests can omit it.
+`MobileScaffold` delegates to this shell with `safeArea="none"` by default
+because nested Showcase pages already sit below that root shell. A caller
+that owns a standalone mobile page can pass `safeArea="all"` instead of
+adding another wrapper.
+
+Independent mini-apps that expose a host close action pass
+`reservedActions="mini-app"` to `SafeAreaScaffold`. This is one shared 60px
+top-right reservation (44px action + 8px outer inset + 8px content gap), not
+per-page right padding. `MobileAppBar` reads the scaffold context and keeps its
+background full width while its title/subtitle column is shrinkable and clipped;
+the trailing badge/action therefore stays at `x + width <= viewportWidth - 60`
+even on a narrow portrait window. The root Showcase intentionally does not set
+this reservation because its full-screen host surfaces own that action region.
+The native JS regression fixture (`packages/pocket_ui/test/safe_area_native.test.ts`)
+probes 390px and 320px windows, sends a 24px top/18px bottom viewport update,
+and asserts the Guest badge and subtitle remain left of that 60px boundary while
+the bottom slot does not consume the bottom inset twice.
+
+The retained Flutter showcase used the same rule at its host boundary: its
+top shell read `MediaQuery.paddingOf(context).top` and reserved that height
+before painting the header (`../../pocketjs_flutter_demo/lib/ui/mini_app_host_page.dart:107-133`),
+while its `BottomNavigationBar` (`../../pocketjs_flutter_demo/lib/render/pocket_ui_components.dart:2239-2345`)
+occupied full width at the bottom with `Expanded` equal-width tab items and
+bottom safe-area padding. The current JS SystemUI applies the equivalent top
+edge once on its root content shell (`demo/js/app.tsx`); individual nested
+pages keep `MobileScaffold safeArea="none"`. `NavigationBar` (also exported as
+`TabBar` and `BottomNavigationBar` from `@pocket/ui`) remains a full-width
+horizontal bottom TabBar across narrow, wide, and iPhone Duo folded/unfolded
+postures, using `bottomBarInsets()` (`packages/pocket_ui/src/responsive.ts`) so
+top-corner occlusions (such as iPhone Duo's top-right status cluster projected
+into `safeArea.right = 84`) do not shrink or shift the bottom tabs. Passing it
+through the scaffold's `bottomBar` slot does not add a second bottom inset.
+This keeps Home/Header, MobileAppBar, and compositor child surfaces in one
+coordinate space.
+
+## Liquid Glass boundary
+
+The public style ABI can draw gradients and rings but cannot honestly provide
+backdrop blur/refraction by itself. `GlassSurface` therefore first tries the
+generic host bridge:
+
+```text
+pocket.registerSurface(packageId, "glass", JSON.stringify({
+  radius, blur, edgeIntensity, rimIntensity, baseIntensity,
+  tintOpacity, cornerBoost, rippleEffect, warp, pressed, shape
+}))
+```
+
+When registered, the guest mounts an official `CompositorSurface` beneath its
+children and releases it on cleanup. If the bridge is unavailable, it shows a
+gradient recipe and labels the surface as a fallback; it does not call that
+fallback native glass. The actual shader/effect implementation remains a
+generic renderer concern, not a Dart business widget.
+
+## Ablation
+
+There is one public implementation in `packages/pocket_ui` for each mobile
+primitive. `SafeAreaScaffold` owns the only edge-inset policy; `MobileScaffold`
+is a thin themed adapter with an explicit `safeArea="none"` nested default,
+not a second geometry implementation. There is one mobile button implementation (`MobileButton`) with named aliases
+(`FilledButton`, `ElevatedButton`, `OutlinedButton`, and `TextButton`),
+one theme context, and one GlassSurface adapter. The old UIKit is not copied
+as a second runtime library, and no static “38 components” catalogue is
+claimed. Unimplemented upstream primitives stay outside this showcase.
+
+## Option C Design System (Mobile + Desktop Dual Density & Dark Mode)
+
+`packages/pocket_ui/src/mobile.tsx` and `packages/pocket_ui/src/responsive.ts`
+implement the built-in **Option C Design System**, combining:
+
+1. **Material 3 / Shadcn Light & Dark Semantic Tokens** (`MOBILE_THEME_LIGHT`,
+   `MOBILE_THEME_DARK`): `canvas`, `surface`, `surfaceElevated`, `surfaceMuted`,
+   `ink`, `muted`, `border`, `accent`, `accentSoft`, `accentInk`, `success`,
+   `successSoft`, `warning`, `warningSoft`, `danger`, `dangerSoft`.
+2. **3-Tier Window Size Classes & Dual Density** (`responsive.ts`):
+   `deriveWindowSizeClass(geometry)` (`compact < 600px`, `medium 600..959px`,
+   `expanded >= 960px`) and `deriveDesignDensity(geometry, override)` (`touch`
+   44px targets vs `desktop` 36px targets), exposed through
+   `DesignDensityProvider`, `useDesignDensity()`, and `useWindowSizeClass()`.
+3. **Complete Mobile & Desktop Component Library** (`mobile.tsx`):
+   - Actions & Navigation: `MobileButton` (`filled`, `tonal`, `outlined`,
+     `text`, `danger`), `MobileSegmentedControl`, `Tabs`, `NavigationBar`.
+   - Feedback & Overlays: `MobileToast` (`Toast`), `MobileAlert` (`Alert`),
+     `MobilePopup` / `MobileActionSheet` (`Popup` / `ActionSheet` adapting
+     between mobile bottom sheet on `compact` and centered desktop popover on
+     `medium`/`expanded`), and `MobileDialog` (`Dialog` with confirmation and
+     destructive `danger` modes).
+   - Form Controls: `MobileSwitch`, `MobileStepper`, `MobileProgress`
+     (`ProgressBar`), `MobileCheckbox` (`Checkbox`), `MobileRadioGroup`
+     (`RadioGroup`), and `InputField`.
+   - Data Display: `MobileCard`, `MobileListTile`, `MobileBadge`, `MobileTag`
+     (`Tag`), `MobileAvatar` (`Avatar` with presence status dot),
+     `MobileAccordion` (`Accordion`), and `MobileSkeleton` (`Skeleton`).
+4. **State-Change Animations** (`useStateTransition`, `useAnimatedNumber`):
+   Every interactive control and overlay animates state changes through
+   `onFrame` spring interpolation (`opacity`, `translateX`, `translateY`, and
+   leaf graphic `scale` / `scaleX`) combined with compiler-baked
+   `transition-colors` style records. Containers that host `<Text>` descendants
+   avoid non-translation transforms (`scale != 1.0`, `rotate != 0.0`) so the
+   Rust renderer's `style.rs:declares_transform()` check keeps `TEXT_RUN`
+   active throughout the animation.
+5. **Validation**:
+   - `demo/js/tests/mobile_ui.test.ts`: verifies token palettes, window size
+     classes, design density derivation, and Showcase state transitions across
+     all Option C components.
+   - `sdk/packages/pocket_ui/test/design_system_native.test.ts`: compiles and
+     executes the Option C component suite inside the native QuickJS + Rust
+     engine, asserting both mid-transition animated frames (`opacity`,
+     `translateY`, `scaleX`) and interactive state updates across `Toast`,
+     `Alert`, `Popup`, `Dialog`, `Checkbox`, `RadioGroup`, `Accordion`,
+     `Skeleton`, `Progress`, `Switch`, `Tag`, and `Avatar`.
+
+## Home visual reuse note
+
+The Home visual refresh continues to reuse the old syslib vocabulary and the
+JS-owned component logic; it changes only the hero styling and layer hierarchy.
+The shell header, Home input and Counter behavior, navigation labels, measured
+pointer bounds, geometry/safe-area handling, and page-scroll contract remain
+the same. The Dart-side change is likewise limited to the existing Flutter
+frame-monitor HUD's visual layout and painter; it does not add business UI,
+routing, state, or frame-statistics logic.
+
+The Showcase now uses one blue accent (`#315DEB`), light canvas
+(`#F5F6FA`), dark ink (`#17233B`), white cards and consistent 44px button
+targets. Home, Gallery, Mobile UI, Transitions and Hardware reuse the public
+JS components instead of adding Flutter business widgets. Small filled SVG
+icons are baked by the pinned PocketJS asset compiler; their explicit shape
+fills and root dimensions follow that compiler's supported SVG subset.
+
+The visual ablation removes the duplicate Home branding/status panels, the
+oversized FPS slab and full-cell selected navigation backgrounds. It keeps
+the actual input, counter, app opening/results, recording and host request
+paths. Hardware results are separate readable text rows rather than one long
+JSON line. Flutter's independent FPS monitor retains its original engine
+samples and history; only the badge presentation changes. An embedded
+viewport uses a compact top badge so it does not obscure bottom navigation.
+
+The 2026-11-03 iPhone 18 Pro simulator debug run used a measured 60 Hz display.
+Continuous counter updates observed 60 Hz, with build p95 4.595 ms, raster p95
+1.369 ms and no over-budget frames in the four-second sample. Home and the
+500-node static scene made zero native frame calls while idle. The independent
+Flutter monitor measured 60 FPS normally and about 20 FPS with an intentional
+45 ms build stall. These are simulator regression measurements, not high-refresh
+hardware or battery-power validation. Real pointer navigation, Gallery/Hardware,
+system IME and fixed-chrome scrolling passed; the separately rerun three-app
+recording case also passed with its actual memory budgets and strict replay.
+
+
+## Showcase consumer rewrite
+
+The four-tab Showcase now consumes the shared mobile components and one root
+theme/density provider. Secondary routes use a fixed root `MobileAppBar` and
+`NavigationBar visible={false}`; Settings centralizes appearance and persists it
+through the existing app-scoped storage capability. See
+[SHOWCASE_REWRITE.md](SHOWCASE_REWRITE.md) for provenance, ablation and validation.

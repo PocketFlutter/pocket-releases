@@ -1,0 +1,10 @@
+.cache/
+.pocket-build/
+node_modules/
+native/target/
+target/
+dist/
+.DS_Store
+*.log
+*.pem
+*.key
