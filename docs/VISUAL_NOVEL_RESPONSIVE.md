@@ -63,7 +63,7 @@ image, decoded registered frame-skin texture triangles, and used pointer taps
 to open the menu, continue reading, and advance the dialogue. These were
 in-app layout constraints, not OS rotation/window resizing or a physical iPad
 run. The test source is
-[`novel_large_screen_test.dart`](https://github.com/PocketFlutter/Pocket/blob/9ac11fd84d99c0038118232f7d396fb0000b8cc1/demo/integration_test/novel_large_screen_test.dart).
+[`novel_large_screen_test.dart`](https://github.com/PocketFlutter/Pocket/blob/235b5b5589faf492f4a9fc3b7c0827bcd1d9de2c/demo/integration_test/novel_large_screen_test.dart).
 That run checked only the safe content rectangle on iPad (32/20-pixel insets).
 This was insufficient for immersive game art: it accepted uncovered system
 edges. The current contract requires background coverage across the complete

@@ -8,7 +8,7 @@ Host services, input devices, and resource tooling are the main opportunities. U
 
 The official registry contains **32 capability IDs**. UI components and target-specific support are tracked separately. The default Flutter target declares `text.glyphs.baked`, `runtime.worker`, `input.touch`, and `display.viewport.live`. SystemUI additionally declares `ui.compositor-surfaces`. Optional runtime grants and SDK plugins are outside this default list, whose length does not measure overall coverage.
 
-The sweep covered **35 official demos**. Of those, **33 built and completed a one-frame native startup test**, and two were limited by auxiliary-display requirements. The 33 entered the resource catalog. Interaction acceptance, platform coverage, and Flutter/Web/Safari FPS were outside the sweep. Results are in `demo/build/official-demos/report.json` with `frames=1,warmup=0`. [Publishable demo catalog](https://github.com/PocketFlutter/Pocket/blob/9ac11fd84d99c0038118232f7d396fb0000b8cc1/demo/assets/apps/official/catalog.json)
+The sweep covered **35 official demos**. Of those, **33 built and completed a one-frame native startup test**, and two were limited by auxiliary-display requirements. The 33 entered the resource catalog. Interaction acceptance, platform coverage, and Flutter/Web/Safari FPS were outside the sweep. Results are in `demo/build/official-demos/report.json` with `frames=1,warmup=0`. [Publishable demo catalog](https://github.com/PocketFlutter/Pocket/blob/235b5b5589faf492f4a9fc3b7c0827bcd1d9de2c/demo/assets/apps/official/catalog.json)
 
 Integrated means an execution path exists. Partial means only part of the contract or validation is present. A gap lacks an end-to-end host path. Dedicated-target capabilities require specific devices or products. Source availability, demo startup, and bridge unit tests provide separate evidence.
 
@@ -20,7 +20,7 @@ Integrated means an execution path exists. Partial means only part of the contra
 
 ## Official Contracts and Host Coverage
 
-Contracts come from `sdk/.cache/pocketjs/contracts/spec/platform-types.ts` and neighboring `contracts/spec/*.ts`. The pinned script regenerates the cache. [Flutter target declarations](../scripts/flutter_target.ts), [Session admission](https://github.com/PocketFlutter/Pocket/blob/9ac11fd84d99c0038118232f7d396fb0000b8cc1/sdk/lib/src/pocket_session.dart)
+Contracts come from `sdk/.cache/pocketjs/contracts/spec/platform-types.ts` and neighboring `contracts/spec/*.ts`. The pinned script regenerates the cache. [Flutter target declarations](../scripts/flutter_target.ts), [Session admission](https://github.com/PocketFlutter/Pocket/blob/235b5b5589faf492f4a9fc3b7c0827bcd1d9de2c/sdk/lib/src/pocket_session.dart)
 
 | Official capability | Current status | Remaining work and acceptance |
 | --- | --- | --- |

@@ -33,7 +33,7 @@ The corresponding release attachments record final archive and two-platform acce
 
 ## Publisher build
 
-The [release workflow](https://github.com/PocketFlutter/Pocket/blob/9ac11fd84d99c0038118232f7d396fb0000b8cc1/.github/workflows/toolchain.yml) uses MSVC, the Windows SDK, and
+The [release workflow](https://github.com/PocketFlutter/Pocket/blob/235b5b5589faf492f4a9fc3b7c0827bcd1d9de2c/.github/workflows/toolchain.yml) uses MSVC, the Windows SDK, and
 Rust 1.98.1 on Windows 2022. It downloads the common Web engine, prepares the pinned PocketJS
 source, and builds two release binaries.
 

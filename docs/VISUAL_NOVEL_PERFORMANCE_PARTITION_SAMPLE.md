@@ -16,7 +16,7 @@ whole-game performance acceptance or a claim that the game has no stutter.
 
 ## Source path and measurement
 
-The current implementation is in [`pocket_view.dart`](https://github.com/PocketFlutter/Pocket/blob/9ac11fd84d99c0038118232f7d396fb0000b8cc1/sdk/packages/pocket_flutter/lib/src/pocket_view.dart):
+The current implementation is in [`pocket_view.dart`](https://github.com/PocketFlutter/Pocket/blob/235b5b5589faf492f4a9fc3b7c0827bcd1d9de2c/sdk/packages/pocket_flutter/lib/src/pocket_view.dart):
 
 - `_buildSurface` starts at line 7084 and gathers non-video drawing ops into
   `canvasOps`.
@@ -39,7 +39,7 @@ semantics, and glass composition but before the final gesture, listener, and
 method. Partition timing covers the complete non-empty flush.
 
 The existing harness in
-[`novel_model_soak_test.dart`](https://github.com/PocketFlutter/Pocket/blob/9ac11fd84d99c0038118232f7d396fb0000b8cc1/demo/integration_test/novel_model_soak_test.dart)
+[`novel_model_soak_test.dart`](https://github.com/PocketFlutter/Pocket/blob/235b5b5589faf492f4a9fc3b7c0827bcd1d9de2c/demo/integration_test/novel_model_soak_test.dart)
 supplied `FrameTiming` and native frame-call observations. The first timed run
 used one 10-second `manual_reading` window and the five 10-second Hiyori model
 windows. It ran in Profile mode on the accepted Lantern Guest and accepted

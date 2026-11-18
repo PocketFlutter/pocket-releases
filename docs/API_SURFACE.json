@@ -4957,7 +4957,7 @@
         },
         {
           "file": "scripts/editor_service.mjs",
-          "sourceSha256": "d7d92f22337bc6df68a2a8ce6147fbbae323f0efee8b1b3bfa6940b8f8c74689"
+          "sourceSha256": "288d657b70a40df78814c93422ad3cb88305ab5932c99a95239f143ca58c1434"
         },
         {
           "file": "scripts/export_web_sdk.ts",

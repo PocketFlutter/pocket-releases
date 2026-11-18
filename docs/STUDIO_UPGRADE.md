@@ -96,6 +96,16 @@ navigation. Final macOS and Windows archives remain subject to the release
 installation/runtime gate. The unsuccessful 0.1.14 candidate was not published;
 its tag remains immutable, and this release uses SDK version 0.1.15.
 
+SDK 0.1.23 retains the retirement plan in `scripts/editor_service.mjs` and
+adds creation time to its Windows `Win32_Process` snapshots. A process created
+after its reported child cannot be that child's original parent. The plan
+omits that edge while retaining protection when timestamps are equal or either
+is unavailable. A Windows process must still have the same creation time and
+command or executable identity before each signal. This handles the false
+ancestry that aborted a source upgrade during 0.1.23 release verification.
+The service tests cover a reused intermediate PID and the real detached
+upgrade path.
+
 
 ## Automatic updates in Git source mode
 

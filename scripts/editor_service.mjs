@@ -272,6 +272,32 @@ async function assertPortOwnership(port, allowForeign) {
   return { processes, owned: processes.filter(info => sameCheckoutServer(info, port)), foreign };
 }
 
+// Win32_Process reports the original parent PID after that parent exits. Use
+// creation time from the same snapshot to distinguish a reused PID.
+async function retirementProcessSnapshot(pid) {
+  if (process.platform !== "win32") return pid === undefined ? findProcess("name", "") : findProcess("pid", pid);
+  if (pid !== undefined && (!Number.isSafeInteger(pid) || pid <= 0)) throw new Error("Invalid retirement PID");
+  const filter = pid === undefined ? "" : ` -Filter "ProcessId = ${pid}"`;
+  const command = [
+    "$ErrorActionPreference = 'Stop'",
+    "[Console]::OutputEncoding = [Text.Encoding]::UTF8",
+    `$rows = @(Get-CimInstance -ClassName Win32_Process${filter} | ForEach-Object {`,
+    "  $creationTicks = if ($null -ne $_.CreationDate) { $_.CreationDate.ToUniversalTime().Ticks.ToString('D19') }",
+    "  [pscustomobject]@{ pid = $_.ProcessId; ppid = $_.ParentProcessId; name = $_.Name; cmd = $_.CommandLine; bin = $_.ExecutablePath; creationTicks = $creationTicks }",
+    "})",
+    "ConvertTo-Json -InputObject $rows -Compress",
+  ].join("\n");
+  const encodedCommand = Buffer.from(command, "utf16le").toString("base64");
+  const output = execFileSync("powershell.exe", ["-NoProfile", "-NonInteractive", "-EncodedCommand", encodedCommand], {
+    encoding: "utf8", windowsHide: true, timeout: 10_000, maxBuffer: 8 * 1024 * 1024,
+  });
+  return JSON.parse(output.trim());
+}
+
+function hasCreationTicks(info) {
+  return typeof info?.creationTicks === "string" && /^\d{19}$/.test(info.creationTicks);
+}
+
 // Keep the detached updater alive while retiring its old Studio process and
 // unrelated worker branches.
 function protectedRetirementPlan(processes, targetPid, protectedPid, onReject) {
@@ -348,7 +374,11 @@ function protectedRetirementPlan(processes, targetPid, protectedPid, onReject) {
     });
   }
   for (const [pid, ppid] of parents) {
-    if (pid !== 0 && children.has(ppid)) children.get(ppid).push(pid);
+    if (pid === 0 || !children.has(ppid)) continue;
+    const child = processes[rowByPid.get(pid)];
+    const parent = processes[rowByPid.get(ppid)];
+    if (hasCreationTicks(parent) && hasCreationTicks(child) && parent.creationTicks > child.creationTicks) continue;
+    children.get(ppid).push(pid);
   }
 
   const collectSubtree = rootPid => {
@@ -492,6 +522,7 @@ async function waitProcessesGone(pids, timeoutMs = 10_000) {
 
 function sameProcessSnapshotIdentity(expected, current) {
   if (Number(expected?.pid) <= 0 || Number(current?.pid) !== Number(expected.pid)) return false;
+  if (process.platform === "win32" && (!hasCreationTicks(expected) || expected.creationTicks !== current.creationTicks)) return false;
   const expectedCommand = String(expected?.cmd || expected?.cmdline || expected?.command || "").trim();
   const currentCommand = String(current?.cmd || current?.cmdline || current?.command || "").trim();
   const expectedBin = String(expected?.bin || "").trim();
@@ -508,7 +539,7 @@ async function signalVerifiedProcess(expected, signal, validateCurrent) {
   const pid = Number(expected?.pid);
   if (!processIsRunning(pid)) return false;
 
-  const found = await findProcess("pid", pid);
+  const found = await retirementProcessSnapshot(pid);
   const current = Array.isArray(found) ? found.find(entry => Number(entry?.pid) === pid) : undefined;
   if (!current) {
     if (!processIsRunning(pid)) return false;
@@ -553,7 +584,7 @@ async function stopOwnedPort(port, required, protectedPid) {
   if (!state.owned.length) return;
   const pids = state.owned.map(info => Number(info.pid));
   if (protectedPid) {
-    const processes = await findProcess("name", "");
+    const processes = await retirementProcessSnapshot();
     const byPid = new Map((Array.isArray(processes) ? processes : []).map(info => [Number(info?.pid), info]));
     const planned = new Map();
     for (const pid of pids) {
@@ -568,6 +599,9 @@ async function stopOwnedPort(port, required, protectedPid) {
         throw protectedProcessSnapshotError(processes, pid, protectedPid, rejection);
       }
       if (!plan) throw protectedProcessSnapshotError(processes, pid, protectedPid, rejection);
+      if (!sameCheckoutServer(target, port)) {
+        throw protectedProcessSnapshotError(processes, pid, protectedPid, { reason: "target-no-longer-owned", targetPid: pid });
+      }
       for (const plannedPid of plan.pids) {
         const info = byPid.get(plannedPid);
         if (!info) throw protectedProcessSnapshotError(processes, pid, protectedPid);
@@ -1055,7 +1089,7 @@ function isEntrypoint(entry = process.argv[1], moduleUrl = import.meta.url) {
   return Boolean(entry && sameFileSystemPath(entry, fileURLToPath(moduleUrl)));
 }
 
-export { configFromHealth, editorToolEnvironment, isEntrypoint, commandIncludesPath, protectedRetirementPlan, terminateProcessSet, makePidRecord, mergeLaunchOptions, parseArgs, parsePidRecord, serviceConfig, upgradeApply };
+export { configFromHealth, editorToolEnvironment, isEntrypoint, commandIncludesPath, protectedRetirementPlan, retirementProcessSnapshot, terminateProcessSet, makePidRecord, mergeLaunchOptions, parseArgs, parsePidRecord, serviceConfig, upgradeApply };
 
 if (isEntrypoint()) {
   main().catch(error => {

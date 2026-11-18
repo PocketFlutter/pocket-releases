@@ -9,7 +9,7 @@ can gate the existing JS mesh transform and PMS1 encoder. The retained parent
 Live2D deformation or renderer to port.
 
 The real Core is the locally accepted official Cubism Native SDK 5 r.5 archive.
-[`bootstrap_cubism_core.sh`](https://github.com/PocketFlutter/Pocket/blob/9ac11fd84d99c0038118232f7d396fb0000b8cc1/sdk/packages/pocket_live2d/scripts/bootstrap_cubism_core.sh)
+[`bootstrap_cubism_core.sh`](https://github.com/PocketFlutter/Pocket/blob/235b5b5589faf492f4a9fc3b7c0827bcd1d9de2c/sdk/packages/pocket_live2d/scripts/bootstrap_cubism_core.sh)
 pins its archive SHA-256 as
 `7ff3a4bbc19c0a8728965aa522ab77eb11b252916453e68a8a78d3b71188bb12`. The
 official `Live2DCubismCore.h` dynamic drawable flags assign bit 5 (`1 << 5`)

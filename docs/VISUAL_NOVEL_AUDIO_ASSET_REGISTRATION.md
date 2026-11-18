@@ -12,7 +12,7 @@ JavaScript but has no audio asset registry. There is no parent Flutter asset
 allowlist implementation to port.
 
 The SDK already has one playback boundary in
-[`pocket_audio_plugin.dart`](https://github.com/PocketFlutter/Pocket/blob/9ac11fd84d99c0038118232f7d396fb0000b8cc1/sdk/packages/pocket_audio/lib/src/pocket_audio_plugin.dart):
+[`pocket_audio_plugin.dart`](https://github.com/PocketFlutter/Pocket/blob/235b5b5589faf492f4a9fc3b7c0827bcd1d9de2c/sdk/packages/pocket_audio/lib/src/pocket_audio_plugin.dart):
 JS sends a logical asset key to the host, the plugin resolves a Flutter bundle
 path, and the existing per-channel queue loads that path through just_audio.
 This change reuses that plugin, queue, player and error path. It removes the

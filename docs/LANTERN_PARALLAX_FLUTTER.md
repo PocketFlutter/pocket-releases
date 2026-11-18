@@ -30,7 +30,7 @@ renders, not a physical phone, OS rotation, or a device resize claim.
 
 ## What the test drives
 
-[`demo/integration_test/novel_parallax_test.dart`](https://github.com/PocketFlutter/Pocket/blob/9ac11fd84d99c0038118232f7d396fb0000b8cc1/demo/integration_test/novel_parallax_test.dart)
+[`demo/integration_test/novel_parallax_test.dart`](https://github.com/PocketFlutter/Pocket/blob/235b5b5589faf492f4a9fc3b7c0827bcd1d9de2c/demo/integration_test/novel_parallax_test.dart)
 reuses `IsolatedNovelSupportDirectory` and `guest_interaction_test.dart`'s real
 pointer helpers. It opens Lantern, starts the actual main story until the disk
 auto-save reaches `arrival_01`, opens the journal and returns to the title,

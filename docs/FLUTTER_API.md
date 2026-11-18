@@ -34,7 +34,7 @@ See [Host parameters, catalog, launch, and controller](HYBRID_HOST_API.md),
 ## Trusted host configuration with PocketAppConfig
 
 The native configuration establishes permission ceilings. A guest manifest can narrow
-them. See [pocket_config.dart](https://github.com/PocketFlutter/Pocket/blob/9ac11fd84d99c0038118232f7d396fb0000b8cc1/sdk/lib/src/pocket_config.dart).
+them. See [pocket_config.dart](https://github.com/PocketFlutter/Pocket/blob/235b5b5589faf492f4a9fc3b7c0827bcd1d9de2c/sdk/lib/src/pocket_config.dart).
 
 | Property | Default and meaning |
 | --- | --- |
@@ -117,7 +117,7 @@ is a ChangeNotifier. Direct consumers own subscriptions and disposal.
 | `close()` | Future that waits for teardown and pending initialization, background preparation, and persistence to finish. |
 | `dispose()` | Starts cleanup. A disposed session cannot be reused. |
 
-Use the public signatures in [pocket_session.dart](https://github.com/PocketFlutter/Pocket/blob/9ac11fd84d99c0038118232f7d396fb0000b8cc1/sdk/lib/src/pocket_session.dart) for
+Use the public signatures in [pocket_session.dart](https://github.com/PocketFlutter/Pocket/blob/235b5b5589faf492f4a9fc3b7c0827bcd1d9de2c/sdk/lib/src/pocket_session.dart) for
 additional diagnostics and update members. Keep callbacks scoped to their own generations.
 
 ## Plugin API and capability admission
@@ -185,7 +185,7 @@ platform requirements. Device support requires validation with the real transpor
 - `pocket_flutter` exposes the low-level `PocketView`, `PocketViewController`, DrawOps,
   DisplayGeometry, Duplex, Compositor, Runtime, TextCache, and Recording APIs.
   `pocket_sdk` exports selected types. For application integration, use the existing
-  rendering and runtime. See [Flutter source entry point](https://github.com/PocketFlutter/Pocket/blob/9ac11fd84d99c0038118232f7d396fb0000b8cc1/sdk/packages/pocket_flutter/lib/pocket_flutter.dart).
+  rendering and runtime. See [Flutter source entry point](https://github.com/PocketFlutter/Pocket/blob/235b5b5589faf492f4a9fc3b7c0827bcd1d9de2c/sdk/packages/pocket_flutter/lib/pocket_flutter.dart).
 - Apple distribution flags include `pocketAppStoreDistribution`,
   `pocketRemoteCodeEnabled`, and `pocketSessionRecordingEnabled`. The bundled profile
   is explicitly selected. The default uses remote loading policy. See [Distribution](APPLE_APP_STORE.md).
@@ -201,192 +201,192 @@ export chain permits it.
 
 | Declaring library | Public top-level type declarations |
 | --- | --- |
-| [packages/pocket_archive/lib/pocket_archive.dart](https://github.com/PocketFlutter/Pocket/blob/9ac11fd84d99c0038118232f7d396fb0000b8cc1/sdk/packages/pocket_archive/lib/pocket_archive.dart) | `PocketNativeArchive` |
+| [packages/pocket_archive/lib/pocket_archive.dart](https://github.com/PocketFlutter/Pocket/blob/235b5b5589faf492f4a9fc3b7c0827bcd1d9de2c/sdk/packages/pocket_archive/lib/pocket_archive.dart) | `PocketNativeArchive` |
 
 ### `pocket_audio`
 
 | Declaring library | Public top-level type declarations |
 | --- | --- |
-| [packages/pocket_audio/lib/pocket_audio.dart](https://github.com/PocketFlutter/Pocket/blob/9ac11fd84d99c0038118232f7d396fb0000b8cc1/sdk/packages/pocket_audio/lib/pocket_audio.dart) | See the library and machine-readable inventory for exports, functions, and constants. |
-| [packages/pocket_audio/lib/src/pocket_audio_plugin.dart](https://github.com/PocketFlutter/Pocket/blob/9ac11fd84d99c0038118232f7d396fb0000b8cc1/sdk/packages/pocket_audio/lib/src/pocket_audio_plugin.dart) | `PocketAudioActiveChanged`, `PocketAudioPlaybackChanged`, `PocketAudioPlayer`, `PocketAudioPlayerFactory`, `PocketAudioPlayerState`, `PocketAudioPlugin` |
+| [packages/pocket_audio/lib/pocket_audio.dart](https://github.com/PocketFlutter/Pocket/blob/235b5b5589faf492f4a9fc3b7c0827bcd1d9de2c/sdk/packages/pocket_audio/lib/pocket_audio.dart) | See the library and machine-readable inventory for exports, functions, and constants. |
+| [packages/pocket_audio/lib/src/pocket_audio_plugin.dart](https://github.com/PocketFlutter/Pocket/blob/235b5b5589faf492f4a9fc3b7c0827bcd1d9de2c/sdk/packages/pocket_audio/lib/src/pocket_audio_plugin.dart) | `PocketAudioActiveChanged`, `PocketAudioPlaybackChanged`, `PocketAudioPlayer`, `PocketAudioPlayerFactory`, `PocketAudioPlayerState`, `PocketAudioPlugin` |
 
 ### `pocket_biometrics`
 
 | Declaring library | Public top-level type declarations |
 | --- | --- |
-| [packages/pocket_biometrics/lib/pocket_biometrics.dart](https://github.com/PocketFlutter/Pocket/blob/9ac11fd84d99c0038118232f7d396fb0000b8cc1/sdk/packages/pocket_biometrics/lib/pocket_biometrics.dart) | `PocketBiometricsPlugin` |
+| [packages/pocket_biometrics/lib/pocket_biometrics.dart](https://github.com/PocketFlutter/Pocket/blob/235b5b5589faf492f4a9fc3b7c0827bcd1d9de2c/sdk/packages/pocket_biometrics/lib/pocket_biometrics.dart) | `PocketBiometricsPlugin` |
 
 ### `pocket_bluetooth`
 
 | Declaring library | Public top-level type declarations |
 | --- | --- |
-| [packages/pocket_bluetooth/lib/pocket_bluetooth.dart](https://github.com/PocketFlutter/Pocket/blob/9ac11fd84d99c0038118232f7d396fb0000b8cc1/sdk/packages/pocket_bluetooth/lib/pocket_bluetooth.dart) | `PocketBluetoothPlugin` |
+| [packages/pocket_bluetooth/lib/pocket_bluetooth.dart](https://github.com/PocketFlutter/Pocket/blob/235b5b5589faf492f4a9fc3b7c0827bcd1d9de2c/sdk/packages/pocket_bluetooth/lib/pocket_bluetooth.dart) | `PocketBluetoothPlugin` |
 
 ### `pocket_camera`
 
 | Declaring library | Public top-level type declarations |
 | --- | --- |
-| [packages/pocket_camera/lib/pocket_camera.dart](https://github.com/PocketFlutter/Pocket/blob/9ac11fd84d99c0038118232f7d396fb0000b8cc1/sdk/packages/pocket_camera/lib/pocket_camera.dart) | `PocketCameraPlugin` |
+| [packages/pocket_camera/lib/pocket_camera.dart](https://github.com/PocketFlutter/Pocket/blob/235b5b5589faf492f4a9fc3b7c0827bcd1d9de2c/sdk/packages/pocket_camera/lib/pocket_camera.dart) | `PocketCameraPlugin` |
 
 ### `pocket_clipboard`
 
 | Declaring library | Public top-level type declarations |
 | --- | --- |
-| [packages/pocket_clipboard/lib/pocket_clipboard.dart](https://github.com/PocketFlutter/Pocket/blob/9ac11fd84d99c0038118232f7d396fb0000b8cc1/sdk/packages/pocket_clipboard/lib/pocket_clipboard.dart) | See the library and machine-readable inventory for exports, functions, and constants. |
-| [packages/pocket_clipboard/lib/src/clipboard_plugin.dart](https://github.com/PocketFlutter/Pocket/blob/9ac11fd84d99c0038118232f7d396fb0000b8cc1/sdk/packages/pocket_clipboard/lib/src/clipboard_plugin.dart) | `PocketClipboardCapabilities`, `PocketClipboardPermissions`, `PocketClipboardPlugin` |
+| [packages/pocket_clipboard/lib/pocket_clipboard.dart](https://github.com/PocketFlutter/Pocket/blob/235b5b5589faf492f4a9fc3b7c0827bcd1d9de2c/sdk/packages/pocket_clipboard/lib/pocket_clipboard.dart) | See the library and machine-readable inventory for exports, functions, and constants. |
+| [packages/pocket_clipboard/lib/src/clipboard_plugin.dart](https://github.com/PocketFlutter/Pocket/blob/235b5b5589faf492f4a9fc3b7c0827bcd1d9de2c/sdk/packages/pocket_clipboard/lib/src/clipboard_plugin.dart) | `PocketClipboardCapabilities`, `PocketClipboardPermissions`, `PocketClipboardPlugin` |
 
 ### `pocket_diagnostics`
 
 | Declaring library | Public top-level type declarations |
 | --- | --- |
-| [packages/pocket_diagnostics/lib/pocket_diagnostics.dart](https://github.com/PocketFlutter/Pocket/blob/9ac11fd84d99c0038118232f7d396fb0000b8cc1/sdk/packages/pocket_diagnostics/lib/pocket_diagnostics.dart) | See the library and machine-readable inventory for exports, functions, and constants. |
-| [packages/pocket_diagnostics/lib/src/collector.dart](https://github.com/PocketFlutter/Pocket/blob/9ac11fd84d99c0038118232f7d396fb0000b8cc1/sdk/packages/pocket_diagnostics/lib/src/collector.dart) | `DiagnosticsCollector`, `MemoryDiagnosticsStorage` |
-| [packages/pocket_diagnostics/lib/src/file_storage.dart](https://github.com/PocketFlutter/Pocket/blob/9ac11fd84d99c0038118232f7d396fb0000b8cc1/sdk/packages/pocket_diagnostics/lib/src/file_storage.dart) | `FileDiagnosticsCollector`, `FileDiagnosticsStorage` |
-| [packages/pocket_diagnostics/lib/src/flutter_adapter.dart](https://github.com/PocketFlutter/Pocket/blob/9ac11fd84d99c0038118232f7d396fb0000b8cc1/sdk/packages/pocket_diagnostics/lib/src/flutter_adapter.dart) | `FlutterErrorCollector`, `FlutterErrorCollectorHandle` |
-| [packages/pocket_diagnostics/lib/src/normalize.dart](https://github.com/PocketFlutter/Pocket/blob/9ac11fd84d99c0038118232f7d396fb0000b8cc1/sdk/packages/pocket_diagnostics/lib/src/normalize.dart) | `ResolvedNormalizationLimits`, `TruncationTracker` |
-| [packages/pocket_diagnostics/lib/src/types.dart](https://github.com/PocketFlutter/Pocket/blob/9ac11fd84d99c0038118232f7d396fb0000b8cc1/sdk/packages/pocket_diagnostics/lib/src/types.dart) | `DiagnosticClearFilter`, `DiagnosticContext`, `DiagnosticCrashInput`, `DiagnosticCrashRecord`, `DiagnosticExportBundle`, `DiagnosticLogInput`, `DiagnosticLogRecord`, `DiagnosticNormalizationLimits`, `DiagnosticQuery`, `DiagnosticRecentLogSummary`, `DiagnosticRecord`, `DiagnosticRecordKind`, `DiagnosticSeverity`, `DiagnosticsStorage`, `DiagnosticsStorageAppendOptions`, `NormalizedDiagnosticError`, `RecentLogCaptureMode`, `SynchronousDiagnosticsStorage` |
+| [packages/pocket_diagnostics/lib/pocket_diagnostics.dart](https://github.com/PocketFlutter/Pocket/blob/235b5b5589faf492f4a9fc3b7c0827bcd1d9de2c/sdk/packages/pocket_diagnostics/lib/pocket_diagnostics.dart) | See the library and machine-readable inventory for exports, functions, and constants. |
+| [packages/pocket_diagnostics/lib/src/collector.dart](https://github.com/PocketFlutter/Pocket/blob/235b5b5589faf492f4a9fc3b7c0827bcd1d9de2c/sdk/packages/pocket_diagnostics/lib/src/collector.dart) | `DiagnosticsCollector`, `MemoryDiagnosticsStorage` |
+| [packages/pocket_diagnostics/lib/src/file_storage.dart](https://github.com/PocketFlutter/Pocket/blob/235b5b5589faf492f4a9fc3b7c0827bcd1d9de2c/sdk/packages/pocket_diagnostics/lib/src/file_storage.dart) | `FileDiagnosticsCollector`, `FileDiagnosticsStorage` |
+| [packages/pocket_diagnostics/lib/src/flutter_adapter.dart](https://github.com/PocketFlutter/Pocket/blob/235b5b5589faf492f4a9fc3b7c0827bcd1d9de2c/sdk/packages/pocket_diagnostics/lib/src/flutter_adapter.dart) | `FlutterErrorCollector`, `FlutterErrorCollectorHandle` |
+| [packages/pocket_diagnostics/lib/src/normalize.dart](https://github.com/PocketFlutter/Pocket/blob/235b5b5589faf492f4a9fc3b7c0827bcd1d9de2c/sdk/packages/pocket_diagnostics/lib/src/normalize.dart) | `ResolvedNormalizationLimits`, `TruncationTracker` |
+| [packages/pocket_diagnostics/lib/src/types.dart](https://github.com/PocketFlutter/Pocket/blob/235b5b5589faf492f4a9fc3b7c0827bcd1d9de2c/sdk/packages/pocket_diagnostics/lib/src/types.dart) | `DiagnosticClearFilter`, `DiagnosticContext`, `DiagnosticCrashInput`, `DiagnosticCrashRecord`, `DiagnosticExportBundle`, `DiagnosticLogInput`, `DiagnosticLogRecord`, `DiagnosticNormalizationLimits`, `DiagnosticQuery`, `DiagnosticRecentLogSummary`, `DiagnosticRecord`, `DiagnosticRecordKind`, `DiagnosticSeverity`, `DiagnosticsStorage`, `DiagnosticsStorageAppendOptions`, `NormalizedDiagnosticError`, `RecentLogCaptureMode`, `SynchronousDiagnosticsStorage` |
 
 ### `pocket_dio`
 
 | Declaring library | Public top-level type declarations |
 | --- | --- |
-| [packages/pocket_dio/lib/pocket_dio.dart](https://github.com/PocketFlutter/Pocket/blob/9ac11fd84d99c0038118232f7d396fb0000b8cc1/sdk/packages/pocket_dio/lib/pocket_dio.dart) | See the library and machine-readable inventory for exports, functions, and constants. |
-| [packages/pocket_dio/lib/src/dio_plugin.dart](https://github.com/PocketFlutter/Pocket/blob/9ac11fd84d99c0038118232f7d396fb0000b8cc1/sdk/packages/pocket_dio/lib/src/dio_plugin.dart) | `PocketDioPlugin` |
+| [packages/pocket_dio/lib/pocket_dio.dart](https://github.com/PocketFlutter/Pocket/blob/235b5b5589faf492f4a9fc3b7c0827bcd1d9de2c/sdk/packages/pocket_dio/lib/pocket_dio.dart) | See the library and machine-readable inventory for exports, functions, and constants. |
+| [packages/pocket_dio/lib/src/dio_plugin.dart](https://github.com/PocketFlutter/Pocket/blob/235b5b5589faf492f4a9fc3b7c0827bcd1d9de2c/sdk/packages/pocket_dio/lib/src/dio_plugin.dart) | `PocketDioPlugin` |
 
 ### `pocket_file_picker`
 
 | Declaring library | Public top-level type declarations |
 | --- | --- |
-| [packages/pocket_file_picker/lib/pocket_file_picker.dart](https://github.com/PocketFlutter/Pocket/blob/9ac11fd84d99c0038118232f7d396fb0000b8cc1/sdk/packages/pocket_file_picker/lib/pocket_file_picker.dart) | See the library and machine-readable inventory for exports, functions, and constants. |
-| [packages/pocket_file_picker/lib/src/file_picker_plugin.dart](https://github.com/PocketFlutter/Pocket/blob/9ac11fd84d99c0038118232f7d396fb0000b8cc1/sdk/packages/pocket_file_picker/lib/src/file_picker_plugin.dart) | `PocketFilePickerCapabilities`, `PocketFilePickerPermissions`, `PocketFilePickerPlugin` |
+| [packages/pocket_file_picker/lib/pocket_file_picker.dart](https://github.com/PocketFlutter/Pocket/blob/235b5b5589faf492f4a9fc3b7c0827bcd1d9de2c/sdk/packages/pocket_file_picker/lib/pocket_file_picker.dart) | See the library and machine-readable inventory for exports, functions, and constants. |
+| [packages/pocket_file_picker/lib/src/file_picker_plugin.dart](https://github.com/PocketFlutter/Pocket/blob/235b5b5589faf492f4a9fc3b7c0827bcd1d9de2c/sdk/packages/pocket_file_picker/lib/src/file_picker_plugin.dart) | `PocketFilePickerCapabilities`, `PocketFilePickerPermissions`, `PocketFilePickerPlugin` |
 
 ### `pocket_flutter`
 
 | Declaring library | Public top-level type declarations |
 | --- | --- |
-| [packages/pocket_flutter/lib/pocket_flutter.dart](https://github.com/PocketFlutter/Pocket/blob/9ac11fd84d99c0038118232f7d396fb0000b8cc1/sdk/packages/pocket_flutter/lib/pocket_flutter.dart) | See the library and machine-readable inventory for exports, functions, and constants. |
-| [packages/pocket_flutter/lib/src/pocket_assets.dart](https://github.com/PocketFlutter/Pocket/blob/9ac11fd84d99c0038118232f7d396fb0000b8cc1/sdk/packages/pocket_flutter/lib/src/pocket_assets.dart) | `PocketPakImage`, `PocketPakImages` |
-| [packages/pocket_flutter/lib/src/pocket_binary_codec.dart](https://github.com/PocketFlutter/Pocket/blob/9ac11fd84d99c0038118232f7d396fb0000b8cc1/sdk/packages/pocket_flutter/lib/src/pocket_binary_codec.dart) | `PocketBinaryCodec`, `PocketBinaryOffloadRecord` |
-| [packages/pocket_flutter/lib/src/pocket_display.dart](https://github.com/PocketFlutter/Pocket/blob/9ac11fd84d99c0038118232f7d396fb0000b8cc1/sdk/packages/pocket_flutter/lib/src/pocket_display.dart) | See the library and machine-readable inventory for exports, functions, and constants. |
-| [packages/pocket_flutter/lib/src/pocket_display_geometry.dart](https://github.com/PocketFlutter/Pocket/blob/9ac11fd84d99c0038118232f7d396fb0000b8cc1/sdk/packages/pocket_flutter/lib/src/pocket_display_geometry.dart) | `PocketDisplayGeometryChannel`, `PocketDisplayGeometrySnapshot`, `PocketDisplayGeometrySource`, `PocketDisplayGeometryUpdate`, `PocketDisplayRegion` |
-| [packages/pocket_flutter/lib/src/pocket_duplex.dart](https://github.com/PocketFlutter/Pocket/blob/9ac11fd84d99c0038118232f7d396fb0000b8cc1/sdk/packages/pocket_flutter/lib/src/pocket_duplex.dart) | `PocketBinaryDuplexRuntime`, `PocketDuplexChannel`, `PocketDuplexEndpoint`, `PocketDuplexEvent`, `PocketDuplexMessage` |
-| [packages/pocket_flutter/lib/src/flutter_frame_monitor.dart](https://github.com/PocketFlutter/Pocket/blob/9ac11fd84d99c0038118232f7d396fb0000b8cc1/sdk/packages/pocket_flutter/lib/src/flutter_frame_monitor.dart) | `FlutterFrameMonitor`, `FlutterFrameMonitorController`, `FlutterFrameTimingSample`, `FlutterFrameWindow` |
-| [packages/pocket_flutter/lib/src/pocket_model.dart](https://github.com/PocketFlutter/Pocket/blob/9ac11fd84d99c0038118232f7d396fb0000b8cc1/sdk/packages/pocket_flutter/lib/src/pocket_model.dart) | `PocketArcOp`, `PocketClip`, `PocketEvent`, `PocketFrame`, `PocketGradientOp`, `PocketHostSurfaceOp`, `PocketImageOp`, `PocketImageResource`, `PocketMeshLayerBeginOp`, `PocketMeshLayerRestoreOp`, `PocketMeshMaskBeginOp`, `PocketOp`, `PocketPoint`, `PocketRectOp`, `PocketRoundedGradientOp`, `PocketRoundedOp`, `PocketSurfaceFrame`, `PocketTextOp`, `PocketTextureTriangleOp`, `PocketTriangleOp`, `PocketVideoOp` |
-| [packages/pocket_flutter/lib/src/pocket_memory_limits.dart](https://github.com/PocketFlutter/Pocket/blob/9ac11fd84d99c0038118232f7d396fb0000b8cc1/sdk/packages/pocket_flutter/lib/src/pocket_memory_limits.dart) | `PocketMemoryLimits` |
-| [packages/pocket_flutter/lib/src/pocket_guest_security.dart](https://github.com/PocketFlutter/Pocket/blob/9ac11fd84d99c0038118232f7d396fb0000b8cc1/sdk/packages/pocket_flutter/lib/src/pocket_guest_security.dart) | `PocketGuestSecurityPolicy` |
-| [packages/pocket_flutter/lib/src/pocket_host_fonts.dart](https://github.com/PocketFlutter/Pocket/blob/9ac11fd84d99c0038118232f7d396fb0000b8cc1/sdk/packages/pocket_flutter/lib/src/pocket_host_fonts.dart) | `PocketHostFontMetrics` |
-| [packages/pocket_flutter/lib/src/pocket_package.dart](https://github.com/PocketFlutter/Pocket/blob/9ac11fd84d99c0038118232f7d396fb0000b8cc1/sdk/packages/pocket_flutter/lib/src/pocket_package.dart) | `PocketPackageManifest`, `PocketPackageSource` |
-| [packages/pocket_flutter/lib/src/pocket_performance.dart](https://github.com/PocketFlutter/Pocket/blob/9ac11fd84d99c0038118232f7d396fb0000b8cc1/sdk/packages/pocket_flutter/lib/src/pocket_performance.dart) | `PocketLongFrameEvent`, `PocketPerformanceSample`, `PocketPerformanceSampleCallback` |
-| [packages/pocket_flutter/lib/src/pocket_raw_text_input.dart](https://github.com/PocketFlutter/Pocket/blob/9ac11fd84d99c0038118232f7d396fb0000b8cc1/sdk/packages/pocket_flutter/lib/src/pocket_raw_text_input.dart) | `PocketRawTextClient`, `PocketRawTextOutput` |
-| [packages/pocket_flutter/lib/src/pocket_startup_progress.dart](https://github.com/PocketFlutter/Pocket/blob/9ac11fd84d99c0038118232f7d396fb0000b8cc1/sdk/packages/pocket_flutter/lib/src/pocket_startup_progress.dart) | `PocketLoadingBuilder`, `PocketStartupProgress`, `PocketStartupStage` |
-| [packages/pocket_flutter/lib/src/pocket_runtime.dart](https://github.com/PocketFlutter/Pocket/blob/9ac11fd84d99c0038118232f7d396fb0000b8cc1/sdk/packages/pocket_flutter/lib/src/pocket_runtime.dart) | `FfiPocketRuntime`, `PocketBytecodeMetadata`, `PocketBytecodeRuntime`, `PocketCompositorRuntime`, `PocketNativeStageTimings`, `PocketRecordingReplay`, `PocketReplayRunner`, `PocketReplayRuntimeFactory`, `PocketRuntime`, `PocketRuntimeBytecode`, `PocketRuntimeException`, `PocketRuntimeScheduling` |
-| [packages/pocket_flutter/lib/src/pocket_recording.dart](https://github.com/PocketFlutter/Pocket/blob/9ac11fd84d99c0038118232f7d396fb0000b8cc1/sdk/packages/pocket_flutter/lib/src/pocket_recording.dart) | `PocketHostFontMetricsSnapshot`, `PocketRecording`, `PocketRecordingController`, `PocketRecordingEntry`, `PocketRecordingFormatException`, `PocketRecordingMetadata`, `PocketReplayAssets`, `PocketReplayMismatch`, `PocketReplayResult` |
-| [packages/pocket_flutter/lib/src/pocket_text_cache.dart](https://github.com/PocketFlutter/Pocket/blob/9ac11fd84d99c0038118232f7d396fb0000b8cc1/sdk/packages/pocket_flutter/lib/src/pocket_text_cache.dart) | `PocketTextLayoutCache` |
-| [packages/pocket_flutter/lib/src/pocket_view.dart](https://github.com/PocketFlutter/Pocket/blob/9ac11fd84d99c0038118232f7d396fb0000b8cc1/sdk/packages/pocket_flutter/lib/src/pocket_view.dart) | `PocketDuplexEventCallback`, `PocketEventCallback`, `PocketImageResourceDecoder`, `PocketView`, `PocketViewCapture`, `PocketViewController` |
-| [packages/pocket_flutter/lib/src/pocket_compositor.dart](https://github.com/PocketFlutter/Pocket/blob/9ac11fd84d99c0038118232f7d396fb0000b8cc1/sdk/packages/pocket_flutter/lib/src/pocket_compositor.dart) | `PocketCompositorSlot`, `PocketHostSurfaceBuilder` |
-| [packages/pocket_flutter/lib/src/pocket_worker_runtime.dart](https://github.com/PocketFlutter/Pocket/blob/9ac11fd84d99c0038118232f7d396fb0000b8cc1/sdk/packages/pocket_flutter/lib/src/pocket_worker_runtime.dart) | `PocketWorkerLimits`, `PocketWorkerProgram`, `PocketWorkerRuntime` |
-| [packages/pocket_flutter/lib/src/pocket_offload_runtime.dart](https://github.com/PocketFlutter/Pocket/blob/9ac11fd84d99c0038118232f7d396fb0000b8cc1/sdk/packages/pocket_flutter/lib/src/pocket_offload_runtime.dart) | `PocketBoundedOffloadProvider`, `PocketOffloadCancellationToken`, `PocketOffloadCancelled`, `PocketOffloadCompletion`, `PocketOffloadKey`, `PocketOffloadProvider`, `PocketOffloadRequest`, `PocketOffloadRuntime` |
+| [packages/pocket_flutter/lib/pocket_flutter.dart](https://github.com/PocketFlutter/Pocket/blob/235b5b5589faf492f4a9fc3b7c0827bcd1d9de2c/sdk/packages/pocket_flutter/lib/pocket_flutter.dart) | See the library and machine-readable inventory for exports, functions, and constants. |
+| [packages/pocket_flutter/lib/src/pocket_assets.dart](https://github.com/PocketFlutter/Pocket/blob/235b5b5589faf492f4a9fc3b7c0827bcd1d9de2c/sdk/packages/pocket_flutter/lib/src/pocket_assets.dart) | `PocketPakImage`, `PocketPakImages` |
+| [packages/pocket_flutter/lib/src/pocket_binary_codec.dart](https://github.com/PocketFlutter/Pocket/blob/235b5b5589faf492f4a9fc3b7c0827bcd1d9de2c/sdk/packages/pocket_flutter/lib/src/pocket_binary_codec.dart) | `PocketBinaryCodec`, `PocketBinaryOffloadRecord` |
+| [packages/pocket_flutter/lib/src/pocket_display.dart](https://github.com/PocketFlutter/Pocket/blob/235b5b5589faf492f4a9fc3b7c0827bcd1d9de2c/sdk/packages/pocket_flutter/lib/src/pocket_display.dart) | See the library and machine-readable inventory for exports, functions, and constants. |
+| [packages/pocket_flutter/lib/src/pocket_display_geometry.dart](https://github.com/PocketFlutter/Pocket/blob/235b5b5589faf492f4a9fc3b7c0827bcd1d9de2c/sdk/packages/pocket_flutter/lib/src/pocket_display_geometry.dart) | `PocketDisplayGeometryChannel`, `PocketDisplayGeometrySnapshot`, `PocketDisplayGeometrySource`, `PocketDisplayGeometryUpdate`, `PocketDisplayRegion` |
+| [packages/pocket_flutter/lib/src/pocket_duplex.dart](https://github.com/PocketFlutter/Pocket/blob/235b5b5589faf492f4a9fc3b7c0827bcd1d9de2c/sdk/packages/pocket_flutter/lib/src/pocket_duplex.dart) | `PocketBinaryDuplexRuntime`, `PocketDuplexChannel`, `PocketDuplexEndpoint`, `PocketDuplexEvent`, `PocketDuplexMessage` |
+| [packages/pocket_flutter/lib/src/flutter_frame_monitor.dart](https://github.com/PocketFlutter/Pocket/blob/235b5b5589faf492f4a9fc3b7c0827bcd1d9de2c/sdk/packages/pocket_flutter/lib/src/flutter_frame_monitor.dart) | `FlutterFrameMonitor`, `FlutterFrameMonitorController`, `FlutterFrameTimingSample`, `FlutterFrameWindow` |
+| [packages/pocket_flutter/lib/src/pocket_model.dart](https://github.com/PocketFlutter/Pocket/blob/235b5b5589faf492f4a9fc3b7c0827bcd1d9de2c/sdk/packages/pocket_flutter/lib/src/pocket_model.dart) | `PocketArcOp`, `PocketClip`, `PocketEvent`, `PocketFrame`, `PocketGradientOp`, `PocketHostSurfaceOp`, `PocketImageOp`, `PocketImageResource`, `PocketMeshLayerBeginOp`, `PocketMeshLayerRestoreOp`, `PocketMeshMaskBeginOp`, `PocketOp`, `PocketPoint`, `PocketRectOp`, `PocketRoundedGradientOp`, `PocketRoundedOp`, `PocketSurfaceFrame`, `PocketTextOp`, `PocketTextureTriangleOp`, `PocketTriangleOp`, `PocketVideoOp` |
+| [packages/pocket_flutter/lib/src/pocket_memory_limits.dart](https://github.com/PocketFlutter/Pocket/blob/235b5b5589faf492f4a9fc3b7c0827bcd1d9de2c/sdk/packages/pocket_flutter/lib/src/pocket_memory_limits.dart) | `PocketMemoryLimits` |
+| [packages/pocket_flutter/lib/src/pocket_guest_security.dart](https://github.com/PocketFlutter/Pocket/blob/235b5b5589faf492f4a9fc3b7c0827bcd1d9de2c/sdk/packages/pocket_flutter/lib/src/pocket_guest_security.dart) | `PocketGuestSecurityPolicy` |
+| [packages/pocket_flutter/lib/src/pocket_host_fonts.dart](https://github.com/PocketFlutter/Pocket/blob/235b5b5589faf492f4a9fc3b7c0827bcd1d9de2c/sdk/packages/pocket_flutter/lib/src/pocket_host_fonts.dart) | `PocketHostFontMetrics` |
+| [packages/pocket_flutter/lib/src/pocket_package.dart](https://github.com/PocketFlutter/Pocket/blob/235b5b5589faf492f4a9fc3b7c0827bcd1d9de2c/sdk/packages/pocket_flutter/lib/src/pocket_package.dart) | `PocketPackageManifest`, `PocketPackageSource` |
+| [packages/pocket_flutter/lib/src/pocket_performance.dart](https://github.com/PocketFlutter/Pocket/blob/235b5b5589faf492f4a9fc3b7c0827bcd1d9de2c/sdk/packages/pocket_flutter/lib/src/pocket_performance.dart) | `PocketLongFrameEvent`, `PocketPerformanceSample`, `PocketPerformanceSampleCallback` |
+| [packages/pocket_flutter/lib/src/pocket_raw_text_input.dart](https://github.com/PocketFlutter/Pocket/blob/235b5b5589faf492f4a9fc3b7c0827bcd1d9de2c/sdk/packages/pocket_flutter/lib/src/pocket_raw_text_input.dart) | `PocketRawTextClient`, `PocketRawTextOutput` |
+| [packages/pocket_flutter/lib/src/pocket_startup_progress.dart](https://github.com/PocketFlutter/Pocket/blob/235b5b5589faf492f4a9fc3b7c0827bcd1d9de2c/sdk/packages/pocket_flutter/lib/src/pocket_startup_progress.dart) | `PocketLoadingBuilder`, `PocketStartupProgress`, `PocketStartupStage` |
+| [packages/pocket_flutter/lib/src/pocket_runtime.dart](https://github.com/PocketFlutter/Pocket/blob/235b5b5589faf492f4a9fc3b7c0827bcd1d9de2c/sdk/packages/pocket_flutter/lib/src/pocket_runtime.dart) | `FfiPocketRuntime`, `PocketBytecodeMetadata`, `PocketBytecodeRuntime`, `PocketCompositorRuntime`, `PocketNativeStageTimings`, `PocketRecordingReplay`, `PocketReplayRunner`, `PocketReplayRuntimeFactory`, `PocketRuntime`, `PocketRuntimeBytecode`, `PocketRuntimeException`, `PocketRuntimeScheduling` |
+| [packages/pocket_flutter/lib/src/pocket_recording.dart](https://github.com/PocketFlutter/Pocket/blob/235b5b5589faf492f4a9fc3b7c0827bcd1d9de2c/sdk/packages/pocket_flutter/lib/src/pocket_recording.dart) | `PocketHostFontMetricsSnapshot`, `PocketRecording`, `PocketRecordingController`, `PocketRecordingEntry`, `PocketRecordingFormatException`, `PocketRecordingMetadata`, `PocketReplayAssets`, `PocketReplayMismatch`, `PocketReplayResult` |
+| [packages/pocket_flutter/lib/src/pocket_text_cache.dart](https://github.com/PocketFlutter/Pocket/blob/235b5b5589faf492f4a9fc3b7c0827bcd1d9de2c/sdk/packages/pocket_flutter/lib/src/pocket_text_cache.dart) | `PocketTextLayoutCache` |
+| [packages/pocket_flutter/lib/src/pocket_view.dart](https://github.com/PocketFlutter/Pocket/blob/235b5b5589faf492f4a9fc3b7c0827bcd1d9de2c/sdk/packages/pocket_flutter/lib/src/pocket_view.dart) | `PocketDuplexEventCallback`, `PocketEventCallback`, `PocketImageResourceDecoder`, `PocketView`, `PocketViewCapture`, `PocketViewController` |
+| [packages/pocket_flutter/lib/src/pocket_compositor.dart](https://github.com/PocketFlutter/Pocket/blob/235b5b5589faf492f4a9fc3b7c0827bcd1d9de2c/sdk/packages/pocket_flutter/lib/src/pocket_compositor.dart) | `PocketCompositorSlot`, `PocketHostSurfaceBuilder` |
+| [packages/pocket_flutter/lib/src/pocket_worker_runtime.dart](https://github.com/PocketFlutter/Pocket/blob/235b5b5589faf492f4a9fc3b7c0827bcd1d9de2c/sdk/packages/pocket_flutter/lib/src/pocket_worker_runtime.dart) | `PocketWorkerLimits`, `PocketWorkerProgram`, `PocketWorkerRuntime` |
+| [packages/pocket_flutter/lib/src/pocket_offload_runtime.dart](https://github.com/PocketFlutter/Pocket/blob/235b5b5589faf492f4a9fc3b7c0827bcd1d9de2c/sdk/packages/pocket_flutter/lib/src/pocket_offload_runtime.dart) | `PocketBoundedOffloadProvider`, `PocketOffloadCancellationToken`, `PocketOffloadCancelled`, `PocketOffloadCompletion`, `PocketOffloadKey`, `PocketOffloadProvider`, `PocketOffloadRequest`, `PocketOffloadRuntime` |
 
 ### `pocket_hardware`
 
 | Declaring library | Public top-level type declarations |
 | --- | --- |
-| [packages/pocket_hardware/lib/pocket_hardware.dart](https://github.com/PocketFlutter/Pocket/blob/9ac11fd84d99c0038118232f7d396fb0000b8cc1/sdk/packages/pocket_hardware/lib/pocket_hardware.dart) | See the library and machine-readable inventory for exports, functions, and constants. |
-| [packages/pocket_hardware/lib/src/hardware_plugin.dart](https://github.com/PocketFlutter/Pocket/blob/9ac11fd84d99c0038118232f7d396fb0000b8cc1/sdk/packages/pocket_hardware/lib/src/hardware_plugin.dart) | `HardwarePlugin` |
+| [packages/pocket_hardware/lib/pocket_hardware.dart](https://github.com/PocketFlutter/Pocket/blob/235b5b5589faf492f4a9fc3b7c0827bcd1d9de2c/sdk/packages/pocket_hardware/lib/pocket_hardware.dart) | See the library and machine-readable inventory for exports, functions, and constants. |
+| [packages/pocket_hardware/lib/src/hardware_plugin.dart](https://github.com/PocketFlutter/Pocket/blob/235b5b5589faf492f4a9fc3b7c0827bcd1d9de2c/sdk/packages/pocket_hardware/lib/src/hardware_plugin.dart) | `HardwarePlugin` |
 
 ### `pocket_hardware_core`
 
 | Declaring library | Public top-level type declarations |
 | --- | --- |
-| [packages/pocket_hardware_core/lib/pocket_hardware_core.dart](https://github.com/PocketFlutter/Pocket/blob/9ac11fd84d99c0038118232f7d396fb0000b8cc1/sdk/packages/pocket_hardware_core/lib/pocket_hardware_core.dart) | See the library and machine-readable inventory for exports, functions, and constants. |
-| [packages/pocket_hardware_core/lib/src/hardware_plugin.dart](https://github.com/PocketFlutter/Pocket/blob/9ac11fd84d99c0038118232f7d396fb0000b8cc1/sdk/packages/pocket_hardware_core/lib/src/hardware_plugin.dart) | `HardwareCapabilities`, `HardwareCapabilityPlugin`, `HardwareFeature`, `HardwareFeatures`, `HardwarePermissionHandler`, `HardwarePermissions`, `HardwarePlatform`, `HardwarePlatformException`, `HardwareStreamingPlatform`, `HardwareTextureCallback`, `HardwareWeatherFetcher`, `MethodChannelHardwarePlatform` |
+| [packages/pocket_hardware_core/lib/pocket_hardware_core.dart](https://github.com/PocketFlutter/Pocket/blob/235b5b5589faf492f4a9fc3b7c0827bcd1d9de2c/sdk/packages/pocket_hardware_core/lib/pocket_hardware_core.dart) | See the library and machine-readable inventory for exports, functions, and constants. |
+| [packages/pocket_hardware_core/lib/src/hardware_plugin.dart](https://github.com/PocketFlutter/Pocket/blob/235b5b5589faf492f4a9fc3b7c0827bcd1d9de2c/sdk/packages/pocket_hardware_core/lib/src/hardware_plugin.dart) | `HardwareCapabilities`, `HardwareCapabilityPlugin`, `HardwareFeature`, `HardwareFeatures`, `HardwarePermissionHandler`, `HardwarePermissions`, `HardwarePlatform`, `HardwarePlatformException`, `HardwareStreamingPlatform`, `HardwareTextureCallback`, `HardwareWeatherFetcher`, `MethodChannelHardwarePlatform` |
 
 ### `pocket_live2d`
 
 | Declaring library | Public top-level type declarations |
 | --- | --- |
-| [packages/pocket_live2d/lib/pocket_live2d.dart](https://github.com/PocketFlutter/Pocket/blob/9ac11fd84d99c0038118232f7d396fb0000b8cc1/sdk/packages/pocket_live2d/lib/pocket_live2d.dart) | See the library and machine-readable inventory for exports, functions, and constants. |
-| [packages/pocket_live2d/lib/src/pocket_live2d_plugin.dart](https://github.com/PocketFlutter/Pocket/blob/9ac11fd84d99c0038118232f7d396fb0000b8cc1/sdk/packages/pocket_live2d/lib/src/pocket_live2d_plugin.dart) | `PocketLive2dPlugin` |
-| [packages/pocket_live2d/lib/src/pocket_live2d_types.dart](https://github.com/PocketFlutter/Pocket/blob/9ac11fd84d99c0038118232f7d396fb0000b8cc1/sdk/packages/pocket_live2d/lib/src/pocket_live2d_types.dart) | `PocketLive2dCanvas`, `PocketLive2dCoreFactory`, `PocketLive2dCoreMetadata`, `PocketLive2dCoreModel`, `PocketLive2dCorePlacementUpdater`, `PocketLive2dCoreTopologyReader`, `PocketLive2dDrawable`, `PocketLive2dParameterDefault`, `PocketLive2dParameterMetadata`, `PocketLive2dPartMetadata`, `PocketLive2dPlacement` |
+| [packages/pocket_live2d/lib/pocket_live2d.dart](https://github.com/PocketFlutter/Pocket/blob/235b5b5589faf492f4a9fc3b7c0827bcd1d9de2c/sdk/packages/pocket_live2d/lib/pocket_live2d.dart) | See the library and machine-readable inventory for exports, functions, and constants. |
+| [packages/pocket_live2d/lib/src/pocket_live2d_plugin.dart](https://github.com/PocketFlutter/Pocket/blob/235b5b5589faf492f4a9fc3b7c0827bcd1d9de2c/sdk/packages/pocket_live2d/lib/src/pocket_live2d_plugin.dart) | `PocketLive2dPlugin` |
+| [packages/pocket_live2d/lib/src/pocket_live2d_types.dart](https://github.com/PocketFlutter/Pocket/blob/235b5b5589faf492f4a9fc3b7c0827bcd1d9de2c/sdk/packages/pocket_live2d/lib/src/pocket_live2d_types.dart) | `PocketLive2dCanvas`, `PocketLive2dCoreFactory`, `PocketLive2dCoreMetadata`, `PocketLive2dCoreModel`, `PocketLive2dCorePlacementUpdater`, `PocketLive2dCoreTopologyReader`, `PocketLive2dDrawable`, `PocketLive2dParameterDefault`, `PocketLive2dParameterMetadata`, `PocketLive2dPartMetadata`, `PocketLive2dPlacement` |
 
 ### `pocket_location`
 
 | Declaring library | Public top-level type declarations |
 | --- | --- |
-| [packages/pocket_location/lib/pocket_location.dart](https://github.com/PocketFlutter/Pocket/blob/9ac11fd84d99c0038118232f7d396fb0000b8cc1/sdk/packages/pocket_location/lib/pocket_location.dart) | `PocketLocationPlugin` |
+| [packages/pocket_location/lib/pocket_location.dart](https://github.com/PocketFlutter/Pocket/blob/235b5b5589faf492f4a9fc3b7c0827bcd1d9de2c/sdk/packages/pocket_location/lib/pocket_location.dart) | `PocketLocationPlugin` |
 
 ### `pocket_permissions`
 
 | Declaring library | Public top-level type declarations |
 | --- | --- |
-| [packages/pocket_permissions/lib/pocket_permissions.dart](https://github.com/PocketFlutter/Pocket/blob/9ac11fd84d99c0038118232f7d396fb0000b8cc1/sdk/packages/pocket_permissions/lib/pocket_permissions.dart) | See the library and machine-readable inventory for exports, functions, and constants. |
-| [packages/pocket_permissions/lib/src/permissions_plugin.dart](https://github.com/PocketFlutter/Pocket/blob/9ac11fd84d99c0038118232f7d396fb0000b8cc1/sdk/packages/pocket_permissions/lib/src/permissions_plugin.dart) | `DeviceInfoPlusPocketDeviceInfo`, `PocketDeviceInfo`, `PocketPermissionNames`, `PocketPermissionsCapabilities`, `PocketPermissionsPlugin`, `PocketSystemPermissions` |
+| [packages/pocket_permissions/lib/pocket_permissions.dart](https://github.com/PocketFlutter/Pocket/blob/235b5b5589faf492f4a9fc3b7c0827bcd1d9de2c/sdk/packages/pocket_permissions/lib/pocket_permissions.dart) | See the library and machine-readable inventory for exports, functions, and constants. |
+| [packages/pocket_permissions/lib/src/permissions_plugin.dart](https://github.com/PocketFlutter/Pocket/blob/235b5b5589faf492f4a9fc3b7c0827bcd1d9de2c/sdk/packages/pocket_permissions/lib/src/permissions_plugin.dart) | `DeviceInfoPlusPocketDeviceInfo`, `PocketDeviceInfo`, `PocketPermissionNames`, `PocketPermissionsCapabilities`, `PocketPermissionsPlugin`, `PocketSystemPermissions` |
 
 ### `pocket_platform`
 
 | Declaring library | Public top-level type declarations |
 | --- | --- |
-| [packages/pocket_platform/lib/pocket_platform.dart](https://github.com/PocketFlutter/Pocket/blob/9ac11fd84d99c0038118232f7d396fb0000b8cc1/sdk/packages/pocket_platform/lib/pocket_platform.dart) | See the library and machine-readable inventory for exports, functions, and constants. |
-| [packages/pocket_platform/lib/src/platform_plugin.dart](https://github.com/PocketFlutter/Pocket/blob/9ac11fd84d99c0038118232f7d396fb0000b8cc1/sdk/packages/pocket_platform/lib/src/platform_plugin.dart) | `FlutterPocketPlatformUi`, `MethodChannelPocketPlatformTransport`, `PocketDeepLinkPlugin`, `PocketPlatformCapabilities`, `PocketPlatformClock`, `PocketPlatformHaptics`, `PocketPlatformMethodCallHandler`, `PocketPlatformPlugin`, `PocketPlatformTransport`, `PocketPlatformUi`, `StopwatchPocketPlatformClock` |
+| [packages/pocket_platform/lib/pocket_platform.dart](https://github.com/PocketFlutter/Pocket/blob/235b5b5589faf492f4a9fc3b7c0827bcd1d9de2c/sdk/packages/pocket_platform/lib/pocket_platform.dart) | See the library and machine-readable inventory for exports, functions, and constants. |
+| [packages/pocket_platform/lib/src/platform_plugin.dart](https://github.com/PocketFlutter/Pocket/blob/235b5b5589faf492f4a9fc3b7c0827bcd1d9de2c/sdk/packages/pocket_platform/lib/src/platform_plugin.dart) | `FlutterPocketPlatformUi`, `MethodChannelPocketPlatformTransport`, `PocketDeepLinkPlugin`, `PocketPlatformCapabilities`, `PocketPlatformClock`, `PocketPlatformHaptics`, `PocketPlatformMethodCallHandler`, `PocketPlatformPlugin`, `PocketPlatformTransport`, `PocketPlatformUi`, `StopwatchPocketPlatformClock` |
 
 ### `pocket_sensors`
 
 | Declaring library | Public top-level type declarations |
 | --- | --- |
-| [packages/pocket_sensors/lib/pocket_sensors.dart](https://github.com/PocketFlutter/Pocket/blob/9ac11fd84d99c0038118232f7d396fb0000b8cc1/sdk/packages/pocket_sensors/lib/pocket_sensors.dart) | `PocketSensorsPlugin` |
+| [packages/pocket_sensors/lib/pocket_sensors.dart](https://github.com/PocketFlutter/Pocket/blob/235b5b5589faf492f4a9fc3b7c0827bcd1d9de2c/sdk/packages/pocket_sensors/lib/pocket_sensors.dart) | `PocketSensorsPlugin` |
 
 ### `pocket_services`
 
 | Declaring library | Public top-level type declarations |
 | --- | --- |
-| [packages/pocket_services/lib/pocket_services.dart](https://github.com/PocketFlutter/Pocket/blob/9ac11fd84d99c0038118232f7d396fb0000b8cc1/sdk/packages/pocket_services/lib/pocket_services.dart) | See the library and machine-readable inventory for exports, functions, and constants. |
-| [packages/pocket_services/lib/src/pocket_guest_manifest.dart](https://github.com/PocketFlutter/Pocket/blob/9ac11fd84d99c0038118232f7d396fb0000b8cc1/sdk/packages/pocket_services/lib/src/pocket_guest_manifest.dart) | `GuestManifest`, `PocketCapabilityName`, `PocketGuestManifest`, `PocketPermissionName` |
-| [packages/pocket_services/lib/src/pocket_package.dart](https://github.com/PocketFlutter/Pocket/blob/9ac11fd84d99c0038118232f7d396fb0000b8cc1/sdk/packages/pocket_services/lib/src/pocket_package.dart) | `PocketArchiveExtractor`, `PocketCancellationToken`, `PocketManifestAsset`, `PocketManifestBundle`, `PocketManifestEntry`, `PocketManifestFile`, `PocketManifestVerifier`, `PocketPackage`, `PocketPackageArtifact`, `PocketPackageException`, `PocketPackageFormatException`, `PocketPackageManifest`, `PocketPackagePreparationProgress`, `PocketPackagePreparationStage`, `PocketPackageStore`, `PocketPakBlobEntry`, `PocketPakManifest`, `PocketPakPart`, `PocketSignedManifest`, `PocketUpdateCancellation`, `PocketVersionInfo` |
-| [packages/pocket_services/lib/src/pocket_trust.dart](https://github.com/PocketFlutter/Pocket/blob/9ac11fd84d99c0038118232f7d396fb0000b8cc1/sdk/packages/pocket_services/lib/src/pocket_trust.dart) | `PocketReleaseKey`, `PocketSignedTrustPolicy`, `PocketTrustException`, `PocketTrustPolicy`, `PocketTrustStore` |
-| [packages/pocket_services/lib/src/pocket_stream.dart](https://github.com/PocketFlutter/Pocket/blob/9ac11fd84d99c0038118232f7d396fb0000b8cc1/sdk/packages/pocket_services/lib/src/pocket_stream.dart) | `PocketDuplexStream`, `PocketStreamBridge`, `PocketStreamBufferOverflowException`, `PocketStreamProtocolException`, `PocketStreamRemoteException`, `PocketStreamSend` |
-| [packages/pocket_services/lib/src/pocket_host.dart](https://github.com/PocketFlutter/Pocket/blob/9ac11fd84d99c0038118232f7d396fb0000b8cc1/sdk/packages/pocket_services/lib/src/pocket_host.dart) | `PocketCapabilityAvailability`, `PocketCapabilityDescriptor`, `PocketCapabilityException`, `PocketCapabilityKind`, `PocketCapabilityRequest`, `PocketCapabilityStream`, `PocketHost`, `PocketHostRawSend`, `PocketHostRegistry`, `PocketHostSend`, `PocketHostStreamContext` |
-| [packages/pocket_services/lib/src/pocket_plugin.dart](https://github.com/PocketFlutter/Pocket/blob/9ac11fd84d99c0038118232f7d396fb0000b8cc1/sdk/packages/pocket_services/lib/src/pocket_plugin.dart) | `PocketPermissionRequest`, `PocketPermissionRequestHandler`, `PocketPlugin`, `PocketPluginBudget`, `PocketPluginCapability`, `PocketPluginCapabilitySchema`, `PocketPluginContext`, `PocketPluginDescriptor`, `PocketPluginLimits`, `PocketPluginManager`, `PocketPluginMethod`, `PocketPluginRegistry`, `PocketPluginSchema`, `PocketPluginSchemaType`, `PocketPluginSession` |
-| [packages/pocket_services/lib/src/pocket_update.dart](https://github.com/PocketFlutter/Pocket/blob/9ac11fd84d99c0038118232f7d396fb0000b8cc1/sdk/packages/pocket_services/lib/src/pocket_update.dart) | `HttpPocketUpdateTransport`, `PocketDownloadResponse`, `PocketPreparedPackage`, `PocketUpdateCoordinator`, `PocketUpdateInspection`, `PocketUpdateMode`, `PocketUpdateProgress`, `PocketUpdateProgressCallback`, `PocketUpdateScope`, `PocketUpdateStage`, `PocketUpdateTarget`, `PocketUpdateTransport` |
+| [packages/pocket_services/lib/pocket_services.dart](https://github.com/PocketFlutter/Pocket/blob/235b5b5589faf492f4a9fc3b7c0827bcd1d9de2c/sdk/packages/pocket_services/lib/pocket_services.dart) | See the library and machine-readable inventory for exports, functions, and constants. |
+| [packages/pocket_services/lib/src/pocket_guest_manifest.dart](https://github.com/PocketFlutter/Pocket/blob/235b5b5589faf492f4a9fc3b7c0827bcd1d9de2c/sdk/packages/pocket_services/lib/src/pocket_guest_manifest.dart) | `GuestManifest`, `PocketCapabilityName`, `PocketGuestManifest`, `PocketPermissionName` |
+| [packages/pocket_services/lib/src/pocket_package.dart](https://github.com/PocketFlutter/Pocket/blob/235b5b5589faf492f4a9fc3b7c0827bcd1d9de2c/sdk/packages/pocket_services/lib/src/pocket_package.dart) | `PocketArchiveExtractor`, `PocketCancellationToken`, `PocketManifestAsset`, `PocketManifestBundle`, `PocketManifestEntry`, `PocketManifestFile`, `PocketManifestVerifier`, `PocketPackage`, `PocketPackageArtifact`, `PocketPackageException`, `PocketPackageFormatException`, `PocketPackageManifest`, `PocketPackagePreparationProgress`, `PocketPackagePreparationStage`, `PocketPackageStore`, `PocketPakBlobEntry`, `PocketPakManifest`, `PocketPakPart`, `PocketSignedManifest`, `PocketUpdateCancellation`, `PocketVersionInfo` |
+| [packages/pocket_services/lib/src/pocket_trust.dart](https://github.com/PocketFlutter/Pocket/blob/235b5b5589faf492f4a9fc3b7c0827bcd1d9de2c/sdk/packages/pocket_services/lib/src/pocket_trust.dart) | `PocketReleaseKey`, `PocketSignedTrustPolicy`, `PocketTrustException`, `PocketTrustPolicy`, `PocketTrustStore` |
+| [packages/pocket_services/lib/src/pocket_stream.dart](https://github.com/PocketFlutter/Pocket/blob/235b5b5589faf492f4a9fc3b7c0827bcd1d9de2c/sdk/packages/pocket_services/lib/src/pocket_stream.dart) | `PocketDuplexStream`, `PocketStreamBridge`, `PocketStreamBufferOverflowException`, `PocketStreamProtocolException`, `PocketStreamRemoteException`, `PocketStreamSend` |
+| [packages/pocket_services/lib/src/pocket_host.dart](https://github.com/PocketFlutter/Pocket/blob/235b5b5589faf492f4a9fc3b7c0827bcd1d9de2c/sdk/packages/pocket_services/lib/src/pocket_host.dart) | `PocketCapabilityAvailability`, `PocketCapabilityDescriptor`, `PocketCapabilityException`, `PocketCapabilityKind`, `PocketCapabilityRequest`, `PocketCapabilityStream`, `PocketHost`, `PocketHostRawSend`, `PocketHostRegistry`, `PocketHostSend`, `PocketHostStreamContext` |
+| [packages/pocket_services/lib/src/pocket_plugin.dart](https://github.com/PocketFlutter/Pocket/blob/235b5b5589faf492f4a9fc3b7c0827bcd1d9de2c/sdk/packages/pocket_services/lib/src/pocket_plugin.dart) | `PocketPermissionRequest`, `PocketPermissionRequestHandler`, `PocketPlugin`, `PocketPluginBudget`, `PocketPluginCapability`, `PocketPluginCapabilitySchema`, `PocketPluginContext`, `PocketPluginDescriptor`, `PocketPluginLimits`, `PocketPluginManager`, `PocketPluginMethod`, `PocketPluginRegistry`, `PocketPluginSchema`, `PocketPluginSchemaType`, `PocketPluginSession` |
+| [packages/pocket_services/lib/src/pocket_update.dart](https://github.com/PocketFlutter/Pocket/blob/235b5b5589faf492f4a9fc3b7c0827bcd1d9de2c/sdk/packages/pocket_services/lib/src/pocket_update.dart) | `HttpPocketUpdateTransport`, `PocketDownloadResponse`, `PocketPreparedPackage`, `PocketUpdateCoordinator`, `PocketUpdateInspection`, `PocketUpdateMode`, `PocketUpdateProgress`, `PocketUpdateProgressCallback`, `PocketUpdateScope`, `PocketUpdateStage`, `PocketUpdateTarget`, `PocketUpdateTransport` |
 
 ### `pocket_studio`
 
 | Declaring library | Public top-level type declarations |
 | --- | --- |
-| [packages/pocket_studio/lib/pocket_studio.dart](https://github.com/PocketFlutter/Pocket/blob/9ac11fd84d99c0038118232f7d396fb0000b8cc1/sdk/packages/pocket_studio/lib/pocket_studio.dart) | See the library and machine-readable inventory for exports, functions, and constants. |
-| [packages/pocket_studio/lib/src/studio_config.dart](https://github.com/PocketFlutter/Pocket/blob/9ac11fd84d99c0038118232f7d396fb0000b8cc1/sdk/packages/pocket_studio/lib/src/studio_config.dart) | `PocketStudioConfig` |
-| [packages/pocket_studio/lib/src/studio_image.dart](https://github.com/PocketFlutter/Pocket/blob/9ac11fd84d99c0038118232f7d396fb0000b8cc1/sdk/packages/pocket_studio/lib/src/studio_image.dart) | `StudioImagePreview` (plus helpers in `studio_image.dart`) |
-| [packages/pocket_studio/lib/src/studio_paths.dart](https://github.com/PocketFlutter/Pocket/blob/9ac11fd84d99c0038118232f7d396fb0000b8cc1/sdk/packages/pocket_studio/lib/src/studio_paths.dart) | See the library and machine-readable inventory for exports, functions, and constants. |
-| [packages/pocket_studio/lib/src/studio_plugin.dart](https://github.com/PocketFlutter/Pocket/blob/9ac11fd84d99c0038118232f7d396fb0000b8cc1/sdk/packages/pocket_studio/lib/src/studio_plugin.dart) | `PocketStudioPlugin` |
-| [packages/pocket_studio/lib/src/studio_scrub.dart](https://github.com/PocketFlutter/Pocket/blob/9ac11fd84d99c0038118232f7d396fb0000b8cc1/sdk/packages/pocket_studio/lib/src/studio_scrub.dart) | `StudioPathScrubber` |
-| [packages/pocket_studio/lib/src/studio_service.dart](https://github.com/PocketFlutter/Pocket/blob/9ac11fd84d99c0038118232f7d396fb0000b8cc1/sdk/packages/pocket_studio/lib/src/studio_service.dart) | `PocketStudioService`, `PocketStudioServiceException` |
+| [packages/pocket_studio/lib/pocket_studio.dart](https://github.com/PocketFlutter/Pocket/blob/235b5b5589faf492f4a9fc3b7c0827bcd1d9de2c/sdk/packages/pocket_studio/lib/pocket_studio.dart) | See the library and machine-readable inventory for exports, functions, and constants. |
+| [packages/pocket_studio/lib/src/studio_config.dart](https://github.com/PocketFlutter/Pocket/blob/235b5b5589faf492f4a9fc3b7c0827bcd1d9de2c/sdk/packages/pocket_studio/lib/src/studio_config.dart) | `PocketStudioConfig` |
+| [packages/pocket_studio/lib/src/studio_image.dart](https://github.com/PocketFlutter/Pocket/blob/235b5b5589faf492f4a9fc3b7c0827bcd1d9de2c/sdk/packages/pocket_studio/lib/src/studio_image.dart) | `StudioImagePreview` (plus helpers in `studio_image.dart`) |
+| [packages/pocket_studio/lib/src/studio_paths.dart](https://github.com/PocketFlutter/Pocket/blob/235b5b5589faf492f4a9fc3b7c0827bcd1d9de2c/sdk/packages/pocket_studio/lib/src/studio_paths.dart) | See the library and machine-readable inventory for exports, functions, and constants. |
+| [packages/pocket_studio/lib/src/studio_plugin.dart](https://github.com/PocketFlutter/Pocket/blob/235b5b5589faf492f4a9fc3b7c0827bcd1d9de2c/sdk/packages/pocket_studio/lib/src/studio_plugin.dart) | `PocketStudioPlugin` |
+| [packages/pocket_studio/lib/src/studio_scrub.dart](https://github.com/PocketFlutter/Pocket/blob/235b5b5589faf492f4a9fc3b7c0827bcd1d9de2c/sdk/packages/pocket_studio/lib/src/studio_scrub.dart) | `StudioPathScrubber` |
+| [packages/pocket_studio/lib/src/studio_service.dart](https://github.com/PocketFlutter/Pocket/blob/235b5b5589faf492f4a9fc3b7c0827bcd1d9de2c/sdk/packages/pocket_studio/lib/src/studio_service.dart) | `PocketStudioService`, `PocketStudioServiceException` |
 
 ### `pocket_sync`
 
 | Declaring library | Public top-level type declarations |
 | --- | --- |
-| [packages/pocket_sync/lib/pocket_sync.dart](https://github.com/PocketFlutter/Pocket/blob/9ac11fd84d99c0038118232f7d396fb0000b8cc1/sdk/packages/pocket_sync/lib/pocket_sync.dart) | See the library and machine-readable inventory for exports, functions, and constants. |
-| [packages/pocket_sync/lib/src/sync_plugin.dart](https://github.com/PocketFlutter/Pocket/blob/9ac11fd84d99c0038118232f7d396fb0000b8cc1/sdk/packages/pocket_sync/lib/src/sync_plugin.dart) | `PocketSyncPlugin` |
+| [packages/pocket_sync/lib/pocket_sync.dart](https://github.com/PocketFlutter/Pocket/blob/235b5b5589faf492f4a9fc3b7c0827bcd1d9de2c/sdk/packages/pocket_sync/lib/pocket_sync.dart) | See the library and machine-readable inventory for exports, functions, and constants. |
+| [packages/pocket_sync/lib/src/sync_plugin.dart](https://github.com/PocketFlutter/Pocket/blob/235b5b5589faf492f4a9fc3b7c0827bcd1d9de2c/sdk/packages/pocket_sync/lib/src/sync_plugin.dart) | `PocketSyncPlugin` |
 
 ### `pocket_weather`
 
 | Declaring library | Public top-level type declarations |
 | --- | --- |
-| [packages/pocket_weather/lib/pocket_weather.dart](https://github.com/PocketFlutter/Pocket/blob/9ac11fd84d99c0038118232f7d396fb0000b8cc1/sdk/packages/pocket_weather/lib/pocket_weather.dart) | `PocketWeatherPlugin` |
+| [packages/pocket_weather/lib/pocket_weather.dart](https://github.com/PocketFlutter/Pocket/blob/235b5b5589faf492f4a9fc3b7c0827bcd1d9de2c/sdk/packages/pocket_weather/lib/pocket_weather.dart) | `PocketWeatherPlugin` |
 
 ### `pocket_sdk`
 
 | Declaring library | Public top-level type declarations |
 | --- | --- |
-| [lib/pocket_sdk.dart](https://github.com/PocketFlutter/Pocket/blob/9ac11fd84d99c0038118232f7d396fb0000b8cc1/sdk/lib/pocket_sdk.dart) | See the library and machine-readable inventory for exports, functions, and constants. |
-| [lib/src/pocket_app.dart](https://github.com/PocketFlutter/Pocket/blob/9ac11fd84d99c0038118232f7d396fb0000b8cc1/sdk/lib/src/pocket_app.dart) | `PocketApp`, `PocketGuest`, `PocketGuestSession`, `PocketGuestSessionState` |
-| [lib/src/pocket_config.dart](https://github.com/PocketFlutter/Pocket/blob/9ac11fd84d99c0038118232f7d396fb0000b8cc1/sdk/lib/src/pocket_config.dart) | `PocketAppConfig`, `PocketOffloadProviderFactory`, `PocketPluginFactory`, `PocketUpdateConfig` |
-| [lib/src/pocket_distribution.dart](https://github.com/PocketFlutter/Pocket/blob/9ac11fd84d99c0038118232f7d396fb0000b8cc1/sdk/lib/src/pocket_distribution.dart) | See the library and machine-readable inventory for exports, functions, and constants. |
-| [lib/src/pocket_diagnostics.dart](https://github.com/PocketFlutter/Pocket/blob/9ac11fd84d99c0038118232f7d396fb0000b8cc1/sdk/lib/src/pocket_diagnostics.dart) | `PocketHostDiagnostics` |
-| [lib/src/pocket_bundled_application_catalog.dart](https://github.com/PocketFlutter/Pocket/blob/9ac11fd84d99c0038118232f7d396fb0000b8cc1/sdk/lib/src/pocket_bundled_application_catalog.dart) | `PocketBundledApplicationCatalog`, `PocketBundledApplicationEntry` |
-| [lib/src/pocket_host_config.dart](https://github.com/PocketFlutter/Pocket/blob/9ac11fd84d99c0038118232f7d396fb0000b8cc1/sdk/lib/src/pocket_host_config.dart) | `PocketHostCatalogEntry`, `PocketHostConfig`, `PocketHostLoadProgress`, `PocketHostLoadProgressCallback` |
-| [lib/src/pocket_session.dart](https://github.com/PocketFlutter/Pocket/blob/9ac11fd84d99c0038118232f7d396fb0000b8cc1/sdk/lib/src/pocket_session.dart) | `PocketSession`, `PocketSessionEventListener`, `PocketSessionGenerationMountHook` |
-| [lib/src/performance_history.dart](https://github.com/PocketFlutter/Pocket/blob/9ac11fd84d99c0038118232f7d396fb0000b8cc1/sdk/lib/src/performance_history.dart) | `PerformanceHistory` |
-| [lib/src/pocket_recordings.dart](https://github.com/PocketFlutter/Pocket/blob/9ac11fd84d99c0038118232f7d396fb0000b8cc1/sdk/lib/src/pocket_recordings.dart) | `PocketRecordingLibrary` |
-| [lib/src/package_info_plugin.dart](https://github.com/PocketFlutter/Pocket/blob/9ac11fd84d99c0038118232f7d396fb0000b8cc1/sdk/lib/src/package_info_plugin.dart) | `PackageInfoPlugin` |
-| [lib/src/pocket_system_host.dart](https://github.com/PocketFlutter/Pocket/blob/9ac11fd84d99c0038118232f7d396fb0000b8cc1/sdk/lib/src/pocket_system_host.dart) | `PocketSystemHost`, `PocketSystemHostAppBuilder`, `PocketSystemHostApplication`, `PocketSystemHostApplicationApprover`, `PocketSystemHostApplicationCatalogLoader`, `PocketSystemHostApplicationsBuilder`, `PocketSystemHostCatalog`, `PocketSystemHostCatalogLoader`, `PocketSystemHostController`, `PocketSystemHostSystemUIApprover`, `PocketSystemHostSystemUIBuilder`, `PocketSystemInstanceSnapshot`, `PocketSystemLaunchRequest`, `PocketSystemLaunchResult` |
-| [lib/src/pocket_worker.dart](https://github.com/PocketFlutter/Pocket/blob/9ac11fd84d99c0038118232f7d396fb0000b8cc1/sdk/lib/src/pocket_worker.dart) | `PocketWorkerArtifact` |
+| [lib/pocket_sdk.dart](https://github.com/PocketFlutter/Pocket/blob/235b5b5589faf492f4a9fc3b7c0827bcd1d9de2c/sdk/lib/pocket_sdk.dart) | See the library and machine-readable inventory for exports, functions, and constants. |
+| [lib/src/pocket_app.dart](https://github.com/PocketFlutter/Pocket/blob/235b5b5589faf492f4a9fc3b7c0827bcd1d9de2c/sdk/lib/src/pocket_app.dart) | `PocketApp`, `PocketGuest`, `PocketGuestSession`, `PocketGuestSessionState` |
+| [lib/src/pocket_config.dart](https://github.com/PocketFlutter/Pocket/blob/235b5b5589faf492f4a9fc3b7c0827bcd1d9de2c/sdk/lib/src/pocket_config.dart) | `PocketAppConfig`, `PocketOffloadProviderFactory`, `PocketPluginFactory`, `PocketUpdateConfig` |
+| [lib/src/pocket_distribution.dart](https://github.com/PocketFlutter/Pocket/blob/235b5b5589faf492f4a9fc3b7c0827bcd1d9de2c/sdk/lib/src/pocket_distribution.dart) | See the library and machine-readable inventory for exports, functions, and constants. |
+| [lib/src/pocket_diagnostics.dart](https://github.com/PocketFlutter/Pocket/blob/235b5b5589faf492f4a9fc3b7c0827bcd1d9de2c/sdk/lib/src/pocket_diagnostics.dart) | `PocketHostDiagnostics` |
+| [lib/src/pocket_bundled_application_catalog.dart](https://github.com/PocketFlutter/Pocket/blob/235b5b5589faf492f4a9fc3b7c0827bcd1d9de2c/sdk/lib/src/pocket_bundled_application_catalog.dart) | `PocketBundledApplicationCatalog`, `PocketBundledApplicationEntry` |
+| [lib/src/pocket_host_config.dart](https://github.com/PocketFlutter/Pocket/blob/235b5b5589faf492f4a9fc3b7c0827bcd1d9de2c/sdk/lib/src/pocket_host_config.dart) | `PocketHostCatalogEntry`, `PocketHostConfig`, `PocketHostLoadProgress`, `PocketHostLoadProgressCallback` |
+| [lib/src/pocket_session.dart](https://github.com/PocketFlutter/Pocket/blob/235b5b5589faf492f4a9fc3b7c0827bcd1d9de2c/sdk/lib/src/pocket_session.dart) | `PocketSession`, `PocketSessionEventListener`, `PocketSessionGenerationMountHook` |
+| [lib/src/performance_history.dart](https://github.com/PocketFlutter/Pocket/blob/235b5b5589faf492f4a9fc3b7c0827bcd1d9de2c/sdk/lib/src/performance_history.dart) | `PerformanceHistory` |
+| [lib/src/pocket_recordings.dart](https://github.com/PocketFlutter/Pocket/blob/235b5b5589faf492f4a9fc3b7c0827bcd1d9de2c/sdk/lib/src/pocket_recordings.dart) | `PocketRecordingLibrary` |
+| [lib/src/package_info_plugin.dart](https://github.com/PocketFlutter/Pocket/blob/235b5b5589faf492f4a9fc3b7c0827bcd1d9de2c/sdk/lib/src/package_info_plugin.dart) | `PackageInfoPlugin` |
+| [lib/src/pocket_system_host.dart](https://github.com/PocketFlutter/Pocket/blob/235b5b5589faf492f4a9fc3b7c0827bcd1d9de2c/sdk/lib/src/pocket_system_host.dart) | `PocketSystemHost`, `PocketSystemHostAppBuilder`, `PocketSystemHostApplication`, `PocketSystemHostApplicationApprover`, `PocketSystemHostApplicationCatalogLoader`, `PocketSystemHostApplicationsBuilder`, `PocketSystemHostCatalog`, `PocketSystemHostCatalogLoader`, `PocketSystemHostController`, `PocketSystemHostSystemUIApprover`, `PocketSystemHostSystemUIBuilder`, `PocketSystemInstanceSnapshot`, `PocketSystemLaunchRequest`, `PocketSystemLaunchResult` |
+| [lib/src/pocket_worker.dart](https://github.com/PocketFlutter/Pocket/blob/235b5b5589faf492f4a9fc3b7c0827bcd1d9de2c/sdk/lib/src/pocket_worker.dart) | `PocketWorkerArtifact` |

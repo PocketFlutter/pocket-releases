@@ -4,7 +4,7 @@ This report traces rendering stalls on a physical Android device running Flutter
 
 ## Result
 
-The current [`PocketCanvasPainter`](https://github.com/PocketFlutter/Pocket/blob/9ac11fd84d99c0038118232f7d396fb0000b8cc1/sdk/packages/pocket_flutter/lib/src/pocket_view_painter.dart#L330-L341) applies the DrawOp's rectangular `op.clip` as follows.
+The current [`PocketCanvasPainter`](https://github.com/PocketFlutter/Pocket/blob/235b5b5589faf492f4a9fc3b7c0827bcd1d9de2c/sdk/packages/pocket_flutter/lib/src/pocket_view_painter.dart#L330-L341) applies the DrawOp's rectangular `op.clip` as follows.
 
 ```dart
 canvas.clipRect(

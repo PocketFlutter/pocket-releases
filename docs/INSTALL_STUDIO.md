@@ -33,22 +33,22 @@ By default the existing service manager starts Studio on `http://127.0.0.1:8791`
 installation. Pass CLI options on the same pipeline as needed.
 
 ```sh
-curl -fsSL https://raw.githubusercontent.com/PocketFlutter/Pocket/main/sdk/scripts/install_studio.mjs | node --input-type=module - --version=0.1.21 --dir="$HOME/.pocket/studio" --no-start
+curl -fsSL https://raw.githubusercontent.com/PocketFlutter/Pocket/main/sdk/scripts/install_studio.mjs | node --input-type=module - --version=0.1.23 --dir="$HOME/.pocket/studio" --no-start
 ```
 
 ```powershell
-curl.exe -fsSL https://raw.githubusercontent.com/PocketFlutter/Pocket/main/sdk/scripts/install_studio.mjs | node --input-type=module - --version=0.1.21 --dir="$env:USERPROFILE\.pocket\studio" --no-start
+curl.exe -fsSL https://raw.githubusercontent.com/PocketFlutter/Pocket/main/sdk/scripts/install_studio.mjs | node --input-type=module - --version=0.1.23 --dir="$env:USERPROFILE\.pocket\studio" --no-start
 ```
 
 Use `--no-start` for CI, remote installation, or later manual startup. Installation and
 checks still run. Run `npm run start` in the installation directory afterward. Options also
-accept space-separated values, for example `--version 0.1.21`.
+accept space-separated values, for example `--version 0.1.23`.
 
 ## CLI options
 
 | Option | Default | Behavior |
 | --- | --- | --- |
-| `--version=MAJOR.MINOR.PATCH` | Latest available stable version | Installs the specified official `sdk-v<version>` release. Accepts stable semantic versions such as `0.1.21`. |
+| `--version=MAJOR.MINOR.PATCH` | Latest available stable version | Installs the specified official `sdk-v<version>` release. Accepts stable semantic versions such as `0.1.23`. |
 | `--dir=PATH` | `~/.pocket/studio` (on Windows, `.pocket\studio` in the user directory) | SDK installation directory. Relative paths resolve from the current working directory. |
 | `--project-root=PATH` | Unset | Existing regular directory to pass to the Studio service manager as the project root. |
 | `--no-start` | Off | Installs and runs `setup` and `doctor`, then skips Studio startup. |
@@ -92,9 +92,9 @@ Its `pocketjs_flutter_demo/fix.sh` patches a project using local paths and Flutt
 assumptions. A standalone installer needs to work without Git and Flutter, which prevents
 direct reuse of these sources.
 
-Current reusable components include [export_web_sdk.ts](https://github.com/PocketFlutter/Pocket/blob/9ac11fd84d99c0038118232f7d396fb0000b8cc1/sdk/scripts/export_web_sdk.ts), which
+Current reusable components include [export_web_sdk.ts](https://github.com/PocketFlutter/Pocket/blob/235b5b5589faf492f4a9fc3b7c0827bcd1d9de2c/sdk/scripts/export_web_sdk.ts), which
 builds a standalone package with platform-specific prebuilt tools and provenance,
-the [release workflow](https://github.com/PocketFlutter/Pocket/blob/9ac11fd84d99c0038118232f7d396fb0000b8cc1/.github/workflows/toolchain.yml), which builds macOS arm64 and
+the [release workflow](https://github.com/PocketFlutter/Pocket/blob/235b5b5589faf492f4a9fc3b7c0827bcd1d9de2c/.github/workflows/toolchain.yml), which builds macOS arm64 and
 Windows x64 archives and checksums, [toolchain.mjs](../scripts/toolchain.mjs), whose `setup`
 and `doctor` verify npm dependencies and prebuilt tools, and
 [editor_service.mjs](../scripts/editor_service.mjs), which manages Studio startup and shutdown.

@@ -57,7 +57,7 @@ the Gradle-stripped form of this same library, verified below.
 `pocket_live2d`'s Android CMake target is arm64-v8a only and links the official
 Cubism Core static library plus Android `log`. It consumes the proprietary
 Native SDK R5 archive through
-[`bootstrap_cubism_core.sh`](https://github.com/PocketFlutter/Pocket/blob/9ac11fd84d99c0038118232f7d396fb0000b8cc1/sdk/packages/pocket_live2d/scripts/bootstrap_cubism_core.sh).
+[`bootstrap_cubism_core.sh`](https://github.com/PocketFlutter/Pocket/blob/235b5b5589faf492f4a9fc3b7c0827bcd1d9de2c/sdk/packages/pocket_live2d/scripts/bootstrap_cubism_core.sh).
 The script pins archive SHA-256
 `7ff3a4bbc19c0a8728965aa522ab77eb11b252916453e68a8a78d3b71188bb12` and
 requires the user to accept Live2D's development terms before downloading.

@@ -17,7 +17,7 @@ Install standalone Web SDK and Studio with the [one-click installer](INSTALL_STU
 
 ## Root npm scripts
 
-The root [package.json](https://github.com/PocketFlutter/Pocket/blob/9ac11fd84d99c0038118232f7d396fb0000b8cc1/package.json) forwards common commands.
+The root [package.json](https://github.com/PocketFlutter/Pocket/blob/235b5b5589faf492f4a9fc3b7c0827bcd1d9de2c/package.json) forwards common commands.
 
 | Command | Behavior and output |
 | --- | --- |
@@ -32,7 +32,7 @@ The root [package.json](https://github.com/PocketFlutter/Pocket/blob/9ac11fd84d9
 
 ## SDK npm scripts
 
-See [sdk/package.json](https://github.com/PocketFlutter/Pocket/blob/9ac11fd84d99c0038118232f7d396fb0000b8cc1/sdk/package.json) for the exact definitions.
+See [sdk/package.json](https://github.com/PocketFlutter/Pocket/blob/235b5b5589faf492f4a9fc3b7c0827bcd1d9de2c/sdk/package.json) for the exact definitions.
 
 | Area | `npm run` command | Behavior |
 | --- | --- | --- |
@@ -48,7 +48,7 @@ Run `build`, `init`, and `export:web-sdk` at the SDK root. Generated projects ha
 
 ## `pocket.ts` project CLI
 
-See [pocket.ts usage and validation](https://github.com/PocketFlutter/Pocket/blob/9ac11fd84d99c0038118232f7d396fb0000b8cc1/sdk/pocket.ts#L1095). Missing or invalid arguments print usage and exit with an error. Use `--name=value`.
+See [pocket.ts usage and validation](https://github.com/PocketFlutter/Pocket/blob/235b5b5589faf492f4a9fc3b7c0827bcd1d9de2c/sdk/pocket.ts#L1095). Missing or invalid arguments print usage and exit with an error. Use `--name=value`.
 
 ### `init <directory>`
 
@@ -126,6 +126,8 @@ On macOS with `studio/` (`../studio/pubspec.yaml`), defaults to desktop Pocket S
 
 This CLI runs foreground Editor. `npm start` uses the `editor_service.mjs` manager for daemon, state, logs, and port ownership on 8791. See [EDITOR_STUDIO.md](EDITOR_STUDIO.md), [STUDIO_PROVIDER.md](STUDIO_PROVIDER.md), and [Editor project identity and configuration](EDITOR_PROJECT_CONFIGURATION.md).
 
+During a Windows SDK upgrade, the service manager checks process creation time and command or executable identity before signaling the old Studio processes. If ownership or identity cannot be confirmed, the upgrade reports a retirement failure. See [Studio upgrades](STUDIO_UPGRADE.md).
+
 ## Guest and Web build options and outputs
 
 ### `build:guest`
@@ -154,7 +156,7 @@ Required: `--project-root` and `--outdir`. Optional: `--entry`, `--tick-hz`, `--
 | `build:probe:source` | Builds native preview probe from source and requires the publisher toolchain. |
 | `build:engine:source` | Builds the Web engine from pinned native source. Ordinary development uses setup. |
 | `package:tools` | Packages verified native and compiler tools and generates checksums. |
-| `official-demos` | Compiles and benchmarks pinned samples. See [official_demos.ts](https://github.com/PocketFlutter/Pocket/blob/9ac11fd84d99c0038118232f7d396fb0000b8cc1/sdk/scripts/official_demos.ts#L142) for flags. |
+| `official-demos` | Compiles and benchmarks pinned samples. See [official_demos.ts](https://github.com/PocketFlutter/Pocket/blob/235b5b5589faf492f4a9fc3b7c0827bcd1d9de2c/sdk/scripts/official_demos.ts#L142) for flags. |
 
 ## Publisher update package CLI
 
@@ -202,7 +204,7 @@ Editor routes enforce loopback/LAN, Origin, CSRF, and request validation. Keep t
 
 ## Versioning and documentation maintenance
 
-Consumer setup uses Node/npm and matching prebuilt packages. Source release tools also require Python, Rust, and C/C++. npm workspace, Dart package, and native archive versions come from their own manifests, locks, and releases. See [SDK package](https://github.com/PocketFlutter/Pocket/blob/9ac11fd84d99c0038118232f7d396fb0000b8cc1/sdk/package.json), [sdk/package.json](https://github.com/PocketFlutter/Pocket/blob/9ac11fd84d99c0038118232f7d396fb0000b8cc1/sdk/package.json), and [toolchain.mjs](../scripts/toolchain.mjs).
+Consumer setup uses Node/npm and matching prebuilt packages. Source release tools also require Python, Rust, and C/C++. npm workspace, Dart package, and native archive versions come from their own manifests, locks, and releases. See [SDK package](https://github.com/PocketFlutter/Pocket/blob/235b5b5589faf492f4a9fc3b7c0827bcd1d9de2c/sdk/package.json), [sdk/package.json](https://github.com/PocketFlutter/Pocket/blob/235b5b5589faf492f4a9fc3b7c0827bcd1d9de2c/sdk/package.json), and [toolchain.mjs](../scripts/toolchain.mjs).
 
 Update this page, affected guides, and release notes when changing flags, defaults, dependencies, outputs, endpoints, or supported targets. See [API.md](API.md#maintenance-contract) for the export baseline and maintenance contract. Run:
 

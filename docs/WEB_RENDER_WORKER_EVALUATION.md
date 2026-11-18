@@ -8,7 +8,7 @@ Neither synthetic workload showed an improvement in rendering throughput or main
 
 ## Method and results
 
-The [benchmark script](https://github.com/PocketFlutter/Pocket/blob/9ac11fd84d99c0038118232f7d396fb0000b8cc1/sdk/scripts/bench_web_render_worker.ts) uses Playwright-managed Chromium, a 480×320 canvas, the same pinned engine, and identical QJBC/PAK. Only the execution location changes across modes. The light load has eight animated Views and the heavy load has 256. Each `onFrame` updates position, opacity, and a frame-count label.
+The [benchmark script](https://github.com/PocketFlutter/Pocket/blob/235b5b5589faf492f4a9fc3b7c0827bcd1d9de2c/sdk/scripts/bench_web_render_worker.ts) uses Playwright-managed Chromium, a 480×320 canvas, the same pinned engine, and identical QJBC/PAK. Only the execution location changes across modes. The light load has eight animated Views and the heavy load has 256. Each `onFrame` updates position, opacity, and a frame-count label.
 
 Each load ran three times in each mode, in main/worker, worker/main, and main/worker order. Each run warmed up for two seconds, measured for five seconds, then closed the page. The original functional test left the preceding page open. Closing it kept the other runtime from running in the background. All 12 samples completed without runtime errors.
 

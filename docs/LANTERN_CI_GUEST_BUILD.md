@@ -25,7 +25,7 @@ The source-first review of the retained parent
 model renderer to port. The current Lantern JS source, generated-image
 pipeline, and `buildGuest` remain the consumer implementation; this CI mode is
 only a narrow way to materialize the already declared app bundle. See
-[`LIVE2D_SAMPLE.md`](https://github.com/PocketFlutter/Pocket/blob/9ac11fd84d99c0038118232f7d396fb0000b8cc1/demo/js/apps/lantern/LIVE2D_SAMPLE.md) for the
+[`LIVE2D_SAMPLE.md`](https://github.com/PocketFlutter/Pocket/blob/235b5b5589faf492f4a9fc3b7c0827bcd1d9de2c/demo/js/apps/lantern/LIVE2D_SAMPLE.md) for the
 source comparison, asset provenance, sample hash table and local staging
 behavior.
 

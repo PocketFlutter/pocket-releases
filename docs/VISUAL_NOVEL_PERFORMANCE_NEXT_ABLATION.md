@@ -44,7 +44,7 @@ The retained parent was reviewed outside `pocket_host/`:
   adaptation; the old painter is not a feature-equivalent replacement.
 
 The current SDK ownership point is
-[`pocket_view.dart`](https://github.com/PocketFlutter/Pocket/blob/9ac11fd84d99c0038118232f7d396fb0000b8cc1/sdk/packages/pocket_flutter/lib/src/pocket_view.dart):
+[`pocket_view.dart`](https://github.com/PocketFlutter/Pocket/blob/235b5b5589faf492f4a9fc3b7c0827bcd1d9de2c/sdk/packages/pocket_flutter/lib/src/pocket_view.dart):
 
 - `_buildSurface` creates `canvasOps` at line 7076. `addCanvasBlock` passes
   `canvasOps.sublist(start, end)` to each painter at lines 7110–7121.

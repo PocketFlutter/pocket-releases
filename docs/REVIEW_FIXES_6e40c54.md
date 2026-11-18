@@ -1,6 +1,6 @@
 # 6e40c54 Review Fixes and Ablation
 
-See the [review snapshot](https://github.com/PocketFlutter/Pocket/blob/9ac11fd84d99c0038118232f7d396fb0000b8cc1/POCKET_SDK_REVIEW_6e40c54.md). The fixes use existing PocketJS runtime, HostBridge, bidirectional streams, and Flutter drawing boundaries. Application policy and UI remain in JS.
+See the [review snapshot](https://github.com/PocketFlutter/Pocket/blob/235b5b5589faf492f4a9fc3b7c0827bcd1d9de2c/POCKET_SDK_REVIEW_6e40c54.md). The fixes use existing PocketJS runtime, HostBridge, bidirectional streams, and Flutter drawing boundaries. Application policy and UI remain in JS.
 
 | Finding | Fix | Verification |
 | --- | --- | --- |
