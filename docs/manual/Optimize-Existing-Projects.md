@@ -19,10 +19,13 @@
 
 ```sh
 npm run check -- /absolute/path/to/guest
+npm run lint -- /absolute/path/to/guest --json
 npm run build:guest -- --project-root=/absolute/path/to/guest --outdir=/absolute/path/to/guest-out
 ```
 
 先测试自动生效的收益，再按瓶颈选择框架迁移，例如用 `createPocketRouter` 和 `PocketAppShell` 保留页面状态，或对长列表试用 `PocketVirtualList`。JS 继续持有页面、游戏与业务状态。原生能力沿现有宿主边界接入。 [已发布的 SDK 优化](SDK-Optimizations.md) · [建立基线与做消融](Performance-Loop.md)
+
+对照两个 SDK 的 lint 结果时，先用 `npm run lint -- --list-rules --json` 核对各自的规则目录。把 `file`、`line`、`code` 和 `fixHint` 记入优化清单，再用同场景测量确认优先级。只重查一项时使用 `--rule=CODE`。
 
 ## 按实际交付目标复测
 
