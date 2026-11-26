@@ -2,7 +2,8 @@
 /**
  * Bootstrap a standalone Pocket Web SDK + Studio from an official GitHub
  * Release. This file intentionally has no local imports so it can run from
- * `curl ... | node -` before the SDK exists on disk.
+ * `curl ... | node -` or from a lean native `Pocket Studio.app` bundle before
+ * `~/.pocket/studio-sdk` exists on disk.
  */
 import { spawnSync } from 'node:child_process';
 import { createHash, randomUUID } from 'node:crypto';
@@ -13,7 +14,6 @@ import {
   mkdirSync,
   mkdtempSync,
   readFileSync,
-  readdirSync,
   renameSync,
   rmSync,
   realpathSync,
@@ -21,15 +21,15 @@ import {
   writeFileSync,
 } from 'node:fs';
 import { homedir } from 'node:os';
-import { basename, dirname, isAbsolute, join, posix, relative, resolve } from 'node:path';
+import { dirname, isAbsolute, join, relative, resolve } from 'node:path';
 import { gunzipSync } from 'node:zlib';
 import { fileURLToPath } from 'node:url';
 
 const RELEASE_REPOSITORY = 'PocketFlutter/pocket-releases';
 const RELEASE_PATH = `/${RELEASE_REPOSITORY}/releases`;
 const RELEASE_PAGE_PATH = new RegExp(`^${RELEASE_PATH}/(?:download|tag)/`, 'i');
-const RELEASE_API_PATH = new RegExp(`^/repos${RELEASE_PATH}(?:/tags/sdk-v\\d+\\.\\d+\\.\\d+)?$`, 'i');
-export const RELEASES_URL = `https://api.github.com/repos/${RELEASE_REPOSITORY}/releases`;
+const RELEASE_API_PATH = new RegExp(`^/repos${RELEASE_PATH}(?:/tags/sdk-v\\d+\\.\\d+\\.\\d+|/assets/\\d+)?$`, 'i');
+export const RELEASES_URL = `https://api.github.com/repos${RELEASE_PATH}`;
 export const RELEASE_TAG_URL = `${RELEASES_URL}/tags`;
 export const SOURCE_REPOSITORY = 'PocketFlutter/Pocket';
 export const MIN_NODE_VERSION = '22.22.2';
@@ -115,22 +115,73 @@ export function officialHttpsUrl(rawUrl) {
   return url;
 }
 
-async function fetchOfficial(fetchImpl, rawUrl, { timeoutMs, headers = {}, maxRedirects = 5 } = {}) {
+let cachedInstallerAuth = null;
+function resolveInstallerGitHubAuth(fetchImpl) {
+  const fromEnv = (
+    process.env.POCKET_STUDIO_RELEASE_AUTH ||
+    process.env.GITHUB_TOKEN ||
+    process.env.GH_TOKEN ||
+    ''
+  ).trim();
+  if (fromEnv) {
+    return /^(?:Bearer|token|Basic)\s+/i.test(fromEnv) ? fromEnv : `Bearer ${fromEnv}`;
+  }
+  if (fetchImpl && fetchImpl !== globalThis.fetch) return '';
+  if (cachedInstallerAuth !== null) return cachedInstallerAuth;
+  const ghBins = process.platform === 'win32'
+    ? ['gh.exe', 'gh']
+    : ['gh', '/opt/homebrew/bin/gh', '/usr/local/bin/gh'];
+  for (const bin of ghBins) {
+    try {
+      const res = spawnSync(bin, ['auth', 'token', '--hostname', 'github.com'], {
+        encoding: 'utf8',
+        windowsHide: true,
+        timeout: 3_000,
+      });
+      if (res.status === 0 && res.stdout && res.stdout.trim()) {
+        cachedInstallerAuth = `Bearer ${res.stdout.trim()}`;
+        return cachedInstallerAuth;
+      }
+    } catch {}
+  }
+  cachedInstallerAuth = '';
+  return '';
+}
+
+async function fetchOfficial(fetchImpl, rawUrl, { timeoutMs, headers = {}, assetApiUrl = '', maxRedirects = 5 } = {}) {
   let url = officialHttpsUrl(rawUrl);
+  let reqHeaders = { ...headers };
+  let usedAuthFallback = false;
   const deadline = Date.now() + (timeoutMs ?? DEFAULT_TIMEOUT_MS);
   for (let redirect = 0; redirect <= maxRedirects; redirect += 1) {
     const remainingMs = deadline - Date.now();
     if (remainingMs <= 0) throw new Error('GitHub Release 请求超时');
     const response = await fetchImpl(url.toString(), {
-      headers,
+      headers: reqHeaders,
       redirect: 'manual',
       signal: AbortSignal.timeout(remainingMs),
     });
+    if (!usedAuthFallback && (response.status === 401 || response.status === 403 || response.status === 404)) {
+      const auth = resolveInstallerGitHubAuth(fetchImpl);
+      if (auth) {
+        usedAuthFallback = true;
+        if (assetApiUrl) {
+          url = officialHttpsUrl(assetApiUrl);
+          reqHeaders = { ...headers, accept: 'application/octet-stream', authorization: auth };
+          continue;
+        }
+        if (url.hostname.toLowerCase() === 'api.github.com') {
+          reqHeaders = { ...headers, authorization: auth };
+          continue;
+        }
+      }
+    }
     if (response.status >= 300 && response.status < 400) {
       const location = response.headers?.get?.('location');
       if (!location) throw new Error('GitHub Release 重定向缺少 Location');
       if (redirect === maxRedirects) throw new Error('GitHub Release 重定向次数超过上限');
       url = officialHttpsUrl(new URL(location, url).toString());
+      reqHeaders = { ...headers };
       continue;
     }
     const finalUrl = response.url || url.toString();
@@ -192,7 +243,15 @@ function expectedAssets(release, tuple, version) {
       throw new Error(`拒绝不匹配的官方 ${label} 地址`);
     }
   }
-  return { ...expected, archiveUrl: archiveUrl.toString(), checksumUrl: checksumUrl.toString() };
+  const archiveApiUrl = typeof archive.url === 'string' && archive.url ? officialHttpsUrl(archive.url).toString() : '';
+  const checksumApiUrl = typeof checksum.url === 'string' && checksum.url ? officialHttpsUrl(checksum.url).toString() : '';
+  return {
+    ...expected,
+    archiveUrl: archiveUrl.toString(),
+    checksumUrl: checksumUrl.toString(),
+    ...(archiveApiUrl ? { archiveApiUrl } : {}),
+    ...(checksumApiUrl ? { checksumApiUrl } : {}),
+  };
 }
 
 export function selectStableRelease(releases, tuple, requestedVersion = null) {
@@ -464,12 +523,14 @@ async function fetchRelease(fetchImpl, tuple, requestedVersion) {
 async function downloadAndVerify(fetchImpl, release) {
   const checksumResponse = await fetchOfficial(fetchImpl, release.checksumUrl, {
     timeoutMs: 15_000,
+    assetApiUrl: release.checksumApiUrl || '',
     headers: { 'user-agent': 'pocket-studio-installer' },
   });
   const checksumText = (await readBoundedBytes(checksumResponse, MAX_CHECKSUM_BYTES, 'SHA-256 文件')).toString('utf8');
   const expectedHash = parseSha256File(checksumText, release.archiveName);
   const archiveResponse = await fetchOfficial(fetchImpl, release.archiveUrl, {
     timeoutMs: DEFAULT_TIMEOUT_MS,
+    assetApiUrl: release.archiveApiUrl || '',
     headers: { 'user-agent': 'pocket-studio-installer' },
   });
   const archive = await readBoundedBytes(archiveResponse, MAX_ARCHIVE_BYTES, 'SDK Release 归档');
@@ -507,7 +568,7 @@ export function parseArgs(args) {
     if (name === '--project-root') result.projectRoot = value;
     if (name === '--version') {
       const parsed = parseStableVersion(value);
-      if (!parsed || parsed.version !== value.trim()) throw new Error('--version 只接受稳定版格式 MAJOR.MINOR.PATCH，例如 0.1.24');
+      if (!parsed || parsed.version !== value.trim()) throw new Error('--version 只接受稳定版格式 MAJOR.MINOR.PATCH，例如 0.1.21');
       result.version = parsed.version;
     }
   }
@@ -519,7 +580,7 @@ export function helpText() {
     'Pocket Studio 独立 Web SDK 一键安装',
     '',
     '要求：Node.js >= 22.22.2 和 npm。仅支持 macOS Apple Silicon、Windows x64。',
-    '用法：node install_studio.mjs [--version=0.1.24] [--dir=PATH] [--project-root=PATH] [--no-start] [--help]',
+    '用法：node install_studio.mjs [--version=0.1.21] [--dir=PATH] [--project-root=PATH] [--no-start] [--help]',
     '默认目录：~/.pocket/studio。已有受管安装只执行 doctor/start，不覆盖项目文件。',
   ].join('\n');
 }
@@ -563,9 +624,6 @@ export async function installStudio(options = {}) {
   mkdirSync(parent, { recursive: true });
   const parentStat = statSync(parent);
   if (!parentStat.isDirectory()) throw new Error(`安装父路径不是目录：${parent}`);
-  // System temp paths such as macOS /tmp are directory symlinks. Resolve the
-  // parent for staging so rename remains on the same filesystem while the
-  // requested target path itself is still checked for symlinks above.
   const stageParent = realpathSync(parent);
   const stage = mkdtempSync(join(stageParent, `.pocket-studio-install-${randomUUID()}-`));
   let placed = false;
