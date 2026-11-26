@@ -61,7 +61,7 @@ jobs:
           BUILD_NUMBER: ${{ inputs.build_number }}
           SOURCE_KEY_AVAILABLE: ${{ secrets.POCKET_SOURCE_SSH_KEY != '' }}
         run: |
-          [[ "$SOURCE_KEY_AVAILABLE" == true ]] || { echo "::error::Missing Pocket source deploy key"; exit 1; }
+          [[ "$SOURCE_KEY_AVAILABLE" == true ]] || { echo "::error::Missing POCKET_SOURCE_SSH_KEY"; exit 1; }
           [[ "$SOURCE_SHA" =~ ^[0-9a-fA-F]{40}$ && "$BUILD_NUMBER" =~ ^[1-9][0-9]{0,14}$ ]] ||
             { echo "::error::Expected a full source SHA and a positive build number (up to 15 digits)"; exit 1; }
           printf 'sha=%s\n' "${SOURCE_SHA,,}" >> "$GITHUB_OUTPUT"

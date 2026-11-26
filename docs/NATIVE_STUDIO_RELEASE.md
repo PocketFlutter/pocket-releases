@@ -22,6 +22,8 @@ Dispatch from `main` with a full `source_sha` from the canonical source reposito
 | `studio-native-build` | `main` | Read-only `POCKET_SOURCE_SSH_KEY` | Source validation and desktop builds |
 | `studio-native-signing` | `main` | Read-only `POCKET_SOURCE_SSH_KEY` and production `STUDIO_UPDATE_SIGNING_KEY` | Signed OTA build |
 
+Set `POCKET_SOURCE_SSH_KEY` once as a repository Actions secret to share it between both jobs, or set it in each environment. The matching public key must already have read access to `PocketFlutter/Pocket`. Configure `STUDIO_UPDATE_SIGNING_KEY` in the signing environment.
+
 The signing job writes the production Ed25519 key to a restrictive runner temporary file, removes the file after signing, and uploads the public verification key. The desktop jobs embed the public key. Private source commands suppress output, and checkout cleanup runs even on failure. The workflow uses no source or build caches.
 
 The OTA and desktop jobs upload exact archive, SHA-256, manifest, and public key files with one-day retention. When desktop builds are requested, a separate one-day build artifact contains the compiled WebEngine files consumed by the desktop jobs. The publish job downloads only release artifacts, checks each archive against its sidecar, and creates `SHA256SUMS`. It rejects an existing `studio-v<version>` tag or release and creates a new release at the public packaging commit with `--latest=false`.
