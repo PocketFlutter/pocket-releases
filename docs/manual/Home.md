@@ -15,6 +15,8 @@
 | 接入 Flutter、硬件、权限和系统能力 | [宿主与硬件](Host-and-Hardware.md) |
 | 做游戏、视听互动或视觉小说 | [游戏与媒体](Games-and-Media.md) |
 | 优化 App 或 Game 并验证改动收益 | [可持续性能优化](Performance-Loop.md) |
+| 查询已发布的 SDK 性能改动及生效条件 | [已发布的 SDK 优化](SDK-Optimizations.md) |
+| 给旧 App 或 Game 升级 SDK 并逐项优化 | [旧项目升级与性能优化](Optimize-Existing-Projects.md) |
 | 部署 Web 或微信产物、发布签名更新 | [部署与更新](Deployment-and-Updates.md) |
 | 查 API、定位问题、核对版本差异 | [API 与排障](API-and-Troubleshooting.md) |
 

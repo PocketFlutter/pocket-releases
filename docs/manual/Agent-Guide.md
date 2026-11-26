@@ -8,6 +8,7 @@
 | --- | --- | --- |
 | 新建 App / Game / 多应用壳 | [安装与首个 App](Install-and-First-App.md) | 脚手架文件、类型检查、可交互的首屏 |
 | 接手现有项目 | [项目与 Studio](Project-and-Studio.md) | 项目根、入口文件、同步后的 Agent 规则、可复现预览 |
+| 升级或优化已上线的 App / Game | [旧项目升级与性能优化](Optimize-Existing-Projects.md) · [已发布的 SDK 优化](SDK-Optimizations.md) | SDK 升级与应用改动分开测量，验证旧数据、关键交互和可恢复版本 |
 | 加页面、路由、表单或长列表 | [UI 与导航](UI-and-Navigation.md) | 导航返回、滚动保留、焦点和 IME 的实际验证 |
 | 加硬件、网络或 Worker | [宿主与硬件](Host-and-Hardware.md) · [运行时与目标](Runtime-and-Targets.md) | 能力声明、提供方注册、成功与拒绝路径，以及取消或清理 |
 | 改游戏输入、图形、视频或视觉小说 | [游戏与媒体](Games-and-Media.md) | 真正的输入和可观察帧变化、媒体生命周期、目标端记录 |
