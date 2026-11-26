@@ -25,8 +25,12 @@ import { basename, dirname, isAbsolute, join, posix, relative, resolve } from 'n
 import { gunzipSync } from 'node:zlib';
 import { fileURLToPath } from 'node:url';
 
-export const RELEASES_URL = 'https://api.github.com/repos/PocketFlutter/Pocket/releases';
-export const RELEASE_TAG_URL = 'https://api.github.com/repos/PocketFlutter/Pocket/releases/tags';
+const RELEASE_REPOSITORY = 'PocketFlutter/pocket-releases';
+const RELEASE_PATH = `/${RELEASE_REPOSITORY}/releases`;
+const RELEASE_PAGE_PATH = new RegExp(`^${RELEASE_PATH}/(?:download|tag)/`, 'i');
+const RELEASE_API_PATH = new RegExp(`^/repos${RELEASE_PATH}(?:/tags/sdk-v\\d+\\.\\d+\\.\\d+)?$`, 'i');
+export const RELEASES_URL = `https://api.github.com/repos/${RELEASE_REPOSITORY}/releases`;
+export const RELEASE_TAG_URL = `${RELEASES_URL}/tags`;
 export const SOURCE_REPOSITORY = 'PocketFlutter/Pocket';
 export const MIN_NODE_VERSION = '22.22.2';
 export const MAX_RELEASE_JSON_BYTES = 2 * 1024 * 1024;
@@ -101,12 +105,12 @@ export function officialHttpsUrl(rawUrl) {
     throw new Error(`拒绝非官方 HTTPS 下载来源：${url.protocol}//${url.host}`);
   }
   if (url.hostname.toLowerCase() === 'github.com' &&
-      !/^\/PocketFlutter\/Pocket\/releases\/(?:download|tag)\//i.test(url.pathname)) {
-    throw new Error('拒绝不属于 PocketFlutter/Pocket Release 的 GitHub 地址');
+      !RELEASE_PAGE_PATH.test(url.pathname)) {
+    throw new Error(`拒绝不属于 ${RELEASE_REPOSITORY} Release 的 GitHub 地址`);
   }
   if (url.hostname.toLowerCase() === 'api.github.com' &&
-      !/^\/repos\/PocketFlutter\/Pocket\/releases(?:\/tags\/sdk-v\d+\.\d+\.\d+)?$/i.test(url.pathname)) {
-    throw new Error('拒绝不属于 PocketFlutter/Pocket Releases API 的地址');
+      !RELEASE_API_PATH.test(url.pathname)) {
+    throw new Error(`拒绝不属于 ${RELEASE_REPOSITORY} Releases API 的地址`);
   }
   return url;
 }
@@ -178,7 +182,7 @@ function expectedAssets(release, tuple, version) {
   if (!archive?.browser_download_url || !checksum?.browser_download_url) return null;
   const archiveUrl = officialHttpsUrl(archive.browser_download_url);
   const checksumUrl = officialHttpsUrl(checksum.browser_download_url);
-  const expectedPath = `/PocketFlutter/Pocket/releases/download/${expected.tagName}/`;
+  const expectedPath = `${RELEASE_PATH}/download/${expected.tagName}/`;
   for (const [label, url, filename] of [
     ['SDK archive', archiveUrl, expected.archiveName],
     ['SHA-256 file', checksumUrl, expected.checksumName],
@@ -503,7 +507,7 @@ export function parseArgs(args) {
     if (name === '--project-root') result.projectRoot = value;
     if (name === '--version') {
       const parsed = parseStableVersion(value);
-      if (!parsed || parsed.version !== value.trim()) throw new Error('--version 只接受稳定版格式 MAJOR.MINOR.PATCH，例如 0.1.21');
+      if (!parsed || parsed.version !== value.trim()) throw new Error('--version 只接受稳定版格式 MAJOR.MINOR.PATCH，例如 0.1.24');
       result.version = parsed.version;
     }
   }
@@ -515,7 +519,7 @@ export function helpText() {
     'Pocket Studio 独立 Web SDK 一键安装',
     '',
     '要求：Node.js >= 22.22.2 和 npm。仅支持 macOS Apple Silicon、Windows x64。',
-    '用法：node install_studio.mjs [--version=0.1.21] [--dir=PATH] [--project-root=PATH] [--no-start] [--help]',
+    '用法：node install_studio.mjs [--version=0.1.24] [--dir=PATH] [--project-root=PATH] [--no-start] [--help]',
     '默认目录：~/.pocket/studio。已有受管安装只执行 doctor/start，不覆盖项目文件。',
   ].join('\n');
 }
@@ -550,7 +554,7 @@ export async function installStudio(options = {}) {
     return { ...await doStart(target), version: existing.version, reused: true };
   }
 
-  if (options.log) options.log(`正在查询 PocketFlutter/Pocket 官方稳定 Release${options.version ? ` sdk-v${options.version}` : ''}。`);
+  if (options.log) options.log(`正在查询 ${RELEASE_REPOSITORY} 官方稳定 Release${options.version ? ` sdk-v${options.version}` : ''}。`);
   const fetchImpl = options.fetchImpl ?? globalThis.fetch;
   if (typeof fetchImpl !== 'function') throw new Error('此 Node.js 没有可用的 fetch；请升级到 Node.js 22.22.2+');
   const release = options.release ?? await fetchRelease(fetchImpl, tuple, options.version ?? null);

@@ -130,7 +130,7 @@ The upgrade reference covers the source audit, per-file backup and custom-file t
 
 ### Original v0.1.12 Architecture and Upgrade Boundaries
 
-1. **Automatic checks and semantic version filtering.** On web startup, Studio calls `/api/studio/upgrade/check` for the latest stable `sdk-v<major>.<minor>.<patch>` on GitHub Releases. The check ignores drafts, prereleases, and nonstable tags and coalesces concurrent requests. The original implementation used the historical `CodeEagle/pocket` repository. The current repository is `PocketFlutter/Pocket`.
+1. **Automatic checks and semantic version filtering.** On web startup, Studio calls `/api/studio/upgrade/check` for the latest stable `sdk-v<major>.<minor>.<patch>` on GitHub Releases. The check ignores drafts, prereleases, and nonstable tags and coalesces concurrent requests. Studio discovers stable releases and platform archives in `PocketFlutter/pocket-releases`. Git source workspaces fetch the matching SDK tag from their canonical `PocketFlutter/Pocket` origin.
 2. **Installation mode and source protection.**
    - **Managed standalone (`standalone`).** Identify `@pocket/web-sdk-tools` or `@pocket/web-sdk-tools-<platform>` in package.json with matching provenance.json and no `.git` source markers. When a newer release appears, download the current platform's `pocket-web-sdk-tools-<platform>-<arch>-<version>.tgz` and `.sha256` and apply it.
    - **Source checkout (`source`).** In a Git checkout with markers such as `.git`, `demo/`, or `editor/test`, the toolbar still checks and reports newer versions. At this release, automatic and manual source replacement were rejected with HTTP 409 from `POST /api/studio/upgrade/apply`.

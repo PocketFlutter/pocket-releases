@@ -1,0 +1,396 @@
+name: Pocket Studio Native Release
+
+on:
+  workflow_dispatch:
+    inputs:
+      source_sha:
+        description: Exact PocketFlutter/Pocket commit on main
+        required: true
+        type: string
+      build_number:
+        description: Positive, increasing build number for installers and OTA
+        required: true
+        type: string
+      platforms:
+        description: all or comma-separated macos-arm64,windows-x64,linux-x64
+        default: all
+        type: string
+      ota_only:
+        description: Build and publish only the signed OTA bundle
+        default: false
+        type: boolean
+      mode:
+        description: Flutter build mode
+        type: choice
+        options: [release, profile]
+        default: release
+      create_dmg:
+        description: Include the macOS DMG alongside the ZIP
+        default: true
+        type: boolean
+      publish_release:
+        description: Build and publish. When unchecked, validate the packaging plan.
+        default: false
+        type: boolean
+
+permissions:
+  contents: read
+
+concurrency:
+  group: pocket-studio-native-${{ github.ref }}
+  cancel-in-progress: false
+
+defaults:
+  run:
+    shell: bash
+
+jobs:
+  prepare:
+    if: github.ref == 'refs/heads/main'
+    runs-on: ubuntu-24.04
+    environment: studio-native-build
+    outputs:
+      source_sha: ${{ steps.inputs.outputs.sha }}
+      version: ${{ steps.metadata.outputs.version }}
+      matrix: ${{ steps.metadata.outputs.matrix }}
+    steps:
+      - name: Validate source and build number
+        id: inputs
+        env:
+          SOURCE_SHA: ${{ inputs.source_sha }}
+          BUILD_NUMBER: ${{ inputs.build_number }}
+          SOURCE_KEY_AVAILABLE: ${{ secrets.POCKET_SOURCE_SSH_KEY != '' }}
+        run: |
+          [[ "$SOURCE_KEY_AVAILABLE" == true ]] || { echo "::error::Missing Pocket source deploy key"; exit 1; }
+          [[ "$SOURCE_SHA" =~ ^[0-9a-fA-F]{40}$ && "$BUILD_NUMBER" =~ ^[1-9][0-9]{0,14}$ ]] ||
+            { echo "::error::Expected a full source SHA and a positive build number (up to 15 digits)"; exit 1; }
+          printf 'sha=%s\n' "${SOURCE_SHA,,}" >> "$GITHUB_OUTPUT"
+
+      - uses: actions/checkout@v7
+        with:
+          repository: PocketFlutter/Pocket
+          ref: ${{ steps.inputs.outputs.sha }}
+          path: pocket-source
+          ssh-key: ${{ secrets.POCKET_SOURCE_SSH_KEY }}
+          persist-credentials: false
+          fetch-depth: 0
+
+      - name: Verify ancestry on PocketFlutter/Pocket main
+        working-directory: pocket-source
+        env:
+          SOURCE_SHA: ${{ steps.inputs.outputs.sha }}
+        run: |
+          if [[ "$(git rev-parse --verify HEAD 2>/dev/null)" != "$SOURCE_SHA" ]] ||
+             ! git merge-base --is-ancestor "$SOURCE_SHA" refs/remotes/origin/main >/dev/null 2>&1; then
+            echo "::error::Source SHA must match checkout HEAD and belong to PocketFlutter/Pocket main"
+            exit 1
+          fi
+
+      - uses: oven-sh/setup-bun@v2
+        with: {bun-version: 1.3.9}
+
+      - name: Check source contracts and resolve packaging plans
+        id: metadata
+        working-directory: pocket-source
+        env:
+          BUILD_NUMBER: ${{ inputs.build_number }}
+          PLATFORMS: ${{ inputs.platforms }}
+          OTA_ONLY: ${{ inputs.ota_only }}
+          MODE: ${{ inputs.mode }}
+          CREATE_DMG: ${{ inputs.create_dmg }}
+        run: |
+          trap 'echo "::error::Native Studio source validation or packaging plan failed"' ERR
+          python3 sdk/scripts/check_architecture.py >/dev/null 2>&1
+          bun test sdk/scripts/tests/package_native_studio.test.ts >/dev/null 2>&1
+          bun - >/dev/null 2>&1 <<'JS'
+          import { appendFileSync } from "node:fs";
+          import { SDK_VERSION } from "./sdk/scripts/prebuilt_tools.mjs";
+          import sdk from "./sdk/package.json";
+          if (!/^\d+\.\d+\.\d+$/.test(SDK_VERSION) || SDK_VERSION !== sdk.version) {
+            throw new Error("Invalid SDK version");
+          }
+          const runners = {
+            "macos-arm64": {runner: "macos-15", extension: "zip"},
+            "windows-x64": {runner: "windows-2022", extension: "zip"},
+            "linux-x64": {runner: "ubuntu-24.04", extension: "tar.gz"},
+          };
+          const platforms = process.env.PLATFORMS.trim().toLowerCase();
+          const targets = platforms === "all" ? Object.keys(runners) : [...new Set(platforms.split(",").map(value => value.trim()))];
+          if (!targets.every(target => Object.hasOwn(runners, target))) throw new Error("Unknown platform");
+          const packager = ["bun", "sdk/scripts/package_native_studio.ts", "--plan", `--build-number=${process.env.BUILD_NUMBER}`];
+          const runPlan = args => {
+            const result = Bun.spawnSync([...packager, ...args], {stdout: "ignore", stderr: "ignore"});
+            if (result.exitCode !== 0) throw new Error("Invalid packaging plan");
+          };
+          runPlan(["--ota-only"]);
+          const include = process.env.OTA_ONLY === "true" ? [] : targets.map(target => ({target, ...runners[target]}));
+          for (const {target} of include) {
+            const args = [`--platform=${target}`, `--mode=${process.env.MODE}`, "--no-emit-self-update", "--omit-bundled-projects"];
+            if (target === "macos-arm64" && process.env.CREATE_DMG === "true") args.push("--dmg");
+            runPlan(args);
+          }
+          appendFileSync(process.env.GITHUB_OUTPUT, `version=${SDK_VERSION}\nmatrix=${JSON.stringify({include})}\n`);
+          JS
+
+      - name: Remove private source checkout
+        if: always()
+        run: rm -rf pocket-source
+
+  package-ota:
+    needs: prepare
+    if: inputs.publish_release
+    runs-on: ubuntu-24.04
+    environment: studio-native-signing
+    steps:
+      - &checkout_source
+        uses: actions/checkout@v7
+        with:
+          repository: PocketFlutter/Pocket
+          ref: ${{ needs.prepare.outputs.source_sha }}
+          path: pocket-source
+          ssh-key: ${{ secrets.POCKET_SOURCE_SSH_KEY }}
+          persist-credentials: false
+
+      - uses: oven-sh/setup-bun@v2
+        with: {bun-version: 1.3.9}
+
+      - uses: dtolnay/rust-toolchain@stable
+        with:
+          toolchain: 1.98.1
+          targets: wasm32-unknown-unknown
+
+      - name: Build and sign OTA bundle
+        working-directory: pocket-source
+        env:
+          SOURCE_SHA: ${{ needs.prepare.outputs.source_sha }}
+          VERSION: ${{ needs.prepare.outputs.version }}
+          BUILD_NUMBER: ${{ inputs.build_number }}
+          OTA_ONLY: ${{ inputs.ota_only }}
+          STUDIO_UPDATE_SIGNING_KEY: ${{ secrets.STUDIO_UPDATE_SIGNING_KEY }}
+          POCKET_WECHAT_LLVM_AR: /usr/bin/llvm-ar
+        run: |
+          trap 'echo "::error::Native Studio OTA packaging failed"' ERR
+          [[ "$(git rev-parse --verify HEAD 2>/dev/null)" == "$SOURCE_SHA" ]]
+          [[ -n "$STUDIO_UPDATE_SIGNING_KEY" ]]
+          signing_key="$STUDIO_UPDATE_SIGNING_KEY"
+          unset STUDIO_UPDATE_SIGNING_KEY
+          exec 3>&1
+          trap 'echo "::error::Native Studio OTA packaging failed" >&3' ERR
+          exec >/dev/null 2>&1
+          sudo apt-get update
+          sudo apt-get install -y clang pkg-config patch llvm lld
+          (
+            cd sdk
+            python3 scripts/prepare_upstream.py
+            bun install --frozen-lockfile --cwd .cache/pocketjs
+            cargo build --manifest-path native/Cargo.toml --release -p pocketjs_bytecode
+            if [[ "$OTA_ONLY" != true ]]; then
+              bun scripts/build_web_engine.ts --outdir=.pocket-build/web-engine
+              for file in pocketjs.wasm pocket-web.js pocket-render-worker.js manifest.json; do
+                test -s ".pocket-build/web-engine/$file"
+              done
+            fi
+          )
+          umask 077
+          key="$(mktemp "$RUNNER_TEMP/studio-signing-key.XXXXXX")"
+          trap 'rm -f "$key"' EXIT
+          printf '%s\n' "$signing_key" > "$key"
+          unset signing_key
+          bun sdk/scripts/package_native_studio.ts --ota-only --version="$VERSION" --build-number="$BUILD_NUMBER" \
+            --out=release/studio-ota --update-key-file="$key"
+          cd release/studio-ota
+          rm -f "$key"
+          for file in "PocketStudio-self-update-${VERSION}".{tar.gz,tar.gz.sha256,manifest.json} studio-self-update-public-key.json; do
+            test -s "$file"
+          done
+          jq -e 'keys == ["keyId","publicKeyBase64"] and (all(.[]; type == "string" and length > 0))' studio-self-update-public-key.json
+          if grep -Eqi '"privateKey[^"]*"\s*:' ./*.manifest.json; then false; fi
+
+      - uses: actions/upload-artifact@v7
+        with:
+          name: studio-release-ota
+          path: |
+            pocket-source/release/studio-ota/PocketStudio-self-update-${{ needs.prepare.outputs.version }}.tar.gz
+            pocket-source/release/studio-ota/PocketStudio-self-update-${{ needs.prepare.outputs.version }}.tar.gz.sha256
+            pocket-source/release/studio-ota/PocketStudio-self-update-${{ needs.prepare.outputs.version }}.manifest.json
+            pocket-source/release/studio-ota/studio-self-update-public-key.json
+          if-no-files-found: error
+          retention-days: 1
+
+      - uses: actions/upload-artifact@v7
+        if: "!inputs.ota_only"
+        with:
+          name: studio-build-web-engine
+          path: |
+            pocket-source/sdk/.pocket-build/web-engine/pocketjs.wasm
+            pocket-source/sdk/.pocket-build/web-engine/pocket-web.js
+            pocket-source/sdk/.pocket-build/web-engine/pocket-render-worker.js
+            pocket-source/sdk/.pocket-build/web-engine/manifest.json
+          include-hidden-files: true
+          if-no-files-found: error
+          retention-days: 1
+
+      - name: Remove private source and temporary signing key
+        if: always()
+        run: rm -rf pocket-source "$RUNNER_TEMP"/studio-signing-key.*
+
+  package-studio:
+    needs: [prepare, package-ota]
+    if: inputs.publish_release && !inputs.ota_only
+    runs-on: ${{ matrix.runner }}
+    environment: studio-native-build
+    strategy:
+      fail-fast: false
+      matrix: ${{ fromJSON(needs.prepare.outputs.matrix) }}
+    steps:
+      - *checkout_source
+
+      - uses: actions/download-artifact@v8
+        with:
+          name: studio-build-web-engine
+          path: pocket-source/sdk/.pocket-build/web-engine
+
+      - uses: actions/download-artifact@v8
+        with:
+          name: studio-release-ota
+          path: ota
+
+      - uses: actions/setup-node@v7
+        with:
+          node-version: 24
+          package-manager-cache: false
+
+      - uses: oven-sh/setup-bun@v2
+        with: {bun-version: 1.3.9}
+
+      - uses: dtolnay/rust-toolchain@stable
+        with: {toolchain: 1.98.1}
+
+      - uses: subosito/flutter-action@v2
+        with:
+          flutter-version-file: pocket-source/.fvmrc
+          channel: stable
+
+      - name: Install Linux native dependencies
+        if: runner.os == 'Linux'
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y clang cmake ninja-build pkg-config libgtk-3-dev liblzma-dev libstdc++-12-dev patch zip
+
+      - name: Install patch on Windows
+        if: runner.os == 'Windows'
+        run: choco install patch -y --no-progress
+
+      - name: Build the desktop installer without bundled projects
+        working-directory: pocket-source
+        env:
+          SOURCE_SHA: ${{ needs.prepare.outputs.source_sha }}
+          VERSION: ${{ needs.prepare.outputs.version }}
+          BUILD_NUMBER: ${{ inputs.build_number }}
+          TARGET: ${{ matrix.target }}
+          EXTENSION: ${{ matrix.extension }}
+          MODE: ${{ inputs.mode }}
+          CREATE_DMG: ${{ inputs.create_dmg }}
+          SELF_UPDATE_URL: ${{ vars.STUDIO_SELF_UPDATE_URL }}
+        run: |
+          exec 3>&1
+          trap 'echo "::error::Native Studio desktop packaging failed" >&3' ERR
+          exec >/dev/null 2>&1
+          [[ "$(git rev-parse --verify HEAD)" == "$SOURCE_SHA" ]]
+          (
+            cd sdk
+            if [[ "$RUNNER_OS" == Windows ]]; then python scripts/prepare_upstream.py; else python3 scripts/prepare_upstream.py; fi
+            bun install --frozen-lockfile --cwd .cache/pocketjs
+            npm install --ignore-scripts --legacy-peer-deps --no-audit --no-fund
+          )
+          args=(--no-emit-self-update --omit-bundled-projects --update-public-key-file=../ota/studio-self-update-public-key.json)
+          if [[ "$TARGET" == macos-arm64 && "$CREATE_DMG" == true ]]; then args+=(--dmg); fi
+          if [[ -n "$SELF_UPDATE_URL" ]]; then args+=("--self-update-url=$SELF_UPDATE_URL"); fi
+          bun sdk/scripts/package_native_studio.ts --platform="$TARGET" --mode="$MODE" --version="$VERSION" \
+            --build-number="$BUILD_NUMBER" --out=release/studio-native "${args[@]}"
+          base="release/studio-native/PocketStudio-$TARGET-$VERSION"
+          for file in "$base.$EXTENSION" "$base.$EXTENSION.sha256" "$base.manifest.json"; do test -s "$file"; done
+          if grep -Eqi '"privateKey[^"]*"\s*:' "$base.manifest.json"; then false; fi
+          if [[ "$TARGET" == macos-arm64 && "$CREATE_DMG" == true ]]; then
+            test -s "$base.dmg"
+            test -s "$base.dmg.sha256"
+          fi
+
+      - name: Verify Windows native DLL uses static CRT
+        if: runner.os == 'Windows'
+        shell: pwsh
+        working-directory: pocket-source
+        run: |
+          try {
+            $vs = & "${env:ProgramFiles(x86)}/Microsoft Visual Studio/Installer/vswhere.exe" -latest -products * -property installationPath
+            $dumpbin = Get-ChildItem "$vs/VC/Tools/MSVC/*/bin/Hostx64/x64/dumpbin.exe" | Sort-Object FullName -Descending | Select-Object -First 1
+            $deps = & $dumpbin.FullName /dependents sdk/packages/pocket_flutter/windows/bin/pocket_flutter.dll 2>$null
+            if ($LASTEXITCODE -ne 0 -or $deps -match '(?i)\b(?:VCRUNTIME|MSVCP)\d+[^\s]*\.dll') { throw "CRT verification failed" }
+          } catch { throw "Native Studio Windows DLL failed static CRT verification" }
+
+      - uses: actions/upload-artifact@v7
+        with:
+          name: studio-release-${{ matrix.target }}
+          path: |
+            pocket-source/release/studio-native/PocketStudio-${{ matrix.target }}-${{ needs.prepare.outputs.version }}.${{ matrix.extension }}
+            pocket-source/release/studio-native/PocketStudio-${{ matrix.target }}-${{ needs.prepare.outputs.version }}.${{ matrix.extension }}.sha256
+            pocket-source/release/studio-native/PocketStudio-${{ matrix.target }}-${{ needs.prepare.outputs.version }}.manifest.json
+          if-no-files-found: error
+          retention-days: 1
+
+      - uses: actions/upload-artifact@v7
+        if: matrix.target == 'macos-arm64' && inputs.create_dmg
+        with:
+          name: studio-release-macos-dmg
+          path: |
+            pocket-source/release/studio-native/PocketStudio-macos-arm64-${{ needs.prepare.outputs.version }}.dmg
+            pocket-source/release/studio-native/PocketStudio-macos-arm64-${{ needs.prepare.outputs.version }}.dmg.sha256
+          if-no-files-found: error
+          retention-days: 1
+
+      - name: Remove private source checkout
+        if: always()
+        run: rm -rf pocket-source
+
+  publish:
+    needs: [prepare, package-ota, package-studio]
+    if: "!cancelled() && needs.package-ota.result == 'success' && (inputs.ota_only || needs.package-studio.result == 'success')"
+    runs-on: ubuntu-24.04
+    permissions:
+      contents: write
+    env:
+      GH_TOKEN: ${{ github.token }}
+      GH_REPO: ${{ github.repository }}
+      VERSION: ${{ needs.prepare.outputs.version }}
+      SOURCE_SHA: ${{ needs.prepare.outputs.source_sha }}
+      BUILD_NUMBER: ${{ inputs.build_number }}
+    steps:
+      - uses: actions/download-artifact@v8
+        with:
+          pattern: studio-release-*
+          path: dist
+          merge-multiple: true
+
+      - name: Verify checksums and publish a new studio-v tag
+        working-directory: dist
+        run: |
+          tag="studio-v$VERSION"
+          matching_refs="$(gh api "repos/$GH_REPO/git/matching-refs/tags/$tag" --jq '.[].ref')"
+          if grep -Fxq "refs/tags/$tag" <<<"$matching_refs" || gh release view "$tag" >/dev/null 2>&1; then
+            echo "::error::Tag or release $tag already exists"
+            exit 1
+          fi
+          shopt -s nullglob
+          archives=(*.zip *.dmg *.tar.gz)
+          test -s "PocketStudio-self-update-$VERSION.tar.gz"
+          if grep -Eqi '"privateKey[^"]*"\s*:' ./*.json; then
+            echo "::error::Release metadata contains a private key field"
+            exit 1
+          fi
+          for archive in "${archives[@]}"; do
+            [[ "$(sha256sum -- "$archive")" == "$(< "$archive.sha256")" ]]
+          done
+          sha256sum -- ./* > "$RUNNER_TEMP/SHA256SUMS"
+          mv "$RUNNER_TEMP/SHA256SUMS" .
+          gh release create "$tag" ./* --target "$GITHUB_SHA" --latest=false \
+            --title "Pocket Studio Native $VERSION" --notes "Build $BUILD_NUMBER from PocketFlutter/Pocket commit $SOURCE_SHA"

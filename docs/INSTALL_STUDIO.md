@@ -11,7 +11,7 @@ without a Git checkout or changes to system Node.js.
 - Supported platforms are macOS Apple Silicon (`darwin-arm64`) and Windows x64
   (`win32-x64`). The installer rejects macOS Intel, Linux, Windows ARM64, and other
   unsupported platforms before downloading.
-- First-time installation needs access to `PocketFlutter/Pocket` GitHub Releases and
+- First-time installation needs access to `PocketFlutter/pocket-releases` GitHub Releases and
   the npm registry. Git, Python, Rust, Flutter, and a global Bun installation are optional
   for this workflow.
 
@@ -20,24 +20,24 @@ without a Git checkout or changes to system Node.js.
 On macOS Apple Silicon, run the following command.
 
 ```sh
-curl -fsSL https://raw.githubusercontent.com/PocketFlutter/Pocket/main/sdk/scripts/install_studio.mjs | node --input-type=module -
+curl -fsSL https://raw.githubusercontent.com/PocketFlutter/pocket-releases/main/scripts/install_studio.mjs | node --input-type=module -
 ```
 
 On Windows x64, use `curl.exe` in PowerShell 7 or Command Prompt.
 
 ```powershell
-curl.exe -fsSL https://raw.githubusercontent.com/PocketFlutter/Pocket/main/sdk/scripts/install_studio.mjs | node --input-type=module -
+curl.exe -fsSL https://raw.githubusercontent.com/PocketFlutter/pocket-releases/main/scripts/install_studio.mjs | node --input-type=module -
 ```
 
 By default the existing service manager starts Studio on `http://127.0.0.1:8791` after
 installation. Pass CLI options on the same pipeline as needed.
 
 ```sh
-curl -fsSL https://raw.githubusercontent.com/PocketFlutter/Pocket/main/sdk/scripts/install_studio.mjs | node --input-type=module - --version=0.1.24 --dir="$HOME/.pocket/studio" --no-start
+curl -fsSL https://raw.githubusercontent.com/PocketFlutter/pocket-releases/main/scripts/install_studio.mjs | node --input-type=module - --version=0.1.24 --dir="$HOME/.pocket/studio" --no-start
 ```
 
 ```powershell
-curl.exe -fsSL https://raw.githubusercontent.com/PocketFlutter/Pocket/main/sdk/scripts/install_studio.mjs | node --input-type=module - --version=0.1.24 --dir="$env:USERPROFILE\.pocket\studio" --no-start
+curl.exe -fsSL https://raw.githubusercontent.com/PocketFlutter/pocket-releases/main/scripts/install_studio.mjs | node --input-type=module - --version=0.1.24 --dir="$env:USERPROFILE\.pocket\studio" --no-start
 ```
 
 Use `--no-start` for CI, remote installation, or later manual startup. Installation and
@@ -63,10 +63,10 @@ The [install_studio.mjs](../scripts/install_studio.mjs) installer is a single-fi
 it can run through `curl | node -` before the SDK exists locally. Production release lookups use
 the fixed official GitHub API. A stable `sdk-v<version>` release must contain a precisely
 named platform archive and `.sha256` sidecar. Download URLs must belong to releases in
-PocketFlutter/Pocket. Requests enforce response size, timeout, and redirect origin limits.
+`PocketFlutter/pocket-releases`. Requests enforce response size, timeout, and redirect origin limits.
 
 Before placing files, the installer checks SHA-256, SDK package name and version, official
-repository and commit details in `provenance.json`, the pinned PocketJS revision, and the SDK
+source repository (`PocketFlutter/Pocket`) and commit details in `provenance.json`, the pinned PocketJS revision, and the SDK
 and revision declared by `prebuilt_tools.mjs`. Extraction accepts regular files and
 directories under `package/`, rejects traversal, symlinks, hard links, and special entries,
 and caps archive size, extracted file size, total size, and entry count.

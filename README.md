@@ -34,7 +34,7 @@ Business UI, state, routing, and composition belong in JS. Declare hardware capa
 
 ## Install and build
 
-[One-command installation](docs/INSTALL_STUDIO.md) downloads and verifies the official standalone release.
+[One-command installation](docs/INSTALL_STUDIO.md) downloads and verifies the official standalone release. Find the Web SDK archives and Native Studio installers on the [Pocket releases page](https://github.com/PocketFlutter/pocket-releases/releases). For signed `studio-v*` updates, see [Native Pocket Studio releases](docs/NATIVE_STUDIO_RELEASE.md).
 
 Only Node.js 22.22.2+ (Node.js 24 LTS recommended) and npm are required. Bun is installed and managed by npm; compiler/probe binaries and the prepared pinned compiler are supplied by the platform package. Run:
 
