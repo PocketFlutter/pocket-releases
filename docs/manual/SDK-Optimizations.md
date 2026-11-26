@@ -22,6 +22,11 @@ Agent 收到“把 SDK 优化应用到现有项目”时，先确认项目实际
 | 用框架文本替换有热点的自制排版 | 从 `@pocket/ui/inline-text` 导入 `RichText`。内容可通过 `text` 或 `spans` 传入，`wrap` 默认 `true`，`shrinkWrap` 默认 `false`，`maxLines` 省略或为 `0` 表示不限行。保留稳定的 spans 引用，只在交互或业务确实消费布局时使用 `ref`、`onLayout`。 | 用同一文章、气泡或打字段落对照旧路径，改变宽度与字号并验证文本、链接目标和可访问内容。 [JS API 签名](../JS_API_SIGNATURES.md) |
 | 原生 SVG 与 PVEC | 0.1.33 提供官方矢量路径。用 `@pocket/ui/vector` 的 `PocketVector` 加载已打包的 SVG，动态路径可用 `PocketVector` 或 `PocketPath`。Flutter 的 `PocketView.vectorRenderMode` 默认 `cachedPicture`，可单独对照 `directPath` 或 `autoRasterCache`。静态 SVG 超出 PVEC 编译范围时可走位图编译回退。Studio 浏览器预览有 Canvas2D 矢量路径，软件 raster 会拒绝 PVEC 绘制。 | 核验产物中实际资产类型及目标端后端。在相同尺寸、DPR、颜色和动效下量首次与重复绘制、缓存内存和下载字节，检查裁剪、描边与像素。旧手册已覆盖矢量消融。实现细节见发布 SDK 包内 `docs/SVG_VECTOR_IMPLEMENTATION.md`。 [游戏与媒体](Games-and-Media.md) · [性能测试](Performance-Loop.md) |
 
+## 构建和验证也有可单独测量的优化
+
+- **重复跑页面探针。** `verify-page` 按构建输入摘要缓存 QJBC 和 PAK，并在同一原生探针会话内运行行为检查。快速迭代时看 JSON 的 `buildCacheHit`，发生编译器或输入变更时核对 `buildFingerprint`。测冷构建时用 `--no-cache`，测复用时保持相同输入。探针耗时与 App 真机帧耗时分别记录。 [工具 API](../TOOLING_API.md) · [Agent 探针入口](Agent-Guide.md#agent-cli-与-mcp)
+- **Flutter 原生库与 Worker HTTP。** 带来静态库瘦身的变更还将 Worker HTTP 的网络处理迁至 Flutter Dio 宿主。升级已有宿主时重新构建匹配的原生库。使用 Worker HTTP 的项目验收实际允许的来源、超时、取消及拒绝路径，并对比最终安装包大小和请求耗时。 [Dio Worker](../DIO_WORKER.md) · [宿主与硬件](Host-and-Hardware.md)
+
 ## 版本边界
 
 0.1.33 发布说明主要记录分发迁移，以发布包及其对应源码核对上表的实际可用性。精确的 API 和参数以该版本包内文档为准。后续的字节码准入复用解析和进一步的保留帧转场改动在该标签之后。源码模块拆分属于维护变更，应用收益仍须用具体场景测量。 [公开发布说明](https://github.com/PocketFlutter/pocket-releases/releases/tag/sdk-v0.1.33)
