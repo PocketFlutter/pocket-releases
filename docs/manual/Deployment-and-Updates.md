@@ -52,6 +52,8 @@ Web SDK 0.1.33 需要 Node.js 22.22.2 或更高。托管安装在更新时按 SD
 - **云端发布**。先确认部署对象是 Web 输出、已签名 Guest 更新目录，还是已独立构建的宿主安装包。Cloudflare 可走 R2 发布更新，Web 走 Pages/Workers Static Assets/R2。腾讯云 COS 的发布命令支持读取已签名发布目录和 `--dry-run`。用 HTTPS 可读地址测试最终消费方，签名私钥、账户 token 和云端密钥留在发布环境。
 - **Web SDK 导出**。发行版已带对应工具归档。SDK 发布者另有 `export:web-sdk` 生成独立 SDK，选 `--registry-packages` 可按工作区声明打包指定版本。应用开发者使用 `build:web` 生成站点目录。
 
+以下命令从解包并完成 setup 的独立 Web SDK 根目录执行。
+
 ```sh
 npm run search -- liquid-glass
 npm run add -- /absolute/path/to/my-app liquid-glass

@@ -45,7 +45,7 @@
 | 诊断与同步 | `@pocket/diagnostics` 提供诊断采集和存储适配，`@pocket/sync` 提供 CRDT 同步逻辑并依赖已配置的网络传输 |
 | 产物与发布 | `@pocket/target_web`、`@pocket/target_wechat` 导出对应目标，`@pocket/cos`、`@pocket/cloudflare` 提供发布工具 |
 
-`@pocket/spine`、`@pocket/diagnostics` 与 `@pocket/sync` 的工作区清单标记为 `private`。独立安装能力以实际分发包与所用注册表为准。
+使用独立 SDK 时，按归档里实际提供的 `@pocket/*` 包和入口导入。单独从注册表安装时，核对发布 scope、版本和可用性。源码工作区的 `private` 字段仅描述相应工作区清单。
 
 ## Flutter 库与可选提供方
 

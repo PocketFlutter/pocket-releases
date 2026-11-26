@@ -11,7 +11,7 @@ npm run build:guest -- --project-root=/path/to/app --outdir=/path/to/output/gues
 npm run build:web -- --project-root=/path/to/app --outdir=/path/to/output/web
 ```
 
-Guest 产物包含 `app.qjbc`、`app.bytecode.json`、`app.pak` 和 `guest-manifest.json`。QJBC 受运行时 ABI 校验，PAK 提供编译产生的资源。部署时使用同次构建的对应产物。Web 构建另外生成 JS 宿主和 `engine/pocketjs.wasm`。确认宿主加载 QJBC 和 PAK 后，通过一次真实输入验证下一帧。
+`build:guest` 生成 `app.qjbc`、`app.bytecode.json`、`app.pak` 和编译出的 `app.js`。QJBC 受运行时 ABI 校验，PAK 提供打包资源。部署时使用同次构建的对应产物。Flutter 专用构建另从项目的 `manifest.json` 准备宿主侧 `guest-manifest.json`。Web 构建生成 JS 宿主和 `engine/pocketjs.wasm`。确认宿主加载 QJBC 和 PAK 后，通过一次真实输入验证下一帧。
 
 | 目标 | 运行与验收边界 |
 | --- | --- |
