@@ -72,6 +72,10 @@ Business UI, state, routing and component composition belong in JS. Reuse the ex
 
 The canonical update route is `<root>/<optional-prefix>/pocket/<hostVersion>/<packageId>/<packageVersion>/latest.json`. Initial install may fetch the complete PAK; subsequent releases can fetch only changed content-addressed resource parts. The Editor version backend can publish and test this layout on a LAN.
 
+## Maintainer CI
+
+[Pocket source CI and Web SDK releases](docs/POCKET_SOURCE_CI.md) covers source verification, benchmarks, platform acceptance, and GitHub Actions setup.
+
 ## Licensing
 
 Pocket and its first-party wrappers are licensed under the [MIT License](LICENSE). See [LICENSING.md](LICENSING.md) for component scope. No separate commercial authorization is required under the MIT terms.
