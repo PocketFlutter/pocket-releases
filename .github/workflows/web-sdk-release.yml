@@ -1,0 +1,615 @@
+name: Pocket Web SDK Release
+
+on:
+  workflow_dispatch:
+    inputs:
+      source_sha:
+        description: Exact PocketFlutter/Pocket commit on main
+        required: true
+        type: string
+      publish_release:
+        description: Publish the GitHub Release after acceptance passes
+        default: false
+        type: boolean
+
+permissions:
+  contents: read
+
+concurrency:
+  group: pocket-web-sdk-release-${{ github.ref }}
+  cancel-in-progress: false
+
+defaults:
+  run:
+    shell: bash
+
+jobs:
+  web-engine:
+    name: package-web-engine
+    if: github.ref == 'refs/heads/main'
+    runs-on: ubuntu-24.04
+    environment: pocket-source-ci
+    outputs:
+      source_sha: ${{ steps.inputs.outputs.sha }}
+      version: ${{ steps.metadata.outputs.version }}
+      tag: ${{ steps.metadata.outputs.tag }}
+    steps:
+      - name: Validate source commit input
+        id: inputs
+        env:
+          SOURCE_SHA: ${{ inputs.source_sha }}
+          SOURCE_KEY_AVAILABLE: ${{ secrets.POCKET_SOURCE_SSH_KEY != '' }}
+        run: |
+          [[ "$SOURCE_KEY_AVAILABLE" == true ]] || { echo "::error::Missing POCKET_SOURCE_SSH_KEY"; exit 1; }
+          [[ "$SOURCE_SHA" =~ ^[0-9a-fA-F]{40}$ ]] ||
+            { echo "::error::Expected a full 40-character source SHA"; exit 1; }
+          printf 'sha=%s\n' "${SOURCE_SHA,,}" >> "$GITHUB_OUTPUT"
+
+      - uses: actions/checkout@v7
+        with:
+          repository: PocketFlutter/Pocket
+          ref: ${{ steps.inputs.outputs.sha }}
+          path: pocket-source
+          ssh-key: ${{ secrets.POCKET_SOURCE_SSH_KEY }}
+          persist-credentials: false
+          fetch-depth: 0
+
+      - name: Verify ancestry on PocketFlutter/Pocket main
+        working-directory: pocket-source
+        env:
+          SOURCE_SHA: ${{ steps.inputs.outputs.sha }}
+        run: |
+          if [[ "$(git rev-parse --verify HEAD 2>/dev/null)" != "$SOURCE_SHA" ]] ||
+             ! git merge-base --is-ancestor "$SOURCE_SHA" refs/remotes/origin/main >/dev/null 2>&1; then
+            echo "::error::Source SHA must match checkout HEAD and belong to PocketFlutter/Pocket main"
+            exit 1
+          fi
+
+      - uses: actions/setup-node@v7
+        with:
+          node-version: 24
+          package-manager-cache: false
+
+      - uses: oven-sh/setup-bun@v2
+        with:
+          bun-version: 1.3.9
+
+      - uses: dtolnay/rust-toolchain@stable
+        with:
+          toolchain: 1.98.1
+          targets: wasm32-unknown-unknown
+
+      - name: Validate release metadata, packaging contracts, and build WebAssembly engine
+        id: metadata
+        working-directory: pocket-source
+        env:
+          GH_TOKEN: ${{ github.token }}
+          GH_REPO: ${{ github.repository }}
+          POCKET_WECHAT_LLVM_AR: /usr/bin/llvm-ar
+          PUBLISH_RELEASE: ${{ inputs.publish_release }}
+        run: |
+          exec 3>&1
+          trap 'echo "::error::Web SDK source validation or WebEngine build failed" >&3' ERR
+          exec >/dev/null 2>&1
+          version="$(node --input-type=module -e '
+            import { readFileSync } from "node:fs";
+            import { SDK_VERSION } from "./sdk/scripts/prebuilt_tools.mjs";
+            const version = JSON.parse(readFileSync("sdk/package.json", "utf8")).version;
+            if (!/^\d+\.\d+\.\d+$/.test(version) || version !== SDK_VERSION) throw new Error("SDK version mismatch");
+            process.stdout.write(version);
+          ')"
+          tag="sdk-v$version"
+          if [[ "$PUBLISH_RELEASE" == true ]]; then
+            if [[ "$(git rev-parse --verify "refs/tags/$tag^{commit}" 2>/dev/null)" != "$(git rev-parse HEAD)" ]]; then
+              echo "::error::The Pocket source tag $tag must point to the selected source commit" >&3
+              exit 1
+            fi
+            matching_refs="$(gh api "repos/$GH_REPO/git/matching-refs/tags/$tag" --jq '.[].ref')"
+            if grep -Fxq "refs/tags/$tag" <<<"$matching_refs" || gh release view "$tag" >/dev/null 2>&1; then
+              echo "::error::Tag or release $tag already exists" >&3
+              exit 1
+            fi
+          fi
+          printf 'version=%s\ntag=%s\n' "$version" "$tag" >> "$GITHUB_OUTPUT"
+          node sdk/scripts/release_notes.mjs --check
+          (
+            cd sdk
+            bun test --timeout 60000 \
+              scripts/tests/release_notes.test.ts \
+              scripts/tests/prebuilt_tools.test.ts \
+              scripts/tests/package_toolchain.test.ts \
+              scripts/tests/export_web_sdk.test.ts \
+              scripts/tests/install_studio.test.ts
+          )
+          sudo apt-get update
+          sudo apt-get install -y llvm lld patch
+          (
+            cd sdk
+            python3 scripts/prepare_upstream.py
+            bun install --frozen-lockfile --cwd .cache/pocketjs
+            bun scripts/build_web_engine.ts --outdir=.pocket-build/web-engine
+            for file in pocketjs.wasm pocket-web.js pocket-render-worker.js manifest.json; do
+              test -s ".pocket-build/web-engine/$file"
+            done
+          )
+          printf 'Verified Web SDK %s and built WebAssembly engine\n' "$version" >&3
+
+      - uses: actions/upload-artifact@v7
+        with:
+          name: pocket-web-engine
+          path: |
+            pocket-source/sdk/.pocket-build/web-engine/pocketjs.wasm
+            pocket-source/sdk/.pocket-build/web-engine/pocket-web.js
+            pocket-source/sdk/.pocket-build/web-engine/pocket-render-worker.js
+            pocket-source/sdk/.pocket-build/web-engine/manifest.json
+          include-hidden-files: true
+          if-no-files-found: error
+          retention-days: 1
+
+      - name: Remove private source checkout
+        if: always()
+        run: rm -rf pocket-source
+
+  package:
+    name: package-${{ matrix.os }}-${{ matrix.arch }}
+    runs-on: ${{ matrix.runner }}
+    needs: web-engine
+    environment: pocket-source-ci
+    strategy:
+      fail-fast: false
+      matrix:
+        include:
+          - { runner: macos-15, os: darwin, arch: arm64 }
+          - { runner: windows-2022, os: win32, arch: x64 }
+    steps:
+      - &checkout_source
+        uses: actions/checkout@v7
+        with:
+          repository: PocketFlutter/Pocket
+          ref: ${{ needs.web-engine.outputs.source_sha }}
+          path: pocket-source
+          ssh-key: ${{ secrets.POCKET_SOURCE_SSH_KEY }}
+          persist-credentials: false
+
+      - name: Verify source checkout SHA
+        working-directory: pocket-source
+        env:
+          SOURCE_SHA: ${{ needs.web-engine.outputs.source_sha }}
+        run: |
+          if [[ "$(git rev-parse --verify HEAD 2>/dev/null)" != "$SOURCE_SHA" ]]; then
+            echo "::error::Source checkout does not match verified SHA"
+            exit 1
+          fi
+
+      - uses: actions/download-artifact@v8
+        with:
+          name: pocket-web-engine
+          path: pocket-source/sdk/.pocket-build/web-engine
+
+      - uses: actions/setup-node@v7
+        with:
+          node-version: 24
+          package-manager-cache: false
+
+      - uses: oven-sh/setup-bun@v2
+        with:
+          bun-version: 1.3.9
+
+      - uses: dtolnay/rust-toolchain@stable
+        with:
+          toolchain: 1.98.1
+
+      - name: Install patch on Windows
+        if: runner.os == 'Windows'
+        shell: pwsh
+        run: |
+          choco install patch -y --no-progress *> $null
+          if ($LASTEXITCODE -ne 0) { throw "Failed to install patch" }
+
+      - name: Prepare toolchain and verify platform upgrade gates
+        working-directory: pocket-source/sdk
+        env:
+          POCKET_SOURCE_BUILD: "1"
+        run: |
+          exec 3>&1
+          trap 'echo "::error::Platform dependency setup or Studio upgrade verification failed" >&3' ERR
+          exec >/dev/null 2>&1
+          if [[ "$RUNNER_OS" == Windows ]]; then
+            python scripts/prepare_upstream.py
+          else
+            python3 scripts/prepare_upstream.py
+          fi
+          bun install --frozen-lockfile --cwd .cache/pocketjs
+          npm install --ignore-scripts --legacy-peer-deps --no-audit --no-fund
+          bun test packages/pocket_diagnostics/test/diagnostics.test.ts
+          npx playwright install chromium
+          npm exec --yes --package=bun@1.4.4 -- bun test --timeout 60000 \
+            editor/test/studio_upgrade.test.ts \
+            editor/test/source_upgrade_git.test.ts \
+            scripts/tests/editor_service.test.ts \
+            scripts/tests/install_studio.test.ts
+          printf 'Verified platform diagnostics and Studio upgrade contracts\n' >&3
+
+      - name: Build Noble N-API binding and platform binaries on macOS
+        if: runner.os != 'Windows'
+        working-directory: pocket-source/sdk
+        run: |
+          exec 3>&1
+          trap 'echo "::error::macOS native toolchain build failed" >&3' ERR
+          exec >/dev/null 2>&1
+          node node_modules/node-gyp/bin/node-gyp.js rebuild --directory=node_modules/@abandonware/noble
+          cargo build --locked --release --manifest-path native/Cargo.toml --bin pocket_probe --bin pocketjs_bytecode
+          cargo test --locked --release --manifest-path native/Cargo.toml --bin pocketjs_bytecode
+          printf 'Built and verified macOS native toolchain binaries\n' >&3
+
+      - name: Build Noble WinRT binding and static-CRT binaries on Windows
+        if: runner.os == 'Windows'
+        working-directory: pocket-source/sdk
+        shell: pwsh
+        env:
+          RUSTFLAGS: -C target-feature=+crt-static
+        run: |
+          try {
+            node node_modules/node-gyp/bin/node-gyp.js configure --directory=node_modules/@abandonware/noble *> $null
+            if ($LASTEXITCODE -ne 0) { throw "Noble configure failed" }
+            $config = Get-Content node_modules/@abandonware/noble/build/config.gypi | Where-Object { $_ -notmatch '^#' } | Out-String | ConvertFrom-Json
+            & $config.variables.msbuild_path node_modules/@abandonware/noble/build/binding.sln /p:Configuration=Release /p:Platform=x64 /p:WindowsTargetPlatformVersion=10.0.26100.0 /nologo /nodeReuse:false *> $null
+            if ($LASTEXITCODE -ne 0) { throw "Noble WinRT build failed" }
+            cargo build --locked --release --target x86_64-pc-windows-msvc --manifest-path native/Cargo.toml --bin pocket_probe --bin pocketjs_bytecode *> $null
+            if ($LASTEXITCODE -ne 0) { throw "Windows native build failed" }
+            New-Item -ItemType Directory -Force native/target/release | Out-Null
+            Copy-Item native/target/x86_64-pc-windows-msvc/release/pocket_probe.exe native/target/release/
+            Copy-Item native/target/x86_64-pc-windows-msvc/release/pocketjs_bytecode.exe native/target/release/
+            cargo test --locked --release --target x86_64-pc-windows-msvc --manifest-path native/Cargo.toml --bin pocketjs_bytecode *> $null
+            if ($LASTEXITCODE -ne 0) { throw "Windows bytecode compiler test failed" }
+            $vswhere = "${env:ProgramFiles(x86)}/Microsoft Visual Studio/Installer/vswhere.exe"
+            $vs = & $vswhere -latest -products * -property installationPath
+            $dumpbin = Get-ChildItem "$vs/VC/Tools/MSVC/*/bin/Hostx64/x64/dumpbin.exe" | Sort-Object FullName -Descending | Select-Object -First 1 -ExpandProperty FullName
+            if (-not $dumpbin) { throw "dumpbin not found" }
+            $files = @("native/target/release/pocket_probe.exe", "native/target/release/pocketjs_bytecode.exe", "node_modules/@abandonware/noble/build/Release/binding.node")
+            foreach ($file in $files) {
+              $deps = & $dumpbin /dependents $file 2>$null
+              if ($LASTEXITCODE -ne 0 -or $deps -match '(?i)\b(?:VCRUNTIME|MSVCP)\d+[^\s]*\.dll') {
+                throw "External VC runtime dependency check failed"
+              }
+            }
+            Write-Host "Built and verified Windows static-CRT native toolchain binaries"
+          } catch {
+            Write-Error "Windows native toolchain build or static CRT verification failed"
+            exit 1
+          }
+
+      - name: Assemble and pack platform npm tool archive
+        working-directory: pocket-source/sdk
+        env:
+          SDK_VERSION: ${{ needs.web-engine.outputs.version }}
+          PLATFORM: ${{ matrix.os }}-${{ matrix.arch }}
+        run: |
+          exec 3>&1
+          trap 'echo "::error::Failed to package platform toolchain archive" >&3' ERR
+          exec >/dev/null 2>&1
+          bun scripts/package_toolchain.ts --out=.pocket-build/toolchain-package --force --version="$SDK_VERSION"
+          cd .pocket-build/toolchain-package
+          npm pack --ignore-scripts
+          test -s "pocket-tools-${PLATFORM}-${SDK_VERSION}.tgz"
+          printf 'Packaged pocket-tools-%s-%s.tgz\n' "$PLATFORM" "$SDK_VERSION" >&3
+
+      - uses: actions/upload-artifact@v7
+        with:
+          name: pocket-tools-${{ matrix.os }}-${{ matrix.arch }}
+          path: pocket-source/sdk/.pocket-build/toolchain-package/pocket-tools-${{ matrix.os }}-${{ matrix.arch }}-${{ needs.web-engine.outputs.version }}.tgz
+          include-hidden-files: true
+          if-no-files-found: error
+          retention-days: 1
+
+      - name: Remove private source checkout
+        if: always()
+        run: rm -rf pocket-source
+
+  bundle:
+    name: Bundle SDK (${{ matrix.platform }})
+    needs: [web-engine, package]
+    permissions:
+      contents: read
+      packages: read
+    runs-on: ${{ matrix.runner }}
+    environment: pocket-source-ci
+    strategy:
+      fail-fast: false
+      matrix:
+        include:
+          - { runner: macos-15, platform: darwin-arm64 }
+          - { runner: windows-2022, platform: win32-x64 }
+    steps:
+      - *checkout_source
+
+      - name: Verify source checkout SHA
+        working-directory: pocket-source
+        env:
+          SOURCE_SHA: ${{ needs.web-engine.outputs.source_sha }}
+        run: |
+          if [[ "$(git rev-parse --verify HEAD 2>/dev/null)" != "$SOURCE_SHA" ]]; then
+            echo "::error::Source checkout does not match verified SHA"
+            exit 1
+          fi
+
+      - uses: actions/setup-node@v7
+        with:
+          node-version: 24
+          registry-url: https://npm.pkg.github.com
+          scope: "@pocketflutter"
+          package-manager-cache: false
+
+      - uses: oven-sh/setup-bun@v2
+        with:
+          bun-version: 1.3.9
+
+      - uses: actions/download-artifact@v8
+        with:
+          name: pocket-tools-${{ matrix.platform }}
+          path: pocket-source/sdk/.pocket-build/downloaded
+
+      - name: Assemble and pack standalone platform SDK from GitHub Packages
+        working-directory: pocket-source
+        env:
+          NODE_AUTH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          SDK_VERSION: ${{ needs.web-engine.outputs.version }}
+          PLATFORM: ${{ matrix.platform }}
+        run: |
+          exec 3>&1
+          trap 'echo "::error::Failed to assemble or pack platform SDK from GitHub Packages" >&3' ERR
+          exec >/dev/null 2>&1
+          mkdir -p release sdk/.pocket-build
+          cp "sdk/.pocket-build/downloaded/pocket-tools-${PLATFORM}-${SDK_VERSION}.tgz" sdk/.pocket-build/
+          cp "sdk/.pocket-build/pocket-tools-${PLATFORM}-${SDK_VERSION}.tgz" release/
+          bun sdk/scripts/export_web_sdk.ts --out=sdk/.pocket-build/release-sdk --platform="$PLATFORM" --registry-packages
+          rm -rf sdk/.pocket-build/release-sdk/examples/optional/lantern
+          cd sdk/.pocket-build/release-sdk
+          npm install --package-lock-only --ignore-scripts --legacy-peer-deps --no-audit --no-fund
+          npm shrinkwrap --ignore-scripts
+          npm pack --ignore-scripts --pack-destination ../../../release
+          cd ../../../release
+          test -s "pocket-web-sdk-tools-${PLATFORM}-${SDK_VERSION}.tgz"
+          test -s "pocket-tools-${PLATFORM}-${SDK_VERSION}.tgz"
+          node --input-type=module <<'JS'
+          import { createHash } from 'node:crypto';
+          import { readdirSync, readFileSync, writeFileSync } from 'node:fs';
+          for (const file of readdirSync('.').filter(name => name.endsWith('.tgz'))) {
+            const hash = createHash('sha256').update(readFileSync(file)).digest('hex');
+            writeFileSync(`${file}.sha256`, `${hash}  ${file}\n`);
+          }
+          JS
+          printf 'Bundled pocket-web-sdk-tools-%s-%s.tgz\n' "$PLATFORM" "$SDK_VERSION" >&3
+
+      - uses: actions/upload-artifact@v7
+        with:
+          name: pocket-sdk-release-${{ matrix.platform }}
+          path: |
+            pocket-source/release/pocket-web-sdk-tools-${{ matrix.platform }}-${{ needs.web-engine.outputs.version }}.tgz
+            pocket-source/release/pocket-web-sdk-tools-${{ matrix.platform }}-${{ needs.web-engine.outputs.version }}.tgz.sha256
+            pocket-source/release/pocket-tools-${{ matrix.platform }}-${{ needs.web-engine.outputs.version }}.tgz
+            pocket-source/release/pocket-tools-${{ matrix.platform }}-${{ needs.web-engine.outputs.version }}.tgz.sha256
+          if-no-files-found: error
+          retention-days: 1
+
+      - name: Remove private source checkout
+        if: always()
+        run: rm -rf pocket-source
+
+  verify:
+    name: Verify final SDK (${{ matrix.os }}-${{ matrix.arch }})
+    needs: [web-engine, bundle]
+    runs-on: ${{ matrix.runner }}
+    environment: pocket-source-ci
+    strategy:
+      fail-fast: false
+      matrix:
+        include:
+          - { runner: macos-15, os: darwin, arch: arm64 }
+          - { runner: windows-2022, os: win32, arch: x64 }
+    steps:
+      - *checkout_source
+
+      - name: Verify source checkout SHA
+        working-directory: pocket-source
+        env:
+          SOURCE_SHA: ${{ needs.web-engine.outputs.source_sha }}
+        run: |
+          if [[ "$(git rev-parse --verify HEAD 2>/dev/null)" != "$SOURCE_SHA" ]]; then
+            echo "::error::Source checkout does not match verified SHA"
+            exit 1
+          fi
+
+      - uses: actions/setup-node@v7
+        with:
+          node-version: 24
+          package-manager-cache: false
+
+      - uses: actions/download-artifact@v8
+        with:
+          name: pocket-sdk-release-${{ matrix.os }}-${{ matrix.arch }}
+          path: release
+
+      - name: Install and exercise final release archive
+        env:
+          SDK_VERSION: ${{ needs.web-engine.outputs.version }}
+          PLATFORM: ${{ matrix.os }}-${{ matrix.arch }}
+        run: |
+          exec 3>&1
+          trap 'echo "::error::Release archive acceptance failed on $PLATFORM" >&3' ERR
+          exec >/dev/null 2>&1
+          mkdir -p .pocket-build/release-consumer
+          tar -xzf "release/pocket-web-sdk-tools-${PLATFORM}-${SDK_VERSION}.tgz" -C .pocket-build/release-consumer
+          npm --prefix .pocket-build/release-consumer/package run setup
+          npm --prefix .pocket-build/release-consumer/package run doctor
+          node pocket-source/sdk/scripts/tests/platform_package_smoke.mjs --sdk-root=./.pocket-build/release-consumer/package > "$RUNNER_TEMP/raw-acceptance-${PLATFORM}.json"
+          node --input-type=module - "$RUNNER_TEMP/raw-acceptance-${PLATFORM}.json" "release/acceptance-${PLATFORM}.json" "$SDK_VERSION" "$PLATFORM" <<'JS'
+          import { readFileSync, writeFileSync } from 'node:fs';
+          const [rawPath, outPath, sdkVersion, platform] = process.argv.slice(2);
+          const raw = JSON.parse(readFileSync(rawPath, 'utf8'));
+          if (raw.ok !== true || raw.sdkVersion !== sdkVersion || raw.platformPackage !== `@pocket/tools-${platform}` || raw.nobleSourceBuildPresent !== false || raw.preview?.ok !== true || raw.studio?.start !== true || raw.studio?.health !== true || raw.studio?.status !== true || raw.studio?.stop !== true) {
+            throw new Error(`Invalid acceptance state for ${platform}`);
+          }
+          const builds = {};
+          for (const template of ['app', 'game']) {
+            const b = raw.builds?.[template];
+            if (!(b?.qjbcBytes > 0) || !(b?.pakBytes > 0)) throw new Error(`Missing build bytes for ${template}`);
+            builds[template] = { qjbcBytes: b.qjbcBytes, pakBytes: b.pakBytes };
+          }
+          const results = [];
+          for (const template of ['app', 'game']) {
+            const r = raw.preview?.results?.find(item => item.template === template);
+            if (!r || r.inputChangesFrame !== true || !(r.qjbcBytes > 0) || !(r.pakBytes > 0)) {
+              throw new Error(`Missing preview execution evidence for ${template}`);
+            }
+            results.push({
+              template: r.template,
+              inputChangesFrame: true,
+              frames: r.frames,
+              qjbcBytes: r.qjbcBytes,
+              pakBytes: r.pakBytes,
+            });
+          }
+          const curated = {
+            ok: true,
+            sdkVersion: raw.sdkVersion,
+            platformPackage: raw.platformPackage,
+            nobleSourceBuildPresent: false,
+            builds,
+            preview: { ok: true, results },
+            studio: {
+              port: raw.studio.port,
+              start: true,
+              health: true,
+              status: true,
+              stop: true,
+            },
+          };
+          writeFileSync(outPath, `${JSON.stringify(curated, null, 2)}\n`, 'utf8');
+          JS
+          rm -f "$RUNNER_TEMP/raw-acceptance-${PLATFORM}.json"
+          printf 'Passed release archive acceptance on %s (SDK %s)\n' "$PLATFORM" "$SDK_VERSION" >&3
+
+      - uses: actions/upload-artifact@v7
+        with:
+          name: pocket-acceptance-${{ matrix.os }}-${{ matrix.arch }}
+          path: release/acceptance-${{ matrix.os }}-${{ matrix.arch }}.json
+          if-no-files-found: error
+          retention-days: 1
+
+      - name: Remove private source checkout and consumer workspace
+        if: always()
+        run: rm -rf pocket-source .pocket-build "$RUNNER_TEMP"/raw-acceptance-*.json
+
+  release:
+    name: Publish GitHub Release
+    needs: [web-engine, bundle, verify]
+    if: >-
+      !cancelled() &&
+      inputs.publish_release &&
+      needs.web-engine.result == 'success' &&
+      needs.bundle.result == 'success' &&
+      needs.verify.result == 'success'
+    runs-on: ubuntu-24.04
+    permissions:
+      contents: write
+    env:
+      GH_TOKEN: ${{ github.token }}
+      GH_REPO: ${{ github.repository }}
+      RELEASE_TAG: ${{ needs.web-engine.outputs.tag }}
+      SDK_VERSION: ${{ needs.web-engine.outputs.version }}
+      SOURCE_SHA: ${{ needs.web-engine.outputs.source_sha }}
+    steps:
+      - uses: actions/download-artifact@v8
+        with:
+          pattern: pocket-sdk-release-*
+          path: release
+          merge-multiple: true
+
+      - uses: actions/download-artifact@v8
+        with:
+          pattern: pocket-acceptance-*
+          path: release
+          merge-multiple: true
+
+      - name: Verify acceptance, checksums, and publish a new sdk-v tag
+        working-directory: release
+        run: |
+          matching_refs="$(gh api "repos/$GH_REPO/git/matching-refs/tags/$RELEASE_TAG" --jq '.[].ref')"
+          if grep -Fxq "refs/tags/$RELEASE_TAG" <<<"$matching_refs" || gh release view "$RELEASE_TAG" >/dev/null 2>&1; then
+            echo "::error::Tag or release $RELEASE_TAG already exists"
+            exit 1
+          fi
+          node --input-type=module <<'JS'
+          import { readFileSync } from 'node:fs';
+          const allowedKeys = new Set(['ok', 'sdkVersion', 'platformPackage', 'nobleSourceBuildPresent', 'builds', 'preview', 'studio']);
+          for (const platform of ['darwin-arm64', 'win32-x64']) {
+            const report = JSON.parse(readFileSync(`acceptance-${platform}.json`, 'utf8'));
+            for (const key of Object.keys(report)) {
+              if (!allowedKeys.has(key)) throw new Error(`Unexpected key ${key} in acceptance-${platform}.json`);
+            }
+            if (report.sdkVersion !== process.env.SDK_VERSION ||
+                report.platformPackage !== `@pocket/tools-${platform}` ||
+                report.nobleSourceBuildPresent !== false ||
+                !report.ok ||
+                !report.preview?.ok ||
+                !report.studio?.start ||
+                !report.studio?.health ||
+                !report.studio?.status ||
+                !report.studio?.stop) {
+              throw new Error(`Acceptance failed: ${platform}`);
+            }
+            for (const template of ['app', 'game']) {
+              if (!(report.builds?.[template]?.qjbcBytes > 0) ||
+                  !(report.builds?.[template]?.pakBytes > 0) ||
+                  !report.preview.results?.some(result => result.template === template && result.inputChangesFrame === true)) {
+                throw new Error(`Missing ${template} execution evidence: ${platform}`);
+              }
+            }
+          }
+          JS
+          for platform in darwin-arm64 win32-x64; do
+            for prefix in pocket-web-sdk-tools pocket-tools; do
+              archive="${prefix}-${platform}-${SDK_VERSION}.tgz"
+              test -s "$archive"
+              test -s "$archive.sha256"
+              [[ "$(sha256sum -- "$archive")" == "$(< "$archive.sha256")" ]]
+            done
+          done
+          sha256sum -- *.tgz acceptance-*.json > SHA256SUMS
+          cat > "$RUNNER_TEMP/release-notes.md" <<EOF
+          # Pocket Web SDK ${SDK_VERSION}
+
+          Built from \`PocketFlutter/Pocket\` commit \`${SOURCE_SHA}\`.
+
+          ## Standalone SDK Packages & Quick Start
+
+          Standalone Pocket Web SDK, with a complete development package for each platform (each contains only its platform tools):
+
+          - Windows x64: \`pocket-web-sdk-tools-win32-x64-${SDK_VERSION}.tgz\`
+          - macOS arm64: \`pocket-web-sdk-tools-darwin-arm64-${SDK_VERSION}.tgz\`
+          - \`pocket-tools-*\` contains compiler tools only; download it separately only if you already have the SDK.
+
+          Node.js 24 LTS is recommended (minimum 22.22.2). Extract the complete SDK package for your platform and run:
+
+          \`\`\`sh
+          npm run setup
+          npm start
+          \`\`\`
+
+          Studio runs at \`http://127.0.0.1:8791\`. Product development requires no Rust, Python, C/C++, or global Bun installation.
+
+          ## Acceptance & Provenance
+
+          Before publishing, the complete archives were installed on macOS arm64 and Windows x64 to verify \`doctor\`, Noble native module loading, real App/Game QJBC/PAK builds, input-driven Preview frames, and Studio startup/shutdown. Curated acceptance reports and \`SHA256SUMS\` are attached.
+
+          Source checkout users continue to fetch \`sdk-v${SDK_VERSION}\` from their \`PocketFlutter/Pocket\` origin while discovering standalone release archives here in \`${GH_REPO}\`.
+
+          Distribution build: [Action ${GITHUB_RUN_ID}](https://github.com/${GH_REPO}/actions/runs/${GITHUB_RUN_ID}), release workflow commit \`${GITHUB_SHA}\`, source commit \`${SOURCE_SHA}\`.
+          EOF
+          gh release create "$RELEASE_TAG" ./* \
+            --target "$GITHUB_SHA" \
+            --title "Pocket Web SDK ${SDK_VERSION}" \
+            --notes-file "$RUNNER_TEMP/release-notes.md" \
+            --latest
+          rm -f "$RUNNER_TEMP/release-notes.md"

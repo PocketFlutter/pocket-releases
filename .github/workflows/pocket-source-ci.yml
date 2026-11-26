@@ -1,0 +1,717 @@
+name: Pocket Source CI
+
+on:
+  workflow_dispatch:
+    inputs:
+      source_sha:
+        description: Exact 40-hex commit SHA on PocketFlutter/Pocket main
+        required: true
+        type: string
+      run_vector_benchmarks:
+        description: Run optional Rust, JS, and Flutter vector/SVG benchmark lanes
+        default: false
+        type: boolean
+
+permissions:
+  contents: read
+
+concurrency:
+  group: pocket-source-ci-${{ github.ref }}
+  cancel-in-progress: false
+
+defaults:
+  run:
+    shell: bash
+
+jobs:
+  architecture-and-rust:
+    name: architecture-and-rust
+    if: github.event_name == 'workflow_dispatch' && github.ref == 'refs/heads/main'
+    runs-on: ubuntu-24.04
+    environment: pocket-source-ci
+    steps:
+      - &validate_source_inputs
+        name: Validate source SHA and credential availability
+        working-directory: ${{ github.workspace }}
+        env:
+          SOURCE_SHA: ${{ inputs.source_sha }}
+          SOURCE_KEY_AVAILABLE: ${{ secrets.POCKET_SOURCE_SSH_KEY != '' }}
+        run: |
+          [[ "$SOURCE_KEY_AVAILABLE" == true ]] || { echo "::error::Missing POCKET_SOURCE_SSH_KEY"; exit 1; }
+          [[ "$SOURCE_SHA" =~ ^[0-9a-fA-F]{40}$ ]] || { echo "::error::Expected a 40-character hexadecimal source SHA"; exit 1; }
+
+      - &checkout_source
+        name: Checkout private Pocket source
+        uses: actions/checkout@v7
+        with:
+          repository: PocketFlutter/Pocket
+          ref: ${{ inputs.source_sha }}
+          path: pocket-source
+          ssh-key: ${{ secrets.POCKET_SOURCE_SSH_KEY }}
+          persist-credentials: false
+          fetch-depth: 0
+
+      - &verify_source_ancestry
+        name: Verify pinned SHA and ancestry on canonical source main
+        working-directory: ${{ github.workspace }}/pocket-source
+        env:
+          SOURCE_SHA: ${{ inputs.source_sha }}
+        run: |
+          expected="${SOURCE_SHA,,}"
+          if [[ "$(git rev-parse --verify HEAD 2>/dev/null)" != "$expected" ]] ||
+             ! git merge-base --is-ancestor "$expected" refs/remotes/origin/main >/dev/null 2>&1; then
+            echo "::error::Source SHA must match checkout HEAD and be an ancestor of canonical source main"
+            exit 1
+          fi
+
+      - name: Verify repository architecture contracts
+        working-directory: pocket-source
+        run: |
+          exec 3>&1
+          trap 'echo "::error::Verify repository architecture contracts failed" >&3' ERR
+          exec >/dev/null 2>&1
+          python3 sdk/scripts/check_architecture.py
+
+      - name: Verify maintained public API documentation inventory
+        working-directory: pocket-source
+        run: |
+          exec 3>&1
+          trap 'echo "::error::Verify maintained public API documentation inventory failed" >&3' ERR
+          exec >/dev/null 2>&1
+          python3 sdk/scripts/check_api_docs.py
+
+      - uses: oven-sh/setup-bun@v2
+        with:
+          bun-version: 1.3.9
+
+      - name: Verify SDK package registry and contract conformance
+        working-directory: pocket-source
+        run: |
+          exec 3>&1
+          trap 'echo "::error::Verify SDK package registry and contract conformance failed" >&3' ERR
+          exec >/dev/null 2>&1
+          bun sdk/scripts/check_registry_conformance.ts --json
+
+      - uses: dtolnay/rust-toolchain@stable
+        with:
+          toolchain: 1.98.1
+          components: clippy
+
+      - name: Install system patch tool
+        run: |
+          exec 3>&1
+          trap 'echo "::error::Install system patch tool failed" >&3' ERR
+          exec >/dev/null 2>&1
+          sudo apt-get update
+          sudo apt-get install -y patch gdb llvm
+
+      - name: Prepare pinned PocketJS upstream
+        working-directory: pocket-source/sdk
+        run: |
+          exec 3>&1
+          trap 'echo "::error::Prepare pinned PocketJS upstream failed" >&3' ERR
+          exec >/dev/null 2>&1
+          python3 scripts/prepare_upstream.py
+          bun install --frozen-lockfile --cwd .cache/pocketjs
+
+      - name: Clippy native host and worker runtime
+        working-directory: pocket-source
+        run: |
+          exec 3>&1
+          trap 'echo "::error::Clippy native host and worker runtime failed" >&3' ERR
+          exec >/dev/null 2>&1
+          cargo clippy --locked --manifest-path sdk/native/Cargo.toml --all-targets
+
+      - name: Diagnose native memory safety with AddressSanitizer
+        id: asan-tests
+        working-directory: pocket-source
+        env:
+          RUSTC_BOOTSTRAP: "1"
+          RUSTFLAGS: "-Zsanitizer=address -Cforce-frame-pointers=yes"
+          CFLAGS: "-fsanitize=address -fno-omit-frame-pointer"
+          CARGO_TARGET_DIR: /tmp/pocket-native-asan
+          ASAN_OPTIONS: "detect_leaks=0:abort_on_error=1:disable_coredump=0"
+          ASAN_SYMBOLIZER_PATH: /usr/bin/llvm-symbolizer
+          RUST_TEST_NOCAPTURE: "1"
+        run: |
+          exec 3>&1
+          trap 'echo "::error::Diagnose native memory safety with AddressSanitizer failed" >&3' ERR
+          exec >/dev/null 2>&1
+          ulimit -c unlimited
+          sudo sysctl -w kernel.core_pattern=/tmp/pocket-native-asan-core.%p
+          for attempt in $(seq 1 20); do
+            echo "Native AddressSanitizer ${attempt}/20"
+            timeout --signal=ABRT --kill-after=5s 120s cargo test --locked --manifest-path sdk/native/Cargo.toml --target x86_64-unknown-linux-gnu --lib
+          done
+
+      - name: Test native host and worker runtime
+        id: native-tests
+        working-directory: pocket-source
+        run: |
+          exec 3>&1
+          trap 'echo "::error::Test native host and worker runtime failed" >&3' ERR
+          exec >/dev/null 2>&1
+          ulimit -c unlimited
+          sudo sysctl -w kernel.core_pattern=/tmp/pocket-native-core.%p
+          timeout --signal=ABRT --kill-after=5s 60s cargo test --locked --manifest-path sdk/native/Cargo.toml
+          for attempt in $(seq 1 20); do
+            echo "Native parallel teardown stress ${attempt}/20"
+            if ! timeout --signal=ABRT --kill-after=5s 60s cargo test --locked --manifest-path sdk/native/Cargo.toml --lib > /tmp/pocket-native-stress.log 2>&1; then
+              cat /tmp/pocket-native-stress.log
+              exit 1
+            fi
+          done
+
+      - name: Diagnose a native test crash
+        if: failure() && (steps.native-tests.outcome == 'failure' || steps.asan-tests.outcome == 'failure')
+        working-directory: pocket-source
+        env:
+          ASAN_TEST_OUTCOME: ${{ steps.asan-tests.outcome }}
+        run: |
+          exec 3>&1
+          trap 'echo "::error::Diagnose a native test crash failed" >&3' ERR
+          exec >/dev/null 2>&1
+          shopt -s nullglob
+          if [[ "$ASAN_TEST_OUTCOME" == failure ]]; then
+            test_binary=$(find /tmp/pocket-native-asan/x86_64-unknown-linux-gnu/debug/deps -maxdepth 1 -type f -name 'pocket_flutter-*' -executable | head -1)
+            cores=(/tmp/pocket-native-asan-core.*)
+          else
+            cargo test --locked --manifest-path sdk/native/Cargo.toml --lib --no-run --message-format=json > /tmp/native-test-build.jsonl
+            test_binary=$(python3 -c 'import json; records=(json.loads(line) for line in open("/tmp/native-test-build.jsonl")); print(next(record["executable"] for record in records if record.get("executable")))')
+            cores=(/tmp/pocket-native-core.*)
+          fi
+          if ((${#cores[@]})); then
+            cat > /tmp/pocket-native-core-facts.py <<'PY'
+          import gdb
+          for thread in gdb.selected_inferior().threads():
+              thread.switch()
+              frame = gdb.newest_frame()
+              while frame:
+                  if frame.name() == "pocket_worker_runner_run":
+                      frame.select()
+                      gdb.execute("p *r")
+                      gdb.execute("p r->error")
+                  frame = frame.older()
+          PY
+            for core in "${cores[@]}"; do
+              gdb --batch -ex "thread apply all bt full" -ex "source /tmp/pocket-native-core-facts.py" "$test_binary" "$core"
+            done
+          elif [[ "$ASAN_TEST_OUTCOME" != failure ]]; then
+            timeout --signal=ABRT --kill-after=5s 60s gdb --batch -ex run -ex "thread apply all bt" --args "$test_binary"
+          fi
+
+      - &write_safe_summary
+        name: Record safe lane summary
+        if: always()
+        working-directory: ${{ github.workspace }}
+        env:
+          LANE_NAME: ${{ github.job }}
+          JOB_STATUS: ${{ job.status }}
+        run: |
+          printf -- '- **%s**: %s\n' "$LANE_NAME" "$JOB_STATUS" >> "$GITHUB_STEP_SUMMARY"
+
+      - &cleanup_source
+        name: Remove private source checkout
+        if: always()
+        working-directory: ${{ github.workspace }}
+        run: |
+          rm -rf pocket-source "$RUNNER_TEMP"/pocket-studio-upgrade-diagnostics /tmp/pocket-native-* /tmp/native-test-build.jsonl /tmp/svg-fidelity-fixtures.json /tmp/flutter-bench.log /tmp/pocket-e2e-real-* 2>/dev/null || true
+
+  studio-upgrade-windows:
+    name: studio-upgrade-windows
+    if: github.event_name == 'workflow_dispatch' && github.ref == 'refs/heads/main'
+    runs-on: windows-latest
+    timeout-minutes: 10
+    environment: pocket-source-ci
+    defaults:
+      run:
+        shell: bash
+        working-directory: pocket-source/sdk
+    steps:
+      - *validate_source_inputs
+
+      - *checkout_source
+
+      - *verify_source_ancestry
+
+      - uses: actions/setup-node@v7
+        with:
+          node-version: 24
+          package-manager-cache: false
+
+      - uses: oven-sh/setup-bun@v2
+        with:
+          bun-version: 1.3.9
+
+      - name: Install pinned compiler patch dependency
+        run: |
+          exec 3>&1
+          trap 'echo "::error::Install pinned compiler patch dependency failed" >&3' ERR
+          exec >/dev/null 2>&1
+          choco install patch -y --no-progress
+
+      - name: Prepare pinned compiler sources for Studio imports
+        run: |
+          exec 3>&1
+          trap 'echo "::error::Prepare pinned compiler sources for Studio imports failed" >&3' ERR
+          exec >/dev/null 2>&1
+          python scripts/prepare_upstream.py
+          bun install --frozen-lockfile --cwd .cache/pocketjs
+
+      - name: Install SDK dependencies without install scripts
+        run: |
+          exec 3>&1
+          trap 'echo "::error::Install SDK dependencies without install scripts failed" >&3' ERR
+          exec >/dev/null 2>&1
+          npm install --ignore-scripts --legacy-peer-deps --no-audit --no-fund
+
+      - name: Install Playwright Chromium
+        run: |
+          exec 3>&1
+          trap 'echo "::error::Install Playwright Chromium failed" >&3' ERR
+          exec >/dev/null 2>&1
+          npx playwright install chromium
+
+      - name: Verify Studio standalone and source upgrade on Windows
+        env:
+          POCKET_SOURCE_BUILD: "1"
+        run: |
+          exec 3>&1
+          trap 'echo "::error::Verify Studio standalone and source upgrade on Windows failed" >&3' ERR
+          exec >/dev/null 2>&1
+          npm exec --yes --package=bun@1.4.4 -- bun test --timeout 60000 editor/test/studio_upgrade.test.ts editor/test/source_upgrade_git.test.ts scripts/tests/editor_service.test.ts scripts/tests/install_studio.test.ts
+
+      - *write_safe_summary
+
+      - *cleanup_source
+
+  js-sdk-and-guest:
+    name: js-sdk-and-guest
+    if: github.event_name == 'workflow_dispatch' && github.ref == 'refs/heads/main'
+    runs-on: ubuntu-24.04
+    environment: pocket-source-ci
+    steps:
+      - *validate_source_inputs
+
+      - *checkout_source
+
+      - *verify_source_ancestry
+
+      - uses: actions/setup-node@v7
+        with:
+          node-version: 24
+          package-manager-cache: false
+
+      - uses: oven-sh/setup-bun@v2
+        with:
+          bun-version: 1.3.9
+
+      - uses: dtolnay/rust-toolchain@stable
+        with:
+          toolchain: 1.98.1
+          targets: wasm32-unknown-unknown
+
+      - name: Install system patch tool
+        run: |
+          exec 3>&1
+          trap 'echo "::error::Install system patch tool failed" >&3' ERR
+          exec >/dev/null 2>&1
+          sudo apt-get update
+          sudo apt-get install -y patch llvm lld iproute2 net-tools lsof procps
+
+      - name: Prepare pinned PocketJS upstream
+        working-directory: pocket-source/sdk
+        run: |
+          exec 3>&1
+          trap 'echo "::error::Prepare pinned PocketJS upstream failed" >&3' ERR
+          exec >/dev/null 2>&1
+          python3 scripts/prepare_upstream.py
+          bun install --frozen-lockfile --cwd .cache/pocketjs
+
+      - name: Install SDK JS dependencies
+        working-directory: pocket-source/sdk
+        run: |
+          exec 3>&1
+          trap 'echo "::error::Install SDK JS dependencies failed" >&3' ERR
+          exec >/dev/null 2>&1
+          npm install --ignore-scripts --legacy-peer-deps --no-audit --no-fund
+
+      - name: Install Chromium for browser regression tests
+        working-directory: pocket-source/sdk
+        run: |
+          exec 3>&1
+          trap 'echo "::error::Install Chromium for browser regression tests failed" >&3' ERR
+          exec >/dev/null 2>&1
+          npx playwright install --with-deps chromium
+
+      - name: Build current WebAssembly engine for browser suites
+        working-directory: pocket-source/sdk
+        env:
+          POCKET_WECHAT_LLVM_AR: /usr/bin/llvm-ar
+        run: |
+          exec 3>&1
+          trap 'echo "::error::Build current WebAssembly engine for browser suites failed" >&3' ERR
+          exec >/dev/null 2>&1
+          bun scripts/build_web_engine.ts --outdir=.pocket-build/web-engine
+
+      - name: Install Showcase demo JS dependencies
+        working-directory: pocket-source/demo/js
+        run: |
+          exec 3>&1
+          trap 'echo "::error::Install Showcase demo JS dependencies failed" >&3' ERR
+          exec >/dev/null 2>&1
+          bun install --ignore-scripts
+
+      - name: Build native probe and bytecode compiler
+        working-directory: pocket-source
+        run: |
+          exec 3>&1
+          trap 'echo "::error::Build native probe and bytecode compiler failed" >&3' ERR
+          exec >/dev/null 2>&1
+          cargo build --locked --release --manifest-path sdk/native/Cargo.toml --bin pocket_probe --bin pocketjs_bytecode
+
+      - name: Fetch pinned official Hiyori sample resources
+        uses: actions/checkout@v7
+        with:
+          repository: Live2D/CubismNativeSamples
+          ref: b8024738f108e6003e4925193e8d5ec04cd18196
+          path: pocket-source/sdk/.cache/cubism-native-samples
+          sparse-checkout: Samples/Resources/Hiyori
+          persist-credentials: false
+
+      - name: Verify standalone Lantern guest build
+        working-directory: pocket-source/demo/js
+        env:
+          CUBISM_SDK_ROOT: ${{ github.workspace }}/pocket-source/sdk/.cache/cubism-native-samples
+          POCKET_SOURCE_BUILD: "1"
+          POCKET_COMPILER_PATH: ${{ github.workspace }}/pocket-source/sdk/.cache/pocketjs/tools/build.ts
+          POCKET_BYTECODE_BIN: ${{ github.workspace }}/pocket-source/sdk/native/target/release/pocketjs_bytecode
+        run: |
+          exec 3>&1
+          trap 'echo "::error::Verify standalone Lantern guest build failed" >&3' ERR
+          exec >/dev/null 2>&1
+          bun scripts/build_mini_apps.ts --mini-app=lantern
+
+      - name: Verify Studio upgrade lifecycle before packaging
+        working-directory: pocket-source/sdk
+        env:
+          POCKET_SOURCE_BUILD: "1"
+        run: |
+          exec 3>&1
+          trap 'echo "::error::Verify Studio upgrade lifecycle before packaging failed" >&3' ERR
+          exec >/dev/null 2>&1
+          npm exec --yes --package=bun@1.4.4 -- bun test --timeout 60000 editor/test/studio_upgrade.test.ts editor/test/source_upgrade_git.test.ts scripts/tests/editor_service.test.ts scripts/tests/install_studio.test.ts
+
+      - name: Run SDK JS package and toolchain suites
+        working-directory: pocket-source/sdk
+        env:
+          POCKET_WEB_RUNTIME: ${{ github.workspace }}/pocket-source/sdk/.pocket-build/web-engine/pocket-web.js
+          POCKET_WEB_ENGINE: ${{ github.workspace }}/pocket-source/sdk/.pocket-build/web-engine/pocketjs.wasm
+          POCKET_SOURCE_BUILD: "1"
+          POCKET_BYTECODE_BIN: ${{ github.workspace }}/pocket-source/sdk/native/target/release/pocketjs_bytecode
+          POCKET_NATIVE_PROBE: ${{ github.workspace }}/pocket-source/sdk/native/target/release/pocket_probe
+          POCKET_REQUIRE_REAL: "1"
+        run: |
+          exec 3>&1
+          trap 'echo "::error::Run SDK JS package and toolchain suites failed" >&3' ERR
+          exec >/dev/null 2>&1
+          bun scripts/test_js.ts \
+            packages/pocket_ui/test \
+            packages/pocket_vn/test \
+            packages/pocket_spine/test \
+            packages/pocket_live2d/test \
+            packages/pocket_diagnostics/test \
+            packages/pocket_cos/test \
+            packages/pocket_cloudflare/test \
+            tests \
+            scripts/tests \
+            editor/test/preview_text_transform.test.ts \
+            editor/test/preview_recording_host_fonts.test.ts \
+            editor/test/preview_failure.test.ts \
+            editor/test/preview_host_adapter.test.ts \
+            editor/test/preview_http_async.test.ts \
+            editor/test/preview_system_request_pending.test.ts \
+            editor/test/preview_root_storage_startup.test.ts \
+            editor/test/preview_idle_mini_app.test.ts \
+            editor/test/preview_storage.test.ts \
+            editor/test/cloudflare_and_packages_studio.test.ts
+
+      - name: Run Showcase guest compilation, ablation, and native probe suites
+        working-directory: pocket-source
+        env:
+          POCKET_WEB_RUNTIME: ${{ github.workspace }}/pocket-source/sdk/.pocket-build/web-engine/pocket-web.js
+          POCKET_WEB_ENGINE: ${{ github.workspace }}/pocket-source/sdk/.pocket-build/web-engine/pocketjs.wasm
+          POCKET_SOURCE_BUILD: "1"
+          POCKET_BYTECODE_BIN: ${{ github.workspace }}/pocket-source/sdk/native/target/release/pocketjs_bytecode
+          POCKET_NATIVE_PROBE: ${{ github.workspace }}/pocket-source/sdk/native/target/release/pocket_probe
+          POCKET_REQUIRE_REAL: "1"
+        run: |
+          exec 3>&1
+          trap 'echo "::error::Run Showcase guest compilation, ablation, and native probe suites failed" >&3' ERR
+          exec >/dev/null 2>&1
+          bash demo/js/scripts/test_guest.sh
+
+      - *write_safe_summary
+
+      - *cleanup_source
+
+  flutter-host-fonts-minimum-sdk:
+    name: flutter-host-fonts-dart-3.9.2
+    if: github.event_name == 'workflow_dispatch' && github.ref == 'refs/heads/main'
+    runs-on: ubuntu-24.04
+    environment: pocket-source-ci
+    steps:
+      - *validate_source_inputs
+
+      - *checkout_source
+
+      - *verify_source_ancestry
+
+      - uses: subosito/flutter-action@v2
+        with:
+          flutter-version: '3.35.7'
+          channel: stable
+          cache: false
+
+      - name: Compile and test font callbacks on the minimum Dart SDK
+        working-directory: pocket-source/sdk/packages/pocket_flutter
+        run: |
+          exec 3>&1
+          trap 'echo "::error::Compile and test font callbacks on the minimum Dart SDK failed" >&3' ERR
+          exec >/dev/null 2>&1
+          flutter pub get
+          flutter test test/pocket_host_fonts_test.dart
+
+      - *write_safe_summary
+
+      - *cleanup_source
+
+  flutter-sdk-and-demo:
+    name: flutter-sdk-and-demo
+    runs-on: ubuntu-24.04
+    needs: js-sdk-and-guest
+    if: ${{ github.event_name == 'workflow_dispatch' && github.ref == 'refs/heads/main' && !cancelled() && needs.js-sdk-and-guest.result != 'cancelled' }}
+    environment: pocket-source-ci
+    steps:
+      - *validate_source_inputs
+
+      - *checkout_source
+
+      - *verify_source_ancestry
+
+      - uses: subosito/flutter-action@v2
+        with:
+          channel: stable
+          flutter-version-file: pocket-source/.fvmrc
+          cache: false
+
+      - name: Analyze and test pocket_services
+        working-directory: pocket-source/sdk/packages/pocket_services
+        run: |
+          exec 3>&1
+          trap 'echo "::error::Analyze and test pocket_services failed" >&3' ERR
+          exec >/dev/null 2>&1
+          flutter pub get --enforce-lockfile
+          flutter analyze --no-fatal-infos lib test
+          flutter test
+
+      - name: Setup Bun
+        uses: oven-sh/setup-bun@v2
+        with:
+          bun-version: "1.3.9"
+
+      - name: Install rsvg-convert & generate SVG fidelity fixtures
+        working-directory: pocket-source
+        run: |
+          exec 3>&1
+          trap 'echo "::error::Install rsvg-convert & generate SVG fidelity fixtures failed" >&3' ERR
+          exec >/dev/null 2>&1
+          sudo apt-get update && sudo apt-get install -y librsvg2-bin
+          bun sdk/scripts/svg_fidelity_check.ts --emit-fixtures /tmp/svg-fidelity-fixtures.json
+
+      - name: Analyze and test pocket_flutter
+        working-directory: pocket-source/sdk/packages/pocket_flutter
+        env:
+          POCKET_SVG_FIDELITY_FIXTURES: /tmp/svg-fidelity-fixtures.json
+        run: |
+          exec 3>&1
+          trap 'echo "::error::Analyze and test pocket_flutter failed" >&3' ERR
+          exec >/dev/null 2>&1
+          flutter pub get --enforce-lockfile
+          flutter analyze --no-fatal-infos lib test
+          flutter test
+
+      - name: Analyze and test sdk root package
+        working-directory: pocket-source/sdk
+        run: |
+          exec 3>&1
+          trap 'echo "::error::Analyze and test sdk root package failed" >&3' ERR
+          exec >/dev/null 2>&1
+          flutter pub get --enforce-lockfile
+          flutter analyze --no-fatal-infos lib test
+          flutter test
+
+      - name: Analyze and test Showcase demo Flutter host
+        working-directory: pocket-source/demo
+        env:
+          POCKET_REQUIRE_REAL: "1"
+        run: |
+          exec 3>&1
+          trap 'echo "::error::Analyze and test Showcase demo Flutter host failed" >&3' ERR
+          exec >/dev/null 2>&1
+          flutter pub get --enforce-lockfile
+          flutter analyze --no-fatal-infos lib test
+          flutter test
+
+      - *write_safe_summary
+
+      - *cleanup_source
+
+  rust-and-js-vector-bench:
+    name: Rust & JS Vector Benchmark
+    if: github.event_name == 'workflow_dispatch' && github.ref == 'refs/heads/main' && inputs.run_vector_benchmarks
+    runs-on: ubuntu-24.04
+    environment: pocket-source-ci
+    steps:
+      - *validate_source_inputs
+
+      - *checkout_source
+
+      - *verify_source_ancestry
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v7
+        with:
+          node-version: "24"
+          package-manager-cache: false
+
+      - name: Setup Bun
+        uses: oven-sh/setup-bun@v2
+        with:
+          bun-version: "1.3.9"
+
+      - name: Setup Rust toolchain
+        uses: dtolnay/rust-toolchain@stable
+        with:
+          toolchain: "1.98.1"
+          components: clippy
+
+      - name: Install system dependencies
+        run: |
+          exec 3>&1
+          trap 'echo "::error::Install system dependencies failed" >&3' ERR
+          exec >/dev/null 2>&1
+          sudo apt-get update && sudo apt-get install -y patch
+
+      - name: Prepare upstream & install JS dependencies
+        working-directory: pocket-source/sdk
+        run: |
+          exec 3>&1
+          trap 'echo "::error::Prepare upstream & install JS dependencies failed" >&3' ERR
+          exec >/dev/null 2>&1
+          python3 scripts/prepare_upstream.py
+          bun install --frozen-lockfile --cwd .cache/pocketjs
+          npm install --ignore-scripts --legacy-peer-deps --no-audit --no-fund
+
+      - name: Run static checks & Rust vector unit tests
+        working-directory: pocket-source
+        run: |
+          exec 3>&1
+          trap 'echo "::error::Run static checks & Rust vector unit tests failed" >&3' ERR
+          exec >/dev/null 2>&1
+          python3 sdk/scripts/check_architecture.py
+          python3 sdk/scripts/check_api_docs.py
+          node --check sdk/editor/client/preview.js
+          cargo clippy --locked --manifest-path sdk/native/Cargo.toml --all-targets
+          cargo test --locked --manifest-path sdk/native/Cargo.toml --lib vector
+          cargo test --locked --manifest-path sdk/native/Cargo.toml -p pocketjs-core --lib vector
+          cargo test --locked --manifest-path sdk/native/Cargo.toml -p pocket-draw-ops
+          cargo test --locked --manifest-path sdk/native/Cargo.toml -p pocket-present --lib
+          cargo test --locked --manifest-path sdk/native/Cargo.toml -p pocket-raster --lib
+
+      - name: Build release pocket_probe and pocketjs_bytecode
+        working-directory: pocket-source
+        run: |
+          exec 3>&1
+          trap 'echo "::error::Build release pocket_probe and pocketjs_bytecode failed" >&3' ERR
+          exec >/dev/null 2>&1
+          cargo build --locked --release --manifest-path sdk/native/Cargo.toml --bin pocket_probe --bin pocketjs_bytecode
+
+      - name: Run SVG & PVEC unit + native E2E tests
+        working-directory: pocket-source
+        env:
+          POCKET_SOURCE_BUILD: "1"
+          POCKET_NATIVE_PROBE: ${{ github.workspace }}/pocket-source/sdk/native/target/release/pocket_probe
+          POCKET_BYTECODE_BIN: ${{ github.workspace }}/pocket-source/sdk/native/target/release/pocketjs_bytecode
+          POCKET_COMPILER_PATH: ${{ github.workspace }}/pocket-source/sdk/.cache/pocketjs/tools/build.ts
+        run: |
+          exec 3>&1
+          trap 'echo "::error::Run SVG & PVEC unit + native E2E tests failed" >&3' ERR
+          exec >/dev/null 2>&1
+          bun test sdk/scripts/tests/svg_vector.test.ts
+
+      - name: Run SVG & PVEC benchmark suite
+        working-directory: pocket-source
+        env:
+          POCKET_SOURCE_BUILD: "1"
+          POCKET_NATIVE_PROBE: ${{ github.workspace }}/pocket-source/sdk/native/target/release/pocket_probe
+          POCKET_BYTECODE_BIN: ${{ github.workspace }}/pocket-source/sdk/native/target/release/pocketjs_bytecode
+          POCKET_COMPILER_PATH: ${{ github.workspace }}/pocket-source/sdk/.cache/pocketjs/tools/build.ts
+        run: |
+          exec 3>&1
+          trap 'echo "::error::Run SVG & PVEC benchmark suite failed" >&3' ERR
+          exec >/dev/null 2>&1
+          bun sdk/scripts/benchmarks/svg_vector_bench.ts
+
+      - *write_safe_summary
+
+      - *cleanup_source
+
+  flutter-vector-bench:
+    name: Flutter Vector Rasterizer Benchmark
+    if: github.event_name == 'workflow_dispatch' && github.ref == 'refs/heads/main' && inputs.run_vector_benchmarks
+    runs-on: ubuntu-24.04
+    environment: pocket-source-ci
+    steps:
+      - *validate_source_inputs
+
+      - *checkout_source
+
+      - *verify_source_ancestry
+
+      - name: Setup Flutter
+        uses: subosito/flutter-action@v2
+        with:
+          flutter-version-file: pocket-source/.fvmrc
+          cache: false
+
+      - name: Setup Bun
+        uses: oven-sh/setup-bun@v2
+        with:
+          bun-version: "1.3.9"
+
+      - name: Install rsvg-convert & generate SVG fidelity fixtures
+        working-directory: pocket-source
+        run: |
+          exec 3>&1
+          trap 'echo "::error::Install rsvg-convert & generate SVG fidelity fixtures failed" >&3' ERR
+          exec >/dev/null 2>&1
+          sudo apt-get update && sudo apt-get install -y librsvg2-bin
+          bun sdk/scripts/svg_fidelity_check.ts --emit-fixtures /tmp/svg-fidelity-fixtures.json
+
+      - name: Run Flutter pub get, analyze, fidelity gate, and vector benchmark
+        working-directory: pocket-source/sdk/packages/pocket_flutter
+        env:
+          POCKET_SVG_FIDELITY_FIXTURES: /tmp/svg-fidelity-fixtures.json
+        run: |
+          exec 3>&1
+          trap 'echo "::error::Run Flutter pub get, analyze, fidelity gate, and vector benchmark failed" >&3' ERR
+          exec >/dev/null 2>&1
+          set -o pipefail
+          flutter pub get --enforce-lockfile
+          flutter analyze --no-fatal-infos lib test
+          flutter test test/pocket_vector_benchmark_test.dart test/pocket_vector_fidelity_test.dart --reporter expanded
+
+      - *write_safe_summary
+
+      - *cleanup_source
