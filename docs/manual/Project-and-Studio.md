@@ -1,5 +1,7 @@
 # 项目与 Studio
 
+准备升级已有 App 或 Game 时，先按[旧项目升级与性能优化](Optimize-Existing-Projects.md)保留可复测的旧版本，再切换 SDK 和宿主。
+
 `app` 是页面与表单的起点，`game` 提供游戏场景、输入和帧循环，`multi-app` 生成 SystemUI 容器和可发现的示例子应用。三者共享固定版本的编译工具。新建项目后先读项目的 `AGENTS.md`，再沿生成的入口扩展功能。
 
 ## 项目文件与日常命令

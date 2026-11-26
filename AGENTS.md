@@ -5,4 +5,5 @@ Read [Agent 工作指南](docs/manual/Agent-Guide.md) before developing or modif
 - Install the SDK from [GitHub Releases](https://github.com/PocketFlutter/pocket-releases/releases). Match the actual release, operating system and architecture to the project.
 - Read the consumer project's own `AGENTS.md`. Use the SDK scaffold or sync command and preserve local rules. Import through package exports and use existing framework primitives for navigation, scrolling and IME.
 - Verify the actual guest, input, host and platform behavior. Compare performance under repeatable conditions and record regressions or unsupported scenarios.
+- When upgrading an existing app or game, use the [existing-project guide](docs/manual/Optimize-Existing-Projects.md) to isolate the SDK upgrade from app changes. Check the [released SDK optimizations](docs/manual/SDK-Optimizations.md) for version and activation requirements.
 - Keep public documentation in `docs/manual/` and preserve existing page IDs. Sync the Wiki when those pages change. Keep credentials, private source and device-specific diagnostics outside public docs.

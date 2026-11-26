@@ -8,6 +8,8 @@ The Web target uses the pinned PocketJS compiler, admitted QuickJS bytecode (QJB
 
 Use the [Pocket SDK manual](docs/manual/Home.md) or the [GitHub Wiki](https://github.com/PocketFlutter/pocket-releases/wiki) to install, build, and verify Pocket apps. The [agent guide](docs/manual/Agent-Guide.md) maps tasks to SDK entry points and the [optimization guide](docs/manual/Performance-Loop.md) provides a repeatable app and game performance workflow.
 
+For existing apps and games, see the [released SDK optimizations](docs/manual/SDK-Optimizations.md) and the [upgrade and optimization guide](docs/manual/Optimize-Existing-Projects.md).
+
 ## API Reference
 
 Start with the [Pocket API overview](docs/API.md), then use its navigation for [JavaScript / TypeScript](docs/JS_API.md), [Tooling](docs/TOOLING_API.md), [Flutter API](docs/FLUTTER_API.md), [Hybrid Host API](docs/HYBRID_HOST_API.md), and [Hybrid Flutter Tab Host](docs/HYBRID_FLUTTER_TAB_HOST.md). The Flutter references describe integrating the source Pocket SDK into a Flutter app; this standalone Web package does not contain the Flutter/Dart runtime or native Flutter plugins. Source-only references link to the exact exported source commit.

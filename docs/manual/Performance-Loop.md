@@ -2,6 +2,8 @@
 
 适用于 Pocket App、游戏和视觉小说。收到“继续优化”时，先找一条能复现的慢路径，再决定本轮只改变什么。效果以目标运行端上的实测和独立的行为验证为准。Flutter 负责绘制、输入/IME、生命周期与资源及原生能力边界，页面状态、交互和业务调度继续留在 JS。沿用当前 SDK 锁定的 Guest 编译与执行管线。 [能力与平台边界](Capabilities.md)
 
+先用[已发布的 SDK 优化](SDK-Optimizations.md)确认候选版本及生效条件。接手既有 App 或 Game 时，按[旧项目升级与性能优化](Optimize-Existing-Projects.md)分别测量 SDK 替换和应用改造的收益。
+
 ## 先建立一份别人能复测的基线
 
 1. **锁定产物和环境。** 记录应用提交、SDK/toolchain 版本、QJBC、PAK 和相关 Worker／独立资源的摘要、设备及系统、宿主和实际后端、构建模式、刷新率、视口与 DPR。约定网络、缓存、预热、温度和电源条件。比较时保持这些条件一致，只允许预先声明的实验变量变化。模拟器 debug、Flutter 真机 profile/release、Studio 预览和正式 Web 各自出结果。
