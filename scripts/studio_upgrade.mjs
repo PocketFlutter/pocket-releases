@@ -19,7 +19,8 @@ import { basename, delimiter, dirname, isAbsolute, join, posix, relative, resolv
 import { gunzipSync } from 'node:zlib';
 import { SDK_VERSION, readPrebuiltToolsSourceConstants, validateToolsPackage } from './prebuilt_tools.mjs';
 
-export const DEFAULT_GITHUB_RELEASES_URL = 'https://api.github.com/repos/PocketFlutter/Pocket/releases';
+const DEFAULT_RELEASE_REPOSITORY = 'PocketFlutter/pocket-releases';
+export const DEFAULT_GITHUB_RELEASES_URL = `https://api.github.com/repos/${DEFAULT_RELEASE_REPOSITORY}/releases`;
 export const DEFAULT_SOURCE_REPOSITORY = 'PocketFlutter/Pocket';
 export const MAX_RELEASE_JSON_BYTES = 2 * 1024 * 1024;
 export const MAX_SHA256_BYTES = 64 * 1024;
@@ -559,7 +560,7 @@ export function selectLatestStableRelease(releasesPayload, platform = process.pl
     const checksumUrl = typeof checksumAsset?.browser_download_url === 'string' ? checksumAsset.browser_download_url : '';
     const htmlUrl = typeof item.html_url === 'string' && item.html_url
       ? item.html_url
-      : `https://github.com/${DEFAULT_SOURCE_REPOSITORY}/releases/tag/${tagName}`;
+      : `https://github.com/${DEFAULT_RELEASE_REPOSITORY}/releases/tag/${tagName}`;
     if (archiveUrl) validateReleaseOriginUrl(archiveUrl, options);
     if (checksumUrl) validateReleaseOriginUrl(checksumUrl, options);
     candidates.push({

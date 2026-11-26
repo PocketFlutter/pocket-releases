@@ -4,7 +4,7 @@ This reference covers repository npm scripts, `pocket.ts`, the Studio service, a
 
 ## Entry points and prerequisites
 
-Install standalone Web SDK and Studio with the [one-click installer](INSTALL_STUDIO.md). `node install_studio.mjs` accepts `--version=MAJOR.MINOR.PATCH`, `--dir=PATH`, `--project-root=PATH`, `--no-start`, and `--help`. By default it picks the latest stable platform release and installs to `~/.pocket/studio`. It requires Node.js ≥22.22.2 and npm. Git, Flutter, Python, and Rust are unnecessary. Existing managed installs are checked and launched. Their Studio updater handles later upgrades.
+Install standalone Web SDK and Studio with the [one-click installer](INSTALL_STUDIO.md). `node install_studio.mjs` accepts `--version=MAJOR.MINOR.PATCH`, `--dir=PATH`, `--project-root=PATH`, `--no-start`, and `--help`. By default it picks the latest stable platform release from `PocketFlutter/pocket-releases` and installs to `~/.pocket/studio`. It requires Node.js ≥22.22.2 and npm. Git, Flutter, Python, and Rust are unnecessary. Existing managed installs are checked and launched. Their Studio updater handles later upgrades.
 
 | Entry point | Use | Requirements |
 | --- | --- | --- |
