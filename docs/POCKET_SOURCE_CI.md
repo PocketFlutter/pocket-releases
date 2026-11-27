@@ -18,6 +18,12 @@ The canonical source repository `PocketFlutter/Pocket` defines the active CI and
 | `rust-and-js-vector-bench` (`Rust & JS Vector Benchmark`) | `ubuntu-24.04` | Optional (`inputs.run_vector_benchmarks == true`) | Architecture/API doc checks, `node --check sdk/editor/client/preview.js`, `cargo clippy`, Rust vector unit tests (`pocket_flutter`, `pocketjs-core`, `pocket-draw-ops`, `pocket-present`, `pocket-raster`), release `pocket_probe` + `pocketjs_bytecode`, `bun test sdk/scripts/tests/svg_vector.test.ts`, and `bun sdk/scripts/benchmarks/svg_vector_bench.ts` |
 | `flutter-vector-bench` (`Flutter Vector Rasterizer Benchmark`) | `ubuntu-24.04` | Optional (`inputs.run_vector_benchmarks == true`) | `.fvmrc` Flutter version, `rsvg-convert` SVG fidelity fixture generation, `flutter pub get --enforce-lockfile`, `flutter analyze --no-fatal-infos lib test`, and `flutter test test/pocket_vector_benchmark_test.dart test/pocket_vector_fidelity_test.dart --reporter expanded` |
 
+## Visual regression
+
+`visual-regression` runs on Ubuntu in a regular source CI dispatch. It builds the pinned native Pocket runtime and runs the Flutter pixel comparison with that library. The job fails if the visual test fails or skips. Public logs contain the pass and skip counts, and the runner uploads no screenshots.
+
+To validate just the visual comparison, dispatch with `run_visual_regression=true`. For a reviewed Pocket PR, pass its canonical `source_branch` and its exact tip as `source_sha`. Run the visual check before merging a change to the renderer or frame protocol. This dispatch remains manual.
+
 ## Security and Confidentiality Boundaries
 
 `PocketFlutter/pocket-releases` publishes workflow metadata, including the selected commit and the Git checkout status. The workflow limits source execution to trusted revisions and keeps test output, crash dumps, and benchmark tables out of public logs and artifacts.
