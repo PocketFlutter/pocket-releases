@@ -396,6 +396,25 @@ jobs:
           exec >/dev/null 2>&1
           npm install --ignore-scripts --legacy-peer-deps --no-audit --no-fund
 
+      - name: Verify surfaces launch permit suite
+        working-directory: pocket-source/sdk
+        run: |
+          if [[ ! -f packages/pocket_surfaces/test/launch_permit.test.ts ]]; then
+            echo "SKIP: packages/pocket_surfaces/test/launch_permit.test.ts not present in pinned source"
+            printf -- '- **Surfaces launch permit suite**: SKIP\n' >> "$GITHUB_STEP_SUMMARY"
+            exit 0
+          fi
+          exec 3>&1
+          exec >/dev/null 2>&1
+          if bun scripts/test_js.ts packages/pocket_surfaces/test/launch_permit.test.ts; then
+            echo "PASS: packages/pocket_surfaces/test/launch_permit.test.ts" >&3
+            printf -- '- **Surfaces launch permit suite**: PASS\n' >> "$GITHUB_STEP_SUMMARY"
+          else
+            echo "::error::FAIL: packages/pocket_surfaces/test/launch_permit.test.ts" >&3
+            printf -- '- **Surfaces launch permit suite**: FAIL\n' >> "$GITHUB_STEP_SUMMARY"
+            exit 1
+          fi
+
       - name: Install Chromium for browser regression tests
         working-directory: pocket-source/sdk
         run: |
