@@ -29,12 +29,16 @@ on:
         description: Run optional Rust, JS, and Flutter vector/SVG benchmark lanes
         default: false
         type: boolean
+      isolate_source_queue:
+        description: Give the pinned source SHA its own concurrency queue
+        default: false
+        type: boolean
 
 permissions:
   contents: read
 
 concurrency:
-  group: pocket-source-ci-${{ github.ref }}${{ inputs.run_visual_regression && '-visual' || '' }}
+  group: pocket-source-ci-${{ github.ref }}${{ inputs.run_visual_regression && '-visual' || '' }}${{ inputs.isolate_source_queue && format('-{0}', inputs.source_sha) || '' }}
   cancel-in-progress: false
 
 defaults:
