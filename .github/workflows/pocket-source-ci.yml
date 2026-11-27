@@ -4,17 +4,18 @@ on:
   workflow_dispatch:
     inputs:
       source_sha:
-        description: Exact 40-hex commit SHA on PocketFlutter/Pocket main or same-repo open PR head
+        description: Exact 40-hex commit SHA on PocketFlutter/Pocket main or reviewed source_branch
         required: true
         type: string
-      source_pr:
-        description: Optional open same-repo PocketFlutter/Pocket PR number for premerge draw-list acceptance
-        required: false
-        type: string
       source_branch:
-        description: Required with source_pr; canonical same-repo PocketFlutter/Pocket PR head branch
+        description: Optional canonical PocketFlutter/Pocket non-main branch name whose tip equals source_sha
         required: false
+        default: ""
         type: string
+      run_draw_list_benchmark:
+        description: Run only native regressions and the DrawList release ablation
+        default: false
+        type: boolean
       run_vector_benchmarks:
         description: Run optional Rust, JS, and Flutter vector/SVG benchmark lanes
         default: false
@@ -24,7 +25,7 @@ permissions:
   contents: read
 
 concurrency:
-  group: pocket-source-ci-${{ github.ref }}-${{ inputs.source_pr || 'main' }}
+  group: pocket-source-ci-${{ github.ref }}
   cancel-in-progress: false
 
 defaults:
@@ -34,19 +35,28 @@ defaults:
 jobs:
   architecture-and-rust:
     name: architecture-and-rust
-    if: github.event_name == 'workflow_dispatch' && github.ref == 'refs/heads/main' && inputs.source_pr == ''
+    if: github.event_name == 'workflow_dispatch' && github.ref == 'refs/heads/main' && !inputs.run_draw_list_benchmark
     runs-on: ubuntu-24.04
     environment: pocket-source-ci
     steps:
       - &validate_source_inputs
-        name: Validate source SHA and credential availability
+        name: Validate source SHA, optional branch, and credential availability
         working-directory: ${{ github.workspace }}
         env:
           SOURCE_SHA: ${{ inputs.source_sha }}
+          SOURCE_BRANCH: ${{ inputs.source_branch }}
           SOURCE_KEY_AVAILABLE: ${{ secrets.POCKET_SOURCE_SSH_KEY != '' }}
         run: |
           [[ "$SOURCE_KEY_AVAILABLE" == true ]] || { echo "::error::Missing POCKET_SOURCE_SSH_KEY"; exit 1; }
           [[ "$SOURCE_SHA" =~ ^[0-9a-fA-F]{40}$ ]] || { echo "::error::Expected a 40-character hexadecimal source SHA"; exit 1; }
+          if [[ -n "$SOURCE_BRANCH" ]]; then
+            if [[ "$SOURCE_BRANCH" == "main" || "$SOURCE_BRANCH" == -* || "$SOURCE_BRANCH" == refs/* || "$SOURCE_BRANCH" == origin/* || "$SOURCE_BRANCH" == pull/* || "$SOURCE_BRANCH" == pr/* ]] ||
+               ! git check-ref-format --branch "$SOURCE_BRANCH" >/dev/null 2>&1 ||
+               ! git check-ref-format "refs/remotes/origin/$SOURCE_BRANCH" >/dev/null 2>&1; then
+              echo "::error::source_branch must be a valid non-main canonical branch name (fork PR refs rejected)"
+              exit 1
+            fi
+          fi
 
       - &checkout_source
         name: Checkout private Pocket source
@@ -60,16 +70,28 @@ jobs:
           fetch-depth: 0
 
       - &verify_source_ancestry
-        name: Verify pinned SHA and ancestry on canonical source main
+        name: Verify pinned SHA and canonical source ancestry or branch tip
         working-directory: ${{ github.workspace }}/pocket-source
         env:
           SOURCE_SHA: ${{ inputs.source_sha }}
+          SOURCE_BRANCH: ${{ inputs.source_branch }}
         run: |
           expected="${SOURCE_SHA,,}"
-          if [[ "$(git rev-parse --verify HEAD 2>/dev/null)" != "$expected" ]] ||
-             ! git merge-base --is-ancestor "$expected" refs/remotes/origin/main >/dev/null 2>&1; then
-            echo "::error::Source SHA must match checkout HEAD and be an ancestor of canonical source main"
+          if [[ "$(git rev-parse --verify HEAD 2>/dev/null)" != "$expected" ]]; then
+            echo "::error::Source SHA must match checkout HEAD"
             exit 1
+          fi
+          if [[ -z "$SOURCE_BRANCH" ]]; then
+            if ! git merge-base --is-ancestor "$expected" refs/remotes/origin/main >/dev/null 2>&1; then
+              echo "::error::Source SHA must match checkout HEAD and be an ancestor of canonical source main"
+              exit 1
+            fi
+          else
+            remote_ref="refs/remotes/origin/$SOURCE_BRANCH"
+            if [[ "$(git rev-parse --verify "${remote_ref}^{commit}" 2>/dev/null)" != "$expected" ]]; then
+              echo "::error::Source SHA must equal the exact remote tracking branch HEAD on canonical PocketFlutter/Pocket"
+              exit 1
+            fi
           fi
 
       - name: Verify repository architecture contracts
@@ -227,7 +249,7 @@ jobs:
 
   studio-upgrade-windows:
     name: studio-upgrade-windows
-    if: github.event_name == 'workflow_dispatch' && github.ref == 'refs/heads/main' && inputs.source_pr == ''
+    if: github.event_name == 'workflow_dispatch' && github.ref == 'refs/heads/main' && !inputs.run_draw_list_benchmark
     runs-on: windows-latest
     timeout-minutes: 10
     environment: pocket-source-ci
@@ -295,7 +317,7 @@ jobs:
 
   js-sdk-and-guest:
     name: js-sdk-and-guest
-    if: github.event_name == 'workflow_dispatch' && github.ref == 'refs/heads/main' && inputs.source_pr == ''
+    if: github.event_name == 'workflow_dispatch' && github.ref == 'refs/heads/main' && !inputs.run_draw_list_benchmark
     runs-on: ubuntu-24.04
     environment: pocket-source-ci
     steps:
@@ -465,7 +487,7 @@ jobs:
 
   flutter-host-fonts-minimum-sdk:
     name: flutter-host-fonts-dart-3.9.2
-    if: github.event_name == 'workflow_dispatch' && github.ref == 'refs/heads/main' && inputs.source_pr == ''
+    if: github.event_name == 'workflow_dispatch' && github.ref == 'refs/heads/main' && !inputs.run_draw_list_benchmark
     runs-on: ubuntu-24.04
     environment: pocket-source-ci
     steps:
@@ -498,7 +520,7 @@ jobs:
     name: flutter-sdk-and-demo
     runs-on: ubuntu-24.04
     needs: js-sdk-and-guest
-    if: ${{ github.event_name == 'workflow_dispatch' && github.ref == 'refs/heads/main' && inputs.source_pr == '' && !cancelled() && needs.js-sdk-and-guest.result != 'cancelled' }}
+    if: ${{ github.event_name == 'workflow_dispatch' && github.ref == 'refs/heads/main' && !inputs.run_draw_list_benchmark && !cancelled() && needs.js-sdk-and-guest.result != 'cancelled' }}
     environment: pocket-source-ci
     steps:
       - *validate_source_inputs
@@ -577,7 +599,7 @@ jobs:
 
   rust-and-js-vector-bench:
     name: Rust & JS Vector Benchmark
-    if: github.event_name == 'workflow_dispatch' && github.ref == 'refs/heads/main' && inputs.source_pr == '' && inputs.run_vector_benchmarks
+    if: github.event_name == 'workflow_dispatch' && github.ref == 'refs/heads/main' && !inputs.run_draw_list_benchmark && inputs.run_vector_benchmarks
     runs-on: ubuntu-24.04
     environment: pocket-source-ci
     steps:
@@ -677,7 +699,7 @@ jobs:
 
   flutter-vector-bench:
     name: Flutter Vector Rasterizer Benchmark
-    if: github.event_name == 'workflow_dispatch' && github.ref == 'refs/heads/main' && inputs.source_pr == '' && inputs.run_vector_benchmarks
+    if: github.event_name == 'workflow_dispatch' && github.ref == 'refs/heads/main' && !inputs.run_draw_list_benchmark && inputs.run_vector_benchmarks
     runs-on: ubuntu-24.04
     environment: pocket-source-ci
     steps:
@@ -724,61 +746,18 @@ jobs:
 
       - *cleanup_source
 
-  retained-draw-list-pr-acceptance:
-    name: retained-draw-list-pr-acceptance
-    if: github.event_name == 'workflow_dispatch' && github.ref == 'refs/heads/main' && inputs.source_pr != ''
+  retained-draw-list-acceptance:
+    name: retained-draw-list-acceptance
+    if: github.event_name == 'workflow_dispatch' && github.ref == 'refs/heads/main' && inputs.run_draw_list_benchmark
     runs-on: ubuntu-24.04
     timeout-minutes: 30
     environment: pocket-source-ci
     steps:
-      - name: Validate source PR inputs and credential availability
-        working-directory: ${{ github.workspace }}
-        env:
-          SOURCE_SHA: ${{ inputs.source_sha }}
-          SOURCE_PR: ${{ inputs.source_pr }}
-          SOURCE_BRANCH: ${{ inputs.source_branch }}
-          SOURCE_KEY_AVAILABLE: ${{ secrets.POCKET_SOURCE_SSH_KEY != '' }}
-        run: |
-          [[ "$SOURCE_KEY_AVAILABLE" == true ]] || { echo "::error::Missing POCKET_SOURCE_SSH_KEY"; exit 1; }
-          [[ "$SOURCE_SHA" =~ ^[0-9a-fA-F]{40}$ ]] || { echo "::error::Expected a 40-character hexadecimal source SHA"; exit 1; }
-          [[ "$SOURCE_PR" =~ ^[1-9][0-9]*$ ]] || { echo "::error::Expected a positive integer source_pr"; exit 1; }
-          [[ -n "$SOURCE_BRANCH" && "$SOURCE_BRANCH" != "main" && "$SOURCE_BRANCH" =~ ^[A-Za-z0-9._/-]+$ && ! "$SOURCE_BRANCH" =~ ^/ && ! "$SOURCE_BRANCH" =~ /$ && ! "$SOURCE_BRANCH" =~ \.\. && ! "$SOURCE_BRANCH" =~ // && ! "$SOURCE_BRANCH" =~ @\{ && ! "$SOURCE_BRANCH" =~ \.lock(/|$) ]] || { echo "::error::Expected a valid non-main canonical source_branch"; exit 1; }
+      - *validate_source_inputs
 
-      - name: Checkout private Pocket PR merge ref
-        uses: actions/checkout@v7
-        with:
-          repository: PocketFlutter/Pocket
-          ref: refs/pull/${{ inputs.source_pr }}/merge
-          path: pocket-source
-          ssh-key: ${{ secrets.POCKET_SOURCE_SSH_KEY }}
-          persist-credentials: false
-          fetch-depth: 0
-          show-progress: false
+      - *checkout_source
 
-      - name: Verify pinned PR head, branch, and canonical main ancestry
-        working-directory: ${{ github.workspace }}/pocket-source
-        env:
-          SOURCE_SHA: ${{ inputs.source_sha }}
-          SOURCE_BRANCH: ${{ inputs.source_branch }}
-        run: |
-          expected="${SOURCE_SHA,,}"
-          branch_ref="refs/remotes/origin/$SOURCE_BRANCH"
-          head1="$(git rev-parse --verify HEAD^1 2>/dev/null || true)"
-          head2="$(git rev-parse --verify HEAD^2 2>/dev/null || true)"
-          branch_sha="$(git rev-parse --verify "$branch_ref" 2>/dev/null || true)"
-          if [[ -z "$head1" || -z "$head2" || "$head2" != "$expected" || "$branch_sha" != "$expected" ]] ||
-             ! git merge-base --is-ancestor "$head1" refs/remotes/origin/main >/dev/null 2>&1; then
-            echo "::error::PR merge ref must have HEAD^1 on canonical main and HEAD^2 matching source_sha and origin/source_branch"
-            exit 1
-          fi
-          git checkout --detach --quiet "$expected" >/dev/null 2>&1 || {
-            echo "::error::Failed to detach at requested source SHA"
-            exit 1
-          }
-          if [[ "$(git rev-parse --verify HEAD 2>/dev/null)" != "$expected" ]]; then
-            echo "::error::Checkout HEAD does not match requested source SHA"
-            exit 1
-          fi
+      - *verify_source_ancestry
 
       - name: Verify repository architecture contracts
         working-directory: pocket-source
@@ -821,7 +800,6 @@ jobs:
         if: success() || steps.native-regressions.conclusion == 'failure'
         working-directory: pocket-source
         env:
-          SOURCE_PR: ${{ inputs.source_pr }}
           SOURCE_SHA: ${{ inputs.source_sha }}
         run: |
           exec 3>&1
@@ -829,7 +807,6 @@ jobs:
           log="$(mktemp)"
           trap 'rm -f "$log"' EXIT
           exec >/dev/null 2>&1
-          [[ "$SOURCE_PR" =~ ^[1-9][0-9]*$ ]]
           [[ "$SOURCE_SHA" =~ ^[0-9a-fA-F]{40}$ ]]
           cargo test --locked --release --manifest-path sdk/native/Cargo.toml --lib retained_draw_list -- --nocapture >"$log" 2>&1
           summary_line="$(grep -E '^test result: ok\. [1-9][0-9]* passed; 0 failed; [0-9]+ ignored; [0-9]+ measured; [0-9]+ filtered out; finished in [0-9]+\.[0-9]+s$' "$log" | tail -n 1)"
@@ -847,7 +824,7 @@ jobs:
           printf 'Retained draw-list suite: %s passed, 0 failed, %s ignored, %s filtered out (%s)\n' "$passed" "$ignored" "$filtered" "$elapsed" >&3
           printf 'DrawList ablation: %s reused vs %s regenerated frames, %s vs %s µs total\n' "$reused_frames" "$regenerated_frames" "$reused_us" "$regenerated_us" >&3
           {
-            printf '### DrawList reuse acceptance\n\nPocket PR #%s at `%s`\n\n' "$SOURCE_PR" "${SOURCE_SHA,,}"
+            printf '### DrawList reuse acceptance\n\nPocket source `%s`\n\n' "${SOURCE_SHA,,}"
             printf '    test result: ok. %s passed; 0 failed; %s ignored; 0 measured; %s filtered out; finished in %s\n' "$passed" "$ignored" "$filtered" "$elapsed"
             printf '    DrawList ablation: %s reused vs %s regenerated frames, %s vs %s µs total\n' "$reused_frames" "$regenerated_frames" "$reused_us" "$regenerated_us"
           } >> "$GITHUB_STEP_SUMMARY"
