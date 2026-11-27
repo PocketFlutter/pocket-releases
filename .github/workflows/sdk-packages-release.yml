@@ -1,0 +1,109 @@
+name: Pocket SDK Packages Release
+
+on:
+  workflow_dispatch:
+    inputs:
+      source_sha:
+        description: Exact PocketFlutter/Pocket commit on main
+        required: true
+        type: string
+      mode:
+        description: Release mode (dry-run or publish)
+        required: true
+        default: dry-run
+        type: choice
+        options:
+          - dry-run
+          - publish
+      repository_url:
+        description: Optional repository.url for GitHub Packages manifests
+        required: false
+        default: https://github.com/PocketFlutter/pocket-releases.git
+        type: string
+
+permissions:
+  contents: read
+  packages: write
+
+concurrency:
+  group: pocket-sdk-packages-release-${{ github.ref }}
+  cancel-in-progress: false
+
+defaults:
+  run:
+    shell: bash
+
+jobs:
+  sdk-packages:
+    name: SDK Packages (${{ inputs.mode }})
+    if: github.ref == 'refs/heads/main'
+    runs-on: ubuntu-24.04
+    environment: pocket-source-ci
+    steps:
+      - name: Validate source commit input
+        id: inputs
+        env:
+          SOURCE_SHA: ${{ inputs.source_sha }}
+          SOURCE_KEY_AVAILABLE: ${{ secrets.POCKET_SOURCE_SSH_KEY != '' }}
+        run: |
+          [[ "$SOURCE_KEY_AVAILABLE" == true ]] || { echo "::error::Missing POCKET_SOURCE_SSH_KEY"; exit 1; }
+          [[ "$SOURCE_SHA" =~ ^[0-9a-fA-F]{40}$ ]] ||
+            { echo "::error::Expected a full 40-character source SHA"; exit 1; }
+          printf 'sha=%s\n' "${SOURCE_SHA,,}" >> "$GITHUB_OUTPUT"
+
+      - uses: actions/checkout@v7
+        with:
+          repository: PocketFlutter/Pocket
+          ref: ${{ steps.inputs.outputs.sha }}
+          path: pocket-source
+          ssh-key: ${{ secrets.POCKET_SOURCE_SSH_KEY }}
+          persist-credentials: false
+          fetch-depth: 0
+
+      - name: Verify ancestry on PocketFlutter/Pocket main
+        working-directory: pocket-source
+        env:
+          SOURCE_SHA: ${{ steps.inputs.outputs.sha }}
+        run: |
+          if [[ "$(git rev-parse --verify HEAD 2>/dev/null)" != "$SOURCE_SHA" ]] ||
+             ! git merge-base --is-ancestor "$SOURCE_SHA" refs/remotes/origin/main >/dev/null 2>&1; then
+            echo "::error::Source SHA must match checkout HEAD and belong to PocketFlutter/Pocket main"
+            exit 1
+          fi
+
+      - uses: actions/setup-node@v7
+        with:
+          node-version: 24
+          registry-url: https://npm.pkg.github.com
+          scope: "@pocketflutter"
+          package-manager-cache: false
+
+      - uses: oven-sh/setup-bun@v2
+        with:
+          bun-version: 1.3.9
+
+      - name: Run host package regression tests
+        working-directory: pocket-source
+        run: |
+          bun test sdk/scripts/tests/release_sdk_packages.test.ts \
+            sdk/packages/pocket_diagnostics/test sdk/packages/pocket_cos/test \
+            sdk/packages/pocket_cloudflare/test \
+            sdk/packages/pocket_vn/test/engine.test.ts \
+            sdk/packages/pocket_live2d/test/live2d.test.ts sdk/packages/pocket_live2d/test/interaction.test.ts
+
+      - name: Run release_sdk_packages (${{ inputs.mode }})
+        working-directory: pocket-source
+        env:
+          NODE_AUTH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          POCKET_GITHUB_PACKAGES_REPO_URL: ${{ inputs.repository_url }}
+          MODE: ${{ inputs.mode }}
+        run: |
+          if [[ "$MODE" == "publish" ]]; then
+            node sdk/scripts/release_sdk_packages.mjs --publish
+          else
+            node sdk/scripts/release_sdk_packages.mjs
+          fi
+
+      - name: Remove private source checkout
+        if: always()
+        run: rm -rf pocket-source
