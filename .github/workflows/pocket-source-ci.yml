@@ -11,6 +11,10 @@ on:
         description: Optional open same-repo PocketFlutter/Pocket PR number for premerge draw-list acceptance
         required: false
         type: string
+      source_branch:
+        description: Required with source_pr; canonical same-repo PocketFlutter/Pocket PR head branch
+        required: false
+        type: string
       run_vector_benchmarks:
         description: Run optional Rust, JS, and Flutter vector/SVG benchmark lanes
         default: false
@@ -722,43 +726,66 @@ jobs:
 
   retained-draw-list-pr-acceptance:
     name: retained-draw-list-pr-acceptance
-    if: github.event_name == 'workflow_dispatch' && inputs.source_pr != ''
+    if: github.event_name == 'workflow_dispatch' && github.ref == 'refs/heads/main' && inputs.source_pr != ''
     runs-on: ubuntu-24.04
     timeout-minutes: 30
+    environment: pocket-source-ci
     steps:
-      - name: Validate the pinned, open Pocket source PR
+      - name: Validate source PR inputs and credential availability
+        working-directory: ${{ github.workspace }}
         env:
-          GH_TOKEN: ${{ github.token }}
           SOURCE_SHA: ${{ inputs.source_sha }}
           SOURCE_PR: ${{ inputs.source_pr }}
+          SOURCE_BRANCH: ${{ inputs.source_branch }}
+          SOURCE_KEY_AVAILABLE: ${{ secrets.POCKET_SOURCE_SSH_KEY != '' }}
         run: |
-          [[ "$SOURCE_SHA" =~ ^[0-9a-f]{40}$ ]] || { echo "::error::Expected a lowercase 40-hex source_sha"; exit 1; }
+          [[ "$SOURCE_KEY_AVAILABLE" == true ]] || { echo "::error::Missing POCKET_SOURCE_SSH_KEY"; exit 1; }
+          [[ "$SOURCE_SHA" =~ ^[0-9a-fA-F]{40}$ ]] || { echo "::error::Expected a 40-character hexadecimal source SHA"; exit 1; }
           [[ "$SOURCE_PR" =~ ^[1-9][0-9]*$ ]] || { echo "::error::Expected a positive integer source_pr"; exit 1; }
-          curl --fail --silent --show-error --max-time 30 \
-            -H "Authorization: Bearer $GH_TOKEN" \
-            "https://api.github.com/repos/PocketFlutter/Pocket/pulls/$SOURCE_PR" |
-            jq -e --arg sha "$SOURCE_SHA" '
-              .state == "open" and
-              .base.repo.full_name == "PocketFlutter/Pocket" and .base.ref == "main" and
-              .head.repo.full_name == "PocketFlutter/Pocket" and .head.sha == $sha
-            ' >/dev/null || { echo "::error::Expected the exact head of an open same-repo PR targeting Pocket main"; exit 1; }
+          [[ -n "$SOURCE_BRANCH" && "$SOURCE_BRANCH" != "main" && "$SOURCE_BRANCH" =~ ^[A-Za-z0-9._/-]+$ && ! "$SOURCE_BRANCH" =~ ^/ && ! "$SOURCE_BRANCH" =~ /$ && ! "$SOURCE_BRANCH" =~ \.\. && ! "$SOURCE_BRANCH" =~ // && ! "$SOURCE_BRANCH" =~ @\{ && ! "$SOURCE_BRANCH" =~ \.lock(/|$) ]] || { echo "::error::Expected a valid non-main canonical source_branch"; exit 1; }
 
-      # The public source PR lane uses a hosted runner and no protected
-      # environment, repository secrets, writable token, or shared caches.
-      - name: Checkout public Pocket source at the verified SHA
+      - name: Checkout private Pocket PR merge ref
         uses: actions/checkout@v7
         with:
           repository: PocketFlutter/Pocket
-          ref: ${{ inputs.source_sha }}
+          ref: refs/pull/${{ inputs.source_pr }}/merge
           path: pocket-source
+          ssh-key: ${{ secrets.POCKET_SOURCE_SSH_KEY }}
           persist-credentials: false
+          fetch-depth: 0
+          show-progress: false
 
-      - name: Verify checkout and repository contracts
-        working-directory: pocket-source
+      - name: Verify pinned PR head, branch, and canonical main ancestry
+        working-directory: ${{ github.workspace }}/pocket-source
         env:
           SOURCE_SHA: ${{ inputs.source_sha }}
+          SOURCE_BRANCH: ${{ inputs.source_branch }}
         run: |
-          test "$(git rev-parse --verify HEAD)" = "$SOURCE_SHA"
+          expected="${SOURCE_SHA,,}"
+          branch_ref="refs/remotes/origin/$SOURCE_BRANCH"
+          head1="$(git rev-parse --verify HEAD^1 2>/dev/null || true)"
+          head2="$(git rev-parse --verify HEAD^2 2>/dev/null || true)"
+          branch_sha="$(git rev-parse --verify "$branch_ref" 2>/dev/null || true)"
+          if [[ -z "$head1" || -z "$head2" || "$head2" != "$expected" || "$branch_sha" != "$expected" ]] ||
+             ! git merge-base --is-ancestor "$head1" refs/remotes/origin/main >/dev/null 2>&1; then
+            echo "::error::PR merge ref must have HEAD^1 on canonical main and HEAD^2 matching source_sha and origin/source_branch"
+            exit 1
+          fi
+          git checkout --detach --quiet "$expected" >/dev/null 2>&1 || {
+            echo "::error::Failed to detach at requested source SHA"
+            exit 1
+          }
+          if [[ "$(git rev-parse --verify HEAD 2>/dev/null)" != "$expected" ]]; then
+            echo "::error::Checkout HEAD does not match requested source SHA"
+            exit 1
+          fi
+
+      - name: Verify repository architecture contracts
+        working-directory: pocket-source
+        run: |
+          exec 3>&1
+          trap 'echo "::error::Verify repository architecture contracts failed" >&3' ERR
+          exec >/dev/null 2>&1
           python3 sdk/scripts/check_architecture.py
           python3 sdk/scripts/check_api_docs.py
 
@@ -769,6 +796,9 @@ jobs:
       - name: Install patch and prepare the pinned PocketJS engine
         working-directory: pocket-source/sdk
         run: |
+          exec 3>&1
+          trap 'echo "::error::Install patch and prepare the pinned PocketJS engine failed" >&3' ERR
+          exec >/dev/null 2>&1
           sudo apt-get update
           sudo apt-get install -y patch
           python3 scripts/prepare_upstream.py
@@ -776,7 +806,16 @@ jobs:
       - name: Run native library regressions
         id: native-regressions
         working-directory: pocket-source
-        run: cargo test --locked --manifest-path sdk/native/Cargo.toml --lib
+        run: |
+          exec 3>&1
+          trap 'echo "::error::Run native library regressions failed" >&3' ERR
+          log="$(mktemp)"
+          trap 'rm -f "$log"' EXIT
+          exec >/dev/null 2>&1
+          cargo test --locked --manifest-path sdk/native/Cargo.toml --lib >"$log" 2>&1
+          summary_line="$(grep -E '^test result: ok\. [1-9][0-9]* passed; 0 failed; [0-9]+ ignored; [0-9]+ measured; [0-9]+ filtered out; finished in [0-9]+\.[0-9]+s$' "$log" | tail -n 1)"
+          [[ "$summary_line" =~ ^test\ result:\ ok\.\ ([1-9][0-9]*)\ passed\;\ 0\ failed\;\ ([0-9]+)\ ignored\;\ ([0-9]+)\ measured\;\ ([0-9]+)\ filtered\ out\;\ finished\ in\ ([0-9]+\.[0-9]+s)$ ]]
+          printf 'Native library suite: %s passed, 0 failed, %s ignored, %s filtered out (%s)\n' "${BASH_REMATCH[1]}" "${BASH_REMATCH[2]}" "${BASH_REMATCH[4]}" "${BASH_REMATCH[5]}" >&3
 
       - name: Verify DrawList reuse with the release runtime
         if: success() || steps.native-regressions.conclusion == 'failure'
@@ -785,14 +824,32 @@ jobs:
           SOURCE_PR: ${{ inputs.source_pr }}
           SOURCE_SHA: ${{ inputs.source_sha }}
         run: |
-          set -o pipefail
+          exec 3>&1
+          trap 'echo "::error::Verify DrawList reuse with the release runtime failed" >&3' ERR
           log="$(mktemp)"
           trap 'rm -f "$log"' EXIT
-          cargo test --locked --release --manifest-path sdk/native/Cargo.toml --lib retained_draw_list -- --nocapture | tee "$log"
-          grep -Eq '^test result: ok\. [1-9][0-9]* passed; 0 failed;' "$log"
+          exec >/dev/null 2>&1
+          [[ "$SOURCE_PR" =~ ^[1-9][0-9]*$ ]]
+          [[ "$SOURCE_SHA" =~ ^[0-9a-fA-F]{40}$ ]]
+          cargo test --locked --release --manifest-path sdk/native/Cargo.toml --lib retained_draw_list -- --nocapture >"$log" 2>&1
+          summary_line="$(grep -E '^test result: ok\. [1-9][0-9]* passed; 0 failed; [0-9]+ ignored; [0-9]+ measured; [0-9]+ filtered out; finished in [0-9]+\.[0-9]+s$' "$log" | tail -n 1)"
+          [[ "$summary_line" =~ ^test\ result:\ ok\.\ ([1-9][0-9]*)\ passed\;\ 0\ failed\;\ ([0-9]+)\ ignored\;\ ([0-9]+)\ measured\;\ ([0-9]+)\ filtered\ out\;\ finished\ in\ ([0-9]+\.[0-9]+s)$ ]]
+          passed="${BASH_REMATCH[1]}"
+          ignored="${BASH_REMATCH[2]}"
+          filtered="${BASH_REMATCH[4]}"
+          elapsed="${BASH_REMATCH[5]}"
+          ablation_line="$(grep -E '^DrawList ablation: [1-9][0-9]* reused vs [1-9][0-9]* regenerated frames, [0-9]+ vs [0-9]+ µs total$' "$log" | tail -n 1)"
+          [[ "$ablation_line" =~ ^DrawList\ ablation:\ ([1-9][0-9]*)\ reused\ vs\ ([1-9][0-9]*)\ regenerated\ frames,\ ([0-9]+)\ vs\ ([0-9]+)\ µs\ total$ ]]
+          reused_frames="${BASH_REMATCH[1]}"
+          regenerated_frames="${BASH_REMATCH[2]}"
+          reused_us="${BASH_REMATCH[3]}"
+          regenerated_us="${BASH_REMATCH[4]}"
+          printf 'Retained draw-list suite: %s passed, 0 failed, %s ignored, %s filtered out (%s)\n' "$passed" "$ignored" "$filtered" "$elapsed" >&3
+          printf 'DrawList ablation: %s reused vs %s regenerated frames, %s vs %s µs total\n' "$reused_frames" "$regenerated_frames" "$reused_us" "$regenerated_us" >&3
           {
-            printf '### DrawList reuse acceptance\n\nPocket PR #%s at `%s`\n\n' "$SOURCE_PR" "$SOURCE_SHA"
-            grep -E '^(DrawList ablation:|test .*retained_draw_list|test result:)' "$log" | sed 's/^/    /'
+            printf '### DrawList reuse acceptance\n\nPocket PR #%s at `%s`\n\n' "$SOURCE_PR" "${SOURCE_SHA,,}"
+            printf '    test result: ok. %s passed; 0 failed; %s ignored; 0 measured; %s filtered out; finished in %s\n' "$passed" "$ignored" "$filtered" "$elapsed"
+            printf '    DrawList ablation: %s reused vs %s regenerated frames, %s vs %s µs total\n' "$reused_frames" "$regenerated_frames" "$reused_us" "$regenerated_us"
           } >> "$GITHUB_STEP_SUMMARY"
 
       - *write_safe_summary
