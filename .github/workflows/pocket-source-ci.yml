@@ -4,8 +4,12 @@ on:
   workflow_dispatch:
     inputs:
       source_sha:
-        description: Exact 40-hex commit SHA on PocketFlutter/Pocket main
+        description: Exact 40-hex commit SHA on PocketFlutter/Pocket main or same-repo open PR head
         required: true
+        type: string
+      source_pr:
+        description: Optional open same-repo PocketFlutter/Pocket PR number for premerge draw-list acceptance
+        required: false
         type: string
       run_vector_benchmarks:
         description: Run optional Rust, JS, and Flutter vector/SVG benchmark lanes
@@ -16,7 +20,7 @@ permissions:
   contents: read
 
 concurrency:
-  group: pocket-source-ci-${{ github.ref }}
+  group: pocket-source-ci-${{ github.ref }}-${{ inputs.source_pr || 'main' }}
   cancel-in-progress: false
 
 defaults:
@@ -26,7 +30,7 @@ defaults:
 jobs:
   architecture-and-rust:
     name: architecture-and-rust
-    if: github.event_name == 'workflow_dispatch' && github.ref == 'refs/heads/main'
+    if: github.event_name == 'workflow_dispatch' && github.ref == 'refs/heads/main' && inputs.source_pr == ''
     runs-on: ubuntu-24.04
     environment: pocket-source-ci
     steps:
@@ -219,7 +223,7 @@ jobs:
 
   studio-upgrade-windows:
     name: studio-upgrade-windows
-    if: github.event_name == 'workflow_dispatch' && github.ref == 'refs/heads/main'
+    if: github.event_name == 'workflow_dispatch' && github.ref == 'refs/heads/main' && inputs.source_pr == ''
     runs-on: windows-latest
     timeout-minutes: 10
     environment: pocket-source-ci
@@ -287,7 +291,7 @@ jobs:
 
   js-sdk-and-guest:
     name: js-sdk-and-guest
-    if: github.event_name == 'workflow_dispatch' && github.ref == 'refs/heads/main'
+    if: github.event_name == 'workflow_dispatch' && github.ref == 'refs/heads/main' && inputs.source_pr == ''
     runs-on: ubuntu-24.04
     environment: pocket-source-ci
     steps:
@@ -457,7 +461,7 @@ jobs:
 
   flutter-host-fonts-minimum-sdk:
     name: flutter-host-fonts-dart-3.9.2
-    if: github.event_name == 'workflow_dispatch' && github.ref == 'refs/heads/main'
+    if: github.event_name == 'workflow_dispatch' && github.ref == 'refs/heads/main' && inputs.source_pr == ''
     runs-on: ubuntu-24.04
     environment: pocket-source-ci
     steps:
@@ -490,7 +494,7 @@ jobs:
     name: flutter-sdk-and-demo
     runs-on: ubuntu-24.04
     needs: js-sdk-and-guest
-    if: ${{ github.event_name == 'workflow_dispatch' && github.ref == 'refs/heads/main' && !cancelled() && needs.js-sdk-and-guest.result != 'cancelled' }}
+    if: ${{ github.event_name == 'workflow_dispatch' && github.ref == 'refs/heads/main' && inputs.source_pr == '' && !cancelled() && needs.js-sdk-and-guest.result != 'cancelled' }}
     environment: pocket-source-ci
     steps:
       - *validate_source_inputs
@@ -569,7 +573,7 @@ jobs:
 
   rust-and-js-vector-bench:
     name: Rust & JS Vector Benchmark
-    if: github.event_name == 'workflow_dispatch' && github.ref == 'refs/heads/main' && inputs.run_vector_benchmarks
+    if: github.event_name == 'workflow_dispatch' && github.ref == 'refs/heads/main' && inputs.source_pr == '' && inputs.run_vector_benchmarks
     runs-on: ubuntu-24.04
     environment: pocket-source-ci
     steps:
@@ -669,7 +673,7 @@ jobs:
 
   flutter-vector-bench:
     name: Flutter Vector Rasterizer Benchmark
-    if: github.event_name == 'workflow_dispatch' && github.ref == 'refs/heads/main' && inputs.run_vector_benchmarks
+    if: github.event_name == 'workflow_dispatch' && github.ref == 'refs/heads/main' && inputs.source_pr == '' && inputs.run_vector_benchmarks
     runs-on: ubuntu-24.04
     environment: pocket-source-ci
     steps:
@@ -711,6 +715,80 @@ jobs:
           flutter pub get --enforce-lockfile
           flutter analyze --no-fatal-infos lib test
           flutter test test/pocket_vector_benchmark_test.dart test/pocket_vector_fidelity_test.dart --reporter expanded
+
+      - *write_safe_summary
+
+      - *cleanup_source
+
+  retained-draw-list-pr-acceptance:
+    name: retained-draw-list-pr-acceptance
+    if: github.event_name == 'workflow_dispatch' && inputs.source_pr != ''
+    runs-on: ubuntu-24.04
+    timeout-minutes: 30
+    steps:
+      - name: Validate the pinned, open Pocket source PR
+        env:
+          SOURCE_SHA: ${{ inputs.source_sha }}
+          SOURCE_PR: ${{ inputs.source_pr }}
+        run: |
+          [[ "$SOURCE_SHA" =~ ^[0-9a-f]{40}$ ]] || { echo "::error::Expected a lowercase 40-hex source_sha"; exit 1; }
+          [[ "$SOURCE_PR" =~ ^[1-9][0-9]*$ ]] || { echo "::error::Expected a positive integer source_pr"; exit 1; }
+          curl --fail --silent --show-error --max-time 30 \
+            "https://api.github.com/repos/PocketFlutter/Pocket/pulls/$SOURCE_PR" |
+            jq -e --arg sha "$SOURCE_SHA" '
+              .state == "open" and
+              .base.repo.full_name == "PocketFlutter/Pocket" and .base.ref == "main" and
+              .head.repo.full_name == "PocketFlutter/Pocket" and .head.sha == $sha
+            ' >/dev/null || { echo "::error::Expected the exact head of an open same-repo PR targeting Pocket main"; exit 1; }
+
+      # The public source PR lane uses a hosted runner and no protected
+      # environment, repository secrets, writable token, or shared caches.
+      - name: Checkout public Pocket source at the verified SHA
+        uses: actions/checkout@v7
+        with:
+          repository: PocketFlutter/Pocket
+          ref: ${{ inputs.source_sha }}
+          path: pocket-source
+          persist-credentials: false
+
+      - name: Verify checkout and repository contracts
+        working-directory: pocket-source
+        env:
+          SOURCE_SHA: ${{ inputs.source_sha }}
+        run: |
+          test "$(git rev-parse --verify HEAD)" = "$SOURCE_SHA"
+          python3 sdk/scripts/check_architecture.py
+          python3 sdk/scripts/check_api_docs.py
+
+      - uses: dtolnay/rust-toolchain@stable
+        with:
+          toolchain: 1.98.1
+
+      - name: Install patch and prepare the pinned PocketJS engine
+        working-directory: pocket-source/sdk
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y patch
+          python3 scripts/prepare_upstream.py
+
+      - name: Run native library regressions
+        working-directory: pocket-source
+        run: cargo test --locked --manifest-path sdk/native/Cargo.toml --lib
+
+      - name: Verify DrawList reuse with the release runtime
+        working-directory: pocket-source
+        env:
+          SOURCE_PR: ${{ inputs.source_pr }}
+          SOURCE_SHA: ${{ inputs.source_sha }}
+        run: |
+          log="$(mktemp)"
+          trap 'rm -f "$log"' EXIT
+          cargo test --locked --release --manifest-path sdk/native/Cargo.toml --lib retained_draw_list -- --nocapture | tee "$log"
+          grep -Eq '^test result: ok\. [1-9][0-9]* passed; 0 failed;' "$log"
+          {
+            printf '### DrawList reuse acceptance\n\nPocket PR #%s at `%s`\n\n' "$SOURCE_PR" "$SOURCE_SHA"
+            grep -E '^(test .*retained_draw_list|test result:)' "$log" | sed 's/^/    /'
+          } >> "$GITHUB_STEP_SUMMARY"
 
       - *write_safe_summary
 
