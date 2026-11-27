@@ -8,7 +8,7 @@ on:
         required: true
         type: string
       deploy_pages:
-        description: Deploy the signed 28-package registry to GitHub Pages
+        description: Deploy the signed package registry to GitHub Pages
         default: true
         type: boolean
 
@@ -27,7 +27,7 @@ defaults:
 
 jobs:
   build-registry:
-    name: Build & Sign 28-Package Registry
+    name: Build and Sign Package Registry
     if: github.ref == 'refs/heads/main'
     runs-on: ubuntu-24.04
     environment: pocket-source-ci
@@ -84,7 +84,7 @@ jobs:
           bun sdk/scripts/check_registry_conformance.ts
           bun test sdk/scripts/tests/package_registry.test.ts sdk/scripts/tests/package_installer_safety.test.ts
 
-      - name: Build and verify Ed25519-signed 28-package registry
+      - name: Build and verify Ed25519-signed package registry
         working-directory: pocket-source
         env:
           POCKET_REGISTRY_SIGNING_KEY: ${{ secrets.POCKET_REGISTRY_SIGNING_KEY }}
@@ -106,7 +106,7 @@ jobs:
           import { createHash, createPublicKey, verify as cryptoVerify } from "node:crypto";
           import { existsSync, readFileSync, statSync } from "node:fs";
           import { join } from "node:path";
-          import { POCKET_OFFICIAL_REGISTRY_PUBLIC_KEY_PEM } from "./sdk/scripts/registry_catalog.ts";
+          import { OFFICIAL_PACKAGE_SPECS, POCKET_OFFICIAL_REGISTRY_PUBLIC_KEY_PEM } from "./sdk/scripts/registry_catalog.ts";
 
           const outDir = process.argv[2];
           const signed = JSON.parse(readFileSync(join(outDir, "registry/v1/signed-index.json"), "utf8"));
@@ -116,8 +116,12 @@ jobs:
           if (!valid) throw new Error("Ed25519 signature verification failed against committed public key");
 
           const doc = JSON.parse(payloadBytes.toString("utf8"));
-          if (doc.totalPackages !== 28 || !Array.isArray(doc.packages) || doc.packages.length !== 28) {
-            throw new Error(`Expected 28 packages, got ${doc.totalPackages}`);
+          const expected = new Set(OFFICIAL_PACKAGE_SPECS.map((spec) => spec.slug));
+          if (!Array.isArray(doc.packages) || doc.totalPackages !== expected.size || doc.packages.length !== expected.size) {
+            throw new Error(`Expected ${expected.size} packages, got ${doc.totalPackages}`);
+          }
+          for (const pkg of doc.packages) {
+            if (!expected.delete(pkg.slug)) throw new Error(`Unexpected or duplicate package: ${pkg.slug}`);
           }
           for (const pkg of doc.packages) {
             const tgzPath = join(outDir, pkg.tarballPath);
