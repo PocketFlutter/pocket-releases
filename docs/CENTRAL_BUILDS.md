@@ -14,6 +14,8 @@
   - **Reviewer-authorized pre-merge branch check (`source_branch` set)**: validates `source_branch` via `git check-ref-format` as a non-`main` canonical branch name, rejects `refs/*`, `origin/*`, and fork/PR refs (`pull/*`, `pr/*`), and requires the exact remote tracking branch tip `refs/remotes/origin/<source_branch>` in `PocketFlutter/Pocket` to equal `source_sha`.
   - All inputs are bound via step `env:` variables and never interpolated directly into Bash scripts.
   - Invoke manual branch checks only for trusted, reviewer-inspected commits in `PocketFlutter/Pocket` whose Git metadata can appear in public logs. Checkout can show ref names and commit subjects. Confirm the review and exact SHA before dispatch; the branch-tip check verifies identity, while the operator verifies trust. Publication workflows (`studio-native-release.yml`, `web-sdk-release.yml`, `package-registry-release.yml`, `sdk-packages-release.yml`) remain strictly locked to canonical `main` ancestry.
+- **DrawList benchmark**:
+  - Set `run_draw_list_benchmark=true` to run the native library suite and the focused release ablation against the same verified source revision. The Action summary and logs expose numeric counts and timings.
 - **Future automation**:
   - Add automatic dispatch after manual verification. A GitHub App can receive source repository events and dispatch the centralized workflow, then report the result on the exact source SHA.
 

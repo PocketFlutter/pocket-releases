@@ -12,6 +12,10 @@ on:
         required: false
         default: ""
         type: string
+      run_draw_list_benchmark:
+        description: Run only native regressions and the DrawList release ablation
+        default: false
+        type: boolean
       run_vector_benchmarks:
         description: Run optional Rust, JS, and Flutter vector/SVG benchmark lanes
         default: false
@@ -31,7 +35,7 @@ defaults:
 jobs:
   architecture-and-rust:
     name: architecture-and-rust
-    if: github.event_name == 'workflow_dispatch' && github.ref == 'refs/heads/main'
+    if: github.event_name == 'workflow_dispatch' && github.ref == 'refs/heads/main' && !inputs.run_draw_list_benchmark
     runs-on: ubuntu-24.04
     environment: pocket-source-ci
     steps:
@@ -245,7 +249,7 @@ jobs:
 
   studio-upgrade-windows:
     name: studio-upgrade-windows
-    if: github.event_name == 'workflow_dispatch' && github.ref == 'refs/heads/main'
+    if: github.event_name == 'workflow_dispatch' && github.ref == 'refs/heads/main' && !inputs.run_draw_list_benchmark
     runs-on: windows-latest
     timeout-minutes: 10
     environment: pocket-source-ci
@@ -313,7 +317,7 @@ jobs:
 
   js-sdk-and-guest:
     name: js-sdk-and-guest
-    if: github.event_name == 'workflow_dispatch' && github.ref == 'refs/heads/main'
+    if: github.event_name == 'workflow_dispatch' && github.ref == 'refs/heads/main' && !inputs.run_draw_list_benchmark
     runs-on: ubuntu-24.04
     environment: pocket-source-ci
     steps:
@@ -483,7 +487,7 @@ jobs:
 
   flutter-host-fonts-minimum-sdk:
     name: flutter-host-fonts-dart-3.9.2
-    if: github.event_name == 'workflow_dispatch' && github.ref == 'refs/heads/main'
+    if: github.event_name == 'workflow_dispatch' && github.ref == 'refs/heads/main' && !inputs.run_draw_list_benchmark
     runs-on: ubuntu-24.04
     environment: pocket-source-ci
     steps:
@@ -516,7 +520,7 @@ jobs:
     name: flutter-sdk-and-demo
     runs-on: ubuntu-24.04
     needs: js-sdk-and-guest
-    if: ${{ github.event_name == 'workflow_dispatch' && github.ref == 'refs/heads/main' && !cancelled() && needs.js-sdk-and-guest.result != 'cancelled' }}
+    if: ${{ github.event_name == 'workflow_dispatch' && github.ref == 'refs/heads/main' && !inputs.run_draw_list_benchmark && !cancelled() && needs.js-sdk-and-guest.result != 'cancelled' }}
     environment: pocket-source-ci
     steps:
       - *validate_source_inputs
@@ -595,7 +599,7 @@ jobs:
 
   rust-and-js-vector-bench:
     name: Rust & JS Vector Benchmark
-    if: github.event_name == 'workflow_dispatch' && github.ref == 'refs/heads/main' && inputs.run_vector_benchmarks
+    if: github.event_name == 'workflow_dispatch' && github.ref == 'refs/heads/main' && !inputs.run_draw_list_benchmark && inputs.run_vector_benchmarks
     runs-on: ubuntu-24.04
     environment: pocket-source-ci
     steps:
@@ -695,7 +699,7 @@ jobs:
 
   flutter-vector-bench:
     name: Flutter Vector Rasterizer Benchmark
-    if: github.event_name == 'workflow_dispatch' && github.ref == 'refs/heads/main' && inputs.run_vector_benchmarks
+    if: github.event_name == 'workflow_dispatch' && github.ref == 'refs/heads/main' && !inputs.run_draw_list_benchmark && inputs.run_vector_benchmarks
     runs-on: ubuntu-24.04
     environment: pocket-source-ci
     steps:
@@ -737,6 +741,93 @@ jobs:
           flutter pub get --enforce-lockfile
           flutter analyze --no-fatal-infos lib test
           flutter test test/pocket_vector_benchmark_test.dart test/pocket_vector_fidelity_test.dart --reporter expanded
+
+      - *write_safe_summary
+
+      - *cleanup_source
+
+  retained-draw-list-acceptance:
+    name: retained-draw-list-acceptance
+    if: github.event_name == 'workflow_dispatch' && github.ref == 'refs/heads/main' && inputs.run_draw_list_benchmark
+    runs-on: ubuntu-24.04
+    timeout-minutes: 30
+    environment: pocket-source-ci
+    steps:
+      - *validate_source_inputs
+
+      - *checkout_source
+
+      - *verify_source_ancestry
+
+      - name: Verify repository architecture contracts
+        working-directory: pocket-source
+        run: |
+          exec 3>&1
+          trap 'echo "::error::Verify repository architecture contracts failed" >&3' ERR
+          exec >/dev/null 2>&1
+          python3 sdk/scripts/check_architecture.py
+          python3 sdk/scripts/check_api_docs.py
+
+      - uses: dtolnay/rust-toolchain@stable
+        with:
+          toolchain: 1.98.1
+
+      - name: Install patch and prepare the pinned PocketJS engine
+        working-directory: pocket-source/sdk
+        run: |
+          exec 3>&1
+          trap 'echo "::error::Install patch and prepare the pinned PocketJS engine failed" >&3' ERR
+          exec >/dev/null 2>&1
+          sudo apt-get update
+          sudo apt-get install -y patch
+          python3 scripts/prepare_upstream.py
+
+      - name: Run native library regressions
+        id: native-regressions
+        working-directory: pocket-source
+        run: |
+          exec 3>&1
+          trap 'echo "::error::Run native library regressions failed" >&3' ERR
+          log="$(mktemp)"
+          trap 'rm -f "$log"' EXIT
+          exec >/dev/null 2>&1
+          cargo test --locked --manifest-path sdk/native/Cargo.toml --lib >"$log" 2>&1
+          summary_line="$(grep -E '^test result: ok\. [1-9][0-9]* passed; 0 failed; [0-9]+ ignored; [0-9]+ measured; [0-9]+ filtered out; finished in [0-9]+\.[0-9]+s$' "$log" | tail -n 1)"
+          [[ "$summary_line" =~ ^test\ result:\ ok\.\ ([1-9][0-9]*)\ passed\;\ 0\ failed\;\ ([0-9]+)\ ignored\;\ ([0-9]+)\ measured\;\ ([0-9]+)\ filtered\ out\;\ finished\ in\ ([0-9]+\.[0-9]+s)$ ]]
+          printf 'Native library suite: %s passed, 0 failed, %s ignored, %s filtered out (%s)\n' "${BASH_REMATCH[1]}" "${BASH_REMATCH[2]}" "${BASH_REMATCH[4]}" "${BASH_REMATCH[5]}" >&3
+
+      - name: Verify DrawList reuse with the release runtime
+        if: success() || steps.native-regressions.conclusion == 'failure'
+        working-directory: pocket-source
+        env:
+          SOURCE_SHA: ${{ inputs.source_sha }}
+        run: |
+          exec 3>&1
+          trap 'echo "::error::Verify DrawList reuse with the release runtime failed" >&3' ERR
+          log="$(mktemp)"
+          trap 'rm -f "$log"' EXIT
+          exec >/dev/null 2>&1
+          [[ "$SOURCE_SHA" =~ ^[0-9a-fA-F]{40}$ ]]
+          cargo test --locked --release --manifest-path sdk/native/Cargo.toml --lib retained_draw_list -- --nocapture >"$log" 2>&1
+          summary_line="$(grep -E '^test result: ok\. [1-9][0-9]* passed; 0 failed; [0-9]+ ignored; [0-9]+ measured; [0-9]+ filtered out; finished in [0-9]+\.[0-9]+s$' "$log" | tail -n 1)"
+          [[ "$summary_line" =~ ^test\ result:\ ok\.\ ([1-9][0-9]*)\ passed\;\ 0\ failed\;\ ([0-9]+)\ ignored\;\ ([0-9]+)\ measured\;\ ([0-9]+)\ filtered\ out\;\ finished\ in\ ([0-9]+\.[0-9]+s)$ ]]
+          passed="${BASH_REMATCH[1]}"
+          ignored="${BASH_REMATCH[2]}"
+          filtered="${BASH_REMATCH[4]}"
+          elapsed="${BASH_REMATCH[5]}"
+          ablation_line="$(grep -E '^DrawList ablation: [1-9][0-9]* reused vs [1-9][0-9]* regenerated frames, [0-9]+ vs [0-9]+ µs total$' "$log" | tail -n 1)"
+          [[ "$ablation_line" =~ ^DrawList\ ablation:\ ([1-9][0-9]*)\ reused\ vs\ ([1-9][0-9]*)\ regenerated\ frames,\ ([0-9]+)\ vs\ ([0-9]+)\ µs\ total$ ]]
+          reused_frames="${BASH_REMATCH[1]}"
+          regenerated_frames="${BASH_REMATCH[2]}"
+          reused_us="${BASH_REMATCH[3]}"
+          regenerated_us="${BASH_REMATCH[4]}"
+          printf 'Retained draw-list suite: %s passed, 0 failed, %s ignored, %s filtered out (%s)\n' "$passed" "$ignored" "$filtered" "$elapsed" >&3
+          printf 'DrawList ablation: %s reused vs %s regenerated frames, %s vs %s µs total\n' "$reused_frames" "$regenerated_frames" "$reused_us" "$regenerated_us" >&3
+          {
+            printf '### DrawList reuse acceptance\n\nPocket source `%s`\n\n' "${SOURCE_SHA,,}"
+            printf '    test result: ok. %s passed; 0 failed; %s ignored; 0 measured; %s filtered out; finished in %s\n' "$passed" "$ignored" "$filtered" "$elapsed"
+            printf '    DrawList ablation: %s reused vs %s regenerated frames, %s vs %s µs total\n' "$reused_frames" "$regenerated_frames" "$reused_us" "$regenerated_us"
+          } >> "$GITHUB_STEP_SUMMARY"
 
       - *write_safe_summary
 
