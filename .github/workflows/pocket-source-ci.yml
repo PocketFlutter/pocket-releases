@@ -902,8 +902,9 @@ jobs:
           cand_log="$(mktemp)"
           base_log="$(mktemp)"
           diff_log="$(mktemp)"
+          build_log="$(mktemp)"
           cleanup_visual() {
-            rm -f "$cand_log" "$base_log" "$diff_log"
+            rm -f "$cand_log" "$base_log" "$diff_log" "$build_log"
             git -C "$candidate_tree" worktree remove --force "$baseline_tree" >/dev/null 2>&1 || true
             rm -rf "$baseline_tree" "$candidate_out" "$baseline_out"
           }
@@ -931,6 +932,16 @@ jobs:
           [[ "$baseline_sha" =~ ^[0-9a-f]{40}$ ]]
           git -C "$candidate_tree" merge-base --is-ancestor "$baseline_sha" refs/remotes/origin/main
 
+          rebuild_guest=true
+          if git -C "$candidate_tree" diff --quiet "$baseline_sha" "$candidate_sha" -- \
+            demo/js demo/assets sdk \
+            ':(exclude)sdk/docs/**' ':(exclude)sdk/native/src/**' \
+            ':(exclude)sdk/packages/pocket_flutter/lib/**' &&
+            git -C "$candidate_tree" diff --quiet "$baseline_sha" "$candidate_sha" -- sdk/native/src/bin; then
+            rebuild_guest=false
+            echo "Guest sources and packaged assets match. Testing both independently built hosts with the same committed guest." >&3
+          fi
+
           build_and_capture() {
             local tree="$1"
             local out_dir="$2"
@@ -946,16 +957,29 @@ jobs:
             fi
             [[ -f "$tree/sdk/native/target/debug/libpocket_flutter.so" ]]
             [[ -x "$tree/sdk/native/target/debug/pocketjs_bytecode" ]]
-            stage="$label: install SDK and Showcase JS dependencies"
-            (cd "$tree/sdk" && npm install --ignore-scripts --legacy-peer-deps --no-audit --no-fund)
-            (cd "$tree/demo/js" && bun install --ignore-scripts)
-            stage="$label: rebuild Showcase guest"
-            (
-              cd "$tree/demo/js"
-              POCKET_SOURCE_BUILD=1 \
-              POCKET_BYTECODE_BIN="$tree/sdk/native/target/debug/pocketjs_bytecode" \
-              bun run build
-            )
+            if [[ "$rebuild_guest" == true ]]; then
+              stage="$label: install SDK and Showcase JS dependencies"
+              (cd "$tree/sdk" && npm install --ignore-scripts --legacy-peer-deps --no-audit --no-fund)
+              (cd "$tree/demo/js" && bun install --ignore-scripts)
+              stage="$label: rebuild Showcase guest"
+              if ! (
+                cd "$tree/demo/js" &&
+                POCKET_SOURCE_BUILD=1 \
+                POCKET_BYTECODE_BIN="$tree/sdk/native/target/debug/pocketjs_bytecode" \
+                bun ../../sdk/scripts/build_guest.ts --project-root="$tree/demo/js" --copy-assets-to="$tree/demo/assets"
+              ) >"$build_log" 2>&1; then
+                if grep -qF 'PocketJS build: pass 2 bundling failed' "$build_log"; then
+                  stage="$stage (bundle resolution)"
+                elif grep -qF 'class literal(s) do not compile' "$build_log"; then
+                  stage="$stage (style validation)"
+                elif grep -qF 'build_guest: compiler=' "$build_log"; then
+                  stage="$stage (compiler execution or asset staging)"
+                else
+                  stage="$stage (preflight or compiler setup)"
+                fi
+                return 1
+              fi
+            fi
             rm -rf "$out_dir"
             mkdir -p "$out_dir"
             stage="$label: resolve pinned Flutter dependencies"
