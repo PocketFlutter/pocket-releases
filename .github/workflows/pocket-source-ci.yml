@@ -891,7 +891,9 @@ jobs:
           RUN_VISUAL_REGRESSION: ${{ inputs.run_visual_regression }}
         run: |
           exec 3>&1
-          trap 'echo "::error::Compare baseline and candidate Showcase page screenshots failed" >&3' ERR
+          set -E
+          stage="initialize screenshot comparison"
+          trap 'rc=$?; printf "::error::%s failed (exit %s)\n" "$stage" "$rc" >&3' ERR
           candidate_tree="$GITHUB_WORKSPACE/pocket-source"
           baseline_tree="$GITHUB_WORKSPACE/pocket-source-baseline"
           capture_rel="demo/test/pocket_page_visual_capture_test.dart"
@@ -934,32 +936,38 @@ jobs:
             local out_dir="$2"
             local json_log="$3"
             local label="$4"
+            stage="$label: prepare pinned engine"
             if [[ ! -d "$tree/sdk/.cache/pocketjs/node_modules" ]]; then
               (cd "$tree/sdk" && python3 scripts/prepare_upstream.py && bun install --frozen-lockfile --cwd .cache/pocketjs)
             fi
+            stage="$label: build native host and bytecode compiler"
             if [[ ! -f "$tree/sdk/native/target/debug/libpocket_flutter.so" || ! -x "$tree/sdk/native/target/debug/pocketjs_bytecode" ]]; then
               (cd "$tree" && cargo build --locked --manifest-path sdk/native/Cargo.toml --lib --bin pocketjs_bytecode)
             fi
             [[ -f "$tree/sdk/native/target/debug/libpocket_flutter.so" ]]
             [[ -x "$tree/sdk/native/target/debug/pocketjs_bytecode" ]]
+            stage="$label: install SDK and Showcase JS dependencies"
+            (cd "$tree/sdk" && npm install --ignore-scripts --legacy-peer-deps --no-audit --no-fund)
+            (cd "$tree/demo/js" && bun install --ignore-scripts)
+            stage="$label: rebuild Showcase guest"
             (
               cd "$tree/demo/js"
-              bun install --ignore-scripts
               POCKET_SOURCE_BUILD=1 \
-              POCKET_COMPILER_PATH="$tree/sdk/.cache/pocketjs/tools/build.ts" \
               POCKET_BYTECODE_BIN="$tree/sdk/native/target/debug/pocketjs_bytecode" \
               bun run build
             )
             rm -rf "$out_dir"
             mkdir -p "$out_dir"
+            stage="$label: resolve pinned Flutter dependencies"
+            (cd "$tree/demo" && flutter pub get --enforce-lockfile)
+            stage="$label: capture actual Flutter pages"
             local status=0
             (
-              cd "$tree/demo"
-              flutter pub get --enforce-lockfile
+              cd "$tree/demo" &&
               POCKET_REQUIRE_REAL=1 \
               POCKET_NATIVE_LIBRARY="$tree/sdk/native/target/debug/libpocket_flutter.so" \
               POCKET_VISUAL_OUTPUT_DIR="$out_dir" \
-              flutter test --reporter json test/pocket_page_visual_capture_test.dart >"$json_log"
+              flutter test --no-pub --reporter json test/pocket_page_visual_capture_test.dart >"$json_log"
             ) || status=$?
             python3 - "$json_log" "$label" >&3 <<'PY'
           import json
@@ -987,14 +995,16 @@ jobs:
             [[ -s "$out_dir/home.png" && -s "$out_dir/gallery.png" ]]
           }
 
+          stage="prepare baseline worktree and shared capture fixture"
           rm -rf "$baseline_tree"
           git -C "$candidate_tree" worktree add --detach "$baseline_tree" "$baseline_sha"
           mkdir -p "$(dirname "$baseline_tree/$capture_rel")"
           cp "$candidate_tree/$capture_rel" "$baseline_tree/$capture_rel"
 
-          build_and_capture "$baseline_tree" "$baseline_out" "$base_log" "baseline ${baseline_sha}"
-          build_and_capture "$candidate_tree" "$candidate_out" "$cand_log" "candidate ${candidate_sha}"
+          build_and_capture "$baseline_tree" "$baseline_out" "$base_log" "baseline"
+          build_and_capture "$candidate_tree" "$candidate_out" "$cand_log" "candidate"
 
+          stage="report differences between baseline and candidate screenshots"
           diff_status=0
           /usr/bin/python3 "$GITHUB_WORKSPACE/.github/scripts/compare-pocket-page-pixels.py" "$baseline_out" "$candidate_out" >"$diff_log" || diff_status=$?
           cat "$diff_log" >&3
