@@ -1031,13 +1031,21 @@ jobs:
             (cd "$tree/demo" && flutter pub get --enforce-lockfile)
             stage="$label: capture actual Flutter pages"
             local status=0
-            (
-              cd "$tree/demo" &&
-              POCKET_REQUIRE_REAL=1 \
-              POCKET_NATIVE_LIBRARY="$tree/sdk/native/target/debug/libpocket_flutter.so" \
-              POCKET_VISUAL_OUTPUT_DIR="$out_dir" \
-              flutter test --no-pub --reporter json test/pocket_page_visual_capture_test.dart >"$json_log" 2>&1
-            ) || status=$?
+            local page
+            local pages=(Home)
+            if grep -qF 'headless Showcase captures Gallery' "$tree/$capture_rel"; then
+              pages+=(Gallery)
+            fi
+            for page in "${pages[@]}"; do
+              (
+                cd "$tree/demo" &&
+                POCKET_REQUIRE_REAL=1 \
+                POCKET_NATIVE_LIBRARY="$tree/sdk/native/target/debug/libpocket_flutter.so" \
+                POCKET_VISUAL_OUTPUT_DIR="$out_dir" \
+                flutter test --no-pub --reporter json --plain-name "headless Showcase captures $page" test/pocket_page_visual_capture_test.dart
+              ) >>"$json_log" 2>&1 || status=$?
+              [[ "$status" == 0 ]] || break
+            done
             python3 - "$json_log" "$label" >&3 <<'PY'
           import json
           import sys
@@ -1050,7 +1058,8 @@ jobs:
               "POCKET_VISUAL_MOUNTED": "guest startup",
               "POCKET_VISUAL_HOME": "Home PNG",
               "POCKET_VISUAL_HOME_PNG": "Gallery navigation",
-              "POCKET_VISUAL_GALLERY_START": "Gallery load",
+              "POCKET_VISUAL_GALLERY_START": "Gallery asset load",
+              "POCKET_VISUAL_GALLERY_MOUNTED": "Gallery guest startup",
               "POCKET_VISUAL_GALLERY_TITLE": "Gallery PNG",
               "POCKET_VISUAL_GALLERY": "Gallery PNG",
               "POCKET_VISUAL_GALLERY_PNG": "teardown",
@@ -1075,6 +1084,15 @@ jobs:
               "no such file or directory": "file unavailable",
               "frame decode": "native frame decoding",
               "bytecode validation": "bytecode validation",
+              "bytecode admission": "native bytecode admission",
+              "guest bytecode evaluate": "native bytecode evaluation",
+              "native budget": "native resource budget",
+              "frame binary encode": "native frame encoding",
+              "frame delta": "native frame delta",
+              "stack overflow": "native stack overflow",
+              "out of memory": "native allocation",
+              "ReferenceError": "guest reference error",
+              "InternalError": "guest internal error",
               "did not paint": "expected page text",
               "is still pending": "pending timer",
               "debugNeedsPaint": "boundary paint pending",
@@ -1113,7 +1131,9 @@ jobs:
           sys.exit(not (passed > 0 and skipped == 0 and failed == 0))
           PY
             [[ "$status" == 0 ]]
-            [[ -s "$out_dir/home.png" ]]
+            for page in "${pages[@]}"; do
+              [[ -s "$out_dir/${page,,}.png" ]]
+            done
           }
 
           stage="prepare baseline worktree and shared capture fixture"
