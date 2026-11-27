@@ -8,6 +8,7 @@ import sys
 from PIL import Image, ImageChops
 
 REQUIRED_PAGES = ("home",)
+ADDITIONAL_PAGES = ("gallery",)
 
 
 def load_rgba(path: str) -> Image.Image:
@@ -66,9 +67,16 @@ def main() -> int:
         return 2
 
     baseline_dir, candidate_dir = sys.argv[1], sys.argv[2]
+    # Older source revisions only produce Home. Compare every supported page
+    # produced by either revision, so a one-sided missing capture still fails.
+    pages = list(REQUIRED_PAGES)
+    for page in ADDITIONAL_PAGES:
+        if any(os.path.lexists(os.path.join(folder, f"{page}.png"))
+               for folder in (baseline_dir, candidate_dir)):
+            pages.append(page)
     all_ok = True
     lines: list[str] = []
-    for page in REQUIRED_PAGES:
+    for page in pages:
         line, ok = compare_page(baseline_dir, candidate_dir, page)
         lines.append(line)
         if not ok:
