@@ -1,0 +1,168 @@
+name: Pocket Platform Source CI
+
+on:
+  workflow_dispatch:
+    inputs:
+      source_sha:
+        description: Exact lowercase 40-hex SHA in PocketFlutter/pocket-platform
+        required: true
+        type: string
+      source_branch:
+        description: Optional reviewed canonical branch whose tip equals source_sha
+        required: false
+        default: ""
+        type: string
+
+permissions:
+  contents: read
+
+defaults:
+  run:
+    shell: bash
+
+jobs:
+  platform:
+    name: Validate Pocket Platform source
+    if: github.ref == 'refs/heads/main'
+    runs-on: ubuntu-24.04
+    environment: pocket-source-ci
+    timeout-minutes: 25
+    steps:
+      - name: Validate source inputs
+        env:
+          SOURCE_SHA: ${{ inputs.source_sha }}
+          SOURCE_BRANCH: ${{ inputs.source_branch }}
+          SOURCE_KEY_AVAILABLE: ${{ secrets.POCKET_PLATFORM_SOURCE_SSH_KEY != '' }}
+        run: |
+          if [[ ! "$SOURCE_SHA" =~ ^[0-9a-f]{40}$ ]]; then
+            echo "::error::Expected a lowercase 40-character hexadecimal source SHA"
+            exit 1
+          fi
+          if [[ -n "$SOURCE_BRANCH" ]]; then
+            case "$SOURCE_BRANCH" in
+              main|-*|refs/*|origin/*|pull/*|pr/*|@*)
+                echo "::error::Expected a canonical non-main branch name"
+                exit 1
+                ;;
+            esac
+            if ! git check-ref-format "refs/heads/$SOURCE_BRANCH" >/dev/null 2>&1; then
+              echo "::error::Invalid source branch name"
+              exit 1
+            fi
+          fi
+          if [[ "$SOURCE_KEY_AVAILABLE" != true ]]; then
+            echo "::error::Missing POCKET_PLATFORM_SOURCE_SSH_KEY"
+            exit 1
+          fi
+
+      - uses: oven-sh/setup-bun@v2
+        with:
+          bun-version: 1.3.9
+
+      - name: Checkout private Platform source
+        uses: actions/checkout@v7
+        with:
+          repository: PocketFlutter/pocket-platform
+          ref: ${{ inputs.source_sha }}
+          path: platform-source
+          ssh-key: ${{ secrets.POCKET_PLATFORM_SOURCE_SSH_KEY }}
+          persist-credentials: false
+          show-progress: false
+          fetch-depth: 0
+
+      - name: Verify detached checkout and canonical source ref
+        working-directory: platform-source
+        env:
+          SOURCE_SHA: ${{ inputs.source_sha }}
+          SOURCE_BRANCH: ${{ inputs.source_branch }}
+        run: |
+          if git symbolic-ref -q HEAD >/dev/null || [[ "$(git rev-parse --verify HEAD)" != "$SOURCE_SHA" ]]; then
+            echo "::error::Expected a detached checkout at the exact source SHA"
+            exit 1
+          fi
+          if [[ -z "$SOURCE_BRANCH" ]]; then
+            if ! git merge-base --is-ancestor "$SOURCE_SHA" refs/remotes/origin/main 2>/dev/null; then
+              echo "::error::Source SHA must be in canonical main history"
+              exit 1
+            fi
+          elif [[ "$(git rev-parse --verify "refs/remotes/origin/${SOURCE_BRANCH}^{commit}" 2>/dev/null)" != "$SOURCE_SHA" ]]; then
+            echo "::error::Source SHA must equal the exact canonical branch tip"
+            exit 1
+          fi
+
+      - name: Run committed Platform checks
+        working-directory: platform-source
+        run: |
+          umask 077
+          output_dir="$(mktemp -d "$RUNNER_TEMP/platform-source-ci.XXXXXXXX")"
+          trap 'rm -rf -- "$output_dir"' EXIT
+
+          report() {
+            printf '%s\n' "$1" >> "$GITHUB_STEP_SUMMARY"
+          }
+
+          run_private() {
+            local name="$1"
+            shift
+            env -u GITHUB_ENV -u GITHUB_OUTPUT -u GITHUB_PATH -u GITHUB_STEP_SUMMARY -u GITHUB_STATE \
+              timeout --kill-after=10s 5m "$@" > "$output_dir/$name.log" 2>&1
+          }
+
+          report "## Pocket Platform Source CI"
+          report ""
+          report "- Detached checkout and canonical source ref verified."
+          if ! run_private manifest bun -e '
+            const pkg = await Bun.file("package.json").json();
+            const hasScript = (name) => typeof pkg.scripts?.[name] === "string" && pkg.scripts[name].trim() !== "";
+            const hasDependencies = ["dependencies", "devDependencies", "optionalDependencies", "peerDependencies"]
+              .some((name) => Object.keys(pkg[name] ?? {}).length > 0);
+            console.log([hasScript("test"), hasScript("build"), hasDependencies || Boolean(pkg.workspaces)].join(" "));
+          '; then
+            report "- Package manifest could not be read."
+            exit 1
+          fi
+          read -r has_test has_build needs_install < "$output_dir/manifest.log"
+
+          if [[ "$has_test" != true ]]; then
+            report "- Test skipped (no committed test script)."
+          fi
+          if [[ "$has_build" != true ]]; then
+            report "- Build skipped (no committed build script)."
+          fi
+          if [[ "$has_test" != true && "$has_build" != true ]]; then
+            report "- Dependency installation skipped (no scripts to run)."
+            exit 0
+          fi
+
+          if [[ -f bun.lock || -f bun.lockb ]]; then
+            if ! run_private install bun install --frozen-lockfile; then
+              report "- Frozen dependency installation failed. Script execution skipped."
+              exit 1
+            fi
+            report "- Frozen dependency installation passed."
+          elif [[ "$needs_install" == true ]]; then
+            report "- Dependency installation requires a committed Bun lockfile. Script execution skipped."
+            exit 1
+          else
+            report "- Dependency installation skipped (no dependencies)."
+          fi
+
+          status=0
+          for check in test build; do
+            if [[ "$check" == test && "$has_test" != true ]] || [[ "$check" == build && "$has_build" != true ]]; then
+              continue
+            fi
+            if run_private "$check" bun run "$check"; then
+              report "- ${check^} passed."
+            else
+              report "- ${check^} failed. Command output is withheld from public logs."
+              status=1
+            fi
+          done
+          exit "$status"
+
+      - name: Remove private source and captured output
+        if: always()
+        working-directory: ${{ github.workspace }}
+        run: |
+          rm -rf -- platform-source "$RUNNER_TEMP"/platform-source-ci.*
