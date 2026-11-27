@@ -772,10 +772,12 @@ jobs:
           python3 scripts/prepare_upstream.py
 
       - name: Run native library regressions
+        id: native-regressions
         working-directory: pocket-source
         run: cargo test --locked --manifest-path sdk/native/Cargo.toml --lib
 
       - name: Verify DrawList reuse with the release runtime
+        if: success() || steps.native-regressions.conclusion == 'failure'
         working-directory: pocket-source
         env:
           SOURCE_PR: ${{ inputs.source_pr }}
