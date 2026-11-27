@@ -17,9 +17,14 @@ on:
         default: false
         type: boolean
       run_visual_regression:
-        description: Run only the Flutter native FFI visual regression lane
+        description: Run only the Showcase page screenshot comparison
         default: false
         type: boolean
+      visual_baseline_sha:
+        description: Optional exact 40-hex commit SHA on PocketFlutter/Pocket main for page screenshot pixel comparison
+        required: false
+        default: ""
+        type: string
       run_vector_benchmarks:
         description: Run optional Rust, JS, and Flutter vector/SVG benchmark lanes
         default: false
@@ -29,7 +34,7 @@ permissions:
   contents: read
 
 concurrency:
-  group: pocket-source-ci-${{ github.ref }}
+  group: pocket-source-ci-${{ github.ref }}${{ inputs.run_visual_regression && '-visual' || '' }}
   cancel-in-progress: false
 
 defaults:
@@ -49,6 +54,7 @@ jobs:
         env:
           SOURCE_SHA: ${{ inputs.source_sha }}
           SOURCE_BRANCH: ${{ inputs.source_branch }}
+          VISUAL_BASELINE_SHA: ${{ inputs.visual_baseline_sha }}
           SOURCE_KEY_AVAILABLE: ${{ secrets.POCKET_SOURCE_SSH_KEY != '' }}
           RUN_DRAW_LIST_BENCHMARK: ${{ inputs.run_draw_list_benchmark }}
           RUN_VISUAL_REGRESSION: ${{ inputs.run_visual_regression }}
@@ -59,6 +65,10 @@ jobs:
           fi
           [[ "$SOURCE_KEY_AVAILABLE" == true ]] || { echo "::error::Missing POCKET_SOURCE_SSH_KEY"; exit 1; }
           [[ "$SOURCE_SHA" =~ ^[0-9a-fA-F]{40}$ ]] || { echo "::error::Expected a 40-character hexadecimal source SHA"; exit 1; }
+          if [[ -n "$VISUAL_BASELINE_SHA" && ! "$VISUAL_BASELINE_SHA" =~ ^[0-9a-fA-F]{40}$ ]]; then
+            echo "::error::Expected a 40-character hexadecimal visual_baseline_sha"
+            exit 1
+          fi
           if [[ -n "$SOURCE_BRANCH" ]]; then
             if [[ "$SOURCE_BRANCH" == "main" || "$SOURCE_BRANCH" == -* || "$SOURCE_BRANCH" == refs/* || "$SOURCE_BRANCH" == origin/* || "$SOURCE_BRANCH" == pull/* || "$SOURCE_BRANCH" == pr/* ]] ||
                ! git check-ref-format --branch "$SOURCE_BRANCH" >/dev/null 2>&1 ||
@@ -85,6 +95,7 @@ jobs:
         env:
           SOURCE_SHA: ${{ inputs.source_sha }}
           SOURCE_BRANCH: ${{ inputs.source_branch }}
+          VISUAL_BASELINE_SHA: ${{ inputs.visual_baseline_sha }}
         run: |
           expected="${SOURCE_SHA,,}"
           if [[ "$(git rev-parse --verify HEAD 2>/dev/null)" != "$expected" ]]; then
@@ -100,6 +111,14 @@ jobs:
             remote_ref="refs/remotes/origin/$SOURCE_BRANCH"
             if [[ "$(git rev-parse --verify "${remote_ref}^{commit}" 2>/dev/null)" != "$expected" ]]; then
               echo "::error::Source SHA must equal the exact remote tracking branch HEAD on canonical PocketFlutter/Pocket"
+              exit 1
+            fi
+          fi
+          if [[ -n "$VISUAL_BASELINE_SHA" ]]; then
+            baseline_expected="${VISUAL_BASELINE_SHA,,}"
+            if [[ "$(git rev-parse --verify "${baseline_expected}^{commit}" 2>/dev/null)" != "$baseline_expected" ]] ||
+               ! git merge-base --is-ancestor "$baseline_expected" refs/remotes/origin/main >/dev/null 2>&1; then
+              echo "::error::visual_baseline_sha must be an ancestor of canonical source main"
               exit 1
             fi
           fi
@@ -255,7 +274,8 @@ jobs:
         if: always()
         working-directory: ${{ github.workspace }}
         run: |
-          rm -rf pocket-source "$RUNNER_TEMP"/pocket-studio-upgrade-diagnostics /tmp/pocket-native-* /tmp/native-test-build.jsonl /tmp/svg-fidelity-fixtures.json /tmp/flutter-bench.log /tmp/pocket-e2e-real-* 2>/dev/null || true
+          git -C pocket-source worktree remove --force "$GITHUB_WORKSPACE/pocket-source-baseline" 2>/dev/null || true
+          rm -rf pocket-source pocket-source-baseline pocket-visual-baseline pocket-visual-candidate "$RUNNER_TEMP"/pocket-studio-upgrade-diagnostics /tmp/pocket-native-* /tmp/native-test-build.jsonl /tmp/svg-fidelity-fixtures.json /tmp/flutter-bench.log /tmp/pocket-e2e-real-* 2>/dev/null || true
 
   studio-upgrade-windows:
     name: studio-upgrade-windows
@@ -774,14 +794,24 @@ jobs:
     name: visual-regression
     if: github.event_name == 'workflow_dispatch' && github.ref == 'refs/heads/main' && (!inputs.run_draw_list_benchmark || inputs.run_visual_regression)
     runs-on: ubuntu-24.04
-    timeout-minutes: 20
+    timeout-minutes: 30
     environment: pocket-source-ci
     steps:
+      - name: Checkout workflow pixel comparison script
+        uses: actions/checkout@v7
+        with:
+          sparse-checkout: .github/scripts
+          persist-credentials: false
+
       - *validate_source_inputs
 
       - *checkout_source
 
       - *verify_source_ancestry
+
+      - uses: oven-sh/setup-bun@v2
+        with:
+          bun-version: 1.3.9
 
       - uses: dtolnay/rust-toolchain@stable
         with:
@@ -793,24 +823,26 @@ jobs:
           flutter-version-file: pocket-source/.fvmrc
           cache: false
 
-      - name: Install patch and prepare the pinned PocketJS engine
+      - name: Install patch, Pillow, and prepare the pinned PocketJS engine
         working-directory: pocket-source/sdk
         run: |
           exec 3>&1
-          trap 'echo "::error::Install patch and prepare the pinned PocketJS engine failed" >&3' ERR
+          trap 'echo "::error::Install patch, Pillow, and prepare the pinned PocketJS engine failed" >&3' ERR
           exec >/dev/null 2>&1
           sudo apt-get update
-          sudo apt-get install -y patch
+          sudo apt-get install -y patch python3-pil
           python3 scripts/prepare_upstream.py
+          bun install --frozen-lockfile --cwd .cache/pocketjs
 
-      - name: Build native FFI runtime library
+      - name: Build native FFI runtime library and bytecode compiler
         working-directory: pocket-source
         run: |
           exec 3>&1
-          trap 'echo "::error::Build native FFI runtime library failed" >&3' ERR
+          trap 'echo "::error::Build native FFI runtime library and bytecode compiler failed" >&3' ERR
           exec >/dev/null 2>&1
-          cargo build --locked --manifest-path sdk/native/Cargo.toml --lib
+          cargo build --locked --manifest-path sdk/native/Cargo.toml --lib --bin pocketjs_bytecode
           [[ -f sdk/native/target/debug/libpocket_flutter.so ]]
+          [[ -x sdk/native/target/debug/pocketjs_bytecode ]]
 
       - name: Run Flutter background FFI visual regression
         working-directory: pocket-source/sdk/packages/pocket_flutter
@@ -850,6 +882,130 @@ jobs:
           sys.exit(not (passed > 0 and skipped == 0 and failed == 0))
           PY
           [[ "$test_status" == 0 ]]
+
+      - name: Compare baseline and candidate Showcase page screenshots
+        working-directory: ${{ github.workspace }}
+        env:
+          SOURCE_SHA: ${{ inputs.source_sha }}
+          VISUAL_BASELINE_SHA: ${{ inputs.visual_baseline_sha }}
+          RUN_VISUAL_REGRESSION: ${{ inputs.run_visual_regression }}
+        run: |
+          exec 3>&1
+          trap 'echo "::error::Compare baseline and candidate Showcase page screenshots failed" >&3' ERR
+          candidate_tree="$GITHUB_WORKSPACE/pocket-source"
+          baseline_tree="$GITHUB_WORKSPACE/pocket-source-baseline"
+          capture_rel="demo/test/pocket_page_visual_capture_test.dart"
+          candidate_out="$GITHUB_WORKSPACE/pocket-visual-candidate"
+          baseline_out="$GITHUB_WORKSPACE/pocket-visual-baseline"
+          cand_log="$(mktemp)"
+          base_log="$(mktemp)"
+          diff_log="$(mktemp)"
+          cleanup_visual() {
+            rm -f "$cand_log" "$base_log" "$diff_log"
+            git -C "$candidate_tree" worktree remove --force "$baseline_tree" >/dev/null 2>&1 || true
+            rm -rf "$baseline_tree" "$candidate_out" "$baseline_out"
+          }
+          trap cleanup_visual EXIT
+          if [[ ! -f "$candidate_tree/$capture_rel" ]]; then
+            if [[ "$RUN_VISUAL_REGRESSION" == true || -n "$VISUAL_BASELINE_SHA" ]]; then
+              echo "::error::Candidate revision is missing $capture_rel required for page screenshot visual regression" >&3
+              exit 1
+            fi
+            echo "Page screenshot capture harness absent in candidate revision; preserving mini FFI visual check only" >&3
+            exit 0
+          fi
+          exec >/dev/null 2>&1
+          candidate_sha="${SOURCE_SHA,,}"
+          if [[ -n "$VISUAL_BASELINE_SHA" ]]; then
+            baseline_sha="${VISUAL_BASELINE_SHA,,}"
+          else
+            merge_base="$(git -C "$candidate_tree" merge-base "$candidate_sha" refs/remotes/origin/main)"
+            if [[ "$merge_base" != "$candidate_sha" ]]; then
+              baseline_sha="$merge_base"
+            else
+              baseline_sha="$(git -C "$candidate_tree" rev-parse --verify "${candidate_sha}^1")"
+            fi
+          fi
+          [[ "$baseline_sha" =~ ^[0-9a-f]{40}$ ]]
+          git -C "$candidate_tree" merge-base --is-ancestor "$baseline_sha" refs/remotes/origin/main
+
+          build_and_capture() {
+            local tree="$1"
+            local out_dir="$2"
+            local json_log="$3"
+            local label="$4"
+            if [[ ! -d "$tree/sdk/.cache/pocketjs/node_modules" ]]; then
+              (cd "$tree/sdk" && python3 scripts/prepare_upstream.py && bun install --frozen-lockfile --cwd .cache/pocketjs)
+            fi
+            if [[ ! -f "$tree/sdk/native/target/debug/libpocket_flutter.so" || ! -x "$tree/sdk/native/target/debug/pocketjs_bytecode" ]]; then
+              (cd "$tree" && cargo build --locked --manifest-path sdk/native/Cargo.toml --lib --bin pocketjs_bytecode)
+            fi
+            [[ -f "$tree/sdk/native/target/debug/libpocket_flutter.so" ]]
+            [[ -x "$tree/sdk/native/target/debug/pocketjs_bytecode" ]]
+            (
+              cd "$tree/demo/js"
+              bun install --ignore-scripts
+              POCKET_SOURCE_BUILD=1 \
+              POCKET_COMPILER_PATH="$tree/sdk/.cache/pocketjs/tools/build.ts" \
+              POCKET_BYTECODE_BIN="$tree/sdk/native/target/debug/pocketjs_bytecode" \
+              bun run build
+            )
+            rm -rf "$out_dir"
+            mkdir -p "$out_dir"
+            local status=0
+            (
+              cd "$tree/demo"
+              flutter pub get --enforce-lockfile
+              POCKET_REQUIRE_REAL=1 \
+              POCKET_NATIVE_LIBRARY="$tree/sdk/native/target/debug/libpocket_flutter.so" \
+              POCKET_VISUAL_OUTPUT_DIR="$out_dir" \
+              flutter test --reporter json test/pocket_page_visual_capture_test.dart >"$json_log"
+            ) || status=$?
+            python3 - "$json_log" "$label" >&3 <<'PY'
+          import json
+          import sys
+
+          passed = skipped = failed = 0
+          with open(sys.argv[1], encoding="utf-8", errors="replace") as events:
+              for line in events:
+                  try:
+                      event = json.loads(line)
+                  except json.JSONDecodeError:
+                      continue
+                  if not isinstance(event, dict) or event.get("type") != "testDone" or event.get("hidden"):
+                      continue
+                  if event.get("skipped"):
+                      skipped += 1
+                  elif event.get("result") == "success":
+                      passed += 1
+                  else:
+                      failed += 1
+          print(f"Showcase page capture ({sys.argv[2]}): {passed} passed, {skipped} skipped, {failed} failed")
+          sys.exit(not (passed > 0 and skipped == 0 and failed == 0))
+          PY
+            [[ "$status" == 0 ]]
+            [[ -s "$out_dir/home.png" && -s "$out_dir/gallery.png" ]]
+          }
+
+          rm -rf "$baseline_tree"
+          git -C "$candidate_tree" worktree add --detach "$baseline_tree" "$baseline_sha"
+          mkdir -p "$(dirname "$baseline_tree/$capture_rel")"
+          cp "$candidate_tree/$capture_rel" "$baseline_tree/$capture_rel"
+
+          build_and_capture "$baseline_tree" "$baseline_out" "$base_log" "baseline ${baseline_sha}"
+          build_and_capture "$candidate_tree" "$candidate_out" "$cand_log" "candidate ${candidate_sha}"
+
+          diff_status=0
+          /usr/bin/python3 "$GITHUB_WORKSPACE/.github/scripts/compare-pocket-page-pixels.py" "$baseline_out" "$candidate_out" >"$diff_log" || diff_status=$?
+          cat "$diff_log" >&3
+          {
+            printf '### Showcase page visual regression\n\n'
+            printf -- '- **Baseline SHA**: `%s`\n' "$baseline_sha"
+            printf -- '- **Candidate SHA**: `%s`\n\n' "$candidate_sha"
+            cat "$diff_log"
+            printf '\n'
+          } >> "$GITHUB_STEP_SUMMARY"
+          [[ "$diff_status" == 0 ]]
 
       - *write_safe_summary
 
