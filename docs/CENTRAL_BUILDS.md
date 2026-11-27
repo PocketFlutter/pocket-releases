@@ -13,7 +13,7 @@
   - **Default (`source_branch` omitted)**: verifies `source_sha` is an ancestor of canonical `refs/remotes/origin/main` (`git merge-base --is-ancestor`).
   - **Reviewer-authorized pre-merge branch check (`source_branch` set)**: validates `source_branch` via `git check-ref-format` as a non-`main` canonical branch name, rejects `refs/*`, `origin/*`, and fork/PR refs (`pull/*`, `pr/*`), and requires the exact remote tracking branch tip `refs/remotes/origin/<source_branch>` in `PocketFlutter/Pocket` to equal `source_sha`.
   - All inputs are bound via step `env:` variables and never interpolated directly into Bash scripts.
-  - Invoke manual branch checks only for trusted, reviewer-inspected branches in `PocketFlutter/Pocket`. Publication workflows (`studio-native-release.yml`, `web-sdk-release.yml`, `package-registry-release.yml`, `sdk-packages-release.yml`) remain strictly locked to canonical `main` ancestry.
+  - Invoke manual branch checks only for trusted, reviewer-inspected commits in `PocketFlutter/Pocket` whose Git metadata can appear in public logs. Checkout can show ref names and commit subjects. Confirm the review and exact SHA before dispatch; the branch-tip check verifies identity, while the operator verifies trust. Publication workflows (`studio-native-release.yml`, `web-sdk-release.yml`, `package-registry-release.yml`, `sdk-packages-release.yml`) remain strictly locked to canonical `main` ancestry.
 - **Future automation**:
   - Add automatic dispatch after manual verification. A GitHub App can receive source repository events and dispatch the centralized workflow, then report the result on the exact source SHA.
 
