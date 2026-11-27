@@ -785,6 +785,7 @@ jobs:
           SOURCE_PR: ${{ inputs.source_pr }}
           SOURCE_SHA: ${{ inputs.source_sha }}
         run: |
+          set -o pipefail
           log="$(mktemp)"
           trap 'rm -f "$log"' EXIT
           cargo test --locked --release --manifest-path sdk/native/Cargo.toml --lib retained_draw_list -- --nocapture | tee "$log"
