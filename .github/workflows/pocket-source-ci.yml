@@ -728,12 +728,14 @@ jobs:
     steps:
       - name: Validate the pinned, open Pocket source PR
         env:
+          GH_TOKEN: ${{ github.token }}
           SOURCE_SHA: ${{ inputs.source_sha }}
           SOURCE_PR: ${{ inputs.source_pr }}
         run: |
           [[ "$SOURCE_SHA" =~ ^[0-9a-f]{40}$ ]] || { echo "::error::Expected a lowercase 40-hex source_sha"; exit 1; }
           [[ "$SOURCE_PR" =~ ^[1-9][0-9]*$ ]] || { echo "::error::Expected a positive integer source_pr"; exit 1; }
           curl --fail --silent --show-error --max-time 30 \
+            -H "Authorization: Bearer $GH_TOKEN" \
             "https://api.github.com/repos/PocketFlutter/Pocket/pulls/$SOURCE_PR" |
             jq -e --arg sha "$SOURCE_SHA" '
               .state == "open" and
