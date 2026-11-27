@@ -991,20 +991,56 @@ jobs:
               POCKET_REQUIRE_REAL=1 \
               POCKET_NATIVE_LIBRARY="$tree/sdk/native/target/debug/libpocket_flutter.so" \
               POCKET_VISUAL_OUTPUT_DIR="$out_dir" \
-              flutter test --no-pub --reporter json test/pocket_page_visual_capture_test.dart >"$json_log"
+              flutter test --no-pub --reporter json test/pocket_page_visual_capture_test.dart >"$json_log" 2>&1
             ) || status=$?
             python3 - "$json_log" "$label" >&3 <<'PY'
           import json
           import sys
 
           passed = skipped = failed = 0
+          checkpoint = "test setup"
+          markers = {
+              "POCKET_VISUAL_START": "asset load",
+              "POCKET_VISUAL_ASSETS": "guest mount",
+              "POCKET_VISUAL_MOUNTED": "guest startup",
+              "POCKET_VISUAL_HOME": "Home PNG",
+              "POCKET_VISUAL_HOME_PNG": "Gallery navigation",
+              "POCKET_VISUAL_GALLERY": "Gallery PNG",
+              "POCKET_VISUAL_GALLERY_PNG": "teardown",
+          }
+          categories = {
+              "Compilation failed": "Dart compilation",
+              "Failed to load": "test or asset load",
+              "Unable to load asset": "asset load",
+              "PocketView:": "PocketView",
+              "requires host-native fonts": "host fonts",
+              "runtimeAbi mismatch": "bytecode ABI",
+              "failed to start": "guest runtime startup",
+              "did not paint": "expected page text",
+              "is still pending": "pending timer",
+              "debugNeedsPaint": "boundary paint pending",
+              "Null check operator used on a null value": "required value missing",
+              "MissingPluginException": "platform plugin unavailable",
+              "Bad state:": "invalid test or runtime state",
+              "Hit test": "pointer hit test",
+              "Test timed out": "test timeout",
+              "Failed assertion": "assertion",
+              "Expected:": "expectation",
+          }
+          diagnostics = set()
           with open(sys.argv[1], encoding="utf-8", errors="replace") as events:
               for line in events:
+                  diagnostics.update(category for key, category in categories.items() if key in line)
                   try:
                       event = json.loads(line)
                   except json.JSONDecodeError:
                       continue
-                  if not isinstance(event, dict) or event.get("type") != "testDone" or event.get("hidden"):
+                  if not isinstance(event, dict):
+                      continue
+                  message = event.get("message")
+                  if event.get("type") == "print" and isinstance(message, str) and message.strip() in markers:
+                      checkpoint = markers[message.strip()]
+                  if event.get("type") != "testDone" or event.get("hidden"):
                       continue
                   if event.get("skipped"):
                       skipped += 1
@@ -1013,6 +1049,8 @@ jobs:
                   else:
                       failed += 1
           print(f"Showcase page capture ({sys.argv[2]}): {passed} passed, {skipped} skipped, {failed} failed")
+          if not passed or skipped or failed:
+              print(f"Capture checkpoint: {checkpoint}. Categories: {', '.join(sorted(diagnostics)) or 'unclassified'}")
           sys.exit(not (passed > 0 and skipped == 0 and failed == 0))
           PY
             [[ "$status" == 0 ]]
