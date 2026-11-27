@@ -976,22 +976,19 @@ jobs:
             fi
             [[ -f "$tree/sdk/native/target/debug/libpocket_flutter.so" ]]
             [[ -x "$tree/sdk/native/target/debug/pocketjs_bytecode" ]]
-            local build_this_guest="$rebuild_guest"
-            # Historical source trees kept host tools in the guest scanner's
-            # input directory. Their committed guest is the reference.
-            if [[ "$label" == baseline && "$build_this_guest" == true ]] &&
-              git -C "$tree" ls-files --error-unmatch -- demo/js/apps/live2d-workbench/{preview,run,stage}.ts; then
-              stage="$label: verify committed Showcase guest artifacts"
-              local rel_asset
-              for rel_asset in demo/assets/{app.qjbc,app.bytecode.json,app.pak,guest-manifest.json}; do
-                [[ -f "$tree/$rel_asset" && ! -L "$tree/$rel_asset" && -s "$tree/$rel_asset" ]]
-                git -C "$tree" ls-files --error-unmatch -- "$rel_asset"
-                git -C "$tree" diff --quiet HEAD -- "$rel_asset"
-              done
-              build_this_guest=false
-              echo "Using verified committed Guest assets for a historical baseline with the legacy Workbench layout." >&3
-            fi
-            if [[ "$build_this_guest" == true ]]; then
+            if [[ "$rebuild_guest" == true ]]; then
+              local workbench="demo/js/apps/live2d-workbench"
+              if [[ "$label" == baseline ]] &&
+                git -C "$tree" ls-files --error-unmatch -- "$workbench"/{preview,run,stage}.ts; then
+                stage="$label: isolate historical host-only Workbench scripts"
+                mkdir -p "$tree/$workbench/scripts"
+                local script
+                for script in preview run stage; do
+                  [[ ! -e "$tree/$workbench/scripts/$script.ts" ]]
+                  mv "$tree/$workbench/$script.ts" "$tree/$workbench/scripts/$script.ts"
+                done
+                echo "Building the historical Guest with host-only Workbench scripts outside the guest scan." >&3
+              fi
               stage="$label: install SDK and Showcase JS dependencies"
               (cd "$tree/sdk" && npm install --ignore-scripts --legacy-peer-deps --no-audit --no-fund)
               (cd "$tree/demo/js" && bun install --ignore-scripts)
@@ -1012,7 +1009,7 @@ jobs:
                 elif grep -qF 'disallowed browser DOM/HTML constructs' "$build_log"; then
                   stage="$stage (guest framework conventions)"
                   for rule in 'disallowed .* import' 'HTML/DOM JSX tag' 'browser DOM/history/storage global' 'non-translate' 'capability .*not declared' 'Invalid JSON' 'direct text-input'; do
-                    if grep -E '\[pocket-agent-hint\] \[error\]' "$build_log" | grep -Eqi "$rule"; then
+                    if grep -Eqi "\\[pocket-agent-hint\\] \\[error\\].*$rule" "$build_log"; then
                       printf 'Guest conventions matched rule: %s\n' "$rule" >&3
                     fi
                   done
