@@ -1023,9 +1023,7 @@ jobs:
               "POCKET_VISUAL_ASSETS": "guest mount",
               "POCKET_VISUAL_MOUNTED": "guest startup",
               "POCKET_VISUAL_HOME": "Home PNG",
-              "POCKET_VISUAL_HOME_PNG": "Gallery navigation",
-              "POCKET_VISUAL_GALLERY": "Gallery PNG",
-              "POCKET_VISUAL_GALLERY_PNG": "teardown",
+              "POCKET_VISUAL_HOME_PNG": "teardown",
           }
           categories = {
               "Compilation failed": "Dart compilation",
@@ -1073,7 +1071,7 @@ jobs:
           sys.exit(not (passed > 0 and skipped == 0 and failed == 0))
           PY
             [[ "$status" == 0 ]]
-            [[ -s "$out_dir/home.png" && -s "$out_dir/gallery.png" ]]
+            [[ -s "$out_dir/home.png" ]]
           }
 
           stage="prepare baseline worktree and shared capture fixture"

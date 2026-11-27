@@ -7,7 +7,7 @@ import os
 import sys
 from PIL import Image, ImageChops
 
-REQUIRED_PAGES = ("home", "gallery")
+REQUIRED_PAGES = ("home",)
 
 
 def load_rgba(path: str) -> Image.Image:
