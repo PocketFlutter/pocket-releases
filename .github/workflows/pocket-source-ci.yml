@@ -432,6 +432,20 @@ jobs:
           exec >/dev/null 2>&1
           npm exec --yes --package=bun@1.4.4 -- bun test --timeout 60000 editor/test/studio_upgrade.test.ts editor/test/source_upgrade_git.test.ts scripts/tests/editor_service.test.ts scripts/tests/install_studio.test.ts
 
+      - name: Verify Open SDK client, guest build and signed registry
+        working-directory: pocket-source/sdk
+        env:
+          POCKET_SOURCE_BUILD: "1"
+          POCKET_BYTECODE_BIN: ${{ github.workspace }}/pocket-source/sdk/native/target/release/pocketjs_bytecode
+        run: |
+          [[ -f packages/pocket_open_sdk/package.json ]] || exit 0
+          exec 3>&1
+          trap 'echo "::error::Open SDK package verification failed" >&3' ERR
+          exec >/dev/null 2>&1
+          bun test packages/pocket_open_sdk/test/client.test.ts
+          bun test scripts/tests/build_guest_open_sdk.test.ts
+          bun test scripts/tests/package_registry.test.ts -t "official SDK packages deterministically"
+
       - name: Run SDK JS package and toolchain suites
         working-directory: pocket-source/sdk
         env:
