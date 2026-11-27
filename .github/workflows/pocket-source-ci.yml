@@ -787,7 +787,7 @@ jobs:
           grep -Eq '^test result: ok\. [1-9][0-9]* passed; 0 failed;' "$log"
           {
             printf '### DrawList reuse acceptance\n\nPocket PR #%s at `%s`\n\n' "$SOURCE_PR" "$SOURCE_SHA"
-            grep -E '^(test .*retained_draw_list|test result:)' "$log" | sed 's/^/    /'
+            grep -E '^(DrawList ablation:|test .*retained_draw_list|test result:)' "$log" | sed 's/^/    /'
           } >> "$GITHUB_STEP_SUMMARY"
 
       - *write_safe_summary
