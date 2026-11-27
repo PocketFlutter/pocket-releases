@@ -984,8 +984,9 @@ jobs:
               if ! (
                 cd "$tree/demo/js" &&
                 POCKET_SOURCE_BUILD=1 \
+                POCKET_COMPILER_PATH="$tree/sdk/.cache/pocketjs/tools/build.ts" \
                 POCKET_BYTECODE_BIN="$tree/sdk/native/target/debug/pocketjs_bytecode" \
-                bun ../../sdk/scripts/build_guest.ts --project-root="$tree/demo/js" --copy-assets-to="$tree/demo/assets"
+                bun "$tree/sdk/scripts/build_guest.ts" --project-root="$tree/demo/js" --copy-assets-to="$tree/demo/assets"
               ) >"$build_log" 2>&1; then
                 if grep -qF 'PocketJS build: pass 2 bundling failed' "$build_log"; then
                   stage="$stage (bundle resolution)"
@@ -993,8 +994,16 @@ jobs:
                   stage="$stage (style validation)"
                 elif grep -qF 'build_guest: compiler=' "$build_log"; then
                   stage="$stage (compiler execution or asset staging)"
+                elif grep -qF 'disallowed browser DOM/HTML constructs' "$build_log"; then
+                  stage="$stage (guest framework conventions)"
+                elif grep -qE 'Cannot find (module|package)|Could not resolve|ERR_MODULE_NOT_FOUND' "$build_log"; then
+                  stage="$stage (build tool dependency resolution)"
+                elif grep -qE 'invalid (JSON|VN|collections|inventory)|missing model file|unknown background' "$build_log"; then
+                  stage="$stage (guest manifest or asset validation)"
+                elif grep -qE 'pinned (PocketJS compiler|JSX transformer)' "$build_log"; then
+                  stage="$stage (pinned compiler unavailable)"
                 else
-                  stage="$stage (preflight or compiler setup)"
+                  stage="$stage (unclassified before compiler invocation)"
                 fi
                 return 1
               fi
@@ -1023,7 +1032,11 @@ jobs:
               "POCKET_VISUAL_ASSETS": "guest mount",
               "POCKET_VISUAL_MOUNTED": "guest startup",
               "POCKET_VISUAL_HOME": "Home PNG",
-              "POCKET_VISUAL_HOME_PNG": "teardown",
+              "POCKET_VISUAL_HOME_PNG": "Gallery navigation",
+              "POCKET_VISUAL_GALLERY_START": "Gallery load",
+              "POCKET_VISUAL_GALLERY_TITLE": "Gallery PNG",
+              "POCKET_VISUAL_GALLERY": "Gallery PNG",
+              "POCKET_VISUAL_GALLERY_PNG": "teardown",
           }
           categories = {
               "Compilation failed": "Dart compilation",
