@@ -579,6 +579,56 @@ jobs:
 
       - *cleanup_source
 
+  flutter-open-platform-host:
+    name: flutter-open-platform-host
+    if: github.event_name == 'workflow_dispatch' && github.ref == 'refs/heads/main' && !inputs.run_draw_list_benchmark && !inputs.run_visual_regression
+    runs-on: ubuntu-24.04
+    environment: pocket-source-ci
+    steps:
+      - *validate_source_inputs
+
+      - *checkout_source
+
+      - *verify_source_ancestry
+
+      - name: Check SDK signed catalog tests availability
+        id: catalog-tests-check
+        working-directory: pocket-source
+        run: |
+          if [[ -f sdk/packages/pocket_system/test/system_host_platform_catalog_test.dart && -f sdk/packages/pocket_system/test/system_host_platform_catalog_coverage_test.dart ]]; then
+            echo "present=true" >> "$GITHUB_OUTPUT"
+          else
+            echo "present=false" >> "$GITHUB_OUTPUT"
+            echo "SKIP: SDK signed catalog tests not present in pinned source"
+            printf -- '- **Open platform host signed catalog suite**: SKIP\n' >> "$GITHUB_STEP_SUMMARY"
+          fi
+
+      - if: steps.catalog-tests-check.outputs.present == 'true'
+        uses: subosito/flutter-action@v2
+        with:
+          channel: stable
+          flutter-version-file: pocket-source/.fvmrc
+          cache: false
+
+      - name: Verify SDK signed catalog tests
+        if: steps.catalog-tests-check.outputs.present == 'true'
+        working-directory: pocket-source/sdk/packages/pocket_system
+        run: |
+          exec 3>&1
+          exec >/dev/null 2>&1
+          if flutter pub get --enforce-lockfile && flutter test --no-pub test/system_host_platform_catalog_test.dart test/system_host_platform_catalog_coverage_test.dart; then
+            echo "PASS: test/system_host_platform_catalog_test.dart test/system_host_platform_catalog_coverage_test.dart" >&3
+            printf -- '- **Open platform host signed catalog suite**: PASS\n' >> "$GITHUB_STEP_SUMMARY"
+          else
+            echo "::error::FAIL: test/system_host_platform_catalog_test.dart test/system_host_platform_catalog_coverage_test.dart" >&3
+            printf -- '- **Open platform host signed catalog suite**: FAIL\n' >> "$GITHUB_STEP_SUMMARY"
+            exit 1
+          fi
+
+      - *write_safe_summary
+
+      - *cleanup_source
+
   flutter-sdk-and-demo:
     name: flutter-sdk-and-demo
     runs-on: ubuntu-24.04
