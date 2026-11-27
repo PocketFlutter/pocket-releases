@@ -4,8 +4,13 @@ on:
   workflow_dispatch:
     inputs:
       source_sha:
-        description: Exact 40-hex commit SHA on PocketFlutter/Pocket main
+        description: Exact 40-hex commit SHA on PocketFlutter/Pocket main or reviewed source_branch
         required: true
+        type: string
+      source_branch:
+        description: Optional canonical PocketFlutter/Pocket non-main branch name whose tip equals source_sha
+        required: false
+        default: ""
         type: string
       run_vector_benchmarks:
         description: Run optional Rust, JS, and Flutter vector/SVG benchmark lanes
@@ -31,14 +36,23 @@ jobs:
     environment: pocket-source-ci
     steps:
       - &validate_source_inputs
-        name: Validate source SHA and credential availability
+        name: Validate source SHA, optional branch, and credential availability
         working-directory: ${{ github.workspace }}
         env:
           SOURCE_SHA: ${{ inputs.source_sha }}
+          SOURCE_BRANCH: ${{ inputs.source_branch }}
           SOURCE_KEY_AVAILABLE: ${{ secrets.POCKET_SOURCE_SSH_KEY != '' }}
         run: |
           [[ "$SOURCE_KEY_AVAILABLE" == true ]] || { echo "::error::Missing POCKET_SOURCE_SSH_KEY"; exit 1; }
           [[ "$SOURCE_SHA" =~ ^[0-9a-fA-F]{40}$ ]] || { echo "::error::Expected a 40-character hexadecimal source SHA"; exit 1; }
+          if [[ -n "$SOURCE_BRANCH" ]]; then
+            if [[ "$SOURCE_BRANCH" == "main" || "$SOURCE_BRANCH" == -* || "$SOURCE_BRANCH" == refs/* || "$SOURCE_BRANCH" == origin/* || "$SOURCE_BRANCH" == pull/* || "$SOURCE_BRANCH" == pr/* ]] ||
+               ! git check-ref-format --branch "$SOURCE_BRANCH" >/dev/null 2>&1 ||
+               ! git check-ref-format "refs/remotes/origin/$SOURCE_BRANCH" >/dev/null 2>&1; then
+              echo "::error::source_branch must be a valid non-main canonical branch name (fork PR refs rejected)"
+              exit 1
+            fi
+          fi
 
       - &checkout_source
         name: Checkout private Pocket source
@@ -52,16 +66,28 @@ jobs:
           fetch-depth: 0
 
       - &verify_source_ancestry
-        name: Verify pinned SHA and ancestry on canonical source main
+        name: Verify pinned SHA and canonical source ancestry or branch tip
         working-directory: ${{ github.workspace }}/pocket-source
         env:
           SOURCE_SHA: ${{ inputs.source_sha }}
+          SOURCE_BRANCH: ${{ inputs.source_branch }}
         run: |
           expected="${SOURCE_SHA,,}"
-          if [[ "$(git rev-parse --verify HEAD 2>/dev/null)" != "$expected" ]] ||
-             ! git merge-base --is-ancestor "$expected" refs/remotes/origin/main >/dev/null 2>&1; then
-            echo "::error::Source SHA must match checkout HEAD and be an ancestor of canonical source main"
+          if [[ "$(git rev-parse --verify HEAD 2>/dev/null)" != "$expected" ]]; then
+            echo "::error::Source SHA must match checkout HEAD"
             exit 1
+          fi
+          if [[ -z "$SOURCE_BRANCH" ]]; then
+            if ! git merge-base --is-ancestor "$expected" refs/remotes/origin/main >/dev/null 2>&1; then
+              echo "::error::Source SHA must match checkout HEAD and be an ancestor of canonical source main"
+              exit 1
+            fi
+          else
+            remote_ref="refs/remotes/origin/$SOURCE_BRANCH"
+            if [[ "$(git rev-parse --verify "${remote_ref}^{commit}" 2>/dev/null)" != "$expected" ]]; then
+              echo "::error::Source SHA must equal the exact remote tracking branch HEAD on canonical PocketFlutter/Pocket"
+              exit 1
+            fi
           fi
 
       - name: Verify repository architecture contracts
