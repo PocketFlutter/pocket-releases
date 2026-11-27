@@ -922,9 +922,8 @@ jobs:
           base_log="$(mktemp)"
           diff_log="$(mktemp)"
           build_log="$(mktemp)"
-          build_error="$(mktemp)"
           cleanup_visual() {
-            rm -f "$cand_log" "$base_log" "$diff_log" "$build_log" "$build_error"
+            rm -f "$cand_log" "$base_log" "$diff_log" "$build_log"
             git -C "$candidate_tree" worktree remove --force "$baseline_tree" >/dev/null 2>&1 || true
             rm -rf "$baseline_tree" "$candidate_out" "$baseline_out"
           }
@@ -977,7 +976,22 @@ jobs:
             fi
             [[ -f "$tree/sdk/native/target/debug/libpocket_flutter.so" ]]
             [[ -x "$tree/sdk/native/target/debug/pocketjs_bytecode" ]]
-            if [[ "$rebuild_guest" == true ]]; then
+            local build_this_guest="$rebuild_guest"
+            # Historical source trees kept host tools in the guest scanner's
+            # input directory. Their committed guest is the reference.
+            if [[ "$label" == baseline && "$build_this_guest" == true ]] &&
+              git -C "$tree" ls-files --error-unmatch -- demo/js/apps/live2d-workbench/{preview,run,stage}.ts; then
+              stage="$label: verify committed Showcase guest artifacts"
+              local rel_asset
+              for rel_asset in demo/assets/{app.qjbc,app.bytecode.json,app.pak,guest-manifest.json}; do
+                [[ -f "$tree/$rel_asset" && ! -L "$tree/$rel_asset" && -s "$tree/$rel_asset" ]]
+                git -C "$tree" ls-files --error-unmatch -- "$rel_asset"
+                git -C "$tree" diff --quiet HEAD -- "$rel_asset"
+              done
+              build_this_guest=false
+              echo "Using verified committed Guest assets for a historical baseline with the legacy Workbench layout." >&3
+            fi
+            if [[ "$build_this_guest" == true ]]; then
               stage="$label: install SDK and Showcase JS dependencies"
               (cd "$tree/sdk" && npm install --ignore-scripts --legacy-peer-deps --no-audit --no-fund)
               (cd "$tree/demo/js" && bun install --ignore-scripts)
@@ -988,71 +1002,30 @@ jobs:
                 POCKET_COMPILER_PATH="$tree/sdk/.cache/pocketjs/tools/build.ts" \
                 POCKET_BYTECODE_BIN="$tree/sdk/native/target/debug/pocketjs_bytecode" \
                 bun "$tree/sdk/scripts/build_guest.ts" --project-root="$tree/demo/js" --copy-assets-to="$tree/demo/assets"
-              ) >"$build_log" 2>"$build_error"; then
-                cat "$build_error" >>"$build_log"
-                local used_baseline_fallback=false
-                if [[ "$label" == "baseline" ]] && python3 - "$build_error" <<'PY'
-          import re
-          import sys
-
-          expected = {
-              "preview": {"crypto", "fs", "path"},
-              "run": {"child_process", "fs", "path"},
-              "stage": {"child_process", "fs", "path"},
-          }
-          hint = re.compile(
-              r'^\[pocket-agent-hint\] \[error\] apps/live2d-workbench/(preview|run|stage)\.ts:'
-              r' detected disallowed .* import "node:([a-z_]+)";'
-          )
-          with open(sys.argv[1], encoding="utf-8", errors="replace") as log:
-              lines = log.read().strip().splitlines()
-          prefix = "build_guest: disallowed browser DOM/HTML constructs in "
-          if not lines or not lines[0].startswith(prefix):
-              sys.exit(1)
-          seen = {file: set() for file in expected}
-          for line in lines[1:]:
-              match = hint.match(line)
-              if not match:
-                  sys.exit(1)
-              file, module = match.groups()
-              seen[file].add(module)
-          sys.exit(seen != expected)
-          PY
-                then
-                  stage="$label: verify committed Showcase guest artifacts for legacy baseline fallback"
-                  local rel_asset
-                  for rel_asset in \
-                    demo/assets/app.qjbc \
-                    demo/assets/app.bytecode.json \
-                    demo/assets/app.pak \
-                    demo/assets/guest-manifest.json; do
-                    [[ -f "$tree/$rel_asset" && ! -L "$tree/$rel_asset" && -s "$tree/$rel_asset" ]]
-                    git -C "$tree" ls-files --error-unmatch -- "$rel_asset"
-                    git -C "$tree" diff --quiet HEAD -- "$rel_asset"
+              ) >"$build_log" 2>&1; then
+                if grep -qF 'PocketJS build: pass 2 bundling failed' "$build_log"; then
+                  stage="$stage (bundle resolution)"
+                elif grep -qF 'class literal(s) do not compile' "$build_log"; then
+                  stage="$stage (style validation)"
+                elif grep -qF 'build_guest: compiler=' "$build_log"; then
+                  stage="$stage (compiler execution or asset staging)"
+                elif grep -qF 'disallowed browser DOM/HTML constructs' "$build_log"; then
+                  stage="$stage (guest framework conventions)"
+                  for rule in 'disallowed .* import' 'HTML/DOM JSX tag' 'browser DOM/history/storage global' 'non-translate' 'capability .*not declared' 'Invalid JSON' 'direct text-input'; do
+                    if grep -E '\[pocket-agent-hint\] \[error\]' "$build_log" | grep -Eqi "$rule"; then
+                      printf 'Guest conventions matched rule: %s\n' "$rule" >&3
+                    fi
                   done
-                  echo "Baseline Showcase guest rebuild hit only the legacy Live2D Workbench host-script convention error; using verified committed demo/assets artifacts." >&3
-                  used_baseline_fallback=true
+                elif grep -qE 'Cannot find (module|package)|Could not resolve|ERR_MODULE_NOT_FOUND' "$build_log"; then
+                  stage="$stage (build tool dependency resolution)"
+                elif grep -qE 'invalid (JSON|VN|collections|inventory)|missing model file|unknown background' "$build_log"; then
+                  stage="$stage (guest manifest or asset validation)"
+                elif grep -qE 'pinned (PocketJS compiler|JSX transformer)' "$build_log"; then
+                  stage="$stage (pinned compiler unavailable)"
+                else
+                  stage="$stage (unclassified before compiler invocation)"
                 fi
-                if [[ "$used_baseline_fallback" != true ]]; then
-                  if grep -qF 'PocketJS build: pass 2 bundling failed' "$build_log"; then
-                    stage="$stage (bundle resolution)"
-                  elif grep -qF 'class literal(s) do not compile' "$build_log"; then
-                    stage="$stage (style validation)"
-                  elif grep -qF 'build_guest: compiler=' "$build_log"; then
-                    stage="$stage (compiler execution or asset staging)"
-                  elif grep -qF 'disallowed browser DOM/HTML constructs' "$build_log"; then
-                    stage="$stage (guest framework conventions)"
-                  elif grep -qE 'Cannot find (module|package)|Could not resolve|ERR_MODULE_NOT_FOUND' "$build_log"; then
-                    stage="$stage (build tool dependency resolution)"
-                  elif grep -qE 'invalid (JSON|VN|collections|inventory)|missing model file|unknown background' "$build_log"; then
-                    stage="$stage (guest manifest or asset validation)"
-                  elif grep -qE 'pinned (PocketJS compiler|JSX transformer)' "$build_log"; then
-                    stage="$stage (pinned compiler unavailable)"
-                  else
-                    stage="$stage (unclassified before compiler invocation)"
-                  fi
-                  return 1
-                fi
+                return 1
               fi
             fi
             rm -rf "$out_dir"
